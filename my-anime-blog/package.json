@@ -1,0 +1,49 @@
+{
+	"name": "my-anime-blog",
+	"private": true,
+	"type": "module",
+	"scripts": {
+		"build": "react-router build",
+		"cf-typegen": "wrangler types",
+		"deploy": "npm run build && wrangler deploy",
+		"dev": "react-router dev",
+		"postinstall": "npm run cf-typegen",
+		"preview": "npm run build && vite preview",
+		"typecheck": "npm run cf-typegen && react-router typegen && tsc -b"
+	},
+	"dependencies": {
+		"@react-router/cloudflare": "^7.9.6",
+		"@react-router/node": "^7.9.6",
+		"clsx": "^2.1.1",
+		"easymde": "^2.20.0",
+		"framer-motion": "^12.23.24",
+		"highlight.js": "^11.11.1",
+		"isbot": "^5.1.31",
+		"lucide-react": "^0.555.0",
+		"marked": "^17.0.1",
+		"marked-react": "^3.0.2",
+		"react": "^19.1.1",
+		"react-dom": "^19.1.1",
+		"react-markdown": "^10.1.0",
+		"react-router": "^7.9.2",
+		"react-simplemde-editor": "^5.2.0",
+		"remix-themes": "^2.0.4",
+		"tailwind-merge": "^3.4.0"
+	},
+	"devDependencies": {
+		"@cloudflare/vite-plugin": "^1.17.1",
+		"@react-router/dev": "^7.9.2",
+		"@tailwindcss/postcss": "^4.1.17",
+		"@tailwindcss/vite": "^4.1.13",
+		"@types/node": "^22",
+		"@types/react": "^19.1.13",
+		"@types/react-dom": "^19.1.9",
+		"autoprefixer": "^10.4.22",
+		"postcss": "^8.5.6",
+		"tailwindcss": "^4.1.17",
+		"typescript": "^5.9.2",
+		"vite": "^7.1.7",
+		"vite-tsconfig-paths": "^5.1.4",
+		"wrangler": "^4.51.0"
+	}
+}
