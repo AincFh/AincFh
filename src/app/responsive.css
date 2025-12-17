@@ -1,0 +1,320 @@
+/* 响应式设计优化 */
+
+/* 移动设备优化 */
+@media (max-width: 640px) {
+  /* 字体大小调整 */
+  h1 {
+    font-size: 1.75rem;
+    line-height: 1.2;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+    line-height: 1.3;
+  }
+
+  h3 {
+    font-size: 1.25rem;
+    line-height: 1.4;
+  }
+
+  /* 间距调整 */
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* 文章卡片优化 */
+  .article-card {
+    margin-bottom: 1.5rem;
+  }
+
+  /* 导航菜单优化 */
+  .nav-menu {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* 按钮优化 */
+  .btn {
+    padding: 0.625rem 1rem;
+    font-size: 0.875rem;
+  }
+
+  /* 表单优化 */
+  .form-input {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.875rem;
+  }
+
+  /* 图片优化 */
+  img {
+    max-width: 100%;
+    height: auto;
+  }
+
+  /* 文章详情页优化 */
+  .article-content {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .article-meta {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  /* 代码块优化 */
+  pre {
+    padding: 1rem;
+    overflow-x: auto;
+    font-size: 0.875rem;
+  }
+
+  code {
+    word-break: break-all;
+  }
+
+  .decorative-shape {
+    display: none;
+  }
+
+  .floating-element {
+    display: none;
+  }
+
+  .mobile-menu {
+    display: flex;
+  }
+
+  .desktop-menu {
+    display: none;
+  }
+
+  .search-bar {
+    width: 100%;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .pagination {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .comment-form {
+    padding: 1rem;
+  }
+
+  .comment-item {
+    padding: 1rem;
+  }
+}
+
+/* 平板设备优化 */
+@media (min-width: 641px) and (max-width: 1024px) {
+  /* 文章网格布局 */
+  .articles-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+
+  /* 侧边栏布局 */
+  .sidebar-layout {
+    grid-template-columns: 2fr 1fr;
+    gap: 2rem;
+  }
+}
+
+/* 大屏幕优化 */
+@media (min-width: 1025px) {
+  /* 文章网格布局 */
+  .articles-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+
+  /* 侧边栏布局 */
+  .sidebar-layout {
+    grid-template-columns: 3fr 1fr;
+    gap: 2.5rem;
+  }
+}
+
+/* 超大屏幕优化 */
+@media (min-width: 1440px) {
+  .container {
+    max-width: 1280px;
+  }
+
+  /* 文章网格布局 */
+  .articles-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* 触摸设备优化 */
+@media (hover: none) and (pointer: coarse) {
+  /* 增大可点击区域 */
+  .btn, .nav-link, .card-link {
+    min-height: 44px;
+    min-width: 44px;
+  }
+
+  /* 移除悬停效果 */
+  .hover-effect:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* 高分辨率屏幕优化 */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+  /* 图标和细节优化 */
+  .icon {
+    image-rendering: -webkit-optimize-contrast;
+    image-rendering: crisp-edges;
+  }
+}
+
+/* 横屏模式优化 */
+@media (orientation: landscape) and (max-height: 500px) {
+  /* 减小垂直间距 */
+  .section {
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+  }
+
+  /* 调整导航栏 */
+  .navbar {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+}
+
+/* 打印样式优化 */
+@media print {
+  /* 隐藏不需要的元素 */
+  .navbar, .sidebar, .footer, .btn, .comment-section {
+    display: none;
+  }
+
+  /* 调整文本 */
+  body {
+    font-size: 12pt;
+    line-height: 1.5;
+    color: black;
+    background: white;
+  }
+
+  /* 调整链接 */
+  a {
+    color: black;
+    text-decoration: underline;
+  }
+
+  /* 调整图片 */
+  img {
+    max-width: 100%;
+    page-break-inside: avoid;
+  }
+}
+
+/* 可访问性优化 */
+@media (prefers-reduced-motion: reduce) {
+  /* 减少动画 */
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* 深色模式下的响应式优化 */
+@media (prefers-color-scheme: dark) {
+  /* 图片滤镜 */
+  img:not(.no-dark-filter) {
+    filter: brightness(0.9) contrast(1.1);
+  }
+
+  /* 代码块优化 */
+  pre {
+    background-color: #2d2d2d;
+    color: #f8f8f2;
+  }
+}
+
+/* 响应式字体大小 */
+@media (max-width: 640px) {
+  html {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 641px) and (max-width: 1024px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 1025px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+/* 响应式间距 */
+.responsive-padding {
+  padding: 1rem;
+}
+
+@media (min-width: 641px) {
+  .responsive-padding {
+    padding: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-padding {
+    padding: 2rem;
+  }
+}
+
+/* 响应式网格 */
+.responsive-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+}
+
+@media (min-width: 641px) {
+  .responsive-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.5rem;
+  }
+}
+
+@media (min-width: 1025px) {
+  .responsive-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+  }
+}
+
+/* 响应式文本对齐 */
+@media (max-width: 640px) {
+  .responsive-text-align {
+    text-align: left;
+  }
+}
+
+@media (min-width: 641px) {
+  .responsive-text-align {
+    text-align: center;
+  }
+}

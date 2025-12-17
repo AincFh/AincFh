@@ -1,0 +1,296 @@
+/* 性能优化样式 */
+
+/* 图片优化 */
+img {
+  content-visibility: auto;
+  contain-intrinsic-size: 400px 300px;
+}
+
+/* 延迟加载图片 */
+.lazy-img {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.lazy-img.loaded {
+  opacity: 1;
+}
+
+/* 优化重排和重绘 */
+.optimized-card {
+  will-change: transform;
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 减少动画性能开销 */
+.gpu-accelerated {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 优化滚动性能 */
+.smooth-scroll {
+  scroll-behavior: smooth;
+  scroll-padding-top: 80px;
+}
+
+/* 减少布局抖动 */
+.layout-stable {
+  contain: layout style paint;
+}
+
+/* 优化字体加载 */
+.font-display {
+  font-display: swap;
+}
+
+/* 减少重绘区域 */
+.isolation-isolate {
+  isolation: isolate;
+}
+
+/* 优化复杂动画 */
+.complex-animation {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+}
+
+/* 骨架屏优化 */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+.dark .skeleton {
+  background: linear-gradient(90deg, #2a2a2a 25%, #3a3a3a 50%, #2a2a2a 75%);
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+/* 优化长列表渲染 */
+.virtual-list {
+  contain: strict;
+  content-visibility: auto;
+  contain-intrinsic-size: auto 300px;
+}
+
+/* 优化过渡效果 */
+.optimized-transition {
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  will-change: transform, opacity;
+}
+
+/* 优化阴影效果 */
+.optimized-shadow {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  transition: box-shadow 0.3s ease;
+}
+
+/* 优化响应式图片 */
+.responsive-img {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* 优化按钮交互 */
+.optimized-button {
+  position: relative;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+.optimized-button::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.5);
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.optimized-button:active::before {
+  width: 300px;
+  height: 300px;
+}
+
+/* 优化模态框性能 */
+.optimized-modal {
+  will-change: opacity, transform;
+  backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* 优化表单输入 */
+.optimized-input {
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  will-change: border-color, box-shadow;
+}
+
+/* 优化滚动条 */
+.optimized-scrollbar::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+.optimized-scrollbar::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 3px;
+}
+
+.optimized-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(0, 0, 0, 0.3);
+  border-radius: 3px;
+}
+
+.optimized-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(0, 0, 0, 0.5);
+}
+
+/* 优化代码块 */
+.optimized-code {
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+  white-space: pre;
+  overflow-x: auto;
+  tab-size: 2;
+}
+
+/* 优化表格 */
+.optimized-table {
+  border-collapse: collapse;
+  width: 100%;
+  table-layout: fixed;
+}
+
+.optimized-table th,
+.optimized-table td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+/* 优化引用块 */
+.optimized-blockquote {
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+  margin: 1.5rem 0;
+  font-style: italic;
+  color: var(--muted-foreground);
+}
+
+/* 优化链接 */
+.optimized-link {
+  color: var(--primary);
+  text-decoration: none;
+  transition: color 0.2s ease, text-decoration 0.2s ease;
+}
+
+.optimized-link:hover {
+  color: var(--primary-foreground);
+  text-decoration: underline;
+}
+
+/* 优化列表 */
+.optimized-list {
+  padding-left: 1.5rem;
+  margin: 1rem 0;
+}
+
+.optimized-list li {
+  margin-bottom: 0.5rem;
+}
+
+/* 优化分隔线 */
+.optimized-hr {
+  border: none;
+  height: 1px;
+  background: var(--border);
+  margin: 2rem 0;
+}
+
+/* 优化标题 */
+.optimized-heading {
+  margin: 1.5rem 0 1rem;
+  font-weight: 600;
+  line-height: 1.25;
+}
+
+.optimized-heading h1 {
+  font-size: 2.25rem;
+}
+
+.optimized-heading h2 {
+  font-size: 1.875rem;
+}
+
+.optimized-heading h3 {
+  font-size: 1.5rem;
+}
+
+.optimized-heading h4 {
+  font-size: 1.25rem;
+}
+
+.optimized-heading h5 {
+  font-size: 1.125rem;
+}
+
+.optimized-heading h6 {
+  font-size: 1rem;
+}
+
+/* 优化段落 */
+.optimized-paragraph {
+  margin: 1rem 0;
+  line-height: 1.75;
+}
+
+/* 优化强调文本 */
+.optimized-strong {
+  font-weight: 600;
+}
+
+.optimized-em {
+  font-style: italic;
+}
+
+/* 优化代码行内样式 */
+.optimized-inline-code {
+  background: var(--muted);
+  padding: 0.2rem 0.4rem;
+  border-radius: 0.25rem;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+}
+
+/* 优化预格式化文本 */
+.optimized-pre {
+  background: var(--muted);
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow-x: auto;
+  font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
+  font-size: 0.9em;
+  line-height: 1.5;
+}

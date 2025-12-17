@@ -1,0 +1,509 @@
+@import "tailwindcss";
+@import "./responsive.css";
+
+:root {
+  /* Apple-like Premium Colors - Refined */
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  /* Apple's near-black */
+
+  /* iOS Blue - Vibrant & Clear */
+  --primary: #0071e3;
+  --primary-foreground: #ffffff;
+
+  /* Soft Grays & Surfaces */
+  --secondary: #f5f5f7;
+  /* Apple's light gray background */
+  --secondary-foreground: #1d1d1f;
+
+  --muted: #f5f5f7;
+  --muted-foreground: #86868b;
+  /* Apple's subtle gray */
+
+  --accent: #e8e8ed;
+  --accent-foreground: #1d1d1f;
+
+  --destructive: #ff3b30;
+  /* iOS Red */
+  --destructive-foreground: #ffffff;
+
+  --border: rgba(0, 0, 0, 0.08);
+  /* Ultra-subtle border */
+  --input: #ffffff;
+  --ring: #0071e3;
+
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+
+  --radius: 1.5rem;
+  /* Larger radius for softer feel */
+
+  /* Dark Mode Colors - Deep & Rich */
+  --bg-dark: #000000;
+  /* True black for OLED */
+  --text-dark: #f5f5f7;
+  --surface-dark: #1c1c1e;
+  /* Apple's dark gray surface */
+  --border-dark: rgba(255, 255, 255, 0.12);
+
+  /* Custom Easings for "Physical" Feel */
+  --ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.1);
+  /* Subtle bounce */
+  --ease-apple: cubic-bezier(0.25, 0.1, 0.25, 1);
+  /* Smooth deceleration */
+}
+
+/* 深色模式变量 */
+.dark {
+  --background: var(--bg-dark);
+  --foreground: var(--text-dark);
+  --primary: #2997ff;
+  /* Lighter blue for dark mode */
+  --primary-foreground: #ffffff;
+  --secondary: var(--surface-dark);
+  --secondary-foreground: #f5f5f7;
+  --muted: #1c1c1e;
+  --muted-foreground: #98989d;
+  --accent: #2c2c2e;
+  --accent-foreground: #f5f5f7;
+  --destructive: #ff453a;
+  --destructive-foreground: #ffffff;
+  --border: var(--border-dark);
+  --input: #1c1c1e;
+  --ring: #2997ff;
+  --card: #1c1c1e;
+  --card-foreground: var(--text-dark);
+  --popover: #1c1c1e;
+  --popover-foreground: var(--text-dark);
+}
+
+/* 系统深色模式偏好 */
+@media (prefers-color-scheme: dark) {
+  :root:not(.light) {
+    --background: #000000;
+    --foreground: #f5f5f7;
+    --primary: #2997ff;
+    --primary-foreground: #ffffff;
+    --secondary: #1c1c1e;
+    --secondary-foreground: #f5f5f7;
+    --muted: #1c1c1e;
+    --muted-foreground: #98989d;
+    --accent: #2c2c2e;
+    --accent-foreground: #f5f5f7;
+    --destructive: #ff453a;
+    --destructive-foreground: #ffffff;
+    --border: #38383a;
+    --input: #1c1c1e;
+    --ring: #2997ff;
+    --card: #1c1c1e;
+    --card-foreground: #f5f5f7;
+    --popover: #1c1c1e;
+    --popover-foreground: #f5f5f7;
+  }
+}
+
+/* 浅色模式变量 */
+.light {
+  --background: #ffffff;
+  --foreground: #1d1d1f;
+  --primary: #0071e3;
+  --primary-foreground: #ffffff;
+  --secondary: #f5f5f7;
+  --secondary-foreground: #1d1d1f;
+  --muted: #f5f5f7;
+  --muted-foreground: #86868b;
+  --accent: #e8e8ed;
+  --accent-foreground: #1d1d1f;
+  --destructive: #ff3b30;
+  --destructive-foreground: #ffffff;
+  --border: #d2d2d7;
+  --input: #ffffff;
+  --ring: #0071e3;
+  --card: #ffffff;
+  --card-foreground: #1d1d1f;
+  --popover: #ffffff;
+  --popover-foreground: #1d1d1f;
+}
+
+/* Utility Classes for Premium Apple Style */
+
+/* Glassmorphism - Refined */
+.glass {
+  background: rgba(255, 255, 255, 0.75);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.dark .glass {
+  background: rgba(28, 28, 30, 0.75);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Glass Card - Floating Effect */
+.glass-card {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(24px) saturate(180%);
+  -webkit-backdrop-filter: blur(24px) saturate(180%);
+  border: 1px solid rgba(0, 0, 0, 0.04);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.04);
+}
+
+.dark .glass-card {
+  background: rgba(28, 28, 30, 0.6);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 4px 24px -1px rgba(0, 0, 0, 0.3);
+}
+
+/* Premium Shadows - Multi-layered */
+.shadow-apple {
+  box-shadow:
+    0 2px 4px -1px rgba(0, 0, 0, 0.04),
+    0 4px 8px -1px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-apple-md {
+  box-shadow:
+    0 4px 6px -1px rgba(0, 0, 0, 0.04),
+    0 10px 15px -3px rgba(0, 0, 0, 0.04);
+}
+
+.shadow-apple-lg {
+  box-shadow:
+    0 10px 15px -3px rgba(0, 0, 0, 0.04),
+    0 20px 25px -5px rgba(0, 0, 0, 0.02);
+}
+
+.shadow-apple-hover {
+  box-shadow:
+    0 20px 25px -5px rgba(0, 0, 0, 0.08),
+    0 10px 10px -5px rgba(0, 0, 0, 0.03);
+}
+
+/* Typography Utilities */
+.text-balance {
+  text-wrap: balance;
+}
+
+.font-display {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.02em;
+  /* Tighter tracking for headings */
+}
+
+.font-body {
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+  letter-spacing: -0.01em;
+  line-height: 1.6;
+}
+
+/* 全局过渡效果 */
+* {
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* 基础样式 */
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), Arial, Helvetica, sans-serif;
+}
+
+/* 自定义滚动条样式 */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--muted);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--muted-foreground);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-foreground);
+}
+
+/* 选择文本样式 */
+::selection {
+  background-color: var(--primary);
+  color: var(--primary-foreground);
+}
+
+/* 焦点样式 */
+:focus-visible {
+  outline: 2px solid var(--ring);
+  outline-offset: 2px;
+}
+
+/* 自定义动画 */
+@keyframes float {
+
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bounce {
+
+  0%,
+  100% {
+    transform: translateY(-25%);
+    animation-timing-function: cubic-bezier(0.8, 0, 1, 1);
+  }
+
+  50% {
+    transform: translateY(0);
+    animation-timing-function: cubic-bezier(0, 0, 0.2, 1);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+
+  100% {
+    background-position: 1000px 0;
+  }
+}
+
+.animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+.dark .animate-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes ping {
+
+  75%,
+  100% {
+    transform: scale(2);
+    opacity: 0;
+  }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-blob {
+  animation: blob 7s infinite;
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.animate-slide-in {
+  animation: slideIn 0.5s ease-out;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s infinite;
+}
+
+.animate-ping {
+  animation: ping 1s cubic-bezier(0, 0, 0.2, 1) infinite;
+}
+
+.animation-delay-200 {
+  animation-delay: 200ms;
+}
+
+.animation-delay-400 {
+  animation-delay: 400ms;
+}
+
+.animation-delay-500 {
+  animation-delay: 500ms;
+}
+
+.animation-delay-1000 {
+  animation-delay: 1s;
+}
+
+.animation-delay-1500 {
+  animation-delay: 1.5s;
+}
+
+.animation-delay-2000 {
+  animation-delay: 2s;
+}
+
+.animation-delay-4000 {
+  animation-delay: 4s;
+}
+
+/* 文本截断类 */
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.line-clamp-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 深色模式特定样式 */
+.dark {
+  color-scheme: dark;
+}
+
+.light {
+  color-scheme: light;
+}
+
+/* 确保深色模式下所有元素都正确显示 */
+.dark * {
+  border-color: var(--border) !important;
+}
+
+.dark .bg-white {
+  background-color: var(--card) !important;
+}
+
+.dark .bg-gray-50 {
+  background-color: var(--muted) !important;
+}
+
+.dark .bg-gray-100 {
+  background-color: var(--muted) !important;
+}
+
+.dark .text-gray-900 {
+  color: var(--foreground) !important;
+}
+
+.dark .text-gray-800 {
+  color: var(--foreground) !important;
+}
+
+.dark .text-gray-700 {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .text-gray-600 {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .text-gray-500 {
+  color: var(--muted-foreground) !important;
+}
+
+.dark .border-gray-200 {
+  border-color: var(--border) !important;
+}
+
+.dark .border-gray-300 {
+  border-color: var(--border) !important;
+}
+
+.dark .hover\:bg-gray-50:hover {
+  background-color: var(--muted) !important;
+}
+
+.dark .hover\:bg-gray-100:hover {
+  background-color: var(--muted) !important;
+}
+
+/* 确保浅色模式下所有元素都正确显示 */
+.light * {
+  border-color: var(--border) !important;
+}
