@@ -1,0 +1,188 @@
+/* ========================================
+   Admin Theme Variables - Premium Apple Aesthetic
+   ======================================== */
+
+/* Light Theme */
+:root.light {
+    /* Backgrounds */
+    --admin-bg: #F5F5F7;
+    /* Apple's standard light gray background */
+    --admin-surface: rgba(255, 255, 255, 0.75);
+    --admin-surface-hover: rgba(255, 255, 255, 0.9);
+    --admin-elevated: #FFFFFF;
+    --admin-sidebar-bg: rgba(255, 255, 255, 0.7);
+
+    /* Borders - Extremely subtle */
+    --admin-border: rgba(0, 0, 0, 0.04);
+    --admin-divider: rgba(0, 0, 0, 0.04);
+
+    /* Text */
+    --admin-text-primary: #1D1D1F;
+    /* San Francisco Black */
+    --admin-text-secondary: #86868B;
+    --admin-text-tertiary: #A1A1A6;
+    --admin-text-inverse: #FFFFFF;
+
+    /* Brand Colors - Refined Blue */
+    --admin-primary: #0071E3;
+    --admin-primary-hover: #0077ED;
+    --admin-primary-light: rgba(0, 113, 227, 0.12);
+    --admin-success: #34C759;
+    --admin-warning: #FF9F0A;
+    --admin-danger: #FF3B30;
+
+    /* Shadows - Diffused & Soft */
+    --admin-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.04);
+    --admin-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+    --admin-shadow-md: 0 12px 32px rgba(0, 0, 0, 0.08);
+    --admin-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.12);
+}
+
+/* Dark Theme - Deep & Rich */
+:root.dark {
+    /* Backgrounds */
+    --admin-bg: #000000;
+    /* Pure black for OLED feel */
+    --admin-surface: rgba(28, 28, 30, 0.75);
+    --admin-surface-hover: rgba(44, 44, 46, 0.85);
+    --admin-elevated: #1C1C1E;
+    --admin-sidebar-bg: rgba(28, 28, 30, 0.7);
+
+    /* Borders */
+    --admin-border: rgba(255, 255, 255, 0.08);
+    --admin-divider: rgba(255, 255, 255, 0.08);
+
+    /* Text */
+    --admin-text-primary: #F5F5F7;
+    --admin-text-secondary: #98989D;
+    --admin-text-tertiary: #6E6E73;
+    --admin-text-inverse: #000000;
+
+    /* Brand Colors */
+    --admin-primary: #0A84FF;
+    --admin-primary-hover: #409CFF;
+    --admin-primary-light: rgba(10, 132, 255, 0.2);
+    --admin-success: #30D158;
+    --admin-warning: #FF9F0A;
+    --admin-danger: #FF453A;
+
+    /* Shadows */
+    --admin-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+    --admin-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    --admin-shadow-md: 0 12px 32px rgba(0, 0, 0, 0.5);
+    --admin-shadow-lg: 0 20px 48px rgba(0, 0, 0, 0.6);
+}
+
+/* ========================================
+   Global Styles & Transitions
+   ======================================== */
+
+.admin-container {
+    background-color: var(--admin-bg);
+    color: var(--admin-text-primary);
+    transition: background-color 0.5s cubic-bezier(0.32, 0.72, 0, 1), color 0.5s ease;
+}
+
+/* Glassmorphism Utilities */
+.admin-glass {
+    background: var(--admin-surface);
+    backdrop-filter: blur(25px) saturate(180%);
+    -webkit-backdrop-filter: blur(25px) saturate(180%);
+    border: 1px solid var(--admin-border);
+}
+
+.admin-glass-heavy {
+    background: var(--admin-sidebar-bg);
+    backdrop-filter: blur(50px) saturate(180%);
+    -webkit-backdrop-filter: blur(50px) saturate(180%);
+    border-right: 1px solid var(--admin-border);
+}
+
+/* Card Styles - Floating & Clean */
+.admin-card {
+    background: var(--admin-surface);
+    border: 1px solid var(--admin-border);
+    border-radius: 20px;
+    /* More rounded */
+    box-shadow: var(--admin-shadow);
+    transition: all 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+    overflow: hidden;
+}
+
+.admin-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--admin-shadow-md);
+    background: var(--admin-surface-hover);
+}
+
+/* Inputs - Spotlight Style */
+.admin-input {
+    background: rgba(118, 118, 128, 0.12);
+    /* Apple system gray fill */
+    color: var(--admin-text-primary);
+    border: 1px solid transparent;
+    padding: 10px 16px;
+    border-radius: 12px;
+    font-size: 15px;
+    transition: all 0.2s ease;
+}
+
+.admin-input:focus {
+    outline: none;
+    background: var(--admin-surface);
+    border-color: var(--admin-primary);
+    box-shadow: 0 0 0 4px var(--admin-primary-light);
+}
+
+/* Buttons - Pill Shaped */
+.admin-btn-primary {
+    background: var(--admin-primary);
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 24px;
+    border-radius: 9999px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.32, 0.72, 0, 1);
+    box-shadow: 0 2px 8px rgba(0, 113, 227, 0.25);
+}
+
+.admin-btn-primary:hover {
+    background: var(--admin-primary-hover);
+    transform: scale(1.02);
+    box-shadow: 0 4px 12px rgba(0, 113, 227, 0.35);
+}
+
+.admin-btn-primary:active {
+    transform: scale(0.96);
+}
+
+/* Scrollbar - Minimalist */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.3);
+    border-radius: 5px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.5);
+    border: 2px solid transparent;
+    background-clip: content-box;
+}
+
+/* Selection */
+::selection {
+    background: var(--admin-primary-light);
+    color: var(--admin-primary);
+}

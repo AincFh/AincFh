@@ -1,0 +1,3 @@
+## 2024-05-23 - [Unexpected Component Behavior]
+**Learning:** The component `ScrollRevealWithPreload` implies scroll-based revealing logic, but its internal implementation has `isVisible` hardcoded to `true` and returns static transform classes. It functions primarily as a preloader trigger via `IntersectionObserver`.
+**Action:** When optimizing components with descriptive names, verify their implementation matches the name. Don't assume "Reveal" implies animation logic is active. In this case, optimizing the child `ArticleCard` with `memo` was still effective because the parent wrapper re-renders its children.
