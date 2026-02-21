@@ -1,95 +1,97 @@
 <p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=200&section=header&text=AincFh's%20Nexus&fontSize=70&fontAlignY=35&desc=System%20Online%20|%20MAGI%20Active&descAlignY=55&descAlign=50&animation=twinkling" />
+</p>
+
+<p align="center">
   <a href="https://github.com/AincFh">
-    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=24&pause=1000&color=8B5CF6&center=true&vCenter=true&width=600&lines=System+Online...+Welcome,+Visitor.;Fullstack+Architect+%7C+%E5%85%A8%E6%A0%88%E6%9E%B6%E6%9E%84%E5%B8%88;Anime+Enthusiast+%7C+%E4%BA%8C%E6%AC%A1%E5%85%83%E7%8B%82%E7%83%AD;Infrastructure+Craftsman+%7C+%E5%9F%BA%E5%BB%BA%E7%8B%82%E9%AD%94;The+fate+of+destruction+is+also+the+joy+of+rebirth." alt="Typing SVG" />
+    <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=22&pause=1000&color=00FF99&center=true&vCenter=true&width=800&lines=Initializing+A.T.+Field...;Fullstack+Architect+%7C+%E5%85%A8%E6%A0%88%E6%9E%B6%E6%9E%84%E5%B8%88;Cloudflare+Ecosystem+%7C+%E8%BE%B9%E7%BC%98%E8%AE%A1%E7%AE%97%E7%8B%82%E7%83%AD;AI-Driven+Workflow+%7C+AI%E9%A9%B1%E5%8A%A8%E5%BC%80%E5%8F%91;System+Status:+I+alone+level+up+(Arise).;%E7%A0%B4%E7%81%AD%E7%9A%84%E5%AE%BF%E5%91%BD%E4%BA%A6%E6%98%AF%E9%87%8D%E7%94%9F%E7%9A%84%E5%96%9C%E6%82%A6" alt="Typing SVG" />
   </a>
 </p>
 
-<h1 align="center">
-  Greetings, I'm AincFh 👋
-</h1>
-
 <p align="center">
-  <samp>
-    「破灭的宿命亦是重生的喜悦。」
-    <br>
-    Passionate about crafting clean, iOS-aesthetic UI, immersive Web3D experiences, and AI-driven dev workflows.
-  </samp>
-</p>
-
-<p align="center">
-  <img src="https://komarev.com/ghpvc/?username=AincFh&label=SYSTEM%20VISITORS&color=8b5cf6&style=for-the-badge" alt="Visitors" />
+  <img src="https://komarev.com/ghpvc/?username=AincFh&label=SYSTEM%20VISITORS&color=00FF99&style=for-the-badge" alt="Visitors" />
+  <a href="https://github.com/AincFh"><img src="https://img.shields.io/github/followers/AincFh?style=for-the-badge&color=8B5CF6&logo=github" alt="Followers"/></a>
+  <a href="https://github.com/AincFh"><img src="https://img.shields.io/github/stars/AincFh?style=for-the-badge&color=F38020&logo=github" alt="Stars"/></a>
 </p>
 
 ---
 
-### 🛡️ 状态总览 | MAGI System Status
+### 👁️‍🗨️ 终端监控 | System Monitor `[Terminal: Active]`
+
+<table align="center">
+  <tr>
+    <td width="50%">
+      <b>🤖 Identity // 身份标识</b><br>
+      <samp>
+        > <b>Role:</b> Fullstack Dev / UI Explorer<br>
+        > <b>Focus:</b> Cloudflare Workers / Serverless Apps<br>
+        > <b>Vibe:</b> iOS Frosted Glass Aesthetic ❄️<br>
+        > <b>Current Anime:</b> Blue Lock ⚽
+      </samp>
+    </td>
+    <td width="50%">
+      <b>⚡ Active Buffs // 当前状态</b><br>
+      <samp>
+        > <b>Workflow:</b> Enhanced by Antigravity, MCP, Cline<br>
+        > <b>Environment:</b> Neovim / Web3D Sandbox<br>
+        > <b>Network:</b> IEPL Dedicated Lines Deployed<br>
+        > <b>Status:</b> Exploring HTML/Three.js Hacking Sims
+      </samp>
+    </td>
+  </tr>
+</table>
+
+---
+
+### 🧬 核心技能树 | Technology Matrix
+
+*Fully loaded skill matrix. Hover for impact.*
+
+<p align="center">
+  <a href="https://skillicons.dev">
+    <img src="https://skillicons.dev/icons?i=ts,js,nodejs,py,html,css,wasm,bash&perline=8" /><br>
+    <img src="https://skillicons.dev/icons?i=react,remix,tailwind,threejs,android,apple,vite,webpack&perline=8" /><br>
+    <img src="https://skillicons.dev/icons?i=cloudflare,sqlite,mysql,redis,git,githubactions,linux,docker&perline=8" /><br>
+    <img src="https://skillicons.dev/icons?i=vscode,figma,postman,sentry,vercel,netlify,npm,yarn&perline=8" />
+  </a>
+</p>
+
+---
+
+### 🛡️ 成就与算力 | Trophies & Analytics
 
 <p align="center">
   <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=AincFh&theme=tokyonight&no-frame=true&no-bg=true&margin-w=15" alt="AincFh Trophies" />
+    <img src="https://github-profile-trophy.vercel.app/?username=AincFh&theme=radical&no-frame=true&no-bg=true&margin-w=15&column=6" alt="AincFh Trophies" />
   </a>
 </p>
 
 <p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=AincFh&show_icons=true&theme=tokyonight&hide_border=true&title_color=8b5cf6&icon_color=ff69b4&text_color=ffffff&bg_color=00000000" alt="GitHub Stats" height="180" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AincFh&layout=compact&theme=tokyonight&hide_border=true&title_color=8b5cf6&text_color=ffffff&bg_color=00000000" alt="Top Langs" height="180" />
-</p>
-
----
-
-### 🧬 技术矩阵 | Technology Matrix
-
-*Using modern, high-res skill icons for a cleaner, high-quality visual experience.*
-
-<p align="center">
-  <b>Languages & Core</b><br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=ts,js,nodejs,html,css,py" />
-  </a>
+  <img src="https://github-readme-stats.vercel.app/api?username=AincFh&show_icons=true&theme=radical&hide_border=true&title_color=00FF99&icon_color=8B5CF6&text_color=ffffff&bg_color=0a0a0a" alt="GitHub Stats" height="195" />
+  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AincFh&layout=compact&theme=radical&hide_border=true&title_color=00FF99&text_color=ffffff&bg_color=0a0a0a" alt="Top Langs" height="195" />
 </p>
 
 <p align="center">
-  <b>Frameworks & Design</b><br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=react,remix,tailwind,threejs,figma" />
-  </a>
-</p>
-
-<p align="center">
-  <b>Infrastructure & Tools</b><br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=cloudflare,sqlite,git,githubactions,linux" />
-  </a>
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=AincFh&theme=radical&hide_border=true&stroke=00000000&ring=8B5CF6&fire=00FF99&currStreakLabel=00FF99&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&background=0a0a0a" alt="GitHub Streak" />
 </p>
 
 ---
 
-### 🚀 绝对领域 | Project "A.T. Field"
+### 🚀 绝对领域部署 | Active Deployments "A.T. Field"
 
-> **Universal Admin Control Hub & Local Ecosystems**
-> 
-> **EN:** Currently architecting a high-performance **Anime Blog (`my-anime-blog`)** powered by Cloudflare Workers (D1, R2). Also developing serverless, localized mobile management tools. Embracing AI-driven development (Antigravity, MCP, Cline) to push the boundaries of productivity.
-> 
-> **ZH:** 目前正在构建基于 Cloudflare Workers 生态的高性能 **动漫博客系统**（深度整合 D1 与 R2），同时开发无服务器本地化移动端账本工具。深度依赖 AI 驱动工作流（Antigravity, MCP, Cline）来突破开发效率的边界。
+> **EN:** Building the next generation of serverless infrastructure and highly localized mobile experiences.
+> **ZH:** 致力于构建下一代无服务器架构与极致本地化的移动端体验。
 
-- [x] **Sub-Atomic Control**: User Asset, Comments, Articles correction. / 原子级数据控制。
-- [x] **Global Stats Override**: Infusing fake PV/UV metrics via system settings. / 系统级流量覆写。
-- [x] **Gaming Economy**: Mission systems, Shop inventory, Membership tiers. / 游戏化经济系统。
+* 🌐 **`my-anime-blog` Ecosystem:** A high-performance anime content matrix powered entirely by Cloudflare Workers. Deeply integrated with D1 databases and R2 storage, complete with a God-Mode admin hub and gamified user economy.
+* 📱 **GridTong Local Ledger:** A 100% offline, serverless Android application for network operator agents. Designed with a clean, semi-transparent iOS "Dynamic Island" frosted glass aesthetic. Data stays localized, latency stays zero.
+* 🕹️ **Web3D Immersive Labs:** Experimenting with Three.js and HTML to craft story-driven hacking simulation games with deep atmospheric environments.
 
 ---
 
-### 📬 建立连接 | Establish Link
+### 🌌 动态代码活跃度 | Contribution Activity
 
 <p align="center">
-  <a href="https://github.com/AincFh">
-    <img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" />
-  </a>
-  <a href="mailto:your-email@example.com">
-    <img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" />
-  </a>
-  <a href="https://space.bilibili.com/your-id">
-    <img src="https://img.shields.io/badge/Bilibili-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" />
-  </a>
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Graph" />
 </p>
 
 <p align="center">
@@ -101,5 +103,5 @@
 </p>
 
 <p align="center">
-  <sub>Built with Antigravity AI @ 2026 | Driven by curiosity and code.</sub>
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=100&section=footer" />
 </p>
