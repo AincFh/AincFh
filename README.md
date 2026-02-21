@@ -43,8 +43,7 @@
   <img src="https://img.shields.io/badge/Storage-D1_%2B_R2-003B57?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Module-God_Mode_Admin-red?style=for-the-badge" />
 </p>
-
-> **[ STATUS ]** ⚡ 纯边缘节点动漫生态，内置上帝模式后台与游戏化经济闭环。 // Edge-driven anime ecosystem with sub-atomic asset control.
+> **[ STATUS ]** ⚡ 纯边缘节点动漫生态，内置上帝模式后台与游戏化经济闭环。
 
 ---
 
@@ -57,8 +56,7 @@
   <img src="https://img.shields.io/badge/UI_Design-iOS_Frosted_Glass-8B5CF6?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Latency-Absolute_Zero-success?style=for-the-badge" />
 </p>
-
-> **[ STATUS ]** ❄️ 网格代理商离线账本，强行接管安卓原生，注入极致苹果“灵动岛”美学。 // Zero-server Android ledger enforcing Apple iOS frosted-glass UI.
+> **[ STATUS ]** ❄️ 网格代理商离线账本，强行接管安卓原生，注入极致苹果“灵动岛”美学。
 
 ---
 
@@ -71,39 +69,25 @@
   <img src="https://img.shields.io/badge/Canvas-HTML5-E34F26?style=for-the-badge" />
   <img src="https://img.shields.io/badge/Vibe-Cyberpunk_Sim-purple?style=for-the-badge" />
 </p>
-
-> **[ STATUS ]** 👁️‍🗨️ 榨干浏览器性能的 3D 沉浸式黑客模拟沙盒。 // Immersive browser-based hacking simulation pushing WebGL limits.
+> **[ STATUS ]** 👁️‍🗨️ 榨干浏览器性能的 3D 沉浸式黑客模拟沙盒。
 
 ---
 
 ### 🧬 ABSOLUTE SKILL MATRIX // 算力矩阵
 
 <p align="center">
-  <b>[ 🌐 FRONTEND & WEB3D RENDERING ]</b><br>
-  <br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=ts,js,html,css,react,tailwind,threejs,vite&perline=10" />
-  </a>
+  <b>[ 🌐 FRONTEND & WEB3D RENDERING ]</b><br><br>
+  <img src="https://skillicons.dev/icons?i=ts,js,html,css,react,tailwind,threejs,vite&perline=10" />
 </p>
-
 <br>
-
 <p align="center">
-  <b>[ ☁️ EDGE COMPUTING & DATABASES ]</b><br>
-  <br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=cloudflare,nodejs,py,sqlite,mysql,redis,nginx,graphql&perline=10" />
-  </a>
+  <b>[ ☁️ EDGE COMPUTING & DATABASES ]</b><br><br>
+  <img src="https://skillicons.dev/icons?i=cloudflare,nodejs,py,sqlite,mysql,redis,nginx,graphql&perline=10" />
 </p>
-
 <br>
-
 <p align="center">
-  <b>[ ⚙️ MOBILE & DEVOPS INFRASTRUCTURE ]</b><br>
-  <br>
-  <a href="https://skillicons.dev">
-    <img src="https://skillicons.dev/icons?i=android,apple,figma,git,githubactions,linux,docker,bash&perline=10" />
-  </a>
+  <b>[ ⚙️ MOBILE & DEVOPS INFRASTRUCTURE ]</b><br><br>
+  <img src="https://skillicons.dev/icons?i=android,apple,figma,git,githubactions,linux,docker,bash&perline=10" />
 </p>
 
 ---
@@ -111,9 +95,7 @@
 ### 🛡️ SYSTEM ANALYTICS // 数据可视化
 
 <p align="center">
-  <a href="https://github.com/ryo-ma/github-profile-trophy">
-    <img src="https://github-profile-trophy.vercel.app/?username=AincFh&theme=radical&no-frame=true&no-bg=true&margin-w=15&column=7" />
-  </a>
+  <img src="https://github-profile-trophy.vercel.app/?username=AincFh&theme=radical&no-frame=true&no-bg=true&margin-w=15&column=7" />
 </p>
 
 <p align="center">
@@ -131,6 +113,18 @@
 
 ---
 
+### 📡 SECURE COMM LINK // 建立连接
+
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=100&section=footer" width="100%" />
+  <a href="https://github.com/AincFh"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
+  <a href="mailto:your-email@example.com"><img src="https://img.shields.io/badge/Email-D14836?style=for-the-badge&logo=gmail&logoColor=white" /></a>
+  <a href="https://space.bilibili.com/your-id"><img src="https://img.shields.io/badge/Bilibili-00A1D6?style=for-the-badge&logo=bilibili&logoColor=white" /></a>
+</p>
+
+<p align="center">
+  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&pause=3000&color=8b949e&center=true&vCenter=true&width=400&lines=[+Saving+session+state...+];[+Closing+Emby+Matrix+ports...+];[+System+entering+standby+mode+];End+of+Line." />
+</p>
+
+<p align="center">
+  <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=120&section=footer" width="100%" />
 </p>
