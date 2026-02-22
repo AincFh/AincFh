@@ -198,8 +198,6 @@
 
 ---
 
-### 🌌 CONTRIBUTION GRID // 代码活跃度
-
 <p align="center">
   <b>[ 📊 ACTIVITY GRAPH ]</b><br><br>
   <img src="https://github-readme-activity-graph.vercel.app/graph?username=AincFh&theme=tokyo-night&hide_border=true&color=8B5CF6&line=00FF99&point=ffffff" width="100%" />
