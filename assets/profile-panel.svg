@@ -1,25 +1,65 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800">
   <defs>
-    <!-- iOS 风格弥散光背景 -->
+    <!-- CSS 动画定义，用于更复杂的关键帧动画 -->
+    <style>
+      @keyframes float1 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-20px, 30px); }
+      }
+      @keyframes float2 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(30px, -20px); }
+      }
+      @keyframes float3 {
+        0%, 100% { transform: translate(0, 0); }
+        50% { transform: translate(-30px, -30px); }
+      }
+      @keyframes breathe {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50% { opacity: 0.7; transform: scale(1.05); }
+      }
+      @keyframes pulseLight {
+        0%, 100% { opacity: 1; }
+        50% { opacity: 0.3; }
+      }
+      @keyframes aiSparkle {
+        0%, 100% { transform: scale(1) rotate(0deg); opacity: 0.8; }
+        50% { transform: scale(1.15) rotate(5deg); opacity: 1; filter: brightness(1.2); }
+      }
+      @keyframes batteryCharge {
+        0% { width: 4px; fill: #ff3b30; }
+        20% { fill: #ff9500; }
+        100% { width: 16px; fill: #34c759; }
+      }
+      .font-sf {
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      }
+    </style>
+
+    <!-- 背景渐变 -->
     <linearGradient id="bgBase" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#f5f5f9"/>
-      <stop offset="100%" stop-color="#e8e8ed"/>
+      <stop offset="0%" stop-color="#f2f2f7"/>
+      <stop offset="100%" stop-color="#e5e5ea"/>
     </linearGradient>
-    <filter id="bgBlur" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="60"/>
+    
+    <!-- 大模糊滤镜 (用于极光效果) -->
+    <filter id="auroraBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="80"/>
     </filter>
 
     <!-- Apple 渐变色系 -->
     <linearGradient id="nameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#1d1d1f"/>
-      <stop offset="70%" stop-color="#1d1d1f"/>
+      <stop offset="60%" stop-color="#1d1d1f"/>
       <stop offset="100%" stop-color="#86868b"/>
     </linearGradient>
+    
     <linearGradient id="divGrad" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#000000" stop-opacity="0.12"/>
       <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
     </linearGradient>
     
+    <!-- 技能条渐变 -->
     <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#34c759"/>
       <stop offset="100%" stop-color="#0071e3"/>
@@ -30,437 +70,434 @@
     </linearGradient>
     <linearGradient id="bar3" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#af52de"/>
-      <stop offset="100%" stop-color="#ff3b30"/>
+      <stop offset="100%" stop-color="#ff2d55"/>
     </linearGradient>
     <linearGradient id="bar4" x1="0%" y1="0%" x2="100%" y2="0%">
       <stop offset="0%" stop-color="#ff9500"/>
       <stop offset="100%" stop-color="#ff3b30"/>
     </linearGradient>
+    
+    <!-- AI Apple Intelligence 渐变 -->
     <linearGradient id="aiGrad" x1="0%" y1="0%" x2="100%" y2="100%">
       <stop offset="0%" stop-color="#007aff"/>
       <stop offset="50%" stop-color="#af52de"/>
       <stop offset="100%" stop-color="#ff2d55"/>
     </linearGradient>
 
-    <!-- 苹果风格柔和阴影 -->
-    <filter id="cardShadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.05"/>
-      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.02"/>
+    <!-- 苹果风格高级卡片阴影 -->
+    <filter id="glassShadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="24" flood-color="#000000" flood-opacity="0.04"/>
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.02"/>
     </filter>
+    
     <filter id="dotGlow">
       <feGaussianBlur stdDeviation="1.5" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <!-- 基础背景 -->
+  <!-- 1. 基础背景 -->
   <rect width="900" height="800" fill="url(#bgBase)"/>
   
-  <!-- iOS 18 Siri 风格环境光 (透过磨砂玻璃卡片显现) -->
-  <g filter="url(#bgBlur)" opacity="0.4">
-    <circle cx="200" cy="150" r="180" fill="#0071e3"/>
-    <circle cx="750" cy="650" r="220" fill="#af52de"/>
-    <circle cx="800" cy="200" r="150" fill="#34c759"/>
-    <circle cx="300" cy="700" r="200" fill="#ff2d55"/>
+  <!-- 2. 动态极光流光层 (iOS Siri / Apple Intelligence 氛围) -->
+  <g filter="url(#auroraBlur)" opacity="0.6">
+    <circle cx="200" cy="150" r="180" fill="#0071e3" style="animation: float1 12s ease-in-out infinite, breathe 8s ease-in-out infinite; transform-origin: center;"/>
+    <circle cx="750" cy="650" r="220" fill="#af52de" style="animation: float2 15s ease-in-out infinite; transform-origin: center;"/>
+    <circle cx="700" cy="200" r="160" fill="#34c759" style="animation: float3 10s ease-in-out infinite, breathe 9s ease-in-out infinite; transform-origin: center;"/>
+    <circle cx="300" cy="700" r="190" fill="#ff2d55" style="animation: float1 14s ease-in-out infinite reverse; transform-origin: center;"/>
   </g>
 
-  <!-- 精致版 Dynamic Island -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0s" fill="freeze"/>
-    <rect x="330" y="12" width="240" height="34" rx="17" fill="#000000"/>
-    <!-- FaceID 传感器暗孔 -->
-    <rect x="350" y="23" width="24" height="12" rx="6" fill="#111111"/>
-    <circle cx="388" cy="29" r="6" fill="#0a0a0a"/>
-    <circle cx="388" cy="29" r="2" fill="#1e1e64"/>
+  <!-- 全局白色半透明遮罩，使背景流光更柔和（Frosting 效果） -->
+  <rect width="900" height="800" fill="#ffffff" fill-opacity="0.3"/>
+
+  <!-- 3. Dynamic Island (灵动岛) - 弹性下拉动画 -->
+  <g opacity="0" transform="translate(0, -20)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.2s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="0 -20" to="0 0" dur="0.8s" begin="0.2s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <!-- 隐私指示灯 -->
-    <circle cx="550" cy="29" r="3.5" fill="#34c759" filter="url(#dotGlow)">
-      <animate attributeName="opacity" values="1;0.2;1" dur="2.5s" repeatCount="indefinite"/>
-    </circle>
-    <text x="456" y="33" text-anchor="middle" font-size="11.5"
-          fill="#ffffff" fill-opacity="0.85"
-          font-family="'-apple-system','SF Pro Text','Helvetica Neue',sans-serif"
-          font-weight="500" letter-spacing="0.5">
+    <rect x="330" y="14" width="240" height="34" rx="17" fill="#000000" filter="drop-shadow(0 4px 12px rgba(0,0,0,0.15))"/>
+    
+    <!-- 传感器阵列 -->
+    <rect x="348" y="25" width="26" height="12" rx="6" fill="#111111"/>
+    <circle cx="388" cy="31" r="6" fill="#0a0a0a"/>
+    <circle cx="388" cy="31" r="2" fill="#1c1c6e"/> <!-- 隐约的反光 -->
+    
+    <!-- 隐私指示灯 (呼吸闪烁) -->
+    <circle cx="552" cy="31" r="3.5" fill="#34c759" filter="url(#dotGlow)" style="animation: pulseLight 3s infinite;"/>
+    
+    <!-- 文字 -->
+    <text x="460" y="35" text-anchor="middle" font-size="11.5"
+          fill="#ffffff" fill-opacity="0.9"
+          class="font-sf" font-weight="600" letter-spacing="0.5">
       MAGI SYSTEM ONLINE
     </text>
   </g>
 
-  <!-- ═══ LEFT COLUMN ═══ -->
+  <!-- ════ LEFT COLUMN ════ -->
 
-  <!-- Name + Role -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.15s" fill="freeze"/>
-    <text x="32" y="108" font-size="52" fill="url(#nameGrad)" font-weight="700"
-          font-family="'-apple-system','SF Pro Display','Helvetica Neue',sans-serif" letter-spacing="-2">AincFh</text>
-    <text x="34" y="130" font-size="13.5" fill="#86868b" font-weight="500"
-          font-family="'-apple-system','SF Pro Text','Helvetica Neue',sans-serif" letter-spacing="0.2">
+  <!-- 个人信息 -->
+  <g opacity="0" transform="translate(-15, 0)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="translate" from="-15 0" to="0 0" dur="0.8s" begin="0.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    
+    <text x="36" y="112" font-size="52" fill="url(#nameGrad)" font-weight="800"
+          class="font-sf" letter-spacing="-2.5">AincFh</text>
+    <text x="38" y="136" font-size="14" fill="#86868b" font-weight="500"
+          class="font-sf" letter-spacing="0.3">
       Fullstack Architect  ·  全栈架构师
     </text>
   </g>
 
-  <!-- Divider 1 -->
-  <line x1="32" y1="148" x2="32" y2="148" stroke="url(#divGrad)" stroke-width="1">
-    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="0.35s" fill="freeze"
-             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 分割线 1 - 伸展动画 -->
+  <line x1="36" y1="154" x2="36" y2="154" stroke="url(#divGrad)" stroke-width="1.5">
+    <animate attributeName="x2" from="36" to="420" dur="1s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- Bio EN + ZH -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.5s" fill="freeze"/>
-    <text x="32" y="168" font-size="11.5" fill="#1d1d1f" fill-opacity="0.65"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Architect at the intersection of edge computing</text>
-    <text x="32" y="184" font-size="11.5" fill="#1d1d1f" fill-opacity="0.65"
-          font-family="'-apple-system','SF Pro Text',sans-serif">and obsessive design precision. Cloudflare edge,</text>
-    <text x="32" y="200" font-size="11.5" fill="#1d1d1f" fill-opacity="0.65"
-          font-family="'-apple-system','SF Pro Text',sans-serif">100% offline apps, iOS aesthetics everywhere.</text>
-    <text x="32" y="218" font-size="11" fill="#86868b" fill-opacity="0.85"
-          font-family="'-apple-system','SF Pro Text',sans-serif">活跃在边缘计算与极致 UI 美学交汇点的全栈架构师。</text>
-    <text x="32" y="234" font-size="11" fill="#86868b" fill-opacity="0.85"
-          font-family="'-apple-system','SF Pro Text',sans-serif">打造 100% 纯离线、零服务器、绝对隐私的移动应用。</text>
+  <!-- 个人简介 -->
+  <g opacity="0" transform="translate(0, 10)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.6s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="translate" from="0 10" to="0 0" dur="0.8s" begin="0.6s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    
+    <text x="36" y="176" font-size="12" fill="#1d1d1f" fill-opacity="0.75" class="font-sf">Architect at the intersection of edge computing</text>
+    <text x="36" y="194" font-size="12" fill="#1d1d1f" fill-opacity="0.75" class="font-sf">and obsessive design precision. Cloudflare edge,</text>
+    <text x="36" y="212" font-size="12" fill="#1d1d1f" fill-opacity="0.75" class="font-sf">100% offline apps, iOS aesthetics everywhere.</text>
+    
+    <text x="36" y="234" font-size="11.5" fill="#86868b" fill-opacity="0.9" class="font-sf">活跃在边缘计算与极致 UI 美学交汇点的全栈架构师。</text>
+    <text x="36" y="252" font-size="11.5" fill="#86868b" fill-opacity="0.9" class="font-sf">打造 100% 纯离线、零服务器、绝对隐私的移动应用。</text>
   </g>
 
-  <!-- Divider 2 -->
-  <line x1="32" y1="250" x2="32" y2="250" stroke="url(#divGrad)" stroke-width="1">
-    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="0.7s" fill="freeze"
-             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 分割线 2 -->
+  <line x1="36" y1="270" x2="36" y2="270" stroke="url(#divGrad)" stroke-width="1.5">
+    <animate attributeName="x2" from="36" to="420" dur="1s" begin="0.7s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- Stats (Apple System Style) -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="0.85s" fill="freeze"/>
-    <text x="32"  y="270" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">CLASS</text>
-    <text x="118" y="270" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Infrastructure Craftsman</text>
+  <!-- 系统面板 (Apple System Settings 风格) -->
+  <g opacity="0" transform="translate(0, 10)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.8s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="translate" from="0 10" to="0 0" dur="0.8s" begin="0.8s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    
+    <text x="36"  y="292" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">CLASS</text>
+    <text x="126" y="292" font-size="12" fill="#1d1d1f" font-weight="500" class="font-sf">Infrastructure Craftsman</text>
           
-    <text x="32"  y="288" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">NETWORK</text>
-    <text x="118" y="288" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">5G Ultra Wideband  ·  ONLINE</text>
+    <text x="36"  y="312" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">NETWORK</text>
+    <text x="126" y="312" font-size="12" fill="#1d1d1f" font-weight="500" class="font-sf">5G Ultra Wideband  <tspan fill="#34c759">·  ONLINE</tspan></text>
           
-    <text x="32"  y="306" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">AI CORE</text>
-    <text x="118" y="306" font-size="11.5" fill="#34c759" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Apple Intelligence Pro  ·  ACTIVE</text>
+    <text x="36"  y="332" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">AI CORE</text>
+    <!-- AI CORE 采用带小渐变的填充 -->
+    <text x="126" y="332" font-size="12" fill="url(#aiGrad)" font-weight="600" class="font-sf">Apple Intelligence Pro  ·  ACTIVE</text>
           
-    <text x="32"  y="324" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">DEVICE</text>
-    <text x="118" y="324" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">iPhone 16 Pro Max  ·  MacBook Pro M3</text>
+    <text x="36"  y="352" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">DEVICE</text>
+    <text x="126" y="352" font-size="12" fill="#1d1d1f" font-weight="500" class="font-sf">iPhone 16 Pro Max  ·  MacBook Pro M3</text>
           
-    <text x="32"  y="342" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">ASSIST</text>
-    <text x="118" y="342" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Antigravity  ·  MCP  ·  Cline</text>
+    <text x="36"  y="372" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">ASSIST</text>
+    <text x="126" y="372" font-size="12" fill="#1d1d1f" font-weight="500" class="font-sf">Antigravity  ·  MCP  ·  Cline</text>
           
-    <text x="32"  y="360" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.9">ANIME</text>
-    <text x="118" y="360" font-size="11.5" fill="#ff2d55" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Blue Lock  ·  Solo Leveling</text>
+    <text x="36"  y="392" font-size="9.5" fill="#86868b" font-weight="600" class="font-sf" letter-spacing="1">ANIME</text>
+    <text x="126" y="392" font-size="12" fill="#ff2d55" font-weight="600" class="font-sf">Blue Lock  ·  Solo Leveling</text>
   </g>
 
-  <!-- Divider 3 -->
-  <line x1="32" y1="376" x2="32" y2="376" stroke="url(#divGrad)" stroke-width="1">
-    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="1.05s" fill="freeze"
-             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 分割线 3 -->
+  <line x1="36" y1="412" x2="36" y2="412" stroke="url(#divGrad)" stroke-width="1.5">
+    <animate attributeName="x2" from="36" to="420" dur="1s" begin="0.9s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- Skill Bars -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="1.15s" fill="freeze"/>
-    <text x="32"  y="394" font-size="10.5" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">Edge / Cloud</text>
-    <text x="418" y="394" text-anchor="end" font-size="10.5" fill="#34c759" font-weight="600" font-family="'-apple-system','SF Pro Text',sans-serif">92%</text>
-    <rect x="32" y="398" width="386" height="5" rx="2.5" fill="#000000" fill-opacity="0.06"/>
-    <rect x="32" y="398" height="5" rx="2.5" fill="url(#bar1)">
-      <animate attributeName="width" from="0" to="355" dur="1.0s" begin="1.35s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 技能条 (平滑推展动画) -->
+  <g opacity="0" transform="translate(0, 10)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.0s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="translate" from="0 10" to="0 0" dur="0.8s" begin="1.0s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    
+    <text x="36"  y="434" font-size="11" fill="#86868b" font-weight="500" class="font-sf">Edge / Cloud</text>
+    <text x="418" y="434" text-anchor="end" font-size="11" fill="#34c759" font-weight="700" class="font-sf">92%</text>
+    <rect x="36" y="440" width="382" height="6" rx="3" fill="#000000" fill-opacity="0.06"/>
+    <rect x="36" y="440" height="6" rx="3" fill="url(#bar1)">
+      <animate attributeName="width" from="0" to="351" dur="1.2s" begin="1.2s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
     </rect>
     
-    <text x="32"  y="418" font-size="10.5" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">Mobile / iOS UI</text>
-    <text x="418" y="418" text-anchor="end" font-size="10.5" fill="#0071e3" font-weight="600" font-family="'-apple-system','SF Pro Text',sans-serif">87%</text>
-    <rect x="32" y="422" width="386" height="5" rx="2.5" fill="#000000" fill-opacity="0.06"/>
-    <rect x="32" y="422" height="5" rx="2.5" fill="url(#bar2)">
-      <animate attributeName="width" from="0" to="336" dur="1.0s" begin="1.55s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <text x="36"  y="464" font-size="11" fill="#86868b" font-weight="500" class="font-sf">Mobile / iOS UI</text>
+    <text x="418" y="464" text-anchor="end" font-size="11" fill="#0071e3" font-weight="700" class="font-sf">87%</text>
+    <rect x="36" y="470" width="382" height="6" rx="3" fill="#000000" fill-opacity="0.06"/>
+    <rect x="36" y="470" height="6" rx="3" fill="url(#bar2)">
+      <animate attributeName="width" from="0" to="332" dur="1.2s" begin="1.3s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
     </rect>
     
-    <text x="32"  y="442" font-size="10.5" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">Web3D / Canvas</text>
-    <text x="418" y="442" text-anchor="end" font-size="10.5" fill="#af52de" font-weight="600" font-family="'-apple-system','SF Pro Text',sans-serif">78%</text>
-    <rect x="32" y="446" width="386" height="5" rx="2.5" fill="#000000" fill-opacity="0.06"/>
-    <rect x="32" y="446" height="5" rx="2.5" fill="url(#bar3)">
-      <animate attributeName="width" from="0" to="301" dur="1.0s" begin="1.75s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <text x="36"  y="494" font-size="11" fill="#86868b" font-weight="500" class="font-sf">Web3D / Canvas</text>
+    <text x="418" y="494" text-anchor="end" font-size="11" fill="#af52de" font-weight="700" class="font-sf">78%</text>
+    <rect x="36" y="500" width="382" height="6" rx="3" fill="#000000" fill-opacity="0.06"/>
+    <rect x="36" y="500" height="6" rx="3" fill="url(#bar3)">
+      <animate attributeName="width" from="0" to="298" dur="1.2s" begin="1.4s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
     </rect>
     
-    <text x="32"  y="466" font-size="10.5" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">DevOps / Infra</text>
-    <text x="418" y="466" text-anchor="end" font-size="10.5" fill="#ff9500" font-weight="600" font-family="'-apple-system','SF Pro Text',sans-serif">74%</text>
-    <rect x="32" y="470" width="386" height="5" rx="2.5" fill="#000000" fill-opacity="0.06"/>
-    <rect x="32" y="470" height="5" rx="2.5" fill="url(#bar4)">
-      <animate attributeName="width" from="0" to="286" dur="1.0s" begin="1.95s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <text x="36"  y="524" font-size="11" fill="#86868b" font-weight="500" class="font-sf">DevOps / Infra</text>
+    <text x="418" y="524" text-anchor="end" font-size="11" fill="#ff9500" font-weight="700" class="font-sf">74%</text>
+    <rect x="36" y="530" width="382" height="6" rx="3" fill="#000000" fill-opacity="0.06"/>
+    <rect x="36" y="530" height="6" rx="3" fill="url(#bar4)">
+      <animate attributeName="width" from="0" to="282" dur="1.2s" begin="1.5s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
     </rect>
   </g>
 
-  <!-- Divider 4 -->
-  <line x1="32" y1="490" x2="32" y2="490" stroke="url(#divGrad)" stroke-width="1">
-    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="2.0s" fill="freeze"
-             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 分割线 4 -->
+  <line x1="36" y1="552" x2="36" y2="552" stroke="url(#divGrad)" stroke-width="1.5">
+    <animate attributeName="x2" from="36" to="420" dur="1s" begin="1.2s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- Fun Facts -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="2.1s" fill="freeze"/>
-    <circle cx="40" cy="506" r="2.5" fill="#c7c7cc"/>
-    <text x="52" y="510" font-size="11" fill="#1d1d1f" fill-opacity="0.5"
-          font-family="'-apple-system','SF Pro Text',sans-serif">只用深色模式开发，白色主题写给访客看</text>
-    <circle cx="40" cy="524" r="2.5" fill="#c7c7cc"/>
-    <text x="52" y="528" font-size="11" fill="#1d1d1f" fill-opacity="0.5"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Emby 矩阵 24/7 全年在线，断了就睡不着</text>
-    <circle cx="40" cy="542" r="2.5" fill="#c7c7cc"/>
-    <text x="52" y="546" font-size="11" fill="#1d1d1f" fill-opacity="0.5"
-          font-family="'-apple-system','SF Pro Text',sans-serif">每个 App 必须能在飞行模式下完整运行</text>
+  <!-- Fun Facts (精美列表) -->
+  <g opacity="0" transform="translate(0, 10)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animateTransform attributeName="transform" type="translate" from="0 10" to="0 0" dur="0.8s" begin="1.4s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    
+    <circle cx="44" cy="570" r="3" fill="#c7c7cc"/>
+    <text x="58" y="574" font-size="11.5" fill="#1d1d1f" fill-opacity="0.55" class="font-sf" font-weight="500">只用深色模式开发，白色主题写给访客看</text>
+    
+    <circle cx="44" cy="590" r="3" fill="#c7c7cc"/>
+    <text x="58" y="594" font-size="11.5" fill="#1d1d1f" fill-opacity="0.55" class="font-sf" font-weight="500">Emby 矩阵 24/7 全年在线，断了就睡不着</text>
+    
+    <circle cx="44" cy="610" r="3" fill="#c7c7cc"/>
+    <text x="58" y="614" font-size="11.5" fill="#1d1d1f" fill-opacity="0.55" class="font-sf" font-weight="500">每个 App 必须能在飞行模式下完整运行</text>
   </g>
 
-  <!-- Divider 5 -->
-  <line x1="32" y1="562" x2="32" y2="562" stroke="url(#divGrad)" stroke-width="1">
-    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="2.2s" fill="freeze"
-             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  <!-- 分割线 5 -->
+  <line x1="36" y1="632" x2="36" y2="632" stroke="url(#divGrad)" stroke-width="1.5">
+    <animate attributeName="x2" from="36" to="420" dur="1s" begin="1.6s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- Activity Rings (Apple Watch Style) & Quote -->
+  <!-- Apple Watch Activity Rings & Quote -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2.4s" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="1.8s" fill="freeze"/>
     
     <!-- 引用语 -->
-    <text x="32" y="584" font-size="12" fill="#1d1d1f" fill-opacity="0.25" font-style="italic"
-          font-family="Georgia,'Times New Roman',serif">破灭的宿命亦是重生的喜悦</text>
-    <text x="32" y="602" font-size="10.5" fill="#1d1d1f" fill-opacity="0.15" font-style="italic"
+    <text x="36" y="658" font-size="13" fill="#1d1d1f" fill-opacity="0.3" font-style="italic"
+          font-family="Georgia,'Times New Roman',serif" font-weight="600">破灭的宿命亦是重生的喜悦</text>
+    <text x="36" y="678" font-size="11" fill="#1d1d1f" fill-opacity="0.2" font-style="italic"
           font-family="Georgia,'Times New Roman',serif">Destruction is the joy of rebirth.  —  AincFh</text>
           
-    <!-- Activity UI -->
-    <text x="32" y="640" font-size="12" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Activity 目标</text>
+    <!-- Activity UI 标签 -->
+    <text x="36" y="718" font-size="13" fill="#1d1d1f" font-weight="700" class="font-sf">Activity Goal</text>
           
-    <g transform="translate(68, 690)">
-      <!-- Move Ring (Red) -->
-      <circle cx="0" cy="0" r="32" fill="none" stroke="#ff2d55" stroke-width="7" stroke-opacity="0.15"/>
-      <circle cx="0" cy="0" r="32" fill="none" stroke="#ff2d55" stroke-width="7" 
-              stroke-dasharray="201" stroke-dashoffset="40" stroke-linecap="round" transform="rotate(-90)"/>
-      <!-- Exercise Ring (Green) -->
-      <circle cx="0" cy="0" r="23" fill="none" stroke="#34c759" stroke-width="7" stroke-opacity="0.15"/>
-      <circle cx="0" cy="0" r="23" fill="none" stroke="#34c759" stroke-width="7" 
-              stroke-dasharray="144" stroke-dashoffset="30" stroke-linecap="round" transform="rotate(-90)"/>
-      <!-- Stand Ring (Blue) -->
-      <circle cx="0" cy="0" r="14" fill="none" stroke="#007aff" stroke-width="7" stroke-opacity="0.15"/>
-      <circle cx="0" cy="0" r="14" fill="none" stroke="#007aff" stroke-width="7" 
-              stroke-dasharray="88" stroke-dashoffset="10" stroke-linecap="round" transform="rotate(-90)"/>
+    <!-- 健身圆环 (带环绕生长的动画) -->
+    <g transform="translate(74, 764)">
+      <!-- Move Ring (Red) r=34周长=213.6 -->
+      <circle cx="0" cy="0" r="34" fill="none" stroke="#ff2d55" stroke-width="7.5" stroke-opacity="0.15"/>
+      <circle cx="0" cy="0" r="34" fill="none" stroke="#ff2d55" stroke-width="7.5" 
+              stroke-dasharray="213.6" stroke-dashoffset="213.6" stroke-linecap="round" transform="rotate(-90)">
+        <animate attributeName="stroke-dashoffset" from="213.6" to="40" dur="1.5s" begin="2.0s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
+      </circle>
+      
+      <!-- Exercise Ring (Green) r=25周长=157 -->
+      <circle cx="0" cy="0" r="25" fill="none" stroke="#34c759" stroke-width="7.5" stroke-opacity="0.15"/>
+      <circle cx="0" cy="0" r="25" fill="none" stroke="#34c759" stroke-width="7.5" 
+              stroke-dasharray="157" stroke-dashoffset="157" stroke-linecap="round" transform="rotate(-90)">
+        <animate attributeName="stroke-dashoffset" from="157" to="35" dur="1.5s" begin="2.2s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
+      </circle>
+      
+      <!-- Stand Ring (Blue) r=16周长=100.5 -->
+      <circle cx="0" cy="0" r="16" fill="none" stroke="#0071e3" stroke-width="7.5" stroke-opacity="0.15"/>
+      <circle cx="0" cy="0" r="16" fill="none" stroke="#0071e3" stroke-width="7.5" 
+              stroke-dasharray="100.5" stroke-dashoffset="100.5" stroke-linecap="round" transform="rotate(-90)">
+        <animate attributeName="stroke-dashoffset" from="100.5" to="15" dur="1.5s" begin="2.4s" fill="freeze" calcMode="spline" keySplines="0.25 1 0.5 1"/>
+      </circle>
     </g>
 
-    <!-- Ring Legend -->
-    <circle cx="126" cy="668" r="4" fill="#ff2d55"/>
-    <text x="138" y="671" font-size="10" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">Code Commit</text>
+    <!-- 图例 -->
+    <circle cx="136" cy="740" r="4.5" fill="#ff2d55"/>
+    <text x="150" y="744" font-size="11" fill="#86868b" class="font-sf" font-weight="600">Code Commit</text>
     
-    <circle cx="126" cy="688" r="4" fill="#34c759"/>
-    <text x="138" y="691" font-size="10" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">UI / UX Design</text>
+    <circle cx="136" cy="762" r="4.5" fill="#34c759"/>
+    <text x="150" y="766" font-size="11" fill="#86868b" class="font-sf" font-weight="600">UI / UX Design</text>
     
-    <circle cx="126" cy="708" r="4" fill="#007aff"/>
-    <text x="138" y="711" font-size="10" fill="#86868b" font-family="'-apple-system','SF Pro Text',sans-serif">Infra Deploy</text>
+    <circle cx="136" cy="784" r="4.5" fill="#0071e3"/>
+    <text x="150" y="788" font-size="11" fill="#86868b" class="font-sf" font-weight="600">Infra Deploy</text>
   </g>
 
-  <!-- Vertical separator (Extended) -->
+  <!-- 中间垂直分隔线 (淡出显示) -->
   <line x1="440" y1="52" x2="440" y2="52" stroke="#000000" stroke-opacity="0">
-    <animate attributeName="y2" from="52" to="740" dur="1s" begin="0.3s" fill="freeze"/>
-    <animate attributeName="stroke-opacity" from="0" to="0.08" dur="0.5s" begin="0.3s" fill="freeze"/>
+    <animate attributeName="y2" from="52" to="740" dur="1s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.4 0 0.2 1"/>
+    <animate attributeName="stroke-opacity" from="0" to="0.08" dur="0.8s" begin="0.3s" fill="freeze"/>
   </line>
 
-  <!-- ═══ RIGHT COLUMN CARDS (Glassmorphism + iOS Style) ═══ -->
+  <!-- ════ RIGHT COLUMN CARDS (iOS Glassmorphism) ════ -->
 
   <!-- Card 1: Active Status -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.35s" fill="freeze"/>
-    <!-- Glass Background -->
-    <rect x="460" y="52" width="420" height="154" rx="20"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <!-- Highlight Inner Border -->
-    <rect x="460" y="52" width="420" height="154" rx="20"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <circle cx="850" cy="72" r="4.5" fill="#34c759" filter="url(#dotGlow)">
-      <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
-    </circle>
-    <text x="480" y="80" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">⌘  Active Status  ·  在线状态</text>
-    <line x1="480" y1="92" x2="860" y2="92" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
+  <g opacity="0" transform="translate(30, 0)">
+    <!-- 带有弹簧质感的滑动入场 -->
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="30 0" to="0 0" dur="0.8s" begin="0.3s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="480" y="112" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.8">FOCUS</text>
-    <text x="542" y="112" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Zero-latency serverless  ·  零延迟无服务器</text>
+    <!-- 磨砂玻璃主体 -->
+    <rect x="466" y="52" width="410" height="160" rx="24"
+          fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="466" y="52" width="410" height="160" rx="24"
+          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
           
-    <text x="480" y="132" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.8">ENGINE</text>
-    <text x="542" y="132" font-size="11.5" fill="#1d1d1f" fill-opacity="0.75"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Three.js + HTML5 Canvas  ·  Web3D</text>
+    <!-- 状态红绿灯指示器 (类似 macOS 窗口按钮，但作为装饰) -->
+    <circle cx="850" cy="74" r="5" fill="#34c759" filter="url(#dotGlow)" style="animation: pulseLight 2s infinite;"/>
+    
+    <text x="490" y="82" font-size="14" fill="#1d1d1f" font-weight="700"
+          class="font-sf">⌘  Active Status  ·  在线状态</text>
+    <line x1="490" y1="96" x2="856" y2="96" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
+    
+    <text x="490" y="116" font-size="9.5" fill="#86868b" font-weight="700" class="font-sf" letter-spacing="0.8">FOCUS</text>
+    <text x="554" y="116" font-size="12" fill="#1d1d1f" font-weight="600" fill-opacity="0.8" class="font-sf">Zero-latency serverless  ·  零延迟无服务器</text>
           
-    <text x="480" y="152" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.8">VIBE</text>
-    <text x="542" y="152" font-size="11.5" fill="#007aff" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Cyberpunk  ·  iOS Glass  ·  赛博毛玻璃</text>
+    <text x="490" y="138" font-size="9.5" fill="#86868b" font-weight="700" class="font-sf" letter-spacing="0.8">ENGINE</text>
+    <text x="554" y="138" font-size="12" fill="#1d1d1f" font-weight="600" fill-opacity="0.8" class="font-sf">Three.js + HTML5 Canvas  ·  Web3D</text>
           
-    <text x="480" y="172" font-size="9" fill="#86868b" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif" letter-spacing="0.8">EMBY</text>
-    <text x="542" y="172" font-size="11.5" fill="#34c759" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Matrix Streaming  ·  24/7 ACTIVE</text>
+    <text x="490" y="160" font-size="9.5" fill="#86868b" font-weight="700" class="font-sf" letter-spacing="0.8">VIBE</text>
+    <text x="554" y="160" font-size="12" fill="#007aff" font-weight="700" class="font-sf">Cyberpunk  ·  iOS Glass  ·  赛博毛玻璃</text>
+          
+    <text x="490" y="182" font-size="9.5" fill="#86868b" font-weight="700" class="font-sf" letter-spacing="0.8">EMBY</text>
+    <text x="554" y="182" font-size="12" fill="#34c759" font-weight="700" class="font-sf">Matrix Streaming  ·  24/7 ACTIVE</text>
   </g>
 
   <!-- Card 2: Philosophy -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.6s" fill="freeze"/>
-    <rect x="460" y="222" width="420" height="124" rx="20"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="460" y="222" width="420" height="124" rx="20"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <text x="480" y="250" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">  Philosophy  ·  开发者哲学</text>
-    <line x1="480" y1="262" x2="860" y2="262" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
+  <g opacity="0" transform="translate(30, 0)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="30 0" to="0 0" dur="0.8s" begin="0.5s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="480" y="282" font-size="11.5" fill="#1d1d1f" fill-opacity="0.65"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Cloudflare Workers (D1+R2) for zero-overhead global delivery.</text>
-    <text x="480" y="300" font-size="11.5" fill="#1d1d1f" fill-opacity="0.65"
-          font-family="'-apple-system','SF Pro Text',sans-serif">100% offline, serverless, privacy-first mobile apps.</text>
-    <text x="480" y="320" font-size="11" fill="#86868b" fill-opacity="0.85"
-          font-family="'-apple-system','SF Pro Text',sans-serif">利用边缘网络构建无开销全球传输，极致优雅的系统架构。</text>
+    <rect x="466" y="232" width="410" height="126" rx="24"
+          fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="466" y="232" width="410" height="126" rx="24"
+          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
+          
+    <text x="490" y="262" font-size="14" fill="#1d1d1f" font-weight="700"
+          class="font-sf">  Philosophy  ·  开发者哲学</text>
+    <line x1="490" y1="276" x2="856" y2="276" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
+    
+    <text x="490" y="296" font-size="12" fill="#1d1d1f" font-weight="500" fill-opacity="0.75" class="font-sf">Cloudflare Workers (D1+R2) for zero-overhead global delivery.</text>
+    <text x="490" y="316" font-size="12" fill="#1d1d1f" font-weight="500" fill-opacity="0.75" class="font-sf">100% offline, serverless, privacy-first mobile apps.</text>
+    <text x="490" y="336" font-size="11.5" fill="#86868b" font-weight="500" fill-opacity="0.9" class="font-sf">利用边缘网络构建无开销全球传输，极致优雅的系统架构。</text>
   </g>
 
   <!-- Card 3: Stack -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.85s" fill="freeze"/>
-    <rect x="460" y="362" width="420" height="116" rx="20"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="460" y="362" width="420" height="116" rx="20"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
+  <g opacity="0" transform="translate(30, 0)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.7s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="30 0" to="0 0" dur="0.8s" begin="0.7s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    
+    <rect x="466" y="378" width="410" height="124" rx="24"
+          fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="466" y="378" width="410" height="124" rx="24"
+          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
           
-    <text x="480" y="390" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">􀤆  Stack  ·  技术栈</text>
-    <line x1="480" y1="402" x2="860" y2="402" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
+    <text x="490" y="408" font-size="14" fill="#1d1d1f" font-weight="700"
+          class="font-sf">􀤆  Stack  ·  技术栈</text>
+    <line x1="490" y1="422" x2="856" y2="422" stroke="#000000" stroke-width="0.5" stroke-opacity="0.06"/>
     
-    <!-- Row 1 -->
-    <rect x="480" y="412" width="70" height="22" rx="11" fill="#007aff" fill-opacity="0.1"/>
-    <rect x="480" y="412" width="70" height="22" rx="11" fill="none" stroke="#007aff" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="515" y="427" text-anchor="middle" font-size="10" fill="#007aff" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="600">Cloudflare</text>
+    <!-- 技能标签 Row 1 (带细微阴影的 Pill) -->
+    <g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.03))">
+      <rect x="490" y="434" width="76" height="24" rx="12" fill="#007aff" fill-opacity="0.12"/>
+      <rect x="490" y="434" width="76" height="24" rx="12" fill="none" stroke="#007aff" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="528" y="450" text-anchor="middle" font-size="10.5" fill="#007aff" class="font-sf" font-weight="700">Cloudflare</text>
+      
+      <rect x="574" y="434" width="60" height="24" rx="12" fill="#af52de" fill-opacity="0.12"/>
+      <rect x="574" y="434" width="60" height="24" rx="12" fill="none" stroke="#af52de" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="604" y="450" text-anchor="middle" font-size="10.5" fill="#af52de" class="font-sf" font-weight="700">iOS UI</text>
+      
+      <rect x="642" y="434" width="70" height="24" rx="12" fill="#34c759" fill-opacity="0.12"/>
+      <rect x="642" y="434" width="70" height="24" rx="12" fill="none" stroke="#34c759" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="677" y="450" text-anchor="middle" font-size="10.5" fill="#34c759" class="font-sf" font-weight="700">Three.js</text>
+      
+      <rect x="720" y="434" width="56" height="24" rx="12" fill="#ff9500" fill-opacity="0.12"/>
+      <rect x="720" y="434" width="56" height="24" rx="12" fill="none" stroke="#ff9500" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="748" y="450" text-anchor="middle" font-size="10.5" fill="#ff9500" class="font-sf" font-weight="700">AI Pro</text>
+      
+      <rect x="784" y="434" width="52" height="24" rx="12" fill="#ff2d55" fill-opacity="0.12"/>
+      <rect x="784" y="434" width="52" height="24" rx="12" fill="none" stroke="#ff2d55" stroke-width="1" stroke-opacity="0.3"/>
+      <text x="810" y="450" text-anchor="middle" font-size="10.5" fill="#ff2d55" class="font-sf" font-weight="700">React</text>
+    </g>
     
-    <rect x="558" y="412" width="54" height="22" rx="11" fill="#af52de" fill-opacity="0.1"/>
-    <rect x="558" y="412" width="54" height="22" rx="11" fill="none" stroke="#af52de" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="585" y="427" text-anchor="middle" font-size="10" fill="#af52de" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="600">iOS UI</text>
-    
-    <rect x="620" y="412" width="64" height="22" rx="11" fill="#34c759" fill-opacity="0.1"/>
-    <rect x="620" y="412" width="64" height="22" rx="11" fill="none" stroke="#34c759" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="652" y="427" text-anchor="middle" font-size="10" fill="#34c759" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="600">Three.js</text>
-    
-    <rect x="692" y="412" width="50" height="22" rx="11" fill="#ff9500" fill-opacity="0.1"/>
-    <rect x="692" y="412" width="50" height="22" rx="11" fill="none" stroke="#ff9500" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="717" y="427" text-anchor="middle" font-size="10" fill="#ff9500" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="600">AI Pro</text>
-    
-    <rect x="750" y="412" width="46" height="22" rx="11" fill="#ff2d55" fill-opacity="0.1"/>
-    <rect x="750" y="412" width="46" height="22" rx="11" fill="none" stroke="#ff2d55" stroke-width="1" stroke-opacity="0.3"/>
-    <text x="773" y="427" text-anchor="middle" font-size="10" fill="#ff2d55" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="600">React</text>
-    
-    <!-- Row 2 -->
-    <rect x="480" y="442" width="54" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="480" y="442" width="54" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="507" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">Docker</text>
-    
-    <rect x="542" y="442" width="40" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="542" y="442" width="40" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="562" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">TS</text>
-    
-    <rect x="590" y="442" width="54" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="590" y="442" width="54" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="617" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">SQLite</text>
-    
-    <rect x="652" y="442" width="48" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="652" y="442" width="48" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="676" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">Linux</text>
-    
-    <rect x="708" y="442" width="50" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="708" y="442" width="50" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="733" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">Figma</text>
-    
-    <rect x="766" y="442" width="56" height="22" rx="11" fill="#000000" fill-opacity="0.04"/>
-    <rect x="766" y="442" width="56" height="22" rx="11" fill="none" stroke="#000000" stroke-width="0.5" stroke-opacity="0.1"/>
-    <text x="794" y="457" text-anchor="middle" font-size="10" fill="#6e6e73" font-family="'-apple-system','SF Pro Text',sans-serif" font-weight="500">Node.js</text>
+    <!-- 技能标签 Row 2 -->
+    <g filter="drop-shadow(0 2px 4px rgba(0,0,0,0.02))">
+      <rect x="490" y="466" width="60" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="520" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">Docker</text>
+      
+      <rect x="558" y="466" width="42" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="579" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">TS</text>
+      
+      <rect x="608" y="466" width="60" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="638" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">SQLite</text>
+      
+      <rect x="676" y="466" width="54" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="703" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">Linux</text>
+      
+      <rect x="738" y="466" width="56" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="766" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">Figma</text>
+      
+      <rect x="802" y="466" width="62" height="24" rx="12" fill="#000000" fill-opacity="0.05"/>
+      <text x="833" y="482" text-anchor="middle" font-size="10.5" fill="#6e6e73" class="font-sf" font-weight="600">Node.js</text>
+    </g>
   </g>
 
-  <!-- ── Control Center Widgets (iOS 18 Style) ── -->
-  <!-- Widget 1: Focus Mode -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.05s" fill="freeze"/>
-    <rect x="460" y="494" width="202" height="106" rx="24"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="460" y="494" width="202" height="106" rx="24"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <circle cx="496" cy="547" r="20" fill="#5856d6" fill-opacity="0.15"/>
-    <!-- Moon Icon -->
-    <path d="M493,534 a8,8 0 1,0 10,14 a11,11 0 0,1 -10,-14" fill="#5856d6"/>
+  <!-- ── Control Center Widgets (iOS 18 风格控制中心块) ── -->
+  <!-- 左上块: Focus Mode -->
+  <g opacity="0" transform="translate(20, 20)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.9s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="20 20" to="0 0" dur="0.8s" begin="0.9s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="528" y="541" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Deep Work</text>
-    <text x="528" y="559" font-size="11" fill="#86868b" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Coding in progress</text>
+    <rect x="466" y="522" width="195" height="110" rx="26" fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="466" y="522" width="195" height="110" rx="26" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
+          
+    <circle cx="504" cy="577" r="22" fill="#5856d6" fill-opacity="0.15"/>
+    <!-- 月亮图标 -->
+    <path d="M500,564 a9,9 0 1,0 12,16 a12,12 0 0,1 -12,-16" fill="#5856d6"/>
+    
+    <text x="538" y="570" font-size="14" fill="#1d1d1f" font-weight="700" class="font-sf">Deep Work</text>
+    <text x="538" y="588" font-size="11.5" fill="#86868b" font-weight="600" class="font-sf">Coding in progress</text>
   </g>
 
-  <!-- Widget 2: Global Edge Network -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.15s" fill="freeze"/>
-    <rect x="678" y="494" width="202" height="106" rx="24"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="678" y="494" width="202" height="106" rx="24"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <circle cx="714" cy="547" r="20" fill="#007aff" fill-opacity="0.15"/>
-    <!-- Cloud / Network Icon -->
-    <path d="M707,552 a5,5 0 0,1 0,-10 a7,7 0 0,1 14,0 a5,5 0 0,1 0,10 z" fill="none" stroke="#007aff" stroke-width="2.5" stroke-linecap="round"/>
+  <!-- 右上块: Global Edge -->
+  <g opacity="0" transform="translate(20, 20)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.0s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="20 20" to="0 0" dur="0.8s" begin="1.0s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="746" y="541" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Global Edge</text>
-    <text x="746" y="559" font-size="11" fill="#86868b" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">UTC+8  ·  100% Uptime</text>
+    <rect x="681" y="522" width="195" height="110" rx="26" fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="681" y="522" width="195" height="110" rx="26" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
+          
+    <circle cx="719" cy="577" r="22" fill="#007aff" fill-opacity="0.15"/>
+    <!-- 云网络图标 (轻微悬浮呼吸) -->
+    <g style="animation: breathe 4s infinite">
+      <path d="M711,582 a5.5,5.5 0 0,1 0,-11 a7.5,7.5 0 0,1 15,0 a5.5,5.5 0 0,1 0,11 z" fill="none" stroke="#007aff" stroke-width="2.5" stroke-linecap="round"/>
+    </g>
+    
+    <text x="753" y="570" font-size="14" fill="#1d1d1f" font-weight="700" class="font-sf">Global Edge</text>
+    <text x="753" y="588" font-size="11.5" fill="#86868b" font-weight="600" class="font-sf">UTC+8  ·  100% Uptime</text>
   </g>
 
-  <!-- Widget 3: System Energy -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.25s" fill="freeze"/>
-    <rect x="460" y="616" width="202" height="106" rx="24"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="460" y="616" width="202" height="106" rx="24"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <circle cx="496" cy="669" r="20" fill="#34c759" fill-opacity="0.15"/>
-    <!-- Battery Icon -->
-    <rect x="483" y="663" width="22" height="12" rx="3" fill="none" stroke="#34c759" stroke-width="2"/>
-    <path d="M506,666 l0,6" stroke="#34c759" stroke-width="2" stroke-linecap="round"/>
-    <rect x="485" y="665" width="16" height="8" rx="1.5" fill="#34c759"/>
+  <!-- 左下块: Battery / Energy -->
+  <g opacity="0" transform="translate(20, 20)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.1s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="20 20" to="0 0" dur="0.8s" begin="1.1s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="528" y="663" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">System Energy</text>
-    <text x="528" y="681" font-size="11" fill="#86868b" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Fully Charged</text>
+    <rect x="466" y="652" width="195" height="110" rx="26" fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="466" y="652" width="195" height="110" rx="26" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
+          
+    <circle cx="504" cy="707" r="22" fill="#34c759" fill-opacity="0.15"/>
+    <!-- 电池图标及充电动画 -->
+    <rect x="490" y="700" width="24" height="13" rx="3.5" fill="none" stroke="#34c759" stroke-width="2"/>
+    <path d="M515,704 l0,5" stroke="#34c759" stroke-width="2" stroke-linecap="round"/>
+    <rect x="492" y="702" width="16" height="9" rx="2" fill="#34c759" style="animation: batteryCharge 3s ease-out forwards;"/>
+    
+    <text x="538" y="700" font-size="14" fill="#1d1d1f" font-weight="700" class="font-sf">System Energy</text>
+    <text x="538" y="718" font-size="11.5" fill="#86868b" font-weight="600" class="font-sf">Fully Charged</text>
   </g>
 
-  <!-- Widget 4: Apple Intelligence -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.35s" fill="freeze"/>
-    <rect x="678" y="616" width="202" height="106" rx="24"
-          fill="rgba(255,255,255,0.65)" filter="url(#cardShadow)"/>
-    <rect x="678" y="616" width="202" height="106" rx="24"
-          fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.9"/>
-          
-    <circle cx="714" cy="669" r="20" fill="url(#aiGrad)" fill-opacity="0.15"/>
-    <!-- AI Sparkle Icon -->
-    <path d="M714,657 Q714,669 724,669 Q714,669 714,681 Q714,669 704,669 Q714,669 714,657" fill="url(#aiGrad)"/>
-    <path d="M725,655 Q725,660 729,660 Q725,660 725,665 Q725,660 721,660 Q725,660 725,655" fill="url(#aiGrad)"/>
+  <!-- 右下块: Apple Intelligence -->
+  <g opacity="0" transform="translate(20, 20)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.2s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
+    <animateTransform attributeName="transform" type="translate" from="20 20" to="0 0" dur="0.8s" begin="1.2s" fill="freeze" calcMode="spline" keySplines="0.175 0.885 0.32 1.275"/>
     
-    <text x="746" y="663" font-size="13" fill="#1d1d1f" font-weight="600"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Intelligence</text>
-    <text x="746" y="681" font-size="11" fill="#86868b" font-weight="500"
-          font-family="'-apple-system','SF Pro Text',sans-serif">Enhanced by Pro Models</text>
+    <rect x="681" y="652" width="195" height="110" rx="26" fill="rgba(255,255,255,0.55)" filter="url(#glassShadow)"/>
+    <rect x="681" y="652" width="195" height="110" rx="26" fill="none" stroke="#ffffff" stroke-width="1.5" stroke-opacity="0.8"/>
+          
+    <!-- 旋转的 AI 背景光晕 -->
+    <g transform="translate(719, 707)">
+       <circle cx="0" cy="0" r="22" fill="url(#aiGrad)" fill-opacity="0.15"/>
+       <!-- 闪耀的 AI Icon (中心缩放旋转) -->
+       <g style="animation: aiSparkle 4s ease-in-out infinite;">
+         <path d="M0,-13 Q0,0 13,0 Q0,0 0,13 Q0,0 -13,0 Q0,0 0,-13" fill="url(#aiGrad)"/>
+         <path d="M12,-15 Q12,-10 17,-10 Q12,-10 12,-5 Q12,-10 7,-10 Q12,-10 12,-15" fill="url(#aiGrad)" transform="scale(0.8)"/>
+       </g>
+    </g>
+    
+    <text x="753" y="700" font-size="14" fill="#1d1d1f" font-weight="700" class="font-sf">Intelligence</text>
+    <text x="753" y="718" font-size="11.5" fill="#86868b" font-weight="600" class="font-sf">Pro Models Active</text>
   </g>
 </svg>
