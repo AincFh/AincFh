@@ -19,7 +19,7 @@
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="620" />
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="700" />
 </p>
 
 ---
