@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 120" width="900" height="120">
+  <defs>
+    <!-- 向上的 Apple 柔和投影 -->
+    <filter id="shadowUp" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="-8" stdDeviation="16" flood-color="#000000" flood-opacity="0.04"/>
+      <feDropShadow dx="0" dy="-2" stdDeviation="4" flood-color="#000000" flood-opacity="0.02"/>
+    </filter>
+  </defs>
+
+  <!-- 全局底色：与中间的 profile-panel 完美融合的系统灰 -->
+  <rect width="900" height="120" fill="#f5f5f7"/>
+
+  <!-- 纯白底部悬浮波浪 -->
+  <path d="M0,120 L900,120 L900,50 Q450,-30 0,50 Z" fill="#ffffff" filter="url(#shadowUp)"/>
+
+  <!-- 动画组 -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.4s" fill="freeze"/>
+    <animateTransform attributeName="transform" type="translate" from="0 10" to="0 0" dur="0.8s" begin="0.4s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+    
+    <!-- 极简收尾装饰 -->
+    <circle cx="450" cy="70" r="3" fill="#d1d1d6"/>
+    <text x="450" y="95" text-anchor="middle" font-size="10" fill="#86868b" font-weight="600" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif" letter-spacing="2">END OF LINE</text>
+  </g>
+</svg>
