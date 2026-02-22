@@ -1,65 +1,105 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 270" width="620" height="270">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 310" width="700" height="310">
+  <defs>
+    <linearGradient id="tb" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#1c2030"/>
+      <stop offset="100%" stop-color="#161b22"/>
+    </linearGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#0d1117"/>
+      <stop offset="100%" stop-color="#090d13"/>
+    </linearGradient>
+    <filter id="dotglow">
+      <feGaussianBlur stdDeviation="1.5" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
   <style>
-    @keyframes l1{0%,4%{opacity:0}8%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l2{0%,16%{opacity:0}20%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l3{0%,26%{opacity:0}30%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l4{0%,36%{opacity:0}40%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l5{0%,46%{opacity:0}50%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l6{0%,56%{opacity:0}60%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l7{0%,66%{opacity:0}70%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes l8{0%,76%{opacity:0}80%,90%{opacity:1}95%,100%{opacity:0}}
-    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
-    .l1{animation:l1 14s infinite;opacity:0}
-    .l2{animation:l2 14s infinite;opacity:0}
-    .l3{animation:l3 14s infinite;opacity:0}
-    .l4{animation:l4 14s infinite;opacity:0}
-    .l5{animation:l5 14s infinite;opacity:0}
-    .l6{animation:l6 14s infinite;opacity:0}
-    .l7{animation:l7 14s infinite;opacity:0}
-    .l8{animation:l8 14s infinite;opacity:0}
+    /* 每行出现后保持可见，最后一起淡出 */
+    @keyframes l1 { 0%,2%{opacity:0}  4%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l2 { 0%,11%{opacity:0} 13%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l3 { 0%,21%{opacity:0} 23%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l4 { 0%,31%{opacity:0} 33%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l5 { 0%,41%{opacity:0} 43%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l6 { 0%,51%{opacity:0} 53%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l7 { 0%,61%{opacity:0} 63%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes l8 { 0%,71%{opacity:0} 73%,82%{opacity:1} 89%,100%{opacity:0} }
+    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+    .l1{animation:l1 22s infinite;opacity:0}
+    .l2{animation:l2 22s infinite;opacity:0}
+    .l3{animation:l3 22s infinite;opacity:0}
+    .l4{animation:l4 22s infinite;opacity:0}
+    .l5{animation:l5 22s infinite;opacity:0}
+    .l6{animation:l6 22s infinite;opacity:0}
+    .l7{animation:l7 22s infinite;opacity:0}
+    .l8{animation:l8 22s infinite;opacity:0}
     .cur{animation:blink 1s step-end infinite}
     text{font-family:'Courier New',Courier,monospace;font-size:13px}
   </style>
 
   <!-- 终端主体 -->
-  <rect width="620" height="270" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+  <rect width="700" height="310" rx="12" fill="url(#bg)" stroke="#21262d" stroke-width="1.2"/>
+
+  <!-- 扫描线（原生SVG动画，GitHub兼容） -->
+  <rect width="700" height="2" fill="#00FF99" opacity="0.035">
+    <animateTransform attributeName="transform" type="translate"
+      from="0,40" to="0,310" dur="5s" repeatCount="indefinite"/>
+  </rect>
 
   <!-- 标题栏 -->
-  <rect width="620" height="38" rx="10" fill="#161b22"/>
-  <rect y="28" width="620" height="10" fill="#161b22"/>
-  <line x1="0" y1="38" x2="620" y2="38" stroke="#30363d" stroke-width="1"/>
+  <rect width="700" height="42" rx="12" fill="url(#tb)"/>
+  <rect y="30" width="700" height="12" fill="url(#tb)"/>
+  <line x1="0" y1="42" x2="700" y2="42" stroke="#21262d" stroke-width="1"/>
 
-  <!-- 三个点 -->
-  <circle cx="22" cy="19" r="6" fill="#ff5f57"/>
-  <circle cx="44" cy="19" r="6" fill="#febc2e"/>
-  <circle cx="66" cy="19" r="6" fill="#28c840"/>
+  <!-- 三个点（带发光） -->
+  <circle cx="26" cy="21" r="6.5" fill="#ff5f57" filter="url(#dotglow)"/>
+  <circle cx="50" cy="21" r="6.5" fill="#febc2e" filter="url(#dotglow)"/>
+  <circle cx="74" cy="21" r="6.5" fill="#28c840" filter="url(#dotglow)"/>
 
   <!-- 标题 -->
-  <text x="310" y="24" text-anchor="middle" font-size="12" fill="#8b949e">AincFh@MAGI — ./init_core.sh</text>
+  <text x="350" y="27" text-anchor="middle" font-size="12"
+        fill="#6e7681" font-family="-apple-system,'Helvetica Neue',sans-serif">
+    AincFh@MAGI-SYSTEM  —  bash
+  </text>
 
-  <!-- 逐行出现内容 -->
-  <text class="l1" x="20" y="64">
-    <tspan fill="#8b949e">root@AincFh-MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#79c0ff">./init_core.sh</tspan>
+  <!-- L1: 命令提示符 -->
+  <text class="l1" x="20" y="74">
+    <tspan fill="#57a6ff">AincFh</tspan><tspan fill="#6e7681">@</tspan><tspan fill="#3fb950">MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#e6edf3">./init_core.sh</tspan>
   </text>
-  <text class="l2" x="20" y="86">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Authenticating AincFh ........... </tspan><tspan fill="#00FF99">SUCCESS</tspan>
+
+  <!-- L2 -->
+  <text class="l2" x="20" y="98">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">Authenticating AincFh ........... </tspan><tspan fill="#00FF99" font-weight="bold">SUCCESS</tspan>
   </text>
-  <text class="l3" x="20" y="108">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> IEPL Lines &#8594; Emby Matrix ....... </tspan><tspan fill="#00FF99">SECURED</tspan>
+
+  <!-- L3 -->
+  <text class="l3" x="20" y="122">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">IEPL Lines to Emby Matrix ....... </tspan><tspan fill="#00FF99" font-weight="bold">SECURED</tspan>
   </text>
-  <text class="l4" x="20" y="130">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Google AI Pro Loaded ........... </tspan><tspan fill="#00FF99">ACTIVE</tspan>
+
+  <!-- L4 -->
+  <text class="l4" x="20" y="146">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">Google AI Pro Loaded ........... </tspan><tspan fill="#00FF99" font-weight="bold">ACTIVE</tspan>
   </text>
-  <text class="l5" x="20" y="152">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> iOS Frosted Glass UI ........... </tspan><tspan fill="#00FF99">LOCKED</tspan>
+
+  <!-- L5 -->
+  <text class="l5" x="20" y="170">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">iOS Frosted Glass UI ........... </tspan><tspan fill="#00FF99" font-weight="bold">LOCKED</tspan>
   </text>
-  <text class="l6" x="20" y="174">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Cloudflare Edge Workers ........ </tspan><tspan fill="#00FF99">DEPLOYED</tspan>
+
+  <!-- L6 -->
+  <text class="l6" x="20" y="194">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">Cloudflare Edge Workers ........ </tspan><tspan fill="#00FF99" font-weight="bold">DEPLOYED</tspan>
   </text>
-  <text class="l7" x="20" y="196">
-    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> A.T. Field Deployed ............ </tspan><tspan fill="#00FF99">ESTABLISHED</tspan>
+
+  <!-- L7 -->
+  <text class="l7" x="20" y="218">
+    <tspan fill="#3fb950">✓ </tspan><tspan fill="#8b949e">A.T. Field Protocol ............ </tspan><tspan fill="#00FF99" font-weight="bold">ESTABLISHED</tspan>
   </text>
-  <text class="l8" x="20" y="228">
-    <tspan fill="#8b949e">&gt; </tspan><tspan fill="#e6edf3">Welcome back, Architect. </tspan><tspan class="cur" fill="#00FF99">&#9608;</tspan>
+
+  <!-- L8: 欢迎提示符 -->
+  <text class="l8" x="20" y="256">
+    <tspan fill="#57a6ff">AincFh</tspan><tspan fill="#6e7681">@</tspan><tspan fill="#3fb950">MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#e6edf3">echo "Welcome back, Architect." </tspan><tspan class="cur" fill="#00FF99">█</tspan>
   </text>
 </svg>
