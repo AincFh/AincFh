@@ -24,52 +24,6 @@
 
 ---
 
-### 🧬 ABSOLUTE SKILL MATRIX // 算力矩阵
-
-<p align="center">
-  <b>[ 🌐 FRONTEND & WEB3D RENDERING ]</b><br><br>
-  <img src="https://skillicons.dev/icons?i=ts,js,html,css,react,tailwind,threejs,vite&perline=10" />
-</p>
-
-<br>
-
-<p align="center">
-  <b>[ ☁️ EDGE COMPUTING & DATABASES ]</b><br><br>
-  <img src="https://skillicons.dev/icons?i=cloudflare,nodejs,py,sqlite,mysql,redis,nginx,graphql&perline=10" />
-</p>
-
-<br>
-
-<p align="center">
-  <b>[ 📱 MOBILE & UI/UX DESIGN ]</b><br><br>
-  <img src="https://skillicons.dev/icons?i=android,apple,figma,md&perline=10" />
-</p>
-
-<br>
-
-<p align="center">
-  <b>[ ⚙️ DEVOPS & INFRASTRUCTURE ]</b><br><br>
-  <img src="https://skillicons.dev/icons?i=git,github,githubactions,linux,docker,bash,vscode,postman&perline=10" />
-</p>
-
----
-
-<p align="center">
-  <b>[ 📊 ACTIVITY GRAPH ]</b><br><br>
-  <img src="https://github-readme-activity-graph.vercel.app/graph?username=AincFh&theme=tokyo-night&hide_border=true&color=8B5CF6&line=00FF99&point=ffffff" width="100%" />
-</p>
-
-<p align="center">
-  <b>[ 🐍 DATA CONSUMPTION PROTOCOL // SNAKE ]</b><br><br>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AincFh/AincFh/output/github-contribution-grid-snake-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AincFh/AincFh/output/github-contribution-grid-snake.svg">
-    <img alt="snake animation" src="https://raw.githubusercontent.com/AincFh/AincFh/output/github-contribution-grid-snake.svg">
-  </picture>
-</p>
-
----
-
 ### 📡 SECURE COMM LINK // 建立连接
 
 <p align="center">
