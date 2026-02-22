@@ -22,14 +22,6 @@
   <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="620" />
 </p>
 
-### 📖 Architect Chronicles // 开发者档案
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/profile-panel.svg" width="800" />
-</p>
-
----
-
 ### 🚀 ACTIVE DEPLOYMENTS // 核心阵列
 
 <p align="center">
