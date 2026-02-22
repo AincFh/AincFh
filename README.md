@@ -233,6 +233,10 @@
 </p>
 
 <p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=AincFh&theme=tokyonight&hide_border=true&stroke=00000000&ring=8B5CF6&fire=00FF99&currStreakLabel=00FF99&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&background=00000000" height="195" />
+</p>
+
+<p align="center">
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&pause=3000&color=8b949e&center=true&vCenter=true&width=450&lines=[+Saving+session+state...+];[+Closing+Emby+Matrix+ports...+];[+Flushing+A.T.+Field+protocols...+];[+System+entering+standby+mode+];End+of+Line." />
 </p>
 
