@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="900" height="280">
+  <defs>
+    <!-- Apple 标准双层柔和投影 -->
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="8" stdDeviation="16" flood-color="#000000" flood-opacity="0.04"/>
+      <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#000000" flood-opacity="0.02"/>
+    </filter>
+  </defs>
+
+  <!-- 全局底色：与中间的 profile-panel 完美融合的系统灰 -->
+  <rect width="900" height="280" fill="#f5f5f7"/>
+
+  <!-- 纯白波浪悬浮卡片 -->
+  <path d="M0,0 L900,0 L900,200 Q450,290 0,200 Z" fill="#ffffff" filter="url(#shadow)"/>
+
+  <!-- Apple 风格平滑上浮动画组 -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.1s" fill="freeze"/>
+    <animateTransform attributeName="transform" type="translate" from="0 20" to="0 0" dur="0.8s" begin="0.1s" calcMode="spline" keySplines="0.4 0 0.2 1" fill="freeze"/>
+
+    <!-- 标题 (SF Pro Display) -->
+    <text x="450" y="135" text-anchor="middle" font-size="64" fill="#1d1d1f" font-weight="700" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif" letter-spacing="-1.5">AincFh_OS</text>
+    
+    <!-- 副标题 (SF Pro Text) -->
+    <text x="450" y="175" text-anchor="middle" font-size="13" fill="#86868b" font-weight="600" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif" letter-spacing="3">ABSOLUTE DOMAIN // DEPLOYED</text>
+  </g>
+</svg>
