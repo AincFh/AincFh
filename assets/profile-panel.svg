@@ -1,0 +1,214 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500" width="900" height="500">
+  <defs>
+    <radialGradient id="aur1" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#4c1d95" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aur2" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.5"/>
+      <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="aur3" cx="50%" cy="50%" r="50%">
+      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.4"/>
+      <stop offset="100%" stop-color="#064e3b" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="cardFill" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
+    </linearGradient>
+    <linearGradient id="cardShine" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.14"/>
+      <stop offset="50%" stop-color="#ffffff" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="nameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="65%" stop-color="#ffffff" stop-opacity="1"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.45"/>
+    </linearGradient>
+    <linearGradient id="sk1" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#30D158"/>
+      <stop offset="100%" stop-color="#0A84FF"/>
+    </linearGradient>
+    <linearGradient id="sk2" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#0A84FF"/>
+      <stop offset="100%" stop-color="#BF5AF2"/>
+    </linearGradient>
+    <linearGradient id="sk3" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#BF5AF2"/>
+      <stop offset="100%" stop-color="#FF375F"/>
+    </linearGradient>
+    <filter id="aBlur" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="50"/>
+    </filter>
+    <filter id="dGlow">
+      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+  </defs>
+
+  <!-- ░ Background ░ -->
+  <rect width="900" height="500" fill="#040408"/>
+
+  <!-- Aurora Blobs -->
+  <ellipse cx="220" cy="200" rx="300" ry="220" fill="url(#aur1)" filter="url(#aBlur)">
+    <animate attributeName="opacity" values="0.8;1;0.8" dur="8s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="700" cy="280" rx="280" ry="200" fill="url(#aur2)" filter="url(#aBlur)">
+    <animate attributeName="opacity" values="1;0.65;1" dur="10s" repeatCount="indefinite"/>
+  </ellipse>
+  <ellipse cx="500" cy="80" rx="220" ry="150" fill="url(#aur3)" filter="url(#aBlur)">
+    <animate attributeName="opacity" values="0.7;1;0.7" dur="7s" begin="2s" repeatCount="indefinite"/>
+  </ellipse>
+
+  <!-- Dynamic Island Pill -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="0s" fill="freeze"/>
+    <rect x="290" y="16" width="320" height="34" rx="17" fill="#000000" fill-opacity="0.75"/>
+    <rect x="290" y="16" width="320" height="34" rx="17" fill="none"
+          stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.14"/>
+    <circle cx="312" cy="33" r="5" fill="#30D158" filter="url(#dGlow)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="2s" repeatCount="indefinite"/>
+    </circle>
+    <text x="452" y="37" text-anchor="middle" font-size="12" fill="#ffffff" fill-opacity="0.82"
+          font-family="-apple-system,'Helvetica Neue',sans-serif" font-weight="500" letter-spacing="0.3">
+      AincFh  ·  MAGI SYSTEM ONLINE
+    </text>
+  </g>
+
+  <!-- LEFT: Hero Name -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.9s" begin="0.2s" fill="freeze"/>
+    <text x="44" y="128" font-size="56" fill="url(#nameGrad)" font-weight="800"
+          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="-2.5">AincFh</text>
+    <text x="47" y="160" font-size="17" fill="#ffffff" fill-opacity="0.48" font-weight="300"
+          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="0.2">Fullstack Architect</text>
+  </g>
+
+  <!-- Divider 1 -->
+  <line x1="44" y1="178" x2="44" y2="178" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.12">
+    <animate attributeName="x2" from="44" to="400" dur="1s" begin="0.5s" fill="freeze"
+             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  </line>
+
+  <!-- LEFT: Stats -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="0.7s" fill="freeze"/>
+    <text x="44"  y="200" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="1">CLASS</text>
+    <text x="154" y="200" font-size="10.5" fill="#ffffff" fill-opacity="0.8"
+          font-family="-apple-system,sans-serif">Infrastructure Craftsman</text>
+    <text x="44"  y="219" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="1">NETWORK</text>
+    <text x="154" y="219" font-size="10.5" fill="#ffffff" fill-opacity="0.8"
+          font-family="-apple-system,sans-serif">IEPL Dedicated  ·  ONLINE</text>
+    <text x="44"  y="238" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="1">AI CORE</text>
+    <text x="154" y="238" font-size="10.5" fill="#ffffff" fill-opacity="0.8"
+          font-family="-apple-system,sans-serif">Google AI Pro  ·  ENHANCED</text>
+    <text x="44"  y="257" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="1">DEVICE</text>
+    <text x="154" y="257" font-size="10.5" fill="#ffffff" fill-opacity="0.8"
+          font-family="-apple-system,sans-serif">Xiaomi Note 15  ·  SYNCED</text>
+    <text x="44"  y="276" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="1">ASSIST</text>
+    <text x="154" y="276" font-size="10.5" fill="#ffffff" fill-opacity="0.8"
+          font-family="-apple-system,sans-serif">Antigravity  ·  MCP  ·  Cline</text>
+  </g>
+
+  <!-- Divider 2 -->
+  <line x1="44" y1="293" x2="44" y2="293" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.1">
+    <animate attributeName="x2" from="44" to="400" dur="1s" begin="0.9s" fill="freeze"
+             calcMode="spline" keySplines="0.4 0 0.2 1"/>
+  </line>
+
+  <!-- LEFT: Badge Pills -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="1.1s" fill="freeze"/>
+    <rect x="44"  y="307" width="76" height="23" rx="11.5" fill="#0A84FF" fill-opacity="0.12"/>
+    <rect x="44"  y="307" width="76" height="23" rx="11.5" fill="none"
+          stroke="#0A84FF" stroke-width="0.7" stroke-opacity="0.4"/>
+    <text x="82"  y="323" text-anchor="middle" font-size="10" fill="#0A84FF"
+          font-family="-apple-system,sans-serif" font-weight="600">Cloudflare</text>
+    <rect x="128" y="307" width="56" height="23" rx="11.5" fill="#BF5AF2" fill-opacity="0.12"/>
+    <rect x="128" y="307" width="56" height="23" rx="11.5" fill="none"
+          stroke="#BF5AF2" stroke-width="0.7" stroke-opacity="0.4"/>
+    <text x="156" y="323" text-anchor="middle" font-size="10" fill="#BF5AF2"
+          font-family="-apple-system,sans-serif" font-weight="600">iOS UI</text>
+    <rect x="192" y="307" width="62" height="23" rx="11.5" fill="#30D158" fill-opacity="0.12"/>
+    <rect x="192" y="307" width="62" height="23" rx="11.5" fill="none"
+          stroke="#30D158" stroke-width="0.7" stroke-opacity="0.4"/>
+    <text x="223" y="323" text-anchor="middle" font-size="10" fill="#30D158"
+          font-family="-apple-system,sans-serif" font-weight="600">Three.js</text>
+    <rect x="262" y="307" width="68" height="23" rx="11.5" fill="#FF9F0A" fill-opacity="0.12"/>
+    <rect x="262" y="307" width="68" height="23" rx="11.5" fill="none"
+          stroke="#FF9F0A" stroke-width="0.7" stroke-opacity="0.4"/>
+    <text x="296" y="323" text-anchor="middle" font-size="10" fill="#FF9F0A"
+          font-family="-apple-system,sans-serif" font-weight="600">Google AI</text>
+  </g>
+
+  <!-- LEFT: Quote -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.4s" fill="freeze"/>
+    <text x="44" y="376" font-size="42" fill="#ffffff" fill-opacity="0.04"
+          font-family="Georgia,serif">"</text>
+    <text x="58" y="410" font-size="12.5" fill="#ffffff" fill-opacity="0.3" font-style="italic"
+          font-family="Georgia,'Times New Roman',serif">破灭的宿命亦是重生的喜悦</text>
+    <text x="58" y="430" font-size="11" fill="#ffffff" fill-opacity="0.18" font-style="italic"
+          font-family="Georgia,'Times New Roman',serif">Destruction is the joy of rebirth.</text>
+  </g>
+
+  <!-- Vertical Separator -->
+  <line x1="432" y1="62" x2="432" y2="62" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0">
+    <animate attributeName="y2" from="62" to="472" dur="0.9s" begin="0.3s" fill="freeze"/>
+    <animate attributeName="stroke-opacity" from="0" to="0.07" dur="0.5s" begin="0.3s" fill="freeze"/>
+  </line>
+
+  <!-- RIGHT: Card 1 — Active Status -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.5s" fill="freeze"/>
+    <rect x="456" y="60" width="422" height="180" rx="20" fill="url(#cardFill)"/>
+    <rect x="456" y="60" width="422" height="80" rx="20" fill="url(#cardShine)"/>
+    <rect x="456" y="60" width="422" height="180" rx="20" fill="none"
+          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.1"/>
+    <line x1="476" y1="61" x2="720" y2="61" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.18"/>
+    <circle cx="860" cy="80" r="5" fill="#30D158" filter="url(#dGlow)">
+      <animate attributeName="opacity" values="1;0.2;1" dur="1.8s" repeatCount="indefinite"/>
+    </circle>
+    <text x="476" y="90" font-size="13" fill="#ffffff" fill-opacity="0.88" font-weight="600"
+          font-family="-apple-system,sans-serif">⚡  Active Status</text>
+    <line x1="476" y1="100" x2="858" y2="100" stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.07"/>
+    <text x="476" y="120" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">ANIME</text>
+    <text x="540" y="120" font-size="10.5" fill="#FF375F" fill-opacity="0.88"
+          font-family="-apple-system,sans-serif">Blue Lock  ·  Solo Leveling</text>
+    <text x="476" y="138" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">FOCUS</text>
+    <text x="540" y="138" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+          font-family="-apple-system,sans-serif">Zero-latency serverless apps</text>
+    <text x="476" y="156" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">ENGINE</text>
+    <text x="540" y="156" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+          font-family="-apple-system,sans-serif">Three.js  ·  HTML5 Canvas</text>
+    <text x="476" y="174" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">EMBY</text>
+    <text x="540" y="174" font-size="10.5" fill="#30D158" fill-opacity="0.88"
+          font-family="-apple-system,sans-serif">Matrix  ·  STREAMING ACTIVE</text>
+    <text x="476" y="192" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">VIBE</text>
+    <text x="540" y="192" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+          font-family="-apple-system,sans-serif">Cyberpunk  ·  iOS Glass Design</text>
+    <text x="476" y="210" font-size="10.5" fill="#ffffff" fill-opacity="0.28" font-weight="600"
+          font-family="-apple-system,sans-serif" letter-spacing="0.8">MANTRA</text>
+    <text x="540" y="210" font-size="10.5" fill="#BF5AF2" fill-opacity="0.82" font-style="italic"
+          font-family="-apple-system,sans-serif">破灭的宿命亦是重生的喜悦</text>
+  </g>
+
+  <!-- RIGHT: Card 2 — Core Mission -->
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.8s" fill="freeze"/>
+    <rect x="456" y="254" width="422" height="96" rx="20" fill="url(#cardFill)"/>
+    <rect x="456" y="254" width="422" height="48" rx="20" fill="url(#cardShine)"/>
+    <rect x="456" y="254" width="422" height="96" rx="20" fill="none"
+          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.1"/>
+    <line x1="476" y1="255" x2="720" y2="255" stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.18"/>
+    <text x="476" y="282" font-size="13" fill
