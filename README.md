@@ -222,15 +222,6 @@
   </picture>
 </p>
 
-<p align="center">
-  <b>[ 👾 PAC-MAN GRID CONSUME ]</b><br><br>
-  <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AincFh/AincFh/output/pacman-contribution-graph-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="https://raw.githubusercontent.com/AincFh/AincFh/output/pacman-contribution-graph.svg">
-    <img alt="pacman animation" src="https://raw.githubusercontent.com/AincFh/AincFh/output/pacman-contribution-graph.svg">
-  </picture>
-</p>
-
 ---
 
 ### 📡 SECURE COMM LINK // 建立连接
