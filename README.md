@@ -236,6 +236,4 @@
   <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&pause=3000&color=8b949e&center=true&vCenter=true&width=450&lines=[+Saving+session+state...+];[+Closing+Emby+Matrix+ports...+];[+Flushing+A.T.+Field+protocols...+];[+System+entering+standby+mode+];End+of+Line." />
 </p>
 
-<p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=120&section=footer" width="100%" />
-</p>
+<img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=120&section=footer" width="100%" />
