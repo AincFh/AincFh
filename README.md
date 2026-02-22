@@ -19,12 +19,6 @@
 ---
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="700" />
-</p>
-
----
-
-<p align="center">
   <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/profile-panel.svg" width="900" />
 </p>
 
