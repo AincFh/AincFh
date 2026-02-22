@@ -24,7 +24,14 @@
 
 ---
 
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/profile-panel.svg" width="900" />
+</p>
+
+---
+
 ### 📡 SECURE COMM LINK // 建立连接
+
 
 <p align="center">
   <a href="https://github.com/AincFh"><img src="https://img.shields.io/badge/GitHub-100000?style=for-the-badge&logo=github&logoColor=white" /></a>
