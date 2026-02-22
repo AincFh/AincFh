@@ -22,12 +22,6 @@
   <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="620" />
 </p>
 
-### 🚀 ACTIVE DEPLOYMENTS // 核心阵列
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/projects.svg" width="820" />
-</p>
-
 ---
 
 ### 🧬 ABSOLUTE SKILL MATRIX // 算力矩阵
