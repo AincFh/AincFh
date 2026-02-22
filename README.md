@@ -1,5 +1,6 @@
+<!-- 把原来的 <img src="https://capsule-render..." /> 替换为： -->
 <p align="center">
-  <img src="https://capsule-render.vercel.app/api?type=waving&color=0:040408,40:1a0533,70:0a1628,100:040408&height=280&section=header&text=AincFh_OS&fontSize=72&fontAlignY=38&fontColor=ffffff&desc=Absolute%20Domain%20%2F%2F%20Deployed&descSize=18&descAlignY=62&descAlign=50&descFontColor=ffffff&animation=twinkling&stroke=BF5AF2&strokeWidth=2" width="100%" />
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/header.svg" width="100%" />
 </p>
 
 <p align="center">
@@ -31,7 +32,7 @@
 </p>
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&weight=600&size=16&pause=3000&color=8b949e&center=true&vCenter=true&width=450&lines=[+Saving+session+state...+];[+Closing+Emby+Matrix+ports...+];[+Flushing+A.T.+Field+protocols...+];[+System+entering+standby+mode+];End+of+Line." />
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/footer.svg" width="100%" />
 </p>
 
 <img src="https://capsule-render.vercel.app/api?type=waving&color=8B5CF6&height=120&section=footer" width="100%" />
