@@ -19,7 +19,7 @@
 ---
 
 <p align="center">
-  <img src="https://readme-typing-svg.demolab.com?font=Fira+Code&size=14&pause=500&color=00FF99&background=0D1117&center=true&vCenter=true&width=600&height=200&lines=[SUCCESS]+Authenticating+AincFh...;[SECURED]+IEPL+Lines+Active...;[ACTIVE]+Google+AI+Pro+Loaded...;[LOCKED]+iOS+Frosted+Glass+UI...;[DEPLOYED]+Cloudflare+Edge+Workers...;[ESTABLISHED]+A.T.+Field+Deployed.;Welcome+back,+Architect." />
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/terminal.svg" width="620" />
 </p>
 
 ### 📖 Architect Chronicles // 开发者档案
