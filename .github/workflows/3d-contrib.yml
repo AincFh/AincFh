@@ -5,13 +5,15 @@ on:
   workflow_dispatch:
 jobs:
   build:
+    permissions:
+      contents: write
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: yoshi389111/github-profile-3d-contrib@0.7.1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          USERNAME: AincFh
+          USERNAME: ${{ github.repository_owner }}
       - run: |
           git config user.email "action@github.com"
           git config user.name "GitHub Action"
