@@ -24,57 +24,9 @@
 
 ### 📖 Architect Chronicles // 开发者档案
 
-<table align="center">
-  <tr>
-    <td width="50%" valign="top">
-      <h4>🍎 Design Philosophy — EN</h4>
-      <p>
-        I am <b>AincFh</b>, a Fullstack Architect operating at the intersection of <b>edge computing</b> and <b>obsessive design precision</b>. I harness the <b>Cloudflare Workers ecosystem (D1 + R2)</b> for zero-overhead global delivery, while simultaneously engineering <b>100% offline, serverless, privacy-first mobile apps</b>. My UI standard is non-negotiable: semi-transparent frosted glass, iOS Dynamic Island interactions — even forcefully injected into Android native. Empowered by cutting-edge AI workflows, I build scalable backends, gamified user economies, and immersive Web3D hacking simulations.
-      </p>
-    </td>
-    <td width="50%" valign="top">
-      <h4>🤖 开发者哲学 — ZH</h4>
-      <p>
-        我是 <b>AincFh</b>，一名活跃在边缘计算与极致 UI 美学交汇点的全栈架构师。利用 <b>Cloudflare Workers（D1 + R2）</b>构建无开销的全球边缘网络，同时打造 <b>100% 纯离线、零服务器</b>的高隐私应用。我的 UI 标准绝不妥协：半透明毛玻璃、iOS 灵动岛——即便在安卓端也要强行注入。借助 Antigravity、MCP、Cline 等 AI 工具驱动开发工作流，持续突破边界，构建游戏化经济体系与沉浸式 Web3D 体验。
-      </p>
-    </td>
-  </tr>
-  <tr>
-    <td valign="top">
-      <h4>⚡ Active Buffs // 增益状态</h4>
-      <samp>
-        > Class: Infrastructure Craftsman<br>
-        > AI Workflow: Google AI Pro [ENHANCED]<br>
-        > Assistants: Antigravity + MCP + Cline<br>
-        > Network: IEPL Dedicated Lines [ONLINE]<br>
-        > Device: Xiaomi Note 15 [SYNCED]<br>
-        > Anime: Blue Lock ⚽ | Solo Leveling 🗡️<br>
-        > Focus: Zero-latency serverless apps
-      </samp>
-    </td>
-    <td valign="top">
-      <h4>🕹️ Active Sandbox // 沙盒状态</h4>
-      <samp>
-        > Engine: Three.js + HTML5 Canvas<br>
-        > Genre: Story-Driven Hacking Simulator<br>
-        > Aesthetic: Cyberpunk + Deep Atmospheric UI<br>
-        > Emby Matrix: STREAMING [ACTIVE]<br>
-        > Design: Semi-transparent iOS Glass<br>
-        > Icons: BG-free pixel-perfect<br>
-        > Mantra: 破灭的宿命亦是重生的喜悦
-      </samp>
-    </td>
-  </tr>
-  <tr>
-    <td colspan="2" align="center">
-      <h4>🌍 Core Mission // 核心使命</h4>
-      <samp>
-        > <b>EN:</b> Bridging the gap between absolute edge-computing scale and obsessive local privacy.<br>
-        > <b>ZH:</b> 在极致边缘算力与绝对本地隐私之间构建桥梁，两个极端，一个架构师。
-      </samp>
-    </td>
-  </tr>
-</table>
+<p align="center">
+  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/assets/profile-panel.svg" width="800" />
+</p>
 
 ---
 
