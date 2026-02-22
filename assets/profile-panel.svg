@@ -1,386 +1,286 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 960" width="900" height="960">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 520" width="900" height="520">
   <defs>
-    <linearGradient id="tb" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#1c2030"/>
-      <stop offset="100%" stop-color="#161b22"/>
-    </linearGradient>
-    <linearGradient id="termBg" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#0d1117"/>
-      <stop offset="100%" stop-color="#090d13"/>
-    </linearGradient>
-    <radialGradient id="aur1" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#4c1d95" stop-opacity="0.5"/>
-      <stop offset="100%" stop-color="#4c1d95" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="aur2" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#1e3a5f" stop-opacity="0.45"/>
-      <stop offset="100%" stop-color="#1e3a5f" stop-opacity="0"/>
-    </radialGradient>
-    <radialGradient id="aur3" cx="50%" cy="50%" r="50%">
-      <stop offset="0%" stop-color="#064e3b" stop-opacity="0.35"/>
-      <stop offset="100%" stop-color="#064e3b" stop-opacity="0"/>
-    </radialGradient>
-    <linearGradient id="cardFill" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.07"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.02"/>
-    </linearGradient>
-    <linearGradient id="cardShine" x1="0%" y1="0%" x2="0%" y2="100%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="0.13"/>
-      <stop offset="55%" stop-color="#ffffff" stop-opacity="0"/>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5f5f7"/>
+      <stop offset="100%" stop-color="#ebebf0"/>
     </linearGradient>
     <linearGradient id="nameGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="65%" stop-color="#ffffff" stop-opacity="1"/>
-      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.35"/>
+      <stop offset="0%" stop-color="#1d1d1f"/>
+      <stop offset="70%" stop-color="#1d1d1f"/>
+      <stop offset="100%" stop-color="#6e6e73"/>
+    </linearGradient>
+    <linearGradient id="divGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#000000" stop-opacity="0.14"/>
+      <stop offset="100%" stop-color="#000000" stop-opacity="0"/>
     </linearGradient>
     <linearGradient id="bar1" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#30D158"/>
-      <stop offset="100%" stop-color="#0A84FF"/>
+      <stop offset="0%" stop-color="#34c759"/>
+      <stop offset="100%" stop-color="#0071e3"/>
     </linearGradient>
     <linearGradient id="bar2" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#0A84FF"/>
-      <stop offset="100%" stop-color="#BF5AF2"/>
+      <stop offset="0%" stop-color="#0071e3"/>
+      <stop offset="100%" stop-color="#af52de"/>
     </linearGradient>
     <linearGradient id="bar3" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#BF5AF2"/>
-      <stop offset="100%" stop-color="#FF375F"/>
+      <stop offset="0%" stop-color="#af52de"/>
+      <stop offset="100%" stop-color="#ff3b30"/>
     </linearGradient>
     <linearGradient id="bar4" x1="0%" y1="0%" x2="100%" y2="0%">
-      <stop offset="0%" stop-color="#FF9F0A"/>
-      <stop offset="100%" stop-color="#FF375F"/>
+      <stop offset="0%" stop-color="#ff9500"/>
+      <stop offset="100%" stop-color="#ff3b30"/>
     </linearGradient>
-    <filter id="aBlur" x="-50%" y="-50%" width="200%" height="200%">
-      <feGaussianBlur stdDeviation="55"/>
+    <filter id="cardShadow" x="-6%" y="-6%" width="118%" height="130%">
+      <feDropShadow dx="0" dy="2" stdDeviation="8" flood-color="#000000" flood-opacity="0.07"/>
     </filter>
     <filter id="dotGlow">
-      <feGaussianBlur stdDeviation="1.5" result="b"/>
-      <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
-    </filter>
-    <filter id="dGlow">
-      <feGaussianBlur stdDeviation="3" result="b"/>
+      <feGaussianBlur stdDeviation="1.2" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
 
-  <style>
-    @keyframes l1 { 0%,2%{opacity:0}   4%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l2 { 0%,11%{opacity:0}  13%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l3 { 0%,21%{opacity:0}  23%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l4 { 0%,31%{opacity:0}  33%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l5 { 0%,41%{opacity:0}  43%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l6 { 0%,51%{opacity:0}  53%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l7 { 0%,61%{opacity:0}  63%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes l8 { 0%,71%{opacity:0}  73%,82%{opacity:1} 89%,100%{opacity:0} }
-    @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
-    .l1{animation:l1 22s infinite;opacity:0}
-    .l2{animation:l2 22s infinite;opacity:0}
-    .l3{animation:l3 22s infinite;opacity:0}
-    .l4{animation:l4 22s infinite;opacity:0}
-    .l5{animation:l5 22s infinite;opacity:0}
-    .l6{animation:l6 22s infinite;opacity:0}
-    .l7{animation:l7 22s infinite;opacity:0}
-    .l8{animation:l8 22s infinite;opacity:0}
-    .cur{animation:blink 1s step-end infinite}
-    .tt{font-family:'Courier New',Courier,monospace;font-size:13px}
-  </style>
+  <!-- Background -->
+  <rect width="900" height="520" fill="url(#bgGrad)"/>
 
-  <!-- ░░ FULL BACKGROUND ░░ -->
-  <rect width="900" height="960" fill="#040408"/>
-
-  <!-- Aurora (profile section) -->
-  <ellipse cx="180" cy="680" rx="320" ry="240" fill="url(#aur1)" filter="url(#aBlur)">
-    <animate attributeName="opacity" values="0.8;1;0.8" dur="9s" repeatCount="indefinite"/>
-  </ellipse>
-  <ellipse cx="740" cy="760" rx="290" ry="220" fill="url(#aur2)" filter="url(#aBlur)">
-    <animate attributeName="opacity" values="1;0.6;1" dur="11s" repeatCount="indefinite"/>
-  </ellipse>
-  <ellipse cx="500" cy="560" rx="230" ry="150" fill="url(#aur3)" filter="url(#aBlur)">
-    <animate attributeName="opacity" values="0.6;1;0.6" dur="7s" begin="2s" repeatCount="indefinite"/>
-  </ellipse>
-
-  <!-- ═══════════════ TERMINAL ═══════════════ -->
-  <rect x="50" y="15" width="800" height="280" rx="12"
-        fill="url(#termBg)" stroke="#21262d" stroke-width="1.2"/>
-
-  <!-- Scan line -->
-  <rect x="50" y="15" width="800" height="2" fill="#00FF99" opacity="0.03">
-    <animateTransform attributeName="transform" type="translate"
-      from="0,30" to="0,280" dur="5s" repeatCount="indefinite"/>
-  </rect>
-
-  <!-- Title bar -->
-  <rect x="50" y="15" width="800" height="40" rx="12" fill="url(#tb)"/>
-  <rect x="50" y="43" width="800" height="12" fill="url(#tb)"/>
-  <line x1="50" y1="55" x2="850" y2="55" stroke="#21262d" stroke-width="1"/>
-
-  <!-- Dots -->
-  <circle cx="76"  cy="35" r="6.5" fill="#ff5f57" filter="url(#dotGlow)"/>
-  <circle cx="100" cy="35" r="6.5" fill="#febc2e" filter="url(#dotGlow)"/>
-  <circle cx="124" cy="35" r="6.5" fill="#28c840" filter="url(#dotGlow)"/>
-  <text x="450" y="40" text-anchor="middle" font-size="12" fill="#6e7681"
-        font-family="-apple-system,'Helvetica Neue',sans-serif">
-    AincFh@MAGI-SYSTEM  —  bash
-  </text>
-
-  <!-- Terminal lines -->
-  <text class="l1 tt" x="70" y="88">
-    <tspan fill="#57a6ff">AincFh</tspan><tspan fill="#6e7681">@</tspan><tspan fill="#3fb950">MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#e6edf3">./init_core.sh</tspan>
-  </text>
-  <text class="l2 tt" x="70" y="112">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">Authenticating AincFh ............. </tspan><tspan fill="#00FF99" font-weight="bold">SUCCESS</tspan>
-  </text>
-  <text class="l3 tt" x="70" y="136">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">IEPL Lines &#8594; Emby Matrix ......... </tspan><tspan fill="#00FF99" font-weight="bold">SECURED</tspan>
-  </text>
-  <text class="l4 tt" x="70" y="160">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">Google AI Pro Loaded ............. </tspan><tspan fill="#00FF99" font-weight="bold">ACTIVE</tspan>
-  </text>
-  <text class="l5 tt" x="70" y="184">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">iOS Frosted Glass UI ............. </tspan><tspan fill="#00FF99" font-weight="bold">LOCKED</tspan>
-  </text>
-  <text class="l6 tt" x="70" y="208">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">Cloudflare Edge Workers .......... </tspan><tspan fill="#00FF99" font-weight="bold">DEPLOYED</tspan>
-  </text>
-  <text class="l7 tt" x="70" y="232">
-    <tspan fill="#3fb950">&#10003; </tspan><tspan fill="#8b949e">A.T. Field Protocol .............. </tspan><tspan fill="#00FF99" font-weight="bold">ESTABLISHED</tspan>
-  </text>
-  <text class="l8 tt" x="70" y="272">
-    <tspan fill="#57a6ff">AincFh</tspan><tspan fill="#6e7681">@</tspan><tspan fill="#3fb950">MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#e6edf3">echo "Welcome back, Architect." </tspan><tspan class="cur" fill="#00FF99">&#9608;</tspan>
-  </text>
-
-  <!-- Section divider -->
-  <line x1="50" y1="318" x2="850" y2="318"
-        stroke="#ffffff" stroke-width="0.5" stroke-opacity="0.05"/>
-
-  <!-- ═══════════════ PROFILE ═══════════════ -->
+  <!-- Subtle background accents -->
+  <circle cx="120" cy="120" r="200" fill="#0071e3" opacity="0.025"/>
+  <circle cx="800" cy="380" r="180" fill="#af52de" opacity="0.02"/>
 
   <!-- Dynamic Island -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="0.2s" fill="freeze"/>
-    <rect x="285" y="328" width="330" height="32" rx="16"
-          fill="#000000" fill-opacity="0.78"/>
-    <rect x="285" y="328" width="330" height="32" rx="16"
-          fill="none" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.13"/>
-    <circle cx="307" cy="344" r="4.5" fill="#30D158" filter="url(#dGlow)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.6s" begin="0s" fill="freeze"/>
+    <rect x="300" y="12" width="300" height="30" rx="15" fill="#1c1c1e"/>
+    <circle cx="320" cy="27" r="4" fill="#34c759" filter="url(#dotGlow)">
       <animate attributeName="opacity" values="1;0.15;1" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <text x="452" y="349" text-anchor="middle" font-size="11.5"
-          fill="#ffffff" fill-opacity="0.8"
+    <text x="452" y="32" text-anchor="middle" font-size="11"
+          fill="#ffffff" fill-opacity="0.82"
           font-family="-apple-system,'Helvetica Neue',sans-serif"
-          font-weight="500" letter-spacing="0.4">
+          font-weight="500" letter-spacing="0.3">
       AincFh  ·  MAGI SYSTEM ONLINE
     </text>
   </g>
 
-  <!-- ── LEFT COLUMN ── -->
+  <!-- ═══ LEFT COLUMN ═══ -->
 
   <!-- Name + Role -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.9s" begin="0.4s" fill="freeze"/>
-    <text x="40" y="438" font-size="54" fill="url(#nameGrad)" font-weight="800"
-          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="-2.5">AincFh</text>
-    <text x="43" y="464" font-size="14" fill="#ffffff" fill-opacity="0.38" font-weight="300"
-          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="0.3">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.15s" fill="freeze"/>
+    <text x="32" y="108" font-size="50" fill="url(#nameGrad)" font-weight="700"
+          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="-2">AincFh</text>
+    <text x="34" y="130" font-size="13.5" fill="#6e6e73" font-weight="400"
+          font-family="-apple-system,'Helvetica Neue',sans-serif" letter-spacing="0.2">
       Fullstack Architect  ·  全栈架构师
     </text>
   </g>
 
-  <line x1="40" y1="480" x2="40" y2="480" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.12">
-    <animate attributeName="x2" from="40" to="420" dur="0.9s" begin="0.6s" fill="freeze"
+  <!-- Divider 1 -->
+  <line x1="32" y1="144" x2="32" y2="144" stroke="url(#divGrad)" stroke-width="0.8">
+    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="0.35s" fill="freeze"
              calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
-  <!-- EN + ZH Bio -->
+  <!-- Bio EN + ZH -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.8s" fill="freeze"/>
-    <text x="40" y="499" font-size="10.5" fill="#ffffff" fill-opacity="0.5"
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.5s" fill="freeze"/>
+    <text x="32" y="162" font-size="11" fill="#1d1d1f" fill-opacity="0.62"
           font-family="-apple-system,sans-serif">Architect at the intersection of edge computing</text>
-    <text x="40" y="515" font-size="10.5" fill="#ffffff" fill-opacity="0.5"
+    <text x="32" y="177" font-size="11" fill="#1d1d1f" fill-opacity="0.62"
           font-family="-apple-system,sans-serif">and obsessive design precision. Cloudflare edge,</text>
-    <text x="40" y="531" font-size="10.5" fill="#ffffff" fill-opacity="0.5"
+    <text x="32" y="192" font-size="11" fill="#1d1d1f" fill-opacity="0.62"
           font-family="-apple-system,sans-serif">100% offline apps, iOS aesthetics forced into Android.</text>
-    <text x="40" y="549" font-size="10.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32" y="208" font-size="11" fill="#6e6e73" fill-opacity="0.8"
           font-family="-apple-system,sans-serif">活跃在边缘计算与极致 UI 美学交汇点的全栈架构师。</text>
-    <text x="40" y="565" font-size="10.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32" y="223" font-size="11" fill="#6e6e73" fill-opacity="0.8"
           font-family="-apple-system,sans-serif">打造 100% 纯离线、零服务器、绝对隐私的移动应用。</text>
   </g>
 
-  <line x1="40" y1="579" x2="40" y2="579" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.1">
-    <animate attributeName="x2" from="40" to="420" dur="0.9s" begin="1.0s" fill="freeze"
+  <!-- Divider 2 -->
+  <line x1="32" y1="237" x2="32" y2="237" stroke="url(#divGrad)" stroke-width="0.8">
+    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="0.7s" fill="freeze"
              calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
   <!-- Stats -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="1.1s" fill="freeze"/>
-    <text x="40"  y="598" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="0.85s" fill="freeze"/>
+    <text x="32"  y="255" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">CLASS</text>
-    <text x="140" y="598" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+    <text x="118" y="255" font-size="11" fill="#1d1d1f" fill-opacity="0.75"
           font-family="-apple-system,sans-serif">Infrastructure Craftsman</text>
-    <text x="40"  y="616" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="32"  y="272" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">NETWORK</text>
-    <text x="140" y="616" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+    <text x="118" y="272" font-size="11" fill="#1d1d1f" fill-opacity="0.75"
           font-family="-apple-system,sans-serif">IEPL Dedicated  ·  ONLINE</text>
-    <text x="40"  y="634" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="32"  y="289" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">AI CORE</text>
-    <text x="140" y="634" font-size="10.5" fill="#30D158" fill-opacity="0.88"
+    <text x="118" y="289" font-size="11" fill="#34c759"
           font-family="-apple-system,sans-serif">Google AI Pro  ·  ENHANCED</text>
-    <text x="40"  y="652" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="32"  y="306" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">DEVICE</text>
-    <text x="140" y="652" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+    <text x="118" y="306" font-size="11" fill="#1d1d1f" fill-opacity="0.75"
           font-family="-apple-system,sans-serif">Xiaomi Note 15  ·  SYNCED</text>
-    <text x="40"  y="670" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="32"  y="323" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">ASSIST</text>
-    <text x="140" y="670" font-size="10.5" fill="#ffffff" fill-opacity="0.75"
+    <text x="118" y="323" font-size="11" fill="#1d1d1f" fill-opacity="0.75"
           font-family="-apple-system,sans-serif">Antigravity  ·  MCP  ·  Cline</text>
-    <text x="40"  y="688" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="32"  y="340" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.9">ANIME</text>
-    <text x="140" y="688" font-size="10.5" fill="#FF375F" fill-opacity="0.86"
+    <text x="118" y="340" font-size="11" fill="#ff3b30"
           font-family="-apple-system,sans-serif">Blue Lock  ·  Solo Leveling</text>
   </g>
 
-  <line x1="40" y1="702" x2="40" y2="702" stroke="#ffffff" stroke-width="0.6" stroke-opacity="0.1">
-    <animate attributeName="x2" from="40" to="420" dur="0.9s" begin="1.3s" fill="freeze"
+  <!-- Divider 3 -->
+  <line x1="32" y1="353" x2="32" y2="353" stroke="url(#divGrad)" stroke-width="0.8">
+    <animate attributeName="x2" from="32" to="420" dur="0.8s" begin="1.05s" fill="freeze"
              calcMode="spline" keySplines="0.4 0 0.2 1"/>
   </line>
 
   <!-- Skill Bars -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="1.4s" fill="freeze"/>
+    <animate attributeName="opacity" from="0" to="1" dur="0.7s" begin="1.15s" fill="freeze"/>
 
-    <text x="40" y="722" font-size="9.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32"  y="369" font-size="10" fill="#6e6e73"
           font-family="-apple-system,sans-serif">Edge / Cloud</text>
-    <text x="415" y="722" text-anchor="end" font-size="9.5" fill="#30D158"
+    <text x="418" y="369" text-anchor="end" font-size="10" fill="#34c759" font-weight="600"
           font-family="-apple-system,sans-serif">92%</text>
-    <rect x="40" y="726" width="375" height="3.5" rx="1.75" fill="#ffffff" fill-opacity="0.07"/>
-    <rect x="40" y="726" height="3.5" rx="1.75" fill="url(#bar1)">
-      <animate attributeName="width" from="0" to="345" dur="1.1s" begin="1.6s" fill="freeze"
+    <rect x="32" y="373" width="386" height="4" rx="2" fill="#000000" fill-opacity="0.07"/>
+    <rect x="32" y="373" height="4" rx="2" fill="url(#bar1)">
+      <animate attributeName="width" from="0" to="355" dur="1.0s" begin="1.35s" fill="freeze"
                calcMode="spline" keySplines="0.4 0 0.2 1"/>
     </rect>
 
-    <text x="40" y="746" font-size="9.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32"  y="393" font-size="10" fill="#6e6e73"
           font-family="-apple-system,sans-serif">Mobile / iOS UI</text>
-    <text x="415" y="746" text-anchor="end" font-size="9.5" fill="#0A84FF"
+    <text x="418" y="393" text-anchor="end" font-size="10" fill="#0071e3" font-weight="600"
           font-family="-apple-system,sans-serif">87%</text>
-    <rect x="40" y="750" width="375" height="3.5" rx="1.75" fill="#ffffff" fill-opacity="0.07"/>
-    <rect x="40" y="750" height="3.5" rx="1.75" fill="url(#bar2)">
-      <animate attributeName="width" from="0" to="326" dur="1.1s" begin="1.8s" fill="freeze"
+    <rect x="32" y="397" width="386" height="4" rx="2" fill="#000000" fill-opacity="0.07"/>
+    <rect x="32" y="397" height="4" rx="2" fill="url(#bar2)">
+      <animate attributeName="width" from="0" to="336" dur="1.0s" begin="1.55s" fill="freeze"
                calcMode="spline" keySplines="0.4 0 0.2 1"/>
     </rect>
 
-    <text x="40" y="770" font-size="9.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32"  y="417" font-size="10" fill="#6e6e73"
           font-family="-apple-system,sans-serif">Web3D / Canvas</text>
-    <text x="415" y="770" text-anchor="end" font-size="9.5" fill="#BF5AF2"
+    <text x="418" y="417" text-anchor="end" font-size="10" fill="#af52de" font-weight="600"
           font-family="-apple-system,sans-serif">78%</text>
-    <rect x="40" y="774" width="375" height="3.5" rx="1.75" fill="#ffffff" fill-opacity="0.07"/>
-    <rect x="40" y="774" height="3.5" rx="1.75" fill="url(#bar3)">
-      <animate attributeName="width" from="0" to="292" dur="1.1s" begin="2.0s" fill="freeze"
+    <rect x="32" y="421" width="386" height="4" rx="2" fill="#000000" fill-opacity="0.07"/>
+    <rect x="32" y="421" height="4" rx="2" fill="url(#bar3)">
+      <animate attributeName="width" from="0" to="301" dur="1.0s" begin="1.75s" fill="freeze"
                calcMode="spline" keySplines="0.4 0 0.2 1"/>
     </rect>
 
-    <text x="40" y="794" font-size="9.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="32"  y="441" font-size="10" fill="#6e6e73"
           font-family="-apple-system,sans-serif">DevOps / Infra</text>
-    <text x="415" y="794" text-anchor="end" font-size="9.5" fill="#FF9F0A"
+    <text x="418" y="441" text-anchor="end" font-size="10" fill="#ff9500" font-weight="600"
           font-family="-apple-system,sans-serif">74%</text>
-    <rect x="40" y="798" width="375" height="3.5" rx="1.75" fill="#ffffff" fill-opacity="0.07"/>
-    <rect x="40" y="798" height="3.5" rx="1.75" fill="url(#bar4)">
-      <animate attributeName="width" from="0" to="277" dur="1.1s" begin="2.2s" fill="freeze"
+    <rect x="32" y="445" width="386" height="4" rx="2" fill="#000000" fill-opacity="0.07"/>
+    <rect x="32" y="445" height="4" rx="2" fill="url(#bar4)">
+      <animate attributeName="width" from="0" to="286" dur="1.0s" begin="1.95s" fill="freeze"
                calcMode="spline" keySplines="0.4 0 0.2 1"/>
     </rect>
   </g>
 
   <!-- Quote -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2.4s" fill="freeze"/>
-    <text x="40" y="850" font-size="11.5" fill="#ffffff" fill-opacity="0.18" font-style="italic"
+    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="2.1s" fill="freeze"/>
+    <text x="32" y="476" font-size="12" fill="#1d1d1f" fill-opacity="0.18" font-style="italic"
           font-family="Georgia,'Times New Roman',serif">破灭的宿命亦是重生的喜悦</text>
-    <text x="40" y="867" font-size="10" fill="#ffffff" fill-opacity="0.1" font-style="italic"
+    <text x="32" y="491" font-size="10.5" fill="#1d1d1f" fill-opacity="0.12" font-style="italic"
           font-family="Georgia,'Times New Roman',serif">
       Destruction is the joy of rebirth.  —  AincFh
     </text>
   </g>
 
   <!-- Vertical separator -->
-  <line x1="444" y1="370" x2="444" y2="370"
-        stroke="#ffffff" stroke-width="0.5" stroke-opacity="0">
-    <animate attributeName="y2" from="370" to="942" dur="0.8s" begin="0.5s" fill="freeze"/>
-    <animate attributeName="stroke-opacity" from="0" to="0.07" dur="0.5s" begin="0.5s" fill="freeze"/>
+  <line x1="440" y1="52" x2="440" y2="52" stroke="#000000" stroke-opacity="0">
+    <animate attributeName="y2" from="52" to="500" dur="0.7s" begin="0.3s" fill="freeze"/>
+    <animate attributeName="stroke-opacity" from="0" to="0.08" dur="0.5s" begin="0.3s" fill="freeze"/>
   </line>
 
-  <!-- ── RIGHT COLUMN CARDS ── -->
+  <!-- ═══ RIGHT COLUMN CARDS ═══ -->
 
   <!-- Card 1: Active Status -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.6s" fill="freeze"/>
-    <rect x="462" y="370" width="422" height="200" rx="20" fill="url(#cardFill)"/>
-    <rect x="462" y="370" width="422" height="80" rx="20" fill="url(#cardShine)"/>
-    <rect x="462" y="370" width="422" height="200" rx="20" fill="none"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.09"/>
-    <line x1="482" y1="371" x2="740" y2="371"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.16"/>
-    <circle cx="864" cy="390" r="4.5" fill="#30D158" filter="url(#dGlow)">
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.35s" fill="freeze"/>
+    <rect x="454" y="52" width="432" height="162" rx="18"
+          fill="#ffffff" filter="url(#cardShadow)"/>
+    <rect x="454" y="52" width="432" height="162" rx="18"
+          fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.07"/>
+    <line x1="474" y1="53" x2="730" y2="53"
+          stroke="#ffffff" stroke-width="1" stroke-opacity="0.9"/>
+
+    <circle cx="866" cy="72" r="4" fill="#34c759" filter="url(#dotGlow)">
       <animate attributeName="opacity" values="1;0.15;1" dur="2s" repeatCount="indefinite"/>
     </circle>
-    <text x="482" y="398" font-size="12" fill="#ffffff" fill-opacity="0.9" font-weight="600"
-          font-family="-apple-system,sans-serif">&#9889;  Active Status  ·  在线状态</text>
-    <line x1="482" y1="408" x2="874" y2="408"
-          stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.07"/>
-    <text x="482" y="426" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+    <text x="474" y="80" font-size="12.5" fill="#1d1d1f" font-weight="600"
+          font-family="-apple-system,sans-serif">⚡  Active Status  ·  在线状态</text>
+    <line x1="474" y1="90" x2="876" y2="90"
+          stroke="#000000" stroke-width="0.5" stroke-opacity="0.07"/>
+
+    <text x="474" y="108" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">FOCUS</text>
-    <text x="545" y="426" font-size="10.5" fill="#ffffff" fill-opacity="0.72"
+    <text x="536" y="108" font-size="11" fill="#1d1d1f" fill-opacity="0.68"
           font-family="-apple-system,sans-serif">Zero-latency serverless  ·  零延迟无服务器</text>
-    <text x="482" y="444" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="474" y="125" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">ENGINE</text>
-    <text x="545" y="444" font-size="10.5" fill="#ffffff" fill-opacity="0.72"
+    <text x="536" y="125" font-size="11" fill="#1d1d1f" fill-opacity="0.68"
           font-family="-apple-system,sans-serif">Three.js + HTML5 Canvas  ·  Web3D</text>
-    <text x="482" y="462" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="474" y="142" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">EMBY</text>
-    <text x="545" y="462" font-size="10.5" fill="#30D158" fill-opacity="0.85"
+    <text x="536" y="142" font-size="11" fill="#34c759"
           font-family="-apple-system,sans-serif">Matrix Streaming  ·  ACTIVE</text>
-    <text x="482" y="480" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="474" y="159" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">VIBE</text>
-    <text x="545" y="480" font-size="10.5" fill="#ffffff" fill-opacity="0.72"
+    <text x="536" y="159" font-size="11" fill="#1d1d1f" fill-opacity="0.68"
           font-family="-apple-system,sans-serif">Cyberpunk  ·  iOS Glass  ·  赛博毛玻璃</text>
-    <text x="482" y="498" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="474" y="176" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">ANIME</text>
-    <text x="545" y="498" font-size="10.5" fill="#FF375F" fill-opacity="0.85"
+    <text x="536" y="176" font-size="11" fill="#ff3b30"
           font-family="-apple-system,sans-serif">Blue Lock  ·  Solo Leveling  ·  蔚蓝监狱</text>
-    <text x="482" y="516" font-size="9.5" fill="#ffffff" fill-opacity="0.24" font-weight="600"
+
+    <text x="474" y="193" font-size="9" fill="#aeaeb2" font-weight="600"
           font-family="-apple-system,sans-serif" letter-spacing="0.8">MANTRA</text>
-    <text x="545" y="516" font-size="10.5" fill="#BF5AF2" fill-opacity="0.82" font-style="italic"
+    <text x="536" y="193" font-size="11" fill="#af52de" font-style="italic"
           font-family="-apple-system,sans-serif">破灭的宿命亦是重生的喜悦</text>
   </g>
 
   <!-- Card 2: Philosophy -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.9s" fill="freeze"/>
-    <rect x="462" y="586" width="422" height="152" rx="20" fill="url(#cardFill)"/>
-    <rect x="462" y="586" width="422" height="70" rx="20" fill="url(#cardShine)"/>
-    <rect x="462" y="586" width="422" height="152" rx="20" fill="none"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.09"/>
-    <line x1="482" y1="587" x2="740" y2="587"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.16"/>
-    <text x="482" y="614" font-size="12" fill="#ffffff" fill-opacity="0.9" font-weight="600"
-          font-family="-apple-system,sans-serif">&#63743;  Philosophy  ·  开发者哲学</text>
-    <line x1="482" y1="624" x2="874" y2="624"
-          stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.07"/>
-    <text x="482" y="642" font-size="10.5" fill="#ffffff" fill-opacity="0.5"
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.6s" fill="freeze"/>
+    <rect x="454" y="226" width="432" height="134" rx="18"
+          fill="#ffffff" filter="url(#cardShadow)"/>
+    <rect x="454" y="226" width="432" height="134" rx="18"
+          fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.07"/>
+    <line x1="474" y1="227" x2="730" y2="227"
+          stroke="#ffffff" stroke-width="1" stroke-opacity="0.9"/>
+
+    <text x="474" y="254" font-size="12.5" fill="#1d1d1f" font-weight="600"
+          font-family="-apple-system,sans-serif">🍎  Philosophy  ·  开发者哲学</text>
+    <line x1="474" y1="264" x2="876" y2="264"
+          stroke="#000000" stroke-width="0.5" stroke-opacity="0.07"/>
+
+    <text x="474" y="282" font-size="11" fill="#1d1d1f" fill-opacity="0.58"
           font-family="-apple-system,sans-serif">
       Cloudflare Workers (D1+R2) for zero-overhead global delivery.
     </text>
-    <text x="482" y="660" font-size="10.5" fill="#ffffff" fill-opacity="0.5"
+    <text x="474" y="299" font-size="11" fill="#1d1d1f" fill-opacity="0.58"
           font-family="-apple-system,sans-serif">
       100% offline, serverless, privacy-first mobile apps.
     </text>
-    <text x="482" y="680" font-size="10.5" fill="#ffffff" fill-opacity="0.28"
+    <text x="474" y="317" font-size="11" fill="#6e6e73" fill-opacity="0.7"
           font-family="-apple-system,sans-serif">
-      利用 Cloudflare Workers 构建无开销全球边缘网络，
+      利用 Cloudflare Workers 构建无开销全球边缘网络。
     </text>
-    <text x="482" y="698" font-size="10.5" fill="#ffffff" fill-opacity="0.28"
-          font-family="-apple-system,sans-serif">
-      打造 100% 离线零服务器高隐私应用。UI：毛玻璃灵动岛。
-    </text>
-    <text x="482" y="718" font-size="10.5" fill="#ffffff" fill-opacity="0.18"
+    <text x="474" y="334" font-size="11" fill="#6e6e73" fill-opacity="0.5"
           font-family="-apple-system,sans-serif">
       两个极端，一个架构师。  Two extremes, one architect.
     </text>
@@ -388,76 +288,71 @@
 
   <!-- Card 3: Stack -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.2s" fill="freeze"/>
-    <rect x="462" y="754" width="422" height="112" rx="20" fill="url(#cardFill)"/>
-    <rect x="462" y="754" width="422" height="56" rx="20" fill="url(#cardShine)"/>
-    <rect x="462" y="754" width="422" height="112" rx="20" fill="none"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.09"/>
-    <line x1="482" y1="755" x2="740" y2="755"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.16"/>
-    <text x="482" y="782" font-size="12" fill="#ffffff" fill-opacity="0.9" font-weight="600"
-          font-family="-apple-system,sans-serif">&#128203;  Stack  ·  技术栈</text>
-    <line x1="482" y1="792" x2="874" y2="792"
-          stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.07"/>
-    <!-- Row 1 -->
-    <rect x="482" y="800" width="66" height="21" rx="10.5" fill="#0A84FF" fill-opacity="0.11"/>
-    <rect x="482" y="800" width="66" height="21" rx="10.5" fill="none" stroke="#0A84FF" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="515" y="815" text-anchor="middle" font-size="9.5" fill="#0A84FF" font-family="-apple-system,sans-serif" font-weight="600">Cloudflare</text>
-    <rect x="556" y="800" width="50" height="21" rx="10.5" fill="#BF5AF2" fill-opacity="0.11"/>
-    <rect x="556" y="800" width="50" height="21" rx="10.5" fill="none" stroke="#BF5AF2" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="581" y="815" text-anchor="middle" font-size="9.5" fill="#BF5AF2" font-family="-apple-system,sans-serif" font-weight="600">iOS UI</text>
-    <rect x="614" y="800" width="56" height="21" rx="10.5" fill="#30D158" fill-opacity="0.11"/>
-    <rect x="614" y="800" width="56" height="21" rx="10.5" fill="none" stroke="#30D158" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="642" y="815" text-anchor="middle" font-size="9.5" fill="#30D158" font-family="-apple-system,sans-serif" font-weight="600">Three.js</text>
-    <rect x="678" y="800" width="44" height="21" rx="10.5" fill="#FF9F0A" fill-opacity="0.11"/>
-    <rect x="678" y="800" width="44" height="21" rx="10.5" fill="none" stroke="#FF9F0A" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="700" y="815" text-anchor="middle" font-size="9.5" fill="#FF9F0A" font-family="-apple-system,sans-serif" font-weight="600">AI Pro</text>
-    <rect x="730" y="800" width="40" height="21" rx="10.5" fill="#FF375F" fill-opacity="0.11"/>
-    <rect x="730" y="800" width="40" height="21" rx="10.5" fill="none" stroke="#FF375F" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="750" y="815" text-anchor="middle" font-size="9.5" fill="#FF375F" font-family="-apple-system,sans-serif" font-weight="600">React</text>
-    <rect x="778" y="800" width="46" height="21" rx="10.5" fill="#64D2FF" fill-opacity="0.11"/>
-    <rect x="778" y="800" width="46" height="21" rx="10.5" fill="none" stroke="#64D2FF" stroke-width="0.7" stroke-opacity="0.38"/>
-    <text x="801" y="815" text-anchor="middle" font-size="9.5" fill="#64D2FF" font-family="-apple-system,sans-serif" font-weight="600">Docker</text>
-    <rect x="832" y="800" width="36" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="832" y="800" width="36" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.2"/>
-    <text x="850" y="815" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.45" font-family="-apple-system,sans-serif" font-weight="600">TS</text>
-    <!-- Row 2 -->
-    <rect x="482" y="828" width="50" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="482" y="828" width="50" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="507" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">SQLite</text>
-    <rect x="540" y="828" width="42" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="540" y="828" width="42" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="561" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">Linux</text>
-    <rect x="590" y="828" width="44" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="590" y="828" width="44" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="612" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">Figma</text>
-    <rect x="642" y="828" width="46" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="642" y="828" width="46" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="665" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">Node.js</text>
-    <rect x="696" y="828" width="44" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="696" y="828" width="44" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="718" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">Python</text>
-    <rect x="748" y="828" width="44" height="21" rx="10.5" fill="#ffffff" fill-opacity="0.06"/>
-    <rect x="748" y="828" width="44" height="21" rx="10.5" fill="none" stroke="#ffffff" stroke-width="0.7" stroke-opacity="0.18"/>
-    <text x="770" y="843" text-anchor="middle" font-size="9.5" fill="#ffffff" fill-opacity="0.4" font-family="-apple-system,sans-serif" font-weight="600">Nginx</text>
-  </g>
+    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="0.85s" fill="freeze"/>
+    <rect x="454" y="372" width="432" height="122" rx="18"
+          fill="#ffffff" filter="url(#cardShadow)"/>
+    <rect x="454" y="372" width="432" height="122" rx="18"
+          fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.07"/>
+    <line x1="474" y1="373" x2="730" y2="373"
+          stroke="#ffffff" stroke-width="1" stroke-opacity="0.9"/>
 
-  <!-- Card 4: Core Mission -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="0.8s" begin="1.5s" fill="freeze"/>
-    <rect x="462" y="882" width="422" height="80" rx="20" fill="url(#cardFill)"/>
-    <rect x="462" y="882" width="422" height="40" rx="20" fill="url(#cardShine)"/>
-    <rect x="462" y="882" width="422" height="80" rx="20" fill="none"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.09"/>
-    <line x1="482" y1="883" x2="740" y2="883"
-          stroke="#ffffff" stroke-width="0.8" stroke-opacity="0.16"/>
-    <text x="482" y="908" font-size="12" fill="#ffffff" fill-opacity="0.9" font-weight="600"
-          font-family="-apple-system,sans-serif">&#127758;  Core Mission  ·  核心使命</text>
-    <line x1="482" y1="918" x2="874" y2="918"
-          stroke="#ffffff" stroke-width="0.4" stroke-opacity="0.07"/>
-    <text x="482" y="936" font-size="10.5" fill="#ffffff" fill-opacity="0.42"
-          font-family="-apple-system,sans-serif">
-      在极致边缘算力与绝对本地隐私之间构建桥梁。两个极端，一个架构师。
-    </text>
+    <text x="474" y="400" font-size="12.5" fill="#1d1d1f" font-weight="600"
+          font-family="-apple-system,sans-serif">🧬  Stack  ·  技术栈</text>
+    <line x1="474" y1="410" x2="876" y2="410"
+          stroke="#000000" stroke-width="0.5" stroke-opacity="0.07"/>
+
+    <!-- Row 1 pills -->
+    <rect x="474" y="418" width="64" height="20" rx="10" fill="#0071e3" fill-opacity="0.09"/>
+    <rect x="474" y="418" width="64" height="20" rx="10" fill="none" stroke="#0071e3" stroke-width="0.8" stroke-opacity="0.3"/>
+    <text x="506" y="432" text-anchor="middle" font-size="9.5" fill="#0071e3" font-family="-apple-system,sans-serif" font-weight="600">Cloudflare</text>
+
+    <rect x="546" y="418" width="48" height="20" rx="10" fill="#af52de" fill-opacity="0.09"/>
+    <rect x="546" y="418" width="48" height="20" rx="10" fill="none" stroke="#af52de" stroke-width="0.8" stroke-opacity="0.3"/>
+    <text x="570" y="432" text-anchor="middle" font-size="9.5" fill="#af52de" font-family="-apple-system,sans-serif" font-weight="600">iOS UI</text>
+
+    <rect x="602" y="418" width="56" height="20" rx="10" fill="#34c759" fill-opacity="0.09"/>
+    <rect x="602" y="418" width="56" height="20" rx="10" fill="none" stroke="#34c759" stroke-width="0.8" stroke-opacity="0.3"/>
+    <text x="630" y="432" text-anchor="middle" font-size="9.5" fill="#34c759" font-family="-apple-system,sans-serif" font-weight="600">Three.js</text>
+
+    <rect x="666" y="418" width="42" height="20" rx="10" fill="#ff9500" fill-opacity="0.09"/>
+    <rect x="666" y="418" width="42" height="20" rx="10" fill="none" stroke="#ff9500" stroke-width="0.8" stroke-opacity="0.3"/>
+    <text x="687" y="432" text-anchor="middle" font-size="9.5" fill="#ff9500" font-family="-apple-system,sans-serif" font-weight="600">AI Pro</text>
+
+    <rect x="716" y="418" width="38" height="20" rx="10" fill="#ff3b30" fill-opacity="0.09"/>
+    <rect x="716" y="418" width="38" height="20" rx="10" fill="none" stroke="#ff3b30" stroke-width="0.8" stroke-opacity="0.3"/>
+    <text x="735" y="432" text-anchor="middle" font-size="9.5" fill="#ff3b30" font-family="-apple-system,sans-serif" font-weight="600">React</text>
+
+    <rect x="762" y="418" width="44" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="762" y="418" width="44" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="784" y="432" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Docker</text>
+
+    <rect x="814" y="418" width="34" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="814" y="418" width="34" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="831" y="432" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">TS</text>
+
+    <!-- Row 2 pills -->
+    <rect x="474" y="444" width="48" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="474" y="444" width="48" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="498" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">SQLite</text>
+
+    <rect x="530" y="444" width="40" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="530" y="444" width="40" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="550" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Linux</text>
+
+    <rect x="578" y="444" width="42" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="578" y="444" width="42" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="599" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Figma</text>
+
+    <rect x="628" y="444" width="46" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="628" y="444" width="46" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="651" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Node.js</text>
+
+    <rect x="682" y="444" width="44" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="682" y="444" width="44" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="704" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Python</text>
+
+    <rect x="734" y="444" width="42" height="20" rx="10" fill="#000000" fill-opacity="0.04"/>
+    <rect x="734" y="444" width="42" height="20" rx="10" fill="none" stroke="#000000" stroke-width="0.7" stroke-opacity="0.1"/>
+    <text x="755" y="458" text-anchor="middle" font-size="9.5" fill="#6e6e73" font-family="-apple-system,sans-serif" font-weight="600">Nginx</text>
   </g>
 </svg>
