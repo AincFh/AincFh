@@ -20,22 +20,21 @@
 
 ### 💻 System Boot Sequence
 
-<blockquote>
-  <samp>
-    root@AincFh-MAGI:~# ./init_core.sh<br>
-    > Authenticating Architect AincFh... [SUCCESS]<br>
-    > Routing through IEPL Dedicated Lines -> Emby Matrix... [SECURED]<br>
-    > Syncing Xiaomi Note 15 Telemetry... [ONLINE]<br>
-    > Loading Google AI Pro (Antigravity / MCP / Cline)... [ACTIVE]<br>
-    > Enforcing Apple iOS Frosted Glass UI rendering... [LOCKED]<br>
-    > Booting Cloudflare Edge Workers (D1 + R2)... [DEPLOYED]<br>
-    > Initializing Web3D Three.js Canvas... [RENDERING]<br>
-    > Deploying A.T. Field... [ABSOLUTE DOMAIN: ESTABLISHED]<br>
-    > All systems nominal. Welcome back, Architect.
-  </samp>
-</blockquote>
+```bash
+root@AincFh-MAGI:~# ./init_core.sh
 
----
+[✔] Authenticating Architect AincFh............. SUCCESS
+[✔] Routing IEPL Dedicated Lines -> Emby Matrix.. SECURED
+[✔] Syncing Xiaomi Note 15 Telemetry............. ONLINE
+[✔] Loading Google AI Pro (Antigravity/MCP/Cline) ACTIVE
+[✔] Enforcing Apple iOS Frosted Glass UI......... LOCKED
+[✔] Booting Cloudflare Edge Workers (D1 + R2).... DEPLOYED
+[✔] Initializing Web3D Three.js Canvas........... RENDERING
+[✔] Deploying A.T. Field......................... ABSOLUTE DOMAIN: ESTABLISHED
+
+> All systems nominal. Welcome back, Architect. █
+
+```
 
 ### 📖 Architect Chronicles // 开发者档案
 
