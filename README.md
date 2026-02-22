@@ -214,11 +214,6 @@
 </p>
 
 <p align="center">
-  <b>[ 🏗️ 3D ISOMETRIC CONTRIBUTION FIELD ]</b><br><br>
-  <img src="https://raw.githubusercontent.com/AincFh/AincFh/main/profile-3d-contrib/profile-night-rainbow.svg" alt="3D Contribution Graph" />
-</p>
-
-<p align="center">
   <b>[ 🐍 DATA CONSUMPTION PROTOCOL // SNAKE ]</b><br><br>
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="https://raw.githubusercontent.com/AincFh/AincFh/output/github-contribution-grid-snake-dark.svg">
