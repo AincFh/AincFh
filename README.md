@@ -200,6 +200,12 @@
 
 ---
 
+### 🛡️ SYSTEM ANALYTICS // 数据可视化
+
+<p align="center">
+  <img src="https://github-readme-streak-stats.herokuapp.com/?user=AincFh&theme=tokyonight&hide_border=true&stroke=00000000&ring=8B5CF6&fire=00FF99&currStreakLabel=00FF99&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&background=00000000" height="195" />
+</p>
+
 ### 🌌 CONTRIBUTION GRID // 代码活跃度
 
 <p align="center">
