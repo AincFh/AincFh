@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 620 270" width="620" height="270">
+  <style>
+    @keyframes l1{0%,4%{opacity:0}8%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l2{0%,16%{opacity:0}20%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l3{0%,26%{opacity:0}30%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l4{0%,36%{opacity:0}40%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l5{0%,46%{opacity:0}50%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l6{0%,56%{opacity:0}60%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l7{0%,66%{opacity:0}70%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes l8{0%,76%{opacity:0}80%,90%{opacity:1}95%,100%{opacity:0}}
+    @keyframes blink{0%,100%{opacity:1}50%{opacity:0}}
+    .l1{animation:l1 14s infinite;opacity:0}
+    .l2{animation:l2 14s infinite;opacity:0}
+    .l3{animation:l3 14s infinite;opacity:0}
+    .l4{animation:l4 14s infinite;opacity:0}
+    .l5{animation:l5 14s infinite;opacity:0}
+    .l6{animation:l6 14s infinite;opacity:0}
+    .l7{animation:l7 14s infinite;opacity:0}
+    .l8{animation:l8 14s infinite;opacity:0}
+    .cur{animation:blink 1s step-end infinite}
+    text{font-family:'Courier New',Courier,monospace;font-size:13px}
+  </style>
+
+  <!-- 终端主体 -->
+  <rect width="620" height="270" rx="10" fill="#0d1117" stroke="#30363d" stroke-width="1"/>
+
+  <!-- 标题栏 -->
+  <rect width="620" height="38" rx="10" fill="#161b22"/>
+  <rect y="28" width="620" height="10" fill="#161b22"/>
+  <line x1="0" y1="38" x2="620" y2="38" stroke="#30363d" stroke-width="1"/>
+
+  <!-- 三个点 -->
+  <circle cx="22" cy="19" r="6" fill="#ff5f57"/>
+  <circle cx="44" cy="19" r="6" fill="#febc2e"/>
+  <circle cx="66" cy="19" r="6" fill="#28c840"/>
+
+  <!-- 标题 -->
+  <text x="310" y="24" text-anchor="middle" font-size="12" fill="#8b949e">AincFh@MAGI — ./init_core.sh</text>
+
+  <!-- 逐行出现内容 -->
+  <text class="l1" x="20" y="64">
+    <tspan fill="#8b949e">root@AincFh-MAGI</tspan><tspan fill="#c9d1d9">:~# </tspan><tspan fill="#79c0ff">./init_core.sh</tspan>
+  </text>
+  <text class="l2" x="20" y="86">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Authenticating AincFh ........... </tspan><tspan fill="#00FF99">SUCCESS</tspan>
+  </text>
+  <text class="l3" x="20" y="108">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> IEPL Lines &#8594; Emby Matrix ....... </tspan><tspan fill="#00FF99">SECURED</tspan>
+  </text>
+  <text class="l4" x="20" y="130">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Google AI Pro Loaded ........... </tspan><tspan fill="#00FF99">ACTIVE</tspan>
+  </text>
+  <text class="l5" x="20" y="152">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> iOS Frosted Glass UI ........... </tspan><tspan fill="#00FF99">LOCKED</tspan>
+  </text>
+  <text class="l6" x="20" y="174">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> Cloudflare Edge Workers ........ </tspan><tspan fill="#00FF99">DEPLOYED</tspan>
+  </text>
+  <text class="l7" x="20" y="196">
+    <tspan fill="#3fb950">[OK]</tspan><tspan fill="#c9d1d9"> A.T. Field Deployed ............ </tspan><tspan fill="#00FF99">ESTABLISHED</tspan>
+  </text>
+  <text class="l8" x="20" y="228">
+    <tspan fill="#8b949e">&gt; </tspan><tspan fill="#e6edf3">Welcome back, Architect. </tspan><tspan class="cur" fill="#00FF99">&#9608;</tspan>
+  </text>
+</svg>
