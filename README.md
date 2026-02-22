@@ -200,23 +200,6 @@
 
 ---
 
-### 🛡️ SYSTEM ANALYTICS // 数据可视化
-
-<p align="center">
-  <img src="https://github-profile-trophy.vercel.app/?username=AincFh&theme=radical&no-frame=true&no-bg=true&margin-w=15&column=7" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-stats.vercel.app/api?username=AincFh&show_icons=true&theme=tokyonight&hide_border=true&title_color=00FF99&icon_color=8B5CF6&text_color=ffffff&bg_color=00000000" height="195" />
-  <img src="https://github-readme-stats.vercel.app/api/top-langs/?username=AincFh&layout=compact&theme=tokyonight&hide_border=true&title_color=00FF99&text_color=ffffff&bg_color=00000000" height="195" />
-</p>
-
-<p align="center">
-  <img src="https://github-readme-streak-stats.herokuapp.com/?user=AincFh&theme=tokyonight&hide_border=true&stroke=00000000&ring=8B5CF6&fire=00FF99&currStreakLabel=00FF99&sideNums=ffffff&sideLabels=ffffff&dates=ffffff&background=00000000" height="195" />
-</p>
-
----
-
 ### 🌌 CONTRIBUTION GRID // 代码活跃度
 
 <p align="center">
