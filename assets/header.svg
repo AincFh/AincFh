@@ -1,35 +1,82 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="900" height="280">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="900" height="280" role="img" aria-label="AincFh_OS - Absolute Domain Deployed">
   <defs>
-    <!-- Apple 悬浮柔和投影 -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.05"/>
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.03"/>
-    </filter>
+    <style>
+      :root{
+        --bg:#f2f2f7;--ink:#1d1d1f;--sub:#86868b;
+        --glass:rgba(255,255,255,.55);--gedge:rgba(255,255,255,.92);--grid:rgba(0,0,0,.05);
+      }
+      @media (prefers-color-scheme:dark){
+        :root{
+          --bg:#0a0a0c;--ink:#f5f5f7;--sub:#8e8e93;
+          --glass:rgba(32,32,36,.52);--gedge:rgba(255,255,255,.18);--grid:rgba(255,255,255,.055);
+        }
+      }
+      .bg{fill:var(--bg)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}
+      .glass{fill:var(--glass)}.gedge{stroke:var(--gedge);fill:none}
+      .gl{stroke:var(--grid);stroke-width:1;fill:none}
+      .d{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+      .t{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+    </style>
+
+    <radialGradient id="h1"><stop offset="0%" stop-color="#007aff" stop-opacity=".40"/><stop offset="100%" stop-color="#007aff" stop-opacity="0"/></radialGradient>
+    <radialGradient id="h2"><stop offset="0%" stop-color="#af52de" stop-opacity=".36"/><stop offset="100%" stop-color="#af52de" stop-opacity="0"/></radialGradient>
+    <radialGradient id="h3"><stop offset="0%" stop-color="#ff2d55" stop-opacity=".26"/><stop offset="100%" stop-color="#ff2d55" stop-opacity="0"/></radialGradient>
+    <radialGradient id="h4"><stop offset="0%" stop-color="#34c759" stop-opacity=".26"/><stop offset="100%" stop-color="#34c759" stop-opacity="0"/></radialGradient>
+
+    <pattern id="hgrid" width="30" height="30" patternUnits="userSpaceOnUse"><path class="gl" d="M30 0 L0 0 0 30"/></pattern>
+
+    <filter id="hblur" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="16"/></filter>
+    <filter id="hgrain"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+
+    <g id="hbd">
+      <rect class="bg" width="900" height="280"/>
+      <ellipse cx="130" cy="50"  rx="330" ry="230" fill="url(#h1)"/>
+      <ellipse cx="770" cy="30"  rx="310" ry="210" fill="url(#h2)"/>
+      <ellipse cx="530" cy="255" rx="350" ry="185" fill="url(#h3)"/>
+      <ellipse cx="50"  cy="265" rx="270" ry="165" fill="url(#h4)"/>
+      <rect width="900" height="280" fill="url(#hgrid)"/>
+    </g>
+
+    <clipPath id="hwc">
+      <path d="M0,0 L900,0 L900,200 Q450,290 0,200 Z">
+        <animate attributeName="d"
+          values="M0,0 L900,0 L900,200 Q450,290 0,200 Z;
+                  M0,0 L900,0 L900,222 Q450,238 0,178 Z;
+                  M0,0 L900,0 L900,178 Q450,238 0,222 Z;
+                  M0,0 L900,0 L900,200 Q450,290 0,200 Z"
+          dur="14s" repeatCount="indefinite"/>
+      </path>
+    </clipPath>
   </defs>
 
-  <rect width="900" height="280" fill="#f5f5f7"/>
+  <use href="#hbd"/>
 
-  <!-- 全局淡入和缓慢上浮 -->
+  <!-- 真·毛玻璃层：裁切 + 模糊背景副本 + 半透明色 -->
   <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0s" fill="freeze"/>
-    <animateTransform attributeName="transform" type="translate" from="0 25" to="0 0" dur="1.2s" calcMode="spline" keySplines="0.2 0.8 0.2 1" fill="freeze"/>
-
-    <!-- 纯白背景：加入水波形变动画 (Morphing) -->
-    <path fill="#ffffff" filter="url(#shadow)">
-      <animate attributeName="d" 
-               values="M0,0 L900,0 L900,200 Q450,290 0,200 Z;
-                       M0,0 L900,0 L900,220 Q450,240 0,180 Z;
-                       M0,0 L900,0 L900,180 Q450,240 0,220 Z;
-                       M0,0 L900,0 L900,200 Q450,290 0,200 Z" 
-               dur="10s" repeatCount="indefinite" />
+    <animate attributeName="opacity" from="0" to="1" dur="1s" fill="freeze"/>
+    <g clip-path="url(#hwc)">
+      <use href="#hbd" filter="url(#hblur)"/>
+      <rect class="glass" width="900" height="280"/>
+    </g>
+    <path class="gedge" stroke-width="1.2" d="M900,200 Q450,290 0,200">
+      <animate attributeName="d"
+        values="M900,200 Q450,290 0,200;
+                M900,222 Q450,238 0,178;
+                M900,178 Q450,238 0,222;
+                M900,200 Q450,290 0,200"
+        dur="14s" repeatCount="indefinite"/>
     </path>
+  </g>
 
-    <text x="450" y="135" text-anchor="middle" font-size="64" fill="#1d1d1f" font-weight="700" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif" letter-spacing="-1.5">AincFh_OS</text>
-    
-    <!-- 副标题加入呼吸灯效果 -->
-    <text x="450" y="175" text-anchor="middle" font-size="13" fill="#86868b" font-weight="600" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif" letter-spacing="3">
-      <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
+  <g opacity="0">
+    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0.15s" fill="freeze"/>
+    <animateTransform attributeName="transform" type="translate" from="0 22" to="0 0" dur="1.2s" begin="0.15s" calcMode="spline" keySplines="0.2 0.8 0.2 1" fill="freeze"/>
+    <text class="d ink" x="450" y="138" text-anchor="middle" font-size="66" font-weight="700" letter-spacing="-1.5">AincFh_OS</text>
+    <text class="t sub" x="450" y="182" text-anchor="middle" font-size="14" font-weight="600" letter-spacing="3.5">
+      <animate attributeName="opacity" values="1;.45;1" dur="4s" repeatCount="indefinite"/>
       ABSOLUTE DOMAIN // DEPLOYED
     </text>
   </g>
+
+  <rect width="900" height="280" filter="url(#hgrain)" opacity=".045"/>
 </svg>
