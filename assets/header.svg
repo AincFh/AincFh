@@ -1,35 +1,85 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 280" width="900" height="280">
-  <defs>
-    <!-- Apple 悬浮柔和投影 -->
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
-      <feDropShadow dx="0" dy="12" stdDeviation="20" flood-color="#000000" flood-opacity="0.05"/>
-      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#000000" flood-opacity="0.03"/>
-    </filter>
-  </defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 300" width="900" height="300" role="img" aria-label="AincFh_OS - Absolute Domain Deployed">
+<defs>
+<style>
+:root{--wall:#ececef;--ink:#1d1d1f;--sub:#6e6e73;--dim:#8e8e93;--bar:rgba(255,255,255,.55);--edge:rgba(255,255,255,.95);--track:rgba(0,0,0,.10);--grid:rgba(0,0,0,.045)}
+@media (prefers-color-scheme:dark){:root{--wall:#08080a;--ink:#f5f5f7;--sub:#aeaeb2;--dim:#8e8e93;--bar:rgba(46,46,50,.6);--edge:rgba(255,255,255,.15);--track:rgba(255,255,255,.14);--grid:rgba(255,255,255,.05)}}
+.wall{fill:var(--wall)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}.dim{fill:var(--dim)}
+.bar{fill:var(--bar)}.edge{stroke:var(--edge);fill:none}.track{fill:var(--track)}
+.gl{stroke:var(--grid);stroke-width:1;fill:none}.st-dim{stroke:var(--dim)}
+.d{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+.t{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+</style>
+<radialGradient id="w1"><stop offset="0%" stop-color="#007aff" stop-opacity=".42"/><stop offset="100%" stop-color="#007aff" stop-opacity="0"/></radialGradient>
+<radialGradient id="w2"><stop offset="0%" stop-color="#af52de" stop-opacity=".40"/><stop offset="100%" stop-color="#af52de" stop-opacity="0"/></radialGradient>
+<radialGradient id="w3"><stop offset="0%" stop-color="#ff2d55" stop-opacity=".26"/><stop offset="100%" stop-color="#ff2d55" stop-opacity="0"/></radialGradient>
+<radialGradient id="w4"><stop offset="0%" stop-color="#34c759" stop-opacity=".26"/><stop offset="100%" stop-color="#34c759" stop-opacity="0"/></radialGradient>
+<linearGradient id="hex" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007aff"/><stop offset="55%" stop-color="#af52de"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient>
+<linearGradient id="boot" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#34c759"/><stop offset="50%" stop-color="#007aff"/><stop offset="100%" stop-color="#af52de"/></linearGradient>
+<pattern id="g30" width="30" height="30" patternUnits="userSpaceOnUse"><path class="gl" d="M30 0 L0 0 0 30"/></pattern>
+<filter id="bl" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="14"/></filter>
+<filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+<filter id="glow"><feGaussianBlur stdDeviation="6" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<g id="bd">
+<rect class="wall" width="900" height="300"/>
+<ellipse cx="140" cy="40" rx="340" ry="250" fill="url(#w1)"/>
+<ellipse cx="780" cy="20" rx="320" ry="230" fill="url(#w2)"/>
+<ellipse cx="560" cy="300" rx="360" ry="200" fill="url(#w3)"/>
+<ellipse cx="60" cy="290" rx="280" ry="180" fill="url(#w4)"/>
+<rect width="900" height="300" fill="url(#g30)"/>
+</g>
+<clipPath id="mb"><rect width="900" height="28"/></clipPath>
+</defs>
 
-  <rect width="900" height="280" fill="#f5f5f7"/>
+<use href="#bd"/>
 
-  <!-- 全局淡入和缓慢上浮 -->
-  <g opacity="0">
-    <animate attributeName="opacity" from="0" to="1" dur="1s" begin="0s" fill="freeze"/>
-    <animateTransform attributeName="transform" type="translate" from="0 25" to="0 0" dur="1.2s" calcMode="spline" keySplines="0.2 0.8 0.2 1" fill="freeze"/>
+<g clip-path="url(#mb)"><use href="#bd" filter="url(#bl)"/><rect class="bar" width="900" height="28"/></g>
+<line class="edge" x1="0" y1="28" x2="900" y2="28" stroke-width="1"/>
 
-    <!-- 纯白背景：加入水波形变动画 (Morphing) -->
-    <path fill="#ffffff" filter="url(#shadow)">
-      <animate attributeName="d" 
-               values="M0,0 L900,0 L900,200 Q450,290 0,200 Z;
-                       M0,0 L900,0 L900,220 Q450,240 0,180 Z;
-                       M0,0 L900,0 L900,180 Q450,240 0,220 Z;
-                       M0,0 L900,0 L900,200 Q450,290 0,200 Z" 
-               dur="10s" repeatCount="indefinite" />
-    </path>
+<g opacity="0"><animate attributeName="opacity" from="0" to="1" dur=".6s" fill="freeze"/>
+<path d="M20,7 L26,10.5 L26,17.5 L20,21 L14,17.5 L14,10.5 Z" fill="url(#hex)"/>
+<text class="t ink" x="36" y="18" font-size="11.5" font-weight="700">AincFh_OS</text>
+<text class="t dim" x="116" y="18" font-size="11.5">File</text>
+<text class="t dim" x="152" y="18" font-size="11.5">Edit</text>
+<text class="t dim" x="188" y="18" font-size="11.5">View</text>
+<text class="t dim" x="230" y="18" font-size="11.5">Deploy</text>
+<text class="t dim" x="286" y="18" font-size="11.5">Help</text>
+<path class="st-dim" d="M776,17 a9,9 0 0,1 12,0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<path class="st-dim" d="M779.5,20 a4.5,4.5 0 0,1 5,0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
+<circle class="dim" cx="782" cy="22.6" r="1.3"/>
+<rect class="st-dim" x="802" y="9" width="20" height="10" rx="3" stroke-width="1.4" fill="none"/>
+<rect x="804" y="11" width="14" height="6" rx="1.5" fill="#34c759"/>
+<path class="st-dim" d="M824,12 v4" stroke-width="1.6" stroke-linecap="round"/>
+<text class="t sub" x="880" y="18" font-size="11.5" font-weight="500" text-anchor="end">UTC+8</text>
+</g>
 
-    <text x="450" y="135" text-anchor="middle" font-size="64" fill="#1d1d1f" font-weight="700" font-family="-apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif" letter-spacing="-1.5">AincFh_OS</text>
-    
-    <!-- 副标题加入呼吸灯效果 -->
-    <text x="450" y="175" text-anchor="middle" font-size="13" fill="#86868b" font-weight="600" font-family="-apple-system, 'SF Pro Text', 'Helvetica Neue', sans-serif" letter-spacing="3">
-      <animate attributeName="opacity" values="1;0.4;1" dur="3s" repeatCount="indefinite"/>
-      ABSOLUTE DOMAIN // DEPLOYED
-    </text>
-  </g>
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" dur="1s" begin=".2s" fill="freeze"/>
+<g filter="url(#glow)">
+<path d="M450,80 L479,97 L479,131 L450,148 L421,131 L421,97 Z" fill="none" stroke="url(#hex)" stroke-width="2.6" stroke-linejoin="round" stroke-dasharray="204" stroke-dashoffset="204">
+<animate attributeName="stroke-dashoffset" from="204" to="0" dur="1.8s" begin=".3s" fill="freeze" calcMode="spline" keySplines=".25 1 .5 1"/>
+</path>
+</g>
+<path d="M450,104 L461,110.5 L461,123.5 L450,130 L439,123.5 L439,110.5 Z" fill="url(#hex)" opacity="0">
+<animate attributeName="opacity" values="0;1;.45;1" keyTimes="0;.4;.7;1" dur="3s" begin="1.6s" fill="freeze"/>
+<animate attributeName="opacity" values="1;.45;1" dur="3s" begin="4.6s" repeatCount="indefinite"/>
+</path>
+</g>
+
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" dur="1s" begin=".9s" fill="freeze"/>
+<animateTransform attributeName="transform" type="translate" from="0 16" to="0 0" dur="1.2s" begin=".9s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
+<text class="d ink" x="450" y="196" text-anchor="middle" font-size="56" font-weight="700" letter-spacing="-1.6">AincFh_OS</text>
+<text class="t sub" x="450" y="224" text-anchor="middle" font-size="12.5" font-weight="600" letter-spacing="4">ABSOLUTE DOMAIN // DEPLOYED</text>
+</g>
+
+<g opacity="0">
+<animate attributeName="opacity" from="0" to="1" dur=".8s" begin="1.4s" fill="freeze"/>
+<rect class="track" x="330" y="250" width="240" height="4" rx="2"/>
+<rect x="330" y="250" height="4" rx="2" fill="url(#boot)" width="0">
+<animate attributeName="width" from="0" to="240" dur="2.6s" begin="1.6s" fill="freeze" calcMode="spline" keySplines=".3 .1 .2 1"/>
+</rect>
+<text class="t dim" x="450" y="275" text-anchor="middle" font-size="10" font-weight="500" letter-spacing="1.4">v4.0  ·  build 2026.08  ·  Xiamen, CN</text>
+</g>
+
+<rect width="900" height="300" filter="url(#gr)" opacity=".04"/>
 </svg>
