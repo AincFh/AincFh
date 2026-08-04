@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-label="AincFh — frontend and edge developer, Xiamen China">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 660" width="900" height="660" role="img" aria-label="AincFh — frontend and edge developer, Xiamen China">
 <defs>
 <style>
 :root{--bg:#fafafa;--ink:#111111;--sub:#64748b;--dim:#94a3b8;--hexl:rgba(255,159,67,.26);--brk:#8b5cf6;--line:rgba(0,0,0,.08)}
@@ -8,14 +8,16 @@
 .brk{stroke:var(--brk);fill:none;stroke-width:2}
 .ln{stroke:var(--line);stroke-width:1}
 .dsp{font-family:'Orbitron','Rajdhani','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-.txt{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','Helvetica Neue',Arial,sans-serif}
+.txt{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif}
+.chipA{fill:none;stroke:#FF9F43;stroke-width:1.2;stroke-linejoin:round}
+.chipB{fill:none;stroke:#8B5CF6;stroke-width:1.2;stroke-linejoin:round}
 </style>
 <linearGradient id="at" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF9F43"/><stop offset="100%" stop-color="#FF6B6B"/></linearGradient>
 <radialGradient id="o1"><stop offset="0%" stop-color="#FF9F43" stop-opacity=".34"/><stop offset="100%" stop-color="#FF9F43" stop-opacity="0"/></radialGradient>
-<radialGradient id="o2"><stop offset="0%" stop-color="#FF6B6B" stop-opacity=".30"/><stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/></radialGradient>
+<radialGradient id="o2"><stop offset="0%" stop-color="#FF6B6B" stop-opacity=".28"/><stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/></radialGradient>
 <radialGradient id="o3"><stop offset="0%" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
-<radialGradient id="mg" cx="92%" cy="52%" r="58%"><stop offset="0%" stop-color="#fff" stop-opacity="1"/><stop offset="50%" stop-color="#fff" stop-opacity=".45"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
-<mask id="lm"><rect width="900" height="560" fill="url(#mg)"/></mask>
+<radialGradient id="mg" cx="92%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff" stop-opacity="1"/><stop offset="50%" stop-color="#fff" stop-opacity=".45"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<mask id="lm"><rect width="900" height="660" fill="url(#mg)"/></mask>
 <pattern id="hexp" width="60" height="105" patternUnits="userSpaceOnUse">
 <path class="hx" d="M30,0 L60,17.5 L60,52.5 L30,70 L0,52.5 L0,17.5 Z"/>
 <path class="hx" d="M60,52.5 L90,70 L90,105 L60,122.5 L30,105 L30,70 Z"/>
@@ -27,14 +29,14 @@
 <filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
 </defs>
 
-<rect class="bg" width="900" height="560"/>
+<rect class="bg" width="900" height="660"/>
 
 <ellipse cx="120" cy="90" rx="320" ry="240" fill="url(#o1)" opacity=".7">
 <animate attributeName="rx" values="320;352;320" dur="8s" repeatCount="indefinite"/>
 <animate attributeName="opacity" values=".7;.9;.7" dur="8s" repeatCount="indefinite"/>
 </ellipse>
-<ellipse cx="830" cy="520" rx="300" ry="230" fill="url(#o2)" opacity=".6">
-<animate attributeName="rx" values="300;315;300" dur="10s" begin="2s" repeatCount="indefinite"/>
+<ellipse cx="830" cy="620" rx="300" ry="230" fill="url(#o2)" opacity=".6">
+<animate attributeName="rx" values="300;318;300" dur="10s" begin="2s" repeatCount="indefinite"/>
 <animate attributeName="opacity" values=".6;.8;.6" dur="10s" begin="2s" repeatCount="indefinite"/>
 </ellipse>
 <ellipse cx="760" cy="60" rx="280" ry="200" fill="url(#o3)" opacity=".5">
@@ -42,9 +44,9 @@
 <animate attributeName="opacity" values=".5;.7;.5" dur="12s" begin="4s" repeatCount="indefinite"/>
 </ellipse>
 
-<rect width="900" height="560" fill="url(#hexp)" mask="url(#lm)"/>
+<rect width="900" height="660" fill="url(#hexp)" mask="url(#lm)"/>
 
-<path d="M880,114 L1040,207 L1040,393 L880,486 L720,393 L720,207 Z" fill="none" stroke="url(#at)" stroke-width="1.5" stroke-linejoin="round" opacity=".16">
+<path d="M720,300 L800,162 L960,162 L1040,300 L960,438 L800,438 Z" fill="none" stroke="url(#at)" stroke-width="1.5" stroke-linejoin="round" opacity=".16">
 <animate attributeName="opacity" values=".16;.30;.16" dur="12s" repeatCount="indefinite"/>
 </path>
 
@@ -80,30 +82,56 @@
 <animate attributeName="opacity" from="0" to="1" dur=".8s" begin=".45s" fill="freeze"/>
 <animateTransform attributeName="transform" type="translate" from="0 18" to="0 0" dur="1s" begin=".45s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
 
-<text class="dsp" x="60" y="386" font-size="32" font-weight="700" fill="#FF9F43" opacity=".85">01</text>
-<text class="dsp ink" x="116" y="376" font-size="17" font-weight="700" letter-spacing=".5">A.T. FIELD</text>
-<text class="txt" x="840" y="376" font-size="12" font-weight="600" text-anchor="end" fill="#FF6B6B">aincfh.dpdns.org</text>
-<text class="txt sub" x="116" y="398" font-size="12.5">React Router v7 · TypeScript · Tailwind v4 · Cloudflare Workers · D1 · R2 · KV</text>
-<text class="txt dim" x="116" y="417" font-size="12.5">¥0 / month in production · offline-first · 13 runtime guards for slow mobile</text>
+<text class="txt dim" x="60" y="364" font-size="10.5" font-weight="700" letter-spacing="3">STACK</text>
+<text class="txt dim" x="840" y="364" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">WHAT I ACTUALLY SHIP WITH</text>
 
-<text class="dsp" x="60" y="470" font-size="32" font-weight="700" fill="#8B5CF6" opacity=".85">02</text>
-<text class="dsp ink" x="116" y="460" font-size="17" font-weight="700" letter-spacing=".5">SAINT LAURENT SYSTEMS</text>
-<text class="txt dim" x="840" y="460" font-size="12" font-weight="600" text-anchor="end">8 departments · 60+ releases</text>
-<text class="txt sub" x="116" y="482" font-size="12.5">Zero-dependency single-file HTML · 24 chapters / 345 provisions · sentencing calculator</text>
-<text class="txt dim" x="116" y="501" font-size="12.5">Inherited a legacy codebase at v2.0.2 and carried it to v4.59</text>
+<g class="chipA">
+<path d="M60,420 L87.5,373 L142.5,373 L170,420 L142.5,467 L87.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="0s" repeatCount="indefinite"/></path>
+<path d="M190,420 L217.5,373 L272.5,373 L300,420 L272.5,467 L217.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin=".4s" repeatCount="indefinite"/></path>
+<path d="M320,420 L347.5,373 L402.5,373 L430,420 L402.5,467 L347.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin=".8s" repeatCount="indefinite"/></path>
+<path d="M450,420 L477.5,373 L532.5,373 L560,420 L532.5,467 L477.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="1.2s" repeatCount="indefinite"/></path>
+<path d="M580,420 L607.5,373 L662.5,373 L690,420 L662.5,467 L607.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="1.6s" repeatCount="indefinite"/></path>
+<path d="M710,420 L737.5,373 L792.5,373 L820,420 L792.5,467 L737.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="2s" repeatCount="indefinite"/></path>
+</g>
+<g class="txt ink" font-size="11.5" font-weight="600" text-anchor="middle" opacity=".92">
+<text x="115" y="424">React</text>
+<text x="245" y="424">TypeScript</text>
+<text x="375" y="424">Tailwind v4</text>
+<text x="505" y="424">Framer Motion</text>
+<text x="635" y="424">Vite</text>
+<text x="765" y="424">React Router</text>
+</g>
 
-<line class="ln" x1="60" y1="524" x2="840" y2="524"/>
-<text class="txt dim" x="60" y="546" font-size="10.5" font-weight="600" letter-spacing="2.4">AI-AUGMENTED  ·  HUMAN-REVIEWED</text>
-<text class="txt dim" x="840" y="546" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">BLUE LOCK  ·  SOLO LEVELING</text>
+<g class="chipB">
+<path d="M125,524 L152.5,477 L207.5,477 L235,524 L207.5,571 L152.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin=".2s" repeatCount="indefinite"/></path>
+<path d="M255,524 L282.5,477 L337.5,477 L365,524 L337.5,571 L282.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin=".6s" repeatCount="indefinite"/></path>
+<path d="M385,524 L412.5,477 L467.5,477 L495,524 L467.5,571 L412.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1s" repeatCount="indefinite"/></path>
+<path d="M515,524 L542.5,477 L597.5,477 L625,524 L597.5,571 L542.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1.4s" repeatCount="indefinite"/></path>
+<path d="M645,524 L672.5,477 L727.5,477 L755,524 L727.5,571 L672.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1.8s" repeatCount="indefinite"/></path>
+</g>
+<g class="txt ink" font-size="11.5" font-weight="600" text-anchor="middle" opacity=".92">
+<text x="180" y="528">Workers</text>
+<text x="310" y="528">D1</text>
+<text x="440" y="528">R2 · KV</text>
+<text x="570" y="528">Wrangler</text>
+<text x="700" y="528">Node.js</text>
+</g>
+
+<line class="ln" x1="60" y1="606" x2="840" y2="606"/>
+<circle cx="64" cy="626" r="3.5" fill="#FF9F43"/>
+<text class="txt dim" x="76" y="630" font-size="10.5" font-weight="600" letter-spacing="2">INTERFACE</text>
+<circle cx="186" cy="626" r="3.5" fill="#8B5CF6"/>
+<text class="txt dim" x="198" y="630" font-size="10.5" font-weight="600" letter-spacing="2">EDGE</text>
+<text class="txt dim" x="840" y="630" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">BLUE LOCK  ·  SOLO LEVELING</text>
 </g>
 
 <g class="brk">
 <path d="M16,30 L16,16 L30,16"/>
 <path d="M870,16 L884,16 L884,30"/>
-<path d="M16,530 L16,544 L30,544"/>
-<path d="M870,544 L884,544 L884,530"/>
+<path d="M16,630 L16,644 L30,644"/>
+<path d="M870,644 L884,644 L884,630"/>
 </g>
 
-<rect width="900" height="560" fill="url(#scan)" opacity=".1"/>
-<rect width="900" height="560" filter="url(#noise)" opacity=".03"/>
+<rect width="900" height="660" fill="url(#scan)" opacity=".1"/>
+<rect width="900" height="660" filter="url(#noise)" opacity=".03"/>
 </svg>
