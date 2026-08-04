@@ -1,231 +1,109 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 800" width="900" height="800" role="img" aria-label="AincFh - Frontend and Full-stack Developer based in Xiamen, China">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560" role="img" aria-label="AincFh — frontend and edge developer, Xiamen China">
 <defs>
 <style>
-:root{--wall:#ececef;--ink:#1d1d1f;--sub:#6e6e73;--dim:#8e8e93;--pane:rgba(255,255,255,.70);--side:rgba(255,255,255,.42);--bar:rgba(255,255,255,.5);--edge:rgba(255,255,255,.95);--line:rgba(0,0,0,.09);--chip:rgba(0,0,0,.055);--sel:rgba(0,122,255,.13);--track:rgba(0,0,0,.09);--grid:rgba(0,0,0,.045)}
-@media (prefers-color-scheme:dark){:root{--wall:#08080a;--ink:#f5f5f7;--sub:#aeaeb2;--dim:#8e8e93;--pane:rgba(30,30,33,.68);--side:rgba(18,18,20,.5);--bar:rgba(48,48,52,.58);--edge:rgba(255,255,255,.15);--line:rgba(255,255,255,.1);--chip:rgba(255,255,255,.08);--sel:rgba(10,132,255,.24);--track:rgba(255,255,255,.13);--grid:rgba(255,255,255,.05)}}
-.wall{fill:var(--wall)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}.dim{fill:var(--dim)}
-.pane{fill:var(--pane)}.side{fill:var(--side)}.bar{fill:var(--bar)}.chip{fill:var(--chip)}
-.sel{fill:var(--sel)}.track{fill:var(--track)}
-.edge{stroke:var(--edge);fill:none}.line{stroke:var(--line);stroke-width:1}
-.gl{stroke:var(--grid);stroke-width:1;fill:none}.st-dim{stroke:var(--dim)}
-.d{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-.t{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Text','Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-.lbl{font-size:10;font-weight:600;letter-spacing:1.3;fill:var(--dim)}
+:root{--bg:#fafafa;--ink:#111111;--sub:#64748b;--dim:#94a3b8;--hexl:rgba(255,159,67,.26);--brk:#8b5cf6;--line:rgba(0,0,0,.08)}
+@media (prefers-color-scheme:dark){:root{--bg:#1c1f2b;--ink:#f1f5f9;--sub:#94a3b8;--dim:#7c8ba3;--hexl:rgba(255,159,67,.17);--brk:#a78bfa;--line:rgba(255,255,255,.10)}}
+.bg{fill:var(--bg)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}.dim{fill:var(--dim)}
+.hx{stroke:var(--hexl);fill:none;stroke-width:1}
+.brk{stroke:var(--brk);fill:none;stroke-width:2}
+.ln{stroke:var(--line);stroke-width:1}
+.dsp{font-family:'Orbitron','Rajdhani','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
+.txt{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','Helvetica Neue',Arial,sans-serif}
 </style>
-<radialGradient id="p1"><stop offset="0%" stop-color="#007aff" stop-opacity=".40"/><stop offset="100%" stop-color="#007aff" stop-opacity="0"/></radialGradient>
-<radialGradient id="p2"><stop offset="0%" stop-color="#af52de" stop-opacity=".38"/><stop offset="100%" stop-color="#af52de" stop-opacity="0"/></radialGradient>
-<radialGradient id="p3"><stop offset="0%" stop-color="#ff2d55" stop-opacity=".26"/><stop offset="100%" stop-color="#ff2d55" stop-opacity="0"/></radialGradient>
-<radialGradient id="p4"><stop offset="0%" stop-color="#34c759" stop-opacity=".26"/><stop offset="100%" stop-color="#34c759" stop-opacity="0"/></radialGradient>
-<linearGradient id="hex" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007aff"/><stop offset="55%" stop-color="#af52de"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient>
-<linearGradient id="ai" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#007aff"/><stop offset="50%" stop-color="#af52de"/><stop offset="100%" stop-color="#ff2d55"/></linearGradient>
-<linearGradient id="b1" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#34c759"/><stop offset="100%" stop-color="#0071e3"/></linearGradient>
-<linearGradient id="b2" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#0071e3"/><stop offset="100%" stop-color="#af52de"/></linearGradient>
-<linearGradient id="b3" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#af52de"/><stop offset="100%" stop-color="#ff3b30"/></linearGradient>
-<linearGradient id="b4" x1="0%" y1="0%" x2="100%" y2="0%"><stop offset="0%" stop-color="#ff9500"/><stop offset="100%" stop-color="#ff3b30"/></linearGradient>
-<pattern id="g30" width="30" height="30" patternUnits="userSpaceOnUse"><path class="gl" d="M30 0 L0 0 0 30"/></pattern>
-<filter id="bl" x="-25%" y="-25%" width="150%" height="150%"><feGaussianBlur stdDeviation="18"/></filter>
-<filter id="gr"><feTurbulence type="fractalNoise" baseFrequency=".85" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-<filter id="lift" x="-20%" y="-20%" width="140%" height="140%"><feDropShadow dx="0" dy="18" stdDeviation="26" flood-opacity=".13"/><feDropShadow dx="0" dy="3" stdDeviation="6" flood-opacity=".07"/></filter>
-<g id="bd">
-<rect class="wall" width="900" height="800"/>
-<ellipse cx="130" cy="90" rx="380" ry="300" fill="url(#p1)"/>
-<ellipse cx="800" cy="60" rx="340" ry="280" fill="url(#p2)"/>
-<ellipse cx="620" cy="780" rx="400" ry="260" fill="url(#p3)"/>
-<ellipse cx="70" cy="720" rx="330" ry="240" fill="url(#p4)"/>
-<rect width="900" height="800" fill="url(#g30)"/>
-</g>
-<clipPath id="mb"><rect width="900" height="28"/></clipPath>
-<clipPath id="win"><rect x="24" y="44" width="852" height="568" rx="14"/></clipPath>
-<clipPath id="k1"><rect x="24" y="636" width="201" height="134" rx="24"/></clipPath>
-<clipPath id="k2"><rect x="241" y="636" width="201" height="134" rx="24"/></clipPath>
-<clipPath id="k3"><rect x="458" y="636" width="201" height="134" rx="24"/></clipPath>
-<clipPath id="k4"><rect x="675" y="636" width="201" height="134" rx="24"/></clipPath>
+<linearGradient id="at" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF9F43"/><stop offset="100%" stop-color="#FF6B6B"/></linearGradient>
+<radialGradient id="o1"><stop offset="0%" stop-color="#FF9F43" stop-opacity=".34"/><stop offset="100%" stop-color="#FF9F43" stop-opacity="0"/></radialGradient>
+<radialGradient id="o2"><stop offset="0%" stop-color="#FF6B6B" stop-opacity=".30"/><stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/></radialGradient>
+<radialGradient id="o3"><stop offset="0%" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
+<radialGradient id="mg" cx="92%" cy="52%" r="58%"><stop offset="0%" stop-color="#fff" stop-opacity="1"/><stop offset="50%" stop-color="#fff" stop-opacity=".45"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
+<mask id="lm"><rect width="900" height="560" fill="url(#mg)"/></mask>
+<pattern id="hexp" width="60" height="105" patternUnits="userSpaceOnUse">
+<path class="hx" d="M30,0 L60,17.5 L60,52.5 L30,70 L0,52.5 L0,17.5 Z"/>
+<path class="hx" d="M60,52.5 L90,70 L90,105 L60,122.5 L30,105 L30,70 Z"/>
+<path class="hx" d="M0,52.5 L30,70 L30,105 L0,122.5 L-30,105 L-30,70 Z"/>
+<path class="hx" d="M60,-52.5 L90,-35 L90,0 L60,17.5 L30,0 L30,-35 Z"/>
+<path class="hx" d="M0,-52.5 L30,-35 L30,0 L0,17.5 L-30,0 L-30,-35 Z"/>
+</pattern>
+<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect y="2" width="4" height="2" fill="#000" opacity=".2"/></pattern>
+<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
 </defs>
 
-<use href="#bd"/>
+<rect class="bg" width="900" height="560"/>
 
-<g clip-path="url(#mb)"><use href="#bd" filter="url(#bl)"/><rect class="bar" width="900" height="28"/></g>
-<line class="edge" x1="0" y1="28" x2="900" y2="28" stroke-width="1"/>
-<path d="M20,7 L26,10.5 L26,17.5 L20,21 L14,17.5 L14,10.5 Z" fill="url(#hex)"/>
-<text class="t ink" x="36" y="18" font-size="11.5" font-weight="700">AincFh_OS</text>
-<text class="t dim" x="116" y="18" font-size="11.5">File</text>
-<text class="t dim" x="152" y="18" font-size="11.5">Edit</text>
-<text class="t dim" x="188" y="18" font-size="11.5">View</text>
-<text class="t dim" x="230" y="18" font-size="11.5">Deploy</text>
-<text class="t dim" x="286" y="18" font-size="11.5">Help</text>
-<circle cx="670" cy="14" r="3.5" fill="#34c759"><animate attributeName="opacity" values="1;.3;1" dur="2.6s" repeatCount="indefinite"/></circle>
-<text class="t sub" x="682" y="18" font-size="11" font-weight="600" letter-spacing=".6">MAGI ONLINE</text>
-<path class="st-dim" d="M776,17 a9,9 0 0,1 12,0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-<path class="st-dim" d="M779.5,20 a4.5,4.5 0 0,1 5,0" stroke-width="1.8" fill="none" stroke-linecap="round"/>
-<circle class="dim" cx="782" cy="22.6" r="1.3"/>
-<rect class="st-dim" x="802" y="9" width="20" height="10" rx="3" stroke-width="1.4" fill="none"/>
-<rect x="804" y="11" width="14" height="6" rx="1.5" fill="#34c759"/>
-<path class="st-dim" d="M824,12 v4" stroke-width="1.6" stroke-linecap="round"/>
-<text class="t sub" x="880" y="18" font-size="11.5" font-weight="500" text-anchor="end">UTC+8</text>
+<ellipse cx="120" cy="90" rx="320" ry="240" fill="url(#o1)" opacity=".7">
+<animate attributeName="rx" values="320;352;320" dur="8s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values=".7;.9;.7" dur="8s" repeatCount="indefinite"/>
+</ellipse>
+<ellipse cx="830" cy="520" rx="300" ry="230" fill="url(#o2)" opacity=".6">
+<animate attributeName="rx" values="300;315;300" dur="10s" begin="2s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values=".6;.8;.6" dur="10s" begin="2s" repeatCount="indefinite"/>
+</ellipse>
+<ellipse cx="760" cy="60" rx="280" ry="200" fill="url(#o3)" opacity=".5">
+<animate attributeName="rx" values="280;322;280" dur="12s" begin="4s" repeatCount="indefinite"/>
+<animate attributeName="opacity" values=".5;.7;.5" dur="12s" begin="4s" repeatCount="indefinite"/>
+</ellipse>
+
+<rect width="900" height="560" fill="url(#hexp)" mask="url(#lm)"/>
+
+<path d="M880,114 L1040,207 L1040,393 L880,486 L720,393 L720,207 Z" fill="none" stroke="url(#at)" stroke-width="1.5" stroke-linejoin="round" opacity=".16">
+<animate attributeName="opacity" values=".16;.30;.16" dur="12s" repeatCount="indefinite"/>
+</path>
 
 <g opacity="0">
 <animate attributeName="opacity" from="0" to="1" dur=".9s" begin=".1s" fill="freeze"/>
-<animateTransform attributeName="transform" type="translate" from="0 18" to="0 0" dur="1.1s" begin=".1s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
+<animateTransform attributeName="transform" type="translate" from="0 16" to="0 0" dur="1.1s" begin=".1s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
 
-<g filter="url(#lift)">
-<g clip-path="url(#win)">
-<use href="#bd" filter="url(#bl)"/>
-<rect class="pane" x="24" y="44" width="852" height="568"/>
-<rect class="side" x="24" y="88" width="224" height="524"/>
-<rect class="bar" x="24" y="44" width="852" height="44"/>
-</g>
-</g>
-<rect class="edge" x="24.5" y="44.5" width="851" height="567" rx="13.5" stroke-width="1"/>
-<line class="line" x1="24" y1="88" x2="876" y2="88"/>
-<line class="line" x1="248" y1="88" x2="248" y2="612"/>
+<text class="txt dim" x="60" y="50" font-size="10.5" font-weight="700" letter-spacing="3">A.T. FIELD  //  PROFILE</text>
 
-<circle cx="48" cy="66" r="6" fill="#ff5f57"/>
-<circle cx="68" cy="66" r="6" fill="#febc2e"/>
-<circle cx="88" cy="66" r="6" fill="#28c840"/>
-<text class="t sub" x="450" y="70" text-anchor="middle" font-size="13" font-weight="600">AincFh — Overview</text>
+<text class="dsp ink" x="60" y="100" font-size="42" font-weight="700" letter-spacing="1">AincFh</text>
+<text class="txt sub" x="60" y="126" font-size="14" font-weight="500">前端 / 全栈开发 · 从艺术设计转工程</text>
+<text class="txt dim" x="60" y="148" font-size="11" font-weight="600" letter-spacing="2.2">FRONTEND / EDGE  ·  XIAMEN, CN  ·  19</text>
 
-<rect x="48" y="110" width="56" height="56" rx="17" fill="url(#ai)"/>
-<text class="d" x="76" y="149" text-anchor="middle" font-size="30" font-weight="700" fill="#ffffff">A</text>
-<text class="d ink" x="48" y="192" font-size="18" font-weight="700" letter-spacing="-.3">AincFh</text>
-<text class="t sub" x="48" y="210" font-size="12" font-weight="500">Frontend / Full-stack Dev</text>
-<text class="t dim" x="48" y="227" font-size="11.5">Xiamen, CN  ·  19</text>
-<line class="line" x1="48" y1="246" x2="224" y2="246"/>
+<circle cx="680" cy="90" r="4" fill="#34d399"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite"/></circle>
+<text class="txt" x="840" y="94" font-size="11" font-weight="700" letter-spacing="2" text-anchor="end" fill="#34d399">AVAILABLE FOR WORK</text>
+<circle cx="716" cy="120" r="4" fill="#FF9F43"/>
+<text class="txt sub" x="840" y="124" font-size="11" font-weight="600" letter-spacing="2" text-anchor="end">OPEN TO REMOTE</text>
+<circle cx="744" cy="148" r="4" fill="#8B5CF6"/>
+<text class="txt dim" x="840" y="152" font-size="11" font-weight="600" letter-spacing="2" text-anchor="end">UTC+8  ·  ¥0 / MO</text>
 
-<rect class="sel" x="40" y="258" width="192" height="32" rx="9"/>
-<rect x="48" y="266" width="16" height="16" rx="5" fill="#007aff"/>
-<text class="t ink" x="74" y="279" font-size="12.5" font-weight="600">Overview</text>
-<rect x="48" y="302" width="16" height="16" rx="5" fill="#af52de"/>
-<text class="t sub" x="74" y="315" font-size="12.5" font-weight="500">Stack</text>
-<rect x="48" y="338" width="16" height="16" rx="5" fill="#ff9500"/>
-<text class="t sub" x="74" y="351" font-size="12.5" font-weight="500">Projects</text>
-<rect x="48" y="374" width="16" height="16" rx="5" fill="#34c759"/>
-<text class="t sub" x="74" y="387" font-size="12.5" font-weight="500">Now Building</text>
-<rect x="48" y="410" width="16" height="16" rx="5" fill="#ff2d55"/>
-<text class="t sub" x="74" y="423" font-size="12.5" font-weight="500">Contact</text>
-<line class="line" x1="48" y1="452" x2="224" y2="452"/>
+<line class="ln" x1="60" y1="176" x2="840" y2="176"/>
 
-<text class="t lbl" x="48" y="474">STATUS</text>
-<circle cx="51" cy="492" r="3.5" fill="#34c759"><animate attributeName="opacity" values="1;.3;1" dur="2.6s" repeatCount="indefinite"/></circle>
-<text class="t sub" x="64" y="496" font-size="11.5">Available for work</text>
-<circle cx="51" cy="514" r="3.5" fill="#007aff"/>
-<text class="t sub" x="64" y="518" font-size="11.5">Open to remote</text>
-<circle cx="51" cy="536" r="3.5" fill="#af52de"/>
-<text class="t sub" x="64" y="540" font-size="11.5">Blue Lock · Solo Leveling</text>
-<line class="line" x1="48" y1="566" x2="224" y2="566"/>
+<text class="txt ink" x="60" y="210" font-size="14">Building at the intersection of edge computing and obsessive interface</text>
+<text class="txt ink" x="60" y="232" font-size="14">precision. Everything I ship runs on the edge, costs nothing, and</text>
+<text class="txt ink" x="60" y="254" font-size="14">works offline.</text>
+<text class="txt sub" x="60" y="282" font-size="13">在边缘计算与界面精度的交汇处做产品。从艺术设计转前端工程，</text>
+<text class="txt sub" x="60" y="304" font-size="13">做离线优先、零服务器成本的 Web 应用。</text>
 
-<g fill="none" stroke="#007aff" stroke-width="1.4">
-<circle cx="51" cy="589" r="6.5"/>
-<ellipse cx="51" cy="589" rx="2.8" ry="6.5"/>
-<path d="M44.5,589 h13"/>
-</g>
-<text class="t" x="64" y="593" font-size="11.5" font-weight="600" fill="#007aff">aincfh.dpdns.org</text>
-
-<text class="d ink" x="280" y="120" font-size="19" font-weight="700" letter-spacing="-.3">Overview</text>
-<text class="t sub" x="280" y="146" font-size="13">Building at the intersection of edge computing and</text>
-<text class="t sub" x="280" y="164" font-size="13">obsessive interface precision. Everything I ship runs</text>
-<text class="t sub" x="280" y="182" font-size="13">on the edge, costs nothing, and works offline.</text>
-<text class="t dim" x="280" y="204" font-size="12.5">在边缘计算与界面精度的交汇处做产品。</text>
-<text class="t dim" x="280" y="222" font-size="12.5">从艺术设计转前端工程，做离线优先、零服务器成本的 Web 应用。</text>
-<line class="line" x1="280" y1="240" x2="844" y2="240"/>
-
-<text class="t lbl" x="280" y="259">SHIPPED</text>
-<text class="t" x="280" y="277" font-size="13" font-weight="600" fill="#007aff">aincfh.dpdns.org</text>
-<text class="t lbl" x="576" y="259">EDGE</text>
-<text class="t" x="576" y="277" font-size="13" font-weight="600" fill="#34c759">Workers · D1 · R2 · KV</text>
-<text class="t lbl" x="280" y="303">FOCUS</text>
-<text class="t ink" x="280" y="321" font-size="13" font-weight="500">Offline-first · zero-dependency</text>
-<text class="t lbl" x="576" y="303">WORKFLOW</text>
-<text class="t ink" x="576" y="321" font-size="13" font-weight="500">AI-augmented · human-reviewed</text>
-<text class="t lbl" x="280" y="347">DEVICE</text>
-<text class="t ink" x="280" y="365" font-size="13" font-weight="500">iPhone 16 Pro Max · MacBook Pro M3</text>
-<text class="t lbl" x="576" y="347">INFRA COST</text>
-<text class="t ink" x="576" y="365" font-size="13" font-weight="500">¥0 / month in production</text>
-<line class="line" x1="280" y1="383" x2="844" y2="383"/>
-
-<text class="t lbl" x="280" y="401">TIME ALLOCATION</text>
-
-<text class="t ink" x="280" y="419" font-size="12" font-weight="500">Frontend / Interface</text>
-<text class="t dim" x="844" y="419" font-size="12" font-weight="600" text-anchor="end">40%</text>
-<rect class="track" x="280" y="423" width="564" height="5" rx="2.5"/>
-<rect x="280" y="423" height="5" rx="2.5" fill="url(#b1)" width="0"><animate attributeName="width" from="0" to="519" dur="1.1s" begin="1s" fill="freeze" calcMode="spline" keySplines=".2 .8 .2 1"/></rect>
-
-<text class="t ink" x="280" y="443" font-size="12" font-weight="500">Edge / Serverless</text>
-<text class="t dim" x="844" y="443" font-size="12" font-weight="600" text-anchor="end">25%</text>
-<rect class="track" x="280" y="447" width="564" height="5" rx="2.5"/>
-<rect x="280" y="447" height="5" rx="2.5" fill="url(#b2)" width="0"><animate attributeName="width" from="0" to="324" dur="1.1s" begin="1.1s" fill="freeze" calcMode="spline" keySplines=".2 .8 .2 1"/></rect>
-
-<text class="t ink" x="280" y="467" font-size="12" font-weight="500">Design / Motion</text>
-<text class="t dim" x="844" y="467" font-size="12" font-weight="600" text-anchor="end">20%</text>
-<rect class="track" x="280" y="471" width="564" height="5" rx="2.5"/>
-<rect x="280" y="471" height="5" rx="2.5" fill="url(#b3)" width="0"><animate attributeName="width" from="0" to="260" dur="1.1s" begin="1.2s" fill="freeze" calcMode="spline" keySplines=".2 .8 .2 1"/></rect>
-
-<text class="t ink" x="280" y="491" font-size="12" font-weight="500">DevOps / Deploy</text>
-<text class="t dim" x="844" y="491" font-size="12" font-weight="600" text-anchor="end">15%</text>
-<rect class="track" x="280" y="495" width="564" height="5" rx="2.5"/>
-<rect x="280" y="495" height="5" rx="2.5" fill="url(#b4)" width="0"><animate attributeName="width" from="0" to="195" dur="1.1s" begin="1.3s" fill="freeze" calcMode="spline" keySplines=".2 .8 .2 1"/></rect>
-
-<line class="line" x1="280" y1="516" x2="844" y2="516"/>
-<text class="t lbl" x="280" y="534">STACK</text>
-
-<g font-size="11.5" font-weight="600" text-anchor="middle" class="t">
-<rect x="280" y="543" width="76" height="24" rx="12" fill="#f38020" fill-opacity=".14" stroke="#f38020" stroke-opacity=".3"/><text x="318" y="559" fill="#f38020">Cloudflare</text>
-<rect x="366" y="543" width="52" height="24" rx="12" fill="#0091b8" fill-opacity=".14" stroke="#0091b8" stroke-opacity=".3"/><text x="392" y="559" fill="#0091b8">React</text>
-<rect x="428" y="543" width="78" height="24" rx="12" fill="#3178c6" fill-opacity=".14" stroke="#3178c6" stroke-opacity=".3"/><text x="467" y="559" fill="#3178c6">TypeScript</text>
-<rect x="516" y="543" width="68" height="24" rx="12" fill="#0ea5b7" fill-opacity=".14" stroke="#0ea5b7" stroke-opacity=".3"/><text x="550" y="559" fill="#0ea5b7">Tailwind</text>
-<rect x="594" y="543" width="46" height="24" rx="12" fill="#af52de" fill-opacity=".14" stroke="#af52de" stroke-opacity=".3"/><text x="617" y="559" fill="#af52de">Vite</text>
-<rect x="650" y="543" width="56" height="24" rx="12" fill="#e0234e" fill-opacity=".14" stroke="#e0234e" stroke-opacity=".3"/><text x="678" y="559" fill="#e0234e">Remix</text>
-<rect x="716" y="543" width="54" height="24" rx="12" fill="#0acf83" fill-opacity=".14" stroke="#0acf83" stroke-opacity=".3"/><text x="743" y="559" fill="#0acf83">Figma</text>
-</g>
-
-<g font-size="11.5" font-weight="500" text-anchor="middle" class="t">
-<rect class="chip" x="280" y="573" width="62" height="24" rx="12"/><text class="sub" x="311" y="589">Workers</text>
-<rect class="chip" x="352" y="573" width="36" height="24" rx="12"/><text class="sub" x="370" y="589">D1</text>
-<rect class="chip" x="398" y="573" width="36" height="24" rx="12"/><text class="sub" x="416" y="589">R2</text>
-<rect class="chip" x="444" y="573" width="36" height="24" rx="12"/><text class="sub" x="462" y="589">KV</text>
-<rect class="chip" x="490" y="573" width="56" height="24" rx="12"/><text class="sub" x="518" y="589">SQLite</text>
-<rect class="chip" x="556" y="573" width="60" height="24" rx="12"/><text class="sub" x="586" y="589">Node.js</text>
-<rect class="chip" x="626" y="573" width="38" height="24" rx="12"/><text class="sub" x="645" y="589">Git</text>
-<rect class="chip" x="674" y="573" width="66" height="24" rx="12"/><text class="sub" x="707" y="589">Wrangler</text>
-</g>
+<line class="ln" x1="60" y1="330" x2="840" y2="330"/>
 </g>
 
 <g opacity="0">
-<animate attributeName="opacity" from="0" to="1" dur=".8s" begin=".55s" fill="freeze"/>
-<animateTransform attributeName="transform" type="translate" from="0 20" to="0 0" dur="1s" begin=".55s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
+<animate attributeName="opacity" from="0" to="1" dur=".8s" begin=".45s" fill="freeze"/>
+<animateTransform attributeName="transform" type="translate" from="0 18" to="0 0" dur="1s" begin=".45s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
 
-<g clip-path="url(#k1)"><use href="#bd" filter="url(#bl)"/><rect class="pane" x="24" y="636" width="201" height="134"/></g>
-<rect class="edge" x="24.5" y="636.5" width="200" height="133" rx="23.5" stroke-width="1"/>
-<circle cx="58" cy="680" r="21" fill="#5856d6" fill-opacity=".16"/>
-<path d="M60,669.5 a10.5,10.5 0 1 0 0,21 a8.4,8.4 0 1 1 0,-21 Z" fill="#5856d6"/>
-<text class="t ink" x="44" y="724" font-size="14" font-weight="700">Deep Work</text>
-<text class="t sub" x="44" y="742" font-size="11.5">Coding in progress</text>
+<text class="dsp" x="60" y="386" font-size="32" font-weight="700" fill="#FF9F43" opacity=".85">01</text>
+<text class="dsp ink" x="116" y="376" font-size="17" font-weight="700" letter-spacing=".5">A.T. FIELD</text>
+<text class="txt" x="840" y="376" font-size="12" font-weight="600" text-anchor="end" fill="#FF6B6B">aincfh.dpdns.org</text>
+<text class="txt sub" x="116" y="398" font-size="12.5">React Router v7 · TypeScript · Tailwind v4 · Cloudflare Workers · D1 · R2 · KV</text>
+<text class="txt dim" x="116" y="417" font-size="12.5">¥0 / month in production · offline-first · 13 runtime guards for slow mobile</text>
 
-<g clip-path="url(#k2)"><use href="#bd" filter="url(#bl)"/><rect class="pane" x="241" y="636" width="201" height="134"/></g>
-<rect class="edge" x="241.5" y="636.5" width="200" height="133" rx="23.5" stroke-width="1"/>
-<circle cx="275" cy="680" r="21" fill="#007aff" fill-opacity=".16"/>
-<g fill="#007aff"><circle cx="268" cy="678" r="7"/><circle cx="278" cy="676" r="9"/><circle cx="285" cy="681" r="6"/><rect x="264" y="681" width="24" height="7" rx="3.5"/></g>
-<text class="t ink" x="261" y="724" font-size="14" font-weight="700">Global Edge</text>
-<text class="t sub" x="261" y="742" font-size="11.5">UTC+8  ·  Always On</text>
+<text class="dsp" x="60" y="470" font-size="32" font-weight="700" fill="#8B5CF6" opacity=".85">02</text>
+<text class="dsp ink" x="116" y="460" font-size="17" font-weight="700" letter-spacing=".5">SAINT LAURENT SYSTEMS</text>
+<text class="txt dim" x="840" y="460" font-size="12" font-weight="600" text-anchor="end">8 departments · 60+ releases</text>
+<text class="txt sub" x="116" y="482" font-size="12.5">Zero-dependency single-file HTML · 24 chapters / 345 provisions · sentencing calculator</text>
+<text class="txt dim" x="116" y="501" font-size="12.5">Inherited a legacy codebase at v2.0.2 and carried it to v4.59</text>
 
-<g clip-path="url(#k3)"><use href="#bd" filter="url(#bl)"/><rect class="pane" x="458" y="636" width="201" height="134"/></g>
-<rect class="edge" x="458.5" y="636.5" width="200" height="133" rx="23.5" stroke-width="1"/>
-<circle cx="492" cy="680" r="21" fill="#34c759" fill-opacity=".16"/>
-<circle cx="492" cy="680" r="9" fill="none" stroke="#34c759" stroke-width="1.6">
-<animate attributeName="r" values="9;19" dur="2.4s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values=".8;0" dur="2.4s" repeatCount="indefinite"/>
-</circle>
-<circle cx="492" cy="680" r="7" fill="#34c759"/>
-<text class="t ink" x="478" y="724" font-size="14" font-weight="700">A.T. Field</text>
-<text class="t sub" x="478" y="742" font-size="11.5">aincfh.dpdns.org</text>
-
-<g clip-path="url(#k4)"><use href="#bd" filter="url(#bl)"/><rect class="pane" x="675" y="636" width="201" height="134"/></g>
-<rect class="edge" x="675.5" y="636.5" width="200" height="133" rx="23.5" stroke-width="1"/>
-<circle cx="709" cy="680" r="21" fill="url(#ai)" fill-opacity=".16"/>
-<path d="M707,668 C708.5,676 711,678.5 719,680 C711,681.5 708.5,684 707,692 C705.5,684 703,681.5 695,680 C703,678.5 705.5,676 707,668 Z" fill="url(#ai)"/>
-<path d="M717,668 C717.7,671.6 718.9,672.8 722.5,673.5 C718.9,674.2 717.7,675.4 717,679 C716.3,675.4 715.1,674.2 711.5,673.5 C715.1,672.8 716.3,671.6 717,668 Z" fill="url(#ai)" opacity=".8"/>
-<text class="t ink" x="695" y="724" font-size="14" font-weight="700">AI-Augmented</text>
-<text class="t sub" x="695" y="742" font-size="11.5">Decisions stay human</text>
+<line class="ln" x1="60" y1="524" x2="840" y2="524"/>
+<text class="txt dim" x="60" y="546" font-size="10.5" font-weight="600" letter-spacing="2.4">AI-AUGMENTED  ·  HUMAN-REVIEWED</text>
+<text class="txt dim" x="840" y="546" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">BLUE LOCK  ·  SOLO LEVELING</text>
 </g>
 
-<rect width="900" height="800" filter="url(#gr)" opacity=".04"/>
+<g class="brk">
+<path d="M16,30 L16,16 L30,16"/>
+<path d="M870,16 L884,16 L884,30"/>
+<path d="M16,530 L16,544 L30,544"/>
+<path d="M870,544 L884,544 L884,530"/>
+</g>
+
+<rect width="900" height="560" fill="url(#scan)" opacity=".1"/>
+<rect width="900" height="560" filter="url(#noise)" opacity=".03"/>
 </svg>

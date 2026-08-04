@@ -1,13 +1,12 @@
-<img src="./assets/header.svg" width="100%" alt="AincFh_OS — Absolute Domain, Deployed" />
+<img src="./assets/header.svg" width="100%" alt="AincFh — A.T. Field" />
 
 <p align="center">
-  <a href="https://aincfh.dpdns.org"><img src="https://img.shields.io/badge/A.T._Field-LIVE-007AFF?style=for-the-badge&labelColor=1d1d1f" alt="A.T. Field — live" /></a>
-  <img src="https://img.shields.io/badge/Edge-Cloudflare_Workers-FF9500?style=for-the-badge&labelColor=1d1d1f" alt="Runs on Cloudflare Workers" />
-  <img src="https://img.shields.io/badge/UI-iOS_Glass-AF52DE?style=for-the-badge&labelColor=1d1d1f" alt="iOS glass interface language" />
-  <img src="https://img.shields.io/badge/Infra_Cost-%C2%A50-34C759?style=for-the-badge&labelColor=1d1d1f" alt="Zero infrastructure cost" />
+  <a href="https://aincfh.dpdns.org"><img src="https://img.shields.io/badge/A.T._Field-LIVE-FF9F43?style=for-the-badge&labelColor=1c1f2b" alt="A.T. Field — live" /></a>
+  <img src="https://img.shields.io/badge/Edge-Cloudflare_Workers-FF6B6B?style=for-the-badge&labelColor=1c1f2b" alt="Runs on Cloudflare Workers" />
+  <img src="https://img.shields.io/badge/Infra_Cost-%C2%A50-8B5CF6?style=for-the-badge&labelColor=1c1f2b" alt="Zero infrastructure cost" />
 </p>
 
-<img src="./assets/profile-panel.svg" width="100%" alt="AincFh — Frontend and Full-stack Developer, Xiamen, China" />
+<img src="./assets/profile-panel.svg" width="100%" alt="AincFh — frontend and edge developer, Xiamen, China" />
 
 ## ▍A.T. Field / 絶対領域
 
@@ -28,7 +27,7 @@ Three problems from this build that I can still explain from memory:
 - **Double-charging under concurrent callbacks.** Payment confirmation was not idempotent. Fixed with a lock acquired before any state mutation, keyed on the order id.
 - **Queries that were fine locally and slow in production.** The article table needed composite indexes across publish date, category, and status. Local SQLite hid the cost; D1 did not.
 
-## ▍Single-File Systems
+## ▍Saint Laurent Systems
 
 Eight-plus internal tools for a community's public-service departments. Zero dependencies, plain HTML/CSS/JS, one file each, fully functional offline.
 
@@ -47,15 +46,9 @@ I am nineteen, I came into this from art and design, and my weak spot is depth i
 ## ▍Elsewhere
 
 <p align="center">
-  <a href="https://aincfh.dpdns.org"><img src="https://img.shields.io/badge/Site-aincfh.dpdns.org-007AFF?style=flat-square&labelColor=1d1d1f" alt="Website" /></a>
-  <a href="mailto:fhainc@hotmail.com"><img src="https://img.shields.io/badge/Email-fhainc@hotmail.com-8E8E93?style=flat-square&labelColor=1d1d1f" alt="Email" /></a>
-  <a href="https://space.bilibili.com/527018775"><img src="https://img.shields.io/badge/Bilibili-527018775-FB7299?style=flat-square&labelColor=1d1d1f" alt="Bilibili" /></a>
+  <a href="https://aincfh.dpdns.org"><img src="https://img.shields.io/badge/Site-aincfh.dpdns.org-FF9F43?style=flat-square&labelColor=1c1f2b" alt="Website" /></a>
+  <a href="mailto:fhainc@hotmail.com"><img src="https://img.shields.io/badge/Email-fhainc@hotmail.com-94A3B8?style=flat-square&labelColor=1c1f2b" alt="Email" /></a>
+  <a href="https://space.bilibili.com/527018775"><img src="https://img.shields.io/badge/Bilibili-527018775-FB7299?style=flat-square&labelColor=1c1f2b" alt="Bilibili" /></a>
 </p>
 
-<p align="center">
-  <sub><b>破灭的宿命亦是重生的喜悦</b></sub><br />
-  <sub>Destruction is the joy of rebirth.</sub><br />
-  <sub><i>I alone level up. (Arise)</i></sub>
-</p>
-
-<img src="./assets/footer.svg" width="100%" alt="AincFh_OS — end of line" />
+<img src="./assets/footer.svg" width="100%" alt="Destruction is the joy of rebirth" />
