@@ -1,75 +1,81 @@
 <p align="center">
-  <img src="./assets/hero-v2.svg" alt="AincFh — Building software with purpose. Web, desktop and AI systems." width="100%" />
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./assets/hero-dark.svg" />
+    <source media="(prefers-color-scheme: light)" srcset="./assets/hero-light.svg" />
+    <img src="./assets/hero-light.svg" width="100%" alt="AincFh — Design-minded. Engineering-driven. Web platforms, desktop tools and AI." />
+  </picture>
 </p>
 
 <p align="center">
-  <a href="https://aincfh.dpdns.org"><b>Explore A.T. Field</b></a>
-  &nbsp;·&nbsp;
-  <a href="https://github.com/AincFh?tab=repositories">Repositories</a>
-  &nbsp;·&nbsp;
-  <a href="mailto:fhainc@hotmail.com">Contact</a>
+  <a href="https://aincfh.dpdns.org"><strong>Explore A.T. Field</strong></a> &nbsp;·&nbsp;
+  <a href="https://github.com/AincFh?tab=repositories">Repositories</a> &nbsp;·&nbsp;
+  <a href="mailto:fhainc@hotmail.com">Get in touch</a>
 </p>
 
-# AincFh
+## Hello, I'm AincFh.
 
-**独立开发者 / Full-stack Product Builder**
+**独立开发者 · Full-stack Product Builder**
 
-我专注于把想法做成真正可用的产品：从前端体验、后端架构到部署运维，兼顾视觉细节、可维护性和可靠性。
+我喜欢把一个想法从界面设计、应用开发一路做到实际部署。关注的不只是功能能否运行，还有产品是否清晰、顺手、安全，以及能否持续维护。
 
-I build practical software across **web platforms, desktop tools, and AI-assisted workflows** — with a focus on thoughtful interfaces and dependable engineering.
+I work across **web platforms, Windows desktop applications, and AI-assisted workflows** — combining visual detail with practical engineering.
 
----
+## Selected work / 代表作品
 
-## Selected work · 代表作品
+<a href="https://aincfh.dpdns.org">
+  <img src="./assets/project-at-field.svg" alt="A.T. Field — a personal platform built on Cloudflare" width="100%" />
+</a>
 
-### 01 / [A.T. Field — 绝对领域](https://aincfh.dpdns.org)
+**[A.T. Field · 绝对领域](https://aincfh.dpdns.org)** — [Public repository](https://github.com/AincFh/my-anime-blog)
 
-**全栈内容与社区平台** · [Source code](https://github.com/AincFh/my-anime-blog)
+基于 Cloudflare 的全栈个人内容与社区平台，包含内容展示、用户互动及管理能力。持续完善数据一致性、身份认证、边缘部署和工程化质量门禁。
 
-基于 Cloudflare 的个人内容平台，涵盖文章、媒体内容、互动功能与管理后台。围绕真实部署持续完善认证、数据一致性、发布流程和产品体验。
+`TypeScript` · `React` · `Cloudflare Workers` · `D1` · `R2`
 
-`TypeScript` · `React` · `Cloudflare Workers` · `D1` · `R2` · `Tailwind CSS`
+<a href="https://yslfivem.com">
+  <img src="./assets/project-saint-laurent.svg" alt="Saint Laurent — a roleplay community service platform" width="100%" />
+</a>
 
-### 02 / [Saint Laurent — 圣罗兰平台](https://yslfivem.com)
+**[Saint Laurent · 圣罗兰](https://yslfivem.com)** — Private source
 
-**社区服务与业务管理系统** · Private development
+围绕虚构角色扮演社区打造的网站、信息查询与内部工作系统，涉及业务流程、访问控制、智能助手及日常运维。公开链接仅指向社区网站，源代码不公开。
 
-面向角色扮演社区的 Web 平台及配套业务工具，涉及内容查询、内部工作流、权限边界、自动化与系统集成。仓库为私有项目；此处仅展示公开站点和项目概述。
+`Next.js` · `Node.js` · `SQLite` · `System integration`
 
-`Next.js` · `Node.js` · `SQLite` · `Automation`
+<img src="./assets/project-windows.svg" alt="Windows Tools — native desktop applications and diagnostics" width="100%" />
 
-### 03 / Windows desktop tooling
+**Windows desktop tooling** — Private projects
 
-**桌面客户端与诊断工具** · Private development
-
-探索原生 Windows 应用、嵌入式 Web 界面、桌面工具集成与系统诊断，注重桌面端的稳定性、易用性和工程化交付。
+探索 Windows 原生客户端、工具箱、诊断流程与嵌入式 Web 界面。重点是稳定的运行体验、清楚的状态反馈，以及可维护的桌面端架构。
 
 `C#` · `.NET` · `WinForms` · `WebView2`
 
----
+## What I work with / 技术方向
 
-## What I work with · 技术方向
-
-| Area | Focus |
+| Direction | Tools & interests |
 | :--- | :--- |
-| **Product & Frontend** | TypeScript, React, Next.js, UI/UX, responsive interfaces |
-| **Backend & Data** | Node.js, SQLite, Cloudflare Workers, D1, API design |
-| **Desktop** | C#, .NET, WinForms, WebView2, Windows tooling |
-| **AI & Automation** | AI-assisted development, agent workflows, practical integrations |
-| **Engineering** | Security boundaries, testability, deployment workflows, observability |
+| **Frontend & product** | React, Next.js, TypeScript, UX, responsive interfaces |
+| **Backend & infrastructure** | Node.js, Cloudflare Workers, D1, SQLite, APIs |
+| **Windows desktop** | C#, .NET, WinForms, WebView2 |
+| **AI & automation** | AI integrations, agent workflows, workflow orchestration |
+| **Engineering quality** | Testing, authorization boundaries, deployment and operations |
 
-## How I build · 工作理念
+## How I build / 工作方式
 
-- **Experience matters.** 界面应该清晰、克制、好用，而不只是展示技术效果。
-- **Engineering matters.** 关注权限、安全、数据一致性与长期可维护性。
-- **Shipping matters.** 以真实使用和持续迭代验证方案，不用虚构的技能百分比代替作品。
+- **Design for people.** 信息清晰、交互顺手，比堆叠视觉效果更重要。
+- **Build for reality.** 重视数据可靠性、权限隔离、错误处理和发布过程。
+- **Keep improving.** 通过真实项目和持续迭代验证设计，而不是用自评百分比说明能力。
 
-## Elsewhere · 联系与更多内容
+## Elsewhere / 联系方式
 
-[**GitHub**](https://github.com/AincFh) · [**A.T. Field**](https://aincfh.dpdns.org) · [**Bilibili**](https://space.bilibili.com/527018775) · [**Email**](mailto:fhainc@hotmail.com)
+**[GitHub](https://github.com/AincFh)** &nbsp;·&nbsp;
+**[A.T. Field](https://aincfh.dpdns.org)** &nbsp;·&nbsp;
+**[Bilibili](https://space.bilibili.com/527018775)** &nbsp;·&nbsp;
+**[Email](mailto:fhainc@hotmail.com)**
 
 ---
 
 <p align="center">
-  <sub>Designed with intention. Built through iteration. · AincFh</sub>
+  <sub>Designed with intention. Built through iteration.<br />
+  破灭的宿命亦是重生的喜悦 · AincFh</sub>
 </p>
