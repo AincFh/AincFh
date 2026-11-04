@@ -1,0 +1,94 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="1200" height="430" viewBox="0 0 1200 430" role="img" aria-labelledby="title desc">
+  <title id="title">AincFh — Full-stack products, developer tools, and AI systems</title>
+  <desc id="desc">A dark, minimal editorial banner with subtle blue and violet lighting and a stylized systems diagram. AincFh builds thoughtful software across web, desktop, and AI.</desc>
+  <defs>
+    <linearGradient id="base" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#10141D"/>
+      <stop offset=".55" stop-color="#111827"/>
+      <stop offset="1" stop-color="#0A101B"/>
+    </linearGradient>
+    <radialGradient id="glowA" cx="75%" cy="48%" r="54%">
+      <stop offset="0" stop-color="#5864DA" stop-opacity=".3"/>
+      <stop offset=".55" stop-color="#293465" stop-opacity=".11"/>
+      <stop offset="1" stop-color="#10141D" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="glowB" cx="95%" cy="5%" r="50%">
+      <stop offset="0" stop-color="#2DB6C3" stop-opacity=".15"/>
+      <stop offset="1" stop-color="#2DB6C3" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#80BFFF"/>
+      <stop offset=".58" stop-color="#A6A9FF"/>
+      <stop offset="1" stop-color="#D1A9FF"/>
+    </linearGradient>
+    <linearGradient id="card" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#202B3D" stop-opacity=".98"/>
+      <stop offset="1" stop-color="#151C2A" stop-opacity=".98"/>
+    </linearGradient>
+    <pattern id="dots" width="20" height="20" patternUnits="userSpaceOnUse">
+      <circle cx="2" cy="2" r=".85" fill="#B5C2DA" opacity=".11"/>
+    </pattern>
+    <clipPath id="mask"><rect width="1200" height="430" rx="22"/></clipPath>
+  </defs>
+  <g clip-path="url(#mask)">
+    <rect width="1200" height="430" fill="url(#base)"/>
+    <rect width="1200" height="430" fill="url(#glowA)"/>
+    <rect width="1200" height="430" fill="url(#glowB)"/>
+    <rect x="650" y="0" width="550" height="430" fill="url(#dots)"/>
+    <path d="M640 0V430" stroke="#C6D0E1" stroke-opacity=".1"/>
+    <path d="M40 74H1160" stroke="#C6D0E1" stroke-opacity=".11"/>
+    <circle cx="48" cy="38" r="5" fill="#FF716C" opacity=".82"/>
+    <circle cx="66" cy="38" r="5" fill="#F8C85D" opacity=".82"/>
+    <circle cx="84" cy="38" r="5" fill="#63D4A3" opacity=".82"/>
+    <text x="115" y="43" fill="#ACB8CF" font-family="Arial,Helvetica,sans-serif" font-size="15" letter-spacing="2.7" font-weight="600">AINCFH / STUDIO</text>
+    <text x="1158" y="43" text-anchor="end" fill="#8896AF" font-family="Arial,Helvetica,sans-serif" font-size="13" letter-spacing="1.6">DESIGN × ENGINEERING</text>
+
+    <rect x="53" y="105" width="170" height="29" rx="14.5" fill="#9BA9FF" fill-opacity=".1" stroke="#A9B4FF" stroke-opacity=".24"/>
+    <circle cx="70" cy="119.5" r="4" fill="#88D9C9"/>
+    <text x="83" y="124" fill="#BBC5FF" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="1.35" font-weight="700">INDEPENDENT BUILDER</text>
+
+    <text x="46" y="238" fill="#F6F8FC" font-family="Arial,Helvetica,sans-serif" font-size="100" letter-spacing="-6" font-weight="700">AincFh<tspan fill="#A8B1FF">.</tspan></text>
+    <text x="54" y="280" fill="#DCE5F5" font-family="Arial,Helvetica,sans-serif" font-size="24" letter-spacing="-.4" font-weight="500">Building software with purpose.</text>
+    <text x="55" y="310" fill="#98A6BE" font-family="Arial,Helvetica,sans-serif" font-size="17">Thoughtful interfaces. Reliable systems. Real products.</text>
+
+    <g font-family="Arial,Helvetica,sans-serif" font-size="13" font-weight="600" letter-spacing=".3">
+      <rect x="54" y="350" width="124" height="34" rx="17" fill="#FFFFFF" fill-opacity=".05" stroke="#FFFFFF" stroke-opacity=".14"/>
+      <text x="116" y="372" text-anchor="middle" fill="#D2DEEE">WEB / EDGE</text>
+      <rect x="188" y="350" width="126" height="34" rx="17" fill="#FFFFFF" fill-opacity=".05" stroke="#FFFFFF" stroke-opacity=".14"/>
+      <text x="251" y="372" text-anchor="middle" fill="#D2DEEE">DESKTOP</text>
+      <rect x="324" y="350" width="128" height="34" rx="17" fill="#FFFFFF" fill-opacity=".05" stroke="#FFFFFF" stroke-opacity=".14"/>
+      <text x="388" y="372" text-anchor="middle" fill="#D2DEEE">AI SYSTEMS</text>
+    </g>
+
+    <g transform="translate(728 94)">
+      <circle cx="228" cy="162" r="153" fill="none" stroke="#8D9CFF" stroke-opacity=".10"/>
+      <circle cx="228" cy="162" r="121" fill="none" stroke="#8D9CFF" stroke-opacity=".10"/>
+      <circle cx="228" cy="162" r="88" fill="none" stroke="#8D9CFF" stroke-opacity=".10"/>
+      <path d="M0 70C68 70 78 168 145 168S248 90 380 90" fill="none" stroke="url(#accent)" stroke-width="2.1" stroke-opacity=".7"/>
+      <path d="M14 255C102 255 114 196 178 196S273 267 398 267" fill="none" stroke="#80BFFF" stroke-width="1.5" stroke-opacity=".25"/>
+      <rect x="56" y="25" width="347" height="244" rx="21" fill="url(#card)" stroke="#B8C7EB" stroke-opacity=".24" stroke-width="1.2"/>
+      <path d="M56 77H403" stroke="#CED8ED" stroke-opacity=".1"/>
+      <circle cx="85" cy="51" r="5.5" fill="#93D6CD"/>
+      <text x="100" y="56" fill="#F3F6FB" font-family="Arial,Helvetica,sans-serif" font-size="15" font-weight="700" letter-spacing=".7">SYSTEM OVERVIEW</text>
+      <text x="374" y="55" text-anchor="end" fill="#8291AB" font-family="Arial,Helvetica,sans-serif" font-size="12" letter-spacing="1">01 / 03</text>
+
+      <rect x="83" y="102" width="292" height="56" rx="12" fill="#0E1727" stroke="#C4CEE2" stroke-opacity=".14"/>
+      <rect x="98" y="117" width="29" height="26" rx="7" fill="#78BFFF" fill-opacity=".12" stroke="#78BFFF" stroke-opacity=".2"/>
+      <path d="M106 130H119 M112 124V136" stroke="#96CBFF" stroke-width="1.6" stroke-linecap="round"/>
+      <text x="142" y="125" fill="#E5EAF5" font-family="Arial,Helvetica,sans-serif" font-size="14" font-weight="600">Product engineering</text>
+      <text x="142" y="143" fill="#8698B3" font-family="Arial,Helvetica,sans-serif" font-size="11">Architecture + experience</text>
+      <circle cx="349" cy="130" r="4" fill="#77D4BF"/>
+
+      <path d="M107 159V183H207 M350 159V183H261" fill="none" stroke="#758AAB" stroke-width="1.4" stroke-opacity=".5"/>
+      <circle cx="207" cy="183" r="4" fill="#96BFFF"/>
+      <circle cx="261" cy="183" r="4" fill="#C49DFF"/>
+      <rect x="83" y="200" width="136" height="44" rx="10" fill="#24344A" stroke="#97BAE9" stroke-opacity=".3"/>
+      <text x="151" y="227" text-anchor="middle" fill="#C7DFFF" font-family="Arial,Helvetica,sans-serif" font-size="13" letter-spacing=".7">INTERFACE</text>
+      <rect x="239" y="200" width="136" height="44" rx="10" fill="#2D2945" stroke="#BB9DF4" stroke-opacity=".3"/>
+      <text x="307" y="227" text-anchor="middle" fill="#DECCFF" font-family="Arial,Helvetica,sans-serif" font-size="13" letter-spacing=".7">SYSTEMS</text>
+      <circle cx="56" cy="25" r="5" fill="#9FADFF"/>
+      <circle cx="403" cy="269" r="5" fill="#74D2C6"/>
+    </g>
+    <rect x="1" y="1" width="1198" height="428" rx="21" fill="none" stroke="#D5DCEC" stroke-opacity=".15" stroke-width="2"/>
+  </g>
+</svg>
