@@ -32,7 +32,10 @@
     about:{label:'PROFILE / DOSSIER',name:'About',icon:'user',width:500,height:565},
     terminal:{label:'LOCAL INTERACTIVE SHELL',name:'Terminal',icon:'terminal',width:630,height:455},
     contact:{label:'CONTACT / LINKS',name:'Contact',icon:'mail',width:495,height:485},
-    settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:470,height:555}
+    settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:470,height:555},
+    files:{label:'FILE EXPLORER / LOCAL',name:'Files',icon:'folder',width:830,height:620},
+    notes:{label:'NOTES / LOCAL EDITOR',name:'Notes',icon:'code',width:800,height:600},
+    activity:{label:'ACTIVITY / SESSION',name:'Activity',icon:'grid',width:720,height:570}
   };
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
@@ -273,7 +276,10 @@
   window.addEventListener('resize',adaptWindows,{passive:true});
   function renderApp(id) {const w=windows.get(id);if(!w)return;const content=$('.window-content',w.node);
     const renderer={projects:renderProjects,stack:renderStack,about:renderAbout,terminal:renderTerminal,contact:renderContact,settings:renderSettings}[id];
-    content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);
+    if(window.AincWorkspace&&['files','notes','activity'].includes(id)){
+      content.innerHTML=window.AincWorkspace.render(id);
+      window.AincWorkspace.afterOpen(id);
+    }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
   }
 
   // Three real CSS-driven motion states; this is a concept UI, not a recording of the remote product.
@@ -311,14 +317,21 @@
   function focusTerminal(){setTimeout(()=>$('#terminalInput')?.focus({preventScroll:true}),40);}
   function runCommand(raw){const command=raw.trim();if(!command){focusTerminal();return;}terminalState.history.push(command);terminalState.historyIndex=terminalState.history.length;let args=command.split(/\s+/),cmd=args[0].toLowerCase();terminalState.log.push({kind:'normal',line:'aincfh@os:~$ '+command});let result='';
     switch(cmd){
-    case 'help':result='help      list available commands\nprojects  list projects\nopen NAME open projects / stack / about / terminal / contact / settings\nls        list workspace modules\nwhoami    profile summary\nstatus    local interface status\ntheme     dark | light | toggle\naccent    amber | violet | cyan\nmotion    on | off\ndate      local date / time\nclear     clear console\ngithub    open profile in new tab\nneofetch  show AincFh OS info';break;
+    case 'help':result='help      list available commands\nprojects  list projects\nopen NAME open project / app\nfiles     open local File Explorer\nnotes     open editable Notes\nactivity  session and history\nls        list local files\ncat NAME  read text document\nmkdir NAME create a folder\ntouch NAME create a document\nhistory   recent local actions\nwhoami    profile summary\nstatus    local interface status\ntheme     dark | light | toggle\naccent    amber | violet | cyan\nmotion    on | off\ndate      local date / time\nclear     clear console\ngithub    open profile in new tab\nneofetch  show AincFh OS info';break;
     case 'projects':result=projects.map((p,i)=>`${String(i+1).padStart(2,'0')}  ${p.label}  (${p.category})`).join('\n');break;
-    case 'ls':result='projects/  stack/  about/  terminal/  contact/  settings/';break;
+    case 'ls':result=window.AincWorkspace?window.AincWorkspace.list():'No local workspace loaded.';break;
+    case 'files':openWindow('files');result='Opened local file explorer';break;
+    case 'notes':openWindow('notes');result='Opened Notes editor';break;
+    case 'activity':openWindow('activity');result='Opened Activity Center';break;
+    case 'cat':{const name=args.slice(1).join(' ');if(!name){result='Usage: cat FILE_NAME (try: cat Start Here.txt)';break;}var doc=window.AincWorkspace&&window.AincWorkspace.readFile(name);result=doc===null?'File not found: '+name:doc;break;}
+    case 'mkdir':{const name=args.slice(1).join(' ');if(!name){result='Usage: mkdir FOLDER_NAME';break;}result=window.AincWorkspace&&window.AincWorkspace.mkdir(name)?'Created folder: '+name:'Unable to create folder';break;}
+    case 'touch':{const name=args.slice(1).join(' ');if(!name){result='Usage: touch FILE_NAME';break;}result=window.AincWorkspace&&window.AincWorkspace.touch(name)?'Created document: '+name:'Unable to create document';break;}
+    case 'history':result=window.AincWorkspace?window.AincWorkspace.history():'No activity.';break;
     case 'whoami':result='AincFh · Independent Product Builder\nFocus: design + engineering + practical delivery';break;
     case 'status':result=`AincFh OS / local browser session\nTheme: ${state.theme} · Accent: ${state.accent} · Motion: ${state.motion?'on':'off'}\nOpen apps: ${[...windows.keys()].join(', ')||'none'}\nNo live backend metrics are simulated.`;break;
     case 'date':result=new Date().toLocaleString('zh-CN',{dateStyle:'full',timeStyle:'medium'});break;
-    case 'neofetch':result='     ⬡      AincFh OS v2.0\n    ⬡⬡      Interactive studio workspace\n   ⬡⬡⬡     Modules: 6 · Projects: '+projects.length+'\n    ⬡⬡      Runtime: Browser / Vanilla JS\n     ⬡      Design: Hex / Amber / Violet';break;
-    case 'open':{const target=(args[1]||'').toLowerCase(),alias={project:'projects',work:'projects',tech:'stack',skills:'stack',shell:'terminal',mail:'contact',prefs:'settings'};let app=alias[target]||target;const project=projects.find(p=>p.id===app||p.label.toLowerCase().replace(/[^a-z0-9]+/g,'')===app.replace(/[^a-z0-9]+/g,''));if(project){openWindow('projects',{project:project.id,announce:false});result='Opened project: '+project.label;}else if(appInfo[app]){openWindow(app,{announce:false});result='Opened '+appInfo[app].name;}else result='Usage: open projects | stack | about | terminal | contact | settings | field | saint | windows | fishing';break;}
+    case 'neofetch':result='     ⬡      AincFh OS v2.0\n    ⬡⬡      Interactive studio workspace\n   ⬡⬡⬡     Modules: 9 · Projects: '+projects.length+'\n    ⬡⬡      Runtime: Browser / Vanilla JS\n     ⬡      Design: Hex / Amber / Violet';break;
+    case 'open':{const target=(args[1]||'').toLowerCase(),alias={project:'projects',work:'projects',tech:'stack',skills:'stack',shell:'terminal',mail:'contact',prefs:'settings'};let app=alias[target]||target;const project=projects.find(p=>p.id===app||p.label.toLowerCase().replace(/[^a-z0-9]+/g,'')===app.replace(/[^a-z0-9]+/g,''));if(project){openWindow('projects',{project:project.id,announce:false});result='Opened project: '+project.label;}else if(appInfo[app]){openWindow(app,{announce:false});result='Opened '+appInfo[app].name;}else result='Usage: open projects | stack | about | terminal | contact | settings | files | notes | activity | field | saint | windows | fishing';break;}
     case 'theme':{const v=args[1]||'toggle';if(!['dark','light','toggle'].includes(v)){result='Usage: theme dark | light | toggle';break;}setTheme(v==='toggle'?(state.theme==='dark'?'light':'dark'):v);result='Theme: '+state.theme;break;}
     case 'accent':{const v=args[1];if(!['amber','violet','cyan'].includes(v)){result='Usage: accent amber | violet | cyan';break;}setAccent(v);result='Accent: '+state.accent;break;}
     case 'motion':{const v=args[1];if(!['on','off'].includes(v)){result='Usage: motion on | off';break;}setMotion(v==='on');result='Motion: '+v;break;}
@@ -372,7 +385,8 @@
   const palette=$('#paletteBackdrop'),paletteInput=$('#paletteInput'),paletteResults=$('#paletteResults');let filtered=[],activeResult=0,returnFocus=null;
   function openPalette(){returnFocus=document.activeElement;palette.hidden=false;paletteInput.value='';renderResults();setTimeout(()=>paletteInput.focus(),40);closeMenu();}
   function closePalette(){palette.hidden=true;returnFocus?.focus?.();}
-  function renderResults(){let q=paletteInput.value.toLowerCase().trim();filtered=commands.filter(c=>!q||(c.title+' '+c.sub+' '+c.terms).toLowerCase().includes(q)).slice(0,12);activeResult=0;paletteResults.innerHTML=filtered.length?`<div class="palette-group">${q?'MATCHING COMMANDS':'QUICK ACTIONS'} / ${filtered.length}</div>`+filtered.map((c,i)=>`<button class="palette-option ${i===0?'selected':''}" data-result="${i}" role="option" aria-selected="${i===0}"><span class="palette-option-icon">${ICON(c.icon)}</span><span class="palette-option-info"><strong>${escapeHTML(c.title)}</strong><small>${escapeHTML(c.sub)}</small></span><span class="palette-option-arrow">↵</span></button>`).join(''):'<div class="palette-no-results">没有找到匹配的项目或命令。</div>';}
+  function renderResults(){let q=paletteInput.value.toLowerCase().trim();filtered=commands.filter(c=>!q||(c.title+' '+c.sub+' '+c.terms).toLowerCase().includes(q))
+      .concat(q&&window.AincWorkspace?window.AincWorkspace.search(q):[]).slice(0,14);activeResult=0;paletteResults.innerHTML=filtered.length?`<div class="palette-group">${q?'MATCHING COMMANDS':'QUICK ACTIONS'} / ${filtered.length}</div>`+filtered.map((c,i)=>`<button class="palette-option ${i===0?'selected':''}" data-result="${i}" role="option" aria-selected="${i===0}"><span class="palette-option-icon">${ICON(c.icon)}</span><span class="palette-option-info"><strong>${escapeHTML(c.title)}</strong><small>${escapeHTML(c.sub)}</small></span><span class="palette-option-arrow">↵</span></button>`).join(''):'<div class="palette-no-results">没有找到匹配的项目或命令。</div>';}
   function selectResult(i){activeResult=i;$$('[data-result]',paletteResults).forEach((b,idx)=>{b.classList.toggle('selected',i===idx);b.setAttribute('aria-selected',i===idx?'true':'false');if(i===idx)b.scrollIntoView({block:'nearest'});});}
   function executeResult(i){const item=filtered[i];if(!item)return;closePalette();item.action();}
   $('#globalSearch').addEventListener('click',openPalette);$('#dockSearch').addEventListener('click',openPalette);paletteInput.addEventListener('input',renderResults);
@@ -389,6 +403,17 @@
     if(e.ctrlKey&&e.key==='Tab'&&!e.metaKey){e.preventDefault();cycleWindows();}
     else if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();const n=$('.os-window.focused',layer);if(n)toggleMax(n.id.slice(4));}
     else if(e.ctrlKey&&e.altKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();snapWindow(e.key==='ArrowLeft'?'left':'right');}
+  });
+  // Bridge exposes only window operations; persistent documents stay in AincWorkspace.
+  if(window.AincWorkspace)window.AincWorkspace.attach({
+    open: id=>openWindow(id),
+    focus: id=>focusWindow(id),
+    close: id=>closeWindow(id),
+    arrange: type=>arrangeWindows(type),
+    windows: ()=>[...windows.entries()].map(([id,w])=>({
+      id:id,name:appInfo[id].name,minimized:w.minimized,maximized:w.maximized
+    })),
+    toast: toast
   });
   // Ambient animations respond to pointer and accessibility preferences.
   let tracking=false;document.addEventListener('pointermove',e=>{
