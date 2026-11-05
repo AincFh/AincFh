@@ -13,6 +13,7 @@ const catalog=window.AincCatalog?.entries||Object.create(null);
 const ui=window.AincCatalog?.ui||{};
 const allowed=new Set(SUPPORTED.map(x=>x.id));
 let mode='auto',current='en-US',scheduled=false,observer=null;
+const queuedRoots=new Set();
 const lastText=new WeakMap(),lastAttrs=new WeakMap();
 const ATTRS=['placeholder','title','aria-label','alt'];
 const IGNORED='script,style,svg,noscript,canvas,textarea,pre,code,kbd,[contenteditable],[data-i18n-skip],#typeText,#menuClock,#suClockTime,#suTimer,#suStopwatch,#fsNoteBody,#fsNoteTitle,#fsName,#fsSearch,#suTaskName,#suTaskDue,#suCalcExpr,#paletteInput,#suAppSearch,.fs-md-preview,.fs-notelist,.fs-snippet,.terminal-output,.terminal-history,.su-task-row,.fs-activity-log,.su-calc-history,.fs-preview-image';
@@ -93,16 +94,28 @@ function translateTree(root){
  if(root.nodeType===3){translateText(root);return}
  if(root.nodeType!==1&&root.nodeType!==9&&root.nodeType!==11)return;
  if(root.nodeType===1){translateElement(root);if(isIgnored(root))return}
- const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT);
+ const walker=document.createTreeWalker(root,NodeFilter.SHOW_ELEMENT|NodeFilter.SHOW_TEXT,{
+  acceptNode(node){
+   if(node.nodeType===1&&node.matches(IGNORED))return NodeFilter.FILTER_REJECT;
+   return NodeFilter.FILTER_ACCEPT;
+  }
+ });
  let node;
  while(node=walker.nextNode()){
   if(node.nodeType===3)translateText(node);else translateElement(node);
  }
 }
 function schedule(nodes){
+ for(const node of nodes)queuedRoots.add(node);
  if(scheduled)return;
  scheduled=true;
- queueMicrotask(()=>{scheduled=false;for(const node of nodes)translateTree(node)});
+ queueMicrotask(()=>{
+  scheduled=false;
+  const roots=Array.from(queuedRoots);queuedRoots.clear();
+  for(const node of roots){
+   if(node.nodeType===3||node.isConnected)translateTree(node);
+  }
+ });
 }
 function processMutations(mutations){
  const roots=new Set();
