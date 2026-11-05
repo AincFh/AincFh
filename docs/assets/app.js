@@ -40,7 +40,8 @@
     tasks:{label:'TASK BOARD / LOCAL',name:'Tasks',icon:'checklist',width:750,height:625},
     clock:{label:'CLOCK / TIMER',name:'Clock',icon:'clock',width:680,height:590},
     apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:960,height:675},
-    paint:{label:'CREATIVE STUDIO / CANVAS',name:'Paint',icon:'paint',width:1000,height:725}
+    paint:{label:'CREATIVE STUDIO / CANVAS',name:'Paint',icon:'paint',width:1000,height:725},
+    taskmanager:{label:'SYSTEM / RESOURCE MONITOR',name:'Task Manager',icon:'monitor',width:970,height:665}
   };
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
@@ -69,19 +70,24 @@
     keyHints: read('keyHints','on')!=='off',
     quietMode: read('quietMode','off')==='on',
     activityBadge: read('activityBadge','on')!=='off',
-    lowPower: read('lowPower','off')==='on'
+    lowPower: read('lowPower','off')==='on',
+    performanceMode: ['auto','balanced','smooth','save'].includes(read('performanceMode','auto'))?read('performanceMode','auto'):'auto'
   };
   const desktop = $('#desktop'), layer = $('#windowLayer');
   function applySettings() {
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.dataset.accent = state.accent;
-    document.documentElement.classList.toggle('motion-off',!state.motion||state.lowPower);
+    const saver = state.performanceMode==='save' || state.performanceMode==='auto' && (navigator.connection?.saveData||navigator.deviceMemory&&navigator.deviceMemory<=2);
+    const effectiveLowPower=state.lowPower||saver;
+    document.documentElement.classList.toggle('motion-off',!state.motion||effectiveLowPower);
+    document.documentElement.classList.toggle('os-performance-save',effectiveLowPower);
+    document.documentElement.dataset.performanceProfile=state.performanceMode;
     document.documentElement.dataset.contrast=state.contrast;
     document.documentElement.dataset.textSize=state.textSize;
     document.documentElement.dataset.dockSize=state.dockSize;
     document.documentElement.dataset.contextMenu=state.contextMenu?'on':'off';
-    document.documentElement.classList.toggle('os-opaque',!state.glass||state.lowPower);
-    document.documentElement.classList.toggle('os-low-power',state.lowPower);
+    document.documentElement.classList.toggle('os-opaque',!state.glass||effectiveLowPower);
+    document.documentElement.classList.toggle('os-low-power',effectiveLowPower);
     document.documentElement.classList.toggle('os-hide-hints',!state.keyHints);
     document.documentElement.classList.toggle('os-hide-badge',!state.activityBadge);
     document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
@@ -109,9 +115,9 @@
     applySettings();toast('设置已应用');
   }
   function resetPreferences(){
-    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','dockPosition','dockMode','dockScale','dockMagnify','dockAutoHide','startLayout','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','dockPosition','dockMode','dockScale','dockMagnify','dockAutoHide','startLayout','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower','performanceMode'];
     for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
-    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',dockPosition:'bottom',dockMode:'floating',dockScale:'normal',dockMagnify:true,dockAutoHide:false,startLayout:'grid',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',dockPosition:'bottom',dockMode:'floating',dockScale:'normal',dockMagnify:true,dockAutoHide:false,startLayout:'grid',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false,performanceMode:'auto'});
     applySettings();toast('设置已恢复默认');
   }
   function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
@@ -239,12 +245,13 @@
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
     node.classList.toggle('terminal-window',id==='terminal');
+    window.AincSystemMonitor?.markOpen(id);
     renderApp(id);focusWindow(id);window.AincApps?.recordOpen(id);window.AincShell?.recordOpen(id);
     if(options.project)selectProject(options.project);
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
   }
-  function closeWindow(id){const w=windows.get(id);if(!w)return;w.node.remove();windows.delete(id);syncDock();saveSession();}
+  function closeWindow(id){const w=windows.get(id);if(!w)return;if(id==='taskmanager')window.AincSystemMonitor?.onClose();window.AincSystemMonitor?.markClose(id);w.node.remove();windows.delete(id);syncDock();saveSession();}
   function minimizeWindow(id){
     const w=windows.get(id);if(!w)return;
     w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
@@ -401,9 +408,10 @@
     }
   }
   window.addEventListener('resize',adaptWindows,{passive:true});
-  function renderApp(id) {const w=windows.get(id);if(!w)return;const content=$('.window-content',w.node);
+  function renderApp(id) {const w=windows.get(id);if(!w)return;const content=$('.window-content',w.node),started=performance.now();
     const renderer={projects:renderProjects,stack:renderStack,about:renderAbout,terminal:renderTerminal,contact:renderContact,settings:renderSettings}[id];
-    if(window.AincWorkspace&&['files','notes','activity'].includes(id)){
+    if(id==='taskmanager'&&window.AincSystemMonitor){content.innerHTML=window.AincSystemMonitor.render();window.AincSystemMonitor.onRender()}
+    else if(window.AincWorkspace&&['files','notes','activity'].includes(id)){
       content.innerHTML=window.AincWorkspace.render(id);
       window.AincWorkspace.afterOpen(id);
     }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();window.AincSettings.onRender?.(content);}
@@ -411,6 +419,7 @@
     else if(window.AincApps&&['calculator','tasks','clock','apps'].includes(id)){
       content.innerHTML=window.AincApps.render(id);
     }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
+    window.AincSystemMonitor?.recordRender(id,performance.now()-started);
   }
 
   // Three real CSS-driven motion states; this is a concept UI, not a recording of the remote product.
@@ -568,6 +577,12 @@
     arrange:arrangeWindows,
     refresh:()=>renderApp('settings'),
     toast:toast
+  });
+  if(window.AincSystemMonitor)window.AincSystemMonitor.attach({
+    open:id=>openWindow(id),focus:id=>focusWindow(id),minimize:id=>minimizeWindow(id),close:id=>closeWindow(id),
+    apps:()=>Object.entries(appInfo).map(([id,x])=>({id,...x})),
+    windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
+    prefs:()=>({...state}),set:setPreference,toast:toast
   });
   if(window.AincShell)window.AincShell.attach({
     open:(id)=>openWindow(id),focus:(id)=>focusWindow(id),
