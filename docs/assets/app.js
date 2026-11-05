@@ -113,7 +113,7 @@
   }
   function clampValue(v,min,max){return Math.max(min,Math.min(Math.max(min,max),v));}
   function saveWindow(id){
-    const w=windows.get(id);if(!w||w.maximized||isMobile())return;
+    const w=windows.get(id);if(!w||w.maximized||isMobile()||!state.rememberWindows)return;
     const n=w.node;
     w.position={x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,w:n.offsetWidth,h:n.offsetHeight};
     write('win_'+id,JSON.stringify(w.position));
@@ -126,7 +126,7 @@
     const maxY=Math.max(b.top,b.height-h-b.bottom);
     const defaultX=id==='projects'?maxX:clampValue(Math.round(b.width*.21)+(n%4)*35,b.inset,maxX);
     const defaultY=clampValue(id==='projects'?42:48+(n%4)*27,b.top,maxY);
-    const saved=read('win_'+id,'');
+    const saved=state.rememberWindows?read('win_'+id,''):'';
     if(saved&&!isMobile()){
       try{
         const p=JSON.parse(saved);
@@ -254,7 +254,13 @@
       bar.removeEventListener('pointermove',move);bar.removeEventListener('pointerup',done);
       bar.removeEventListener('pointercancel',done);bar.classList.remove('dragging');
       try{bar.releasePointerCapture(event.pointerId)}catch{}
-      if(moved)saveWindow(id);
+      if(moved){
+        saveWindow(id);
+        const b=workBounds(),x=parseFloat(node.style.left)||0,left=x<=b.inset+18,right=x+node.offsetWidth>=b.width-b.inset-18;
+        if(state.snap&&(left||right)&&node.offsetWidth<b.width*.68){
+          focusWindow(id);snapWindow(left?'left':'right');
+        }
+      }
     }
     bar.addEventListener('pointermove',move);bar.addEventListener('pointerup',done);bar.addEventListener('pointercancel',done);
   }
@@ -313,7 +319,8 @@
     if(window.AincWorkspace&&['files','notes','activity'].includes(id)){
       content.innerHTML=window.AincWorkspace.render(id);
       window.AincWorkspace.afterOpen(id);
-    }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
+    }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();}
+    else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
   }
 
   // Three real CSS-driven motion states; this is a concept UI, not a recording of the remote product.
@@ -449,6 +456,15 @@
     })),
     toast: toast
   });
+  if(window.AincSettings)window.AincSettings.attach({
+    prefs:()=>({...state}),
+    set:setPreference,
+    resetPrefs:resetPreferences,
+    resetLayout:resetLayout,
+    arrange:arrangeWindows,
+    refresh:()=>renderApp('settings'),
+    toast:toast
+  });
   // Ambient animations respond to pointer and accessibility preferences.
   let tracking=false;document.addEventListener('pointermove',e=>{
     if(tracking||!state.motion)return;tracking=true;
@@ -470,8 +486,8 @@
     else{charIndex=Math.max(0,charIndex-1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===0){removing=false;lineIndex=(lineIndex+1)%typeLines.length;setTimeout(typeLoop,400);return;}}
     setTimeout(typeLoop,removing?38:78);
   }
-  function updateClock(){const t=new Date();$('#menuClock').textContent=t.toLocaleTimeString('en-GB',{hour:'2-digit',minute:'2-digit'});}
+  function updateClock(){const t=new Date();$('#menuClock').textContent=t.toLocaleTimeString(state.clockMode==='12'?'en-US':'en-GB',{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
   applySettings();typeLoop();updateClock();setInterval(updateClock,30_000);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
-  if(!isMobile())openWindow('projects',{announce:false,focusInput:false});
+  if(!isMobile()&&state.autoOpen)openWindow('projects',{announce:false,focusInput:false});
 })();
