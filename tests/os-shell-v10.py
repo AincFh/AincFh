@@ -107,6 +107,15 @@ def run():
             page.locator('#app-settings [data-sp-language="auto"]').click()
             assert page.evaluate("AincI18n.locale")==locale
             assert page.evaluate("AincI18n.mode")=="auto"
+            # Restart must actually reload the browser desktop, not just draw a spinner.
+            page.locator('#osTopPower').click()
+            page.locator('#osPowerPopup [data-shell-power="restart"]').click()
+            expect(page.locator('#osPowerConfirm')).to_be_visible()
+            with page.expect_navigation(wait_until="load"):
+                page.locator('#osPowerConfirm [data-shell-action="confirm-power"]').click()
+            page.wait_for_function("Boolean(window.AincShell && AincShell.state.power==='on')")
+            assert page.evaluate("sessionStorage.getItem('aincfh_shell_last_boot')")=="restart"
+            no_scroll(page)
             assert not errors,(locale,errors)
             print("PASS OS v10 Shell "+locale+": Start, Dock, power, language, no scroll; JS errors=0")
             context.close()
@@ -120,7 +129,7 @@ def run():
         expect(page.locator('#osStartPanel')).to_be_visible()
         assert page.locator('#osStartPanel').bounding_box()['width']<=390
         page.screenshot(path=str(OUT / 'start-mobile.png'),full_page=True)
-        page.locator('#osStartPanel [data-shell-app="files"]').click()
+        page.locator('#osStartPanel .os-start-grid [data-shell-app="files"]').click()
         expect(page.locator('#app-files')).to_be_visible()
         page.locator('#osTopPower').click()
         page.locator('#osPowerPopup [data-shell-power="sleep"]').click()
