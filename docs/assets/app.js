@@ -34,7 +34,7 @@
     contact:{label:'CONTACT / LINKS',name:'Contact',icon:'mail',width:495,height:485},
     settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:470,height:555}
   };
-  let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all';
+  let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
     theme: ['dark','light'].includes(read('theme','dark')) ? read('theme','dark') : 'dark',
     accent: ['amber','violet','cyan'].includes(read('accent','amber')) ? read('accent','amber') : 'amber',
@@ -120,12 +120,27 @@
     const renderer={projects:renderProjects,stack:renderStack,about:renderAbout,terminal:renderTerminal,contact:renderContact,settings:renderSettings}[id];
     content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);
   }
+
+  // Three real CSS-driven motion states; this is a concept UI, not a recording of the remote product.
+  function renderMotionPreview(p) {
+    const brand = escapeHTML(p.id.toUpperCase());
+    const title = escapeHTML(p.title);
+    const chips = p.tags.slice(0,3).map(t => '<span>' + escapeHTML(t) + '</span>').join('');
+    return '<div class="project-canvas motion-preview ' + (previewPaused ? 'preview-paused' : '') + '" data-art="' + escapeHTML(p.art) + '" role="group" aria-label="' + title + ' 动态概念界面预览">' +
+      '<div class="preview-toolbar"><span><i class="preview-live"></i> MOTION CONCEPT / ' + brand + '</span><button type="button" data-preview-pause aria-label="' + (previewPaused ? '继续播放动态演示' : '暂停动态演示') + '" aria-pressed="' + previewPaused + '">' + (previewPaused ? '▶ PLAY' : 'Ⅱ PAUSE') + '</button></div>' +
+      '<div class="preview-frame"><div class="preview-frame-top"><i></i><i></i><i></i><span>AINCFH / ' + brand + '</span><b>● ACTIVE</b></div>' +
+        '<div class="preview-scene preview-scene-a" aria-hidden="true"><small>01 / DESIGN</small><strong>' + title + '</strong><span class="preview-sweep"></span><div class="preview-lines"><i></i><i></i><i></i></div><div class="preview-chips">' + chips + '</div></div>' +
+        '<div class="preview-scene preview-scene-b" aria-hidden="true"><small>02 / BUILD PIPELINE</small><strong>Compiling experiences.</strong><div class="preview-meter"><span></span></div><div class="preview-flow"><span>DESIGN</span><em>→</em><span>CODE</span><em>→</em><span>SHIP</span></div></div>' +
+        '<div class="preview-scene preview-scene-c" aria-hidden="true"><small>03 / SYSTEM LOG</small><div class="preview-log"><span>&gt; initializing ' + brand.toLowerCase() + '…</span><span>&gt; loading modules… [ok]</span><span>&gt; runtime ready <b>✓</b></span></div><i class="preview-caret"></i></div>' +
+      '</div><div class="preview-timeline" aria-hidden="true"><span></span></div><span class="preview-pointer" aria-hidden="true">↗</span></div>';
+  }
+
   function renderProjects(){
     if(!projects.some(p=>p.id===selectedProject))selectedProject='field';const p=projects.find(p=>p.id===selectedProject),idx=projects.indexOf(p);
     return `<div class="win-eyebrow">SELECTED WORK / PROJECTS</div><div class="project-chooser">${projects.map((p,i)=>`<button class="project-choice ${p.id===selectedProject?'active':''}" data-select-project="${p.id}" aria-pressed="${p.id===selectedProject}">${String(i+1).padStart(2,'0')} / ${escapeHTML(p.label)}</button>`).join('')}</div>
     <div class="project-summary"><div><span class="project-label">${escapeHTML(p.category)}</span><h3>${escapeHTML(p.title)}</h3></div><span class="project-no">${String(idx+1).padStart(2,'0')}</span></div>
     <p class="project-description">${escapeHTML(p.description)}</p>
-    <div class="project-canvas" data-art="${p.art}" aria-label="${escapeHTML(p.title)} 概念界面模型"><div class="project-mini"><div class="project-mini-head"><i></i><i></i><i></i><span>AINCFH / ${escapeHTML(p.id.toUpperCase())}</span></div><div class="mock-body"><div class="mock-main"><span class="mock-line"></span><span class="mock-line l2"></span><span class="mock-line l3"></span><div class="mock-boxes"><span></span><span></span><span></span></div></div><div class="mock-diagram">${escapeHTML(p.mark)}</div></div></div></div>
+    ${renderMotionPreview(p)}
     <div class="project-tags">${p.tags.map(tag=>`<span>${escapeHTML(tag)}</span>`).join('')}</div>
     <div class="project-foot"><a class="project-external" href="${p.url}" target="_blank" rel="noopener noreferrer">${escapeHTML(p.linkText)} ${ICON('link')}</a><div class="project-next"><button class="small-arrow" data-next-project="-1" aria-label="上一个项目" title="上一个项目">←</button><button class="small-arrow" data-next-project="1" aria-label="下一个项目" title="下一个项目">→</button></div></div>`;
   }
@@ -169,6 +184,7 @@
     if(control.matches('[data-home]')){showDesktop();return;}
     if(control.matches('[data-win-action]')){const parent=control.closest('.os-window');if(!parent)return;const id=parent.id.slice(4);const action=control.dataset.winAction;if(action==='close')closeWindow(id);if(action==='minimize')minimizeWindow(id);if(action==='maximize')toggleMax(id);return;}
     if(control.matches('[data-toggle-theme]')){setTheme(state.theme==='dark'?'light':'dark');return;}
+    if(control.matches('[data-preview-pause]')){previewPaused=!previewPaused;write('preview_paused',previewPaused?'true':'false');renderApp('projects');toast(previewPaused?'概念演示已暂停':'概念演示已恢复');return;}
     if(control.matches('[data-select-project]')){selectProject(control.dataset.selectProject);return;}
     if(control.matches('[data-next-project]')){nextProject(Number(control.dataset.nextProject));return;}
     if(control.matches('[data-tech-filter]')){selectedFilter=control.dataset.techFilter;const first=tech.find(t=>selectedFilter==='all'||t.kind===selectedFilter);if(first)selectedTech=first.name;renderApp('stack');return;}
