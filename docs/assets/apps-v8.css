@@ -1,0 +1,132 @@
+/* AincFh OS Utility Suite: polished calculator, Tasks, Clock and App Center. */
+#app-calculator .window-content,#app-tasks .window-content,#app-clock .window-content,#app-apps .window-content{padding:0!important;overflow:auto!important}
+.su-calc,.su-tasks,.su-clock,.su-catalog{padding:clamp(17px,2.4vw,28px);color:var(--ink);min-height:100%;max-height:100%;display:flex;flex-direction:column;gap:15px}
+.su-head{display:grid;gap:4px;flex:none}
+.su-head h2{font-size:clamp(25px,2.9vw,33px);line-height:1.1;letter-spacing:-.045em;margin:4px 0;font-weight:820}
+.su-head h2 span{color:var(--hot)}
+.su-head p{font-size:10px;color:var(--sub);line-height:1.7;max-width:580px;margin:2px 0}
+.su-subheading{font:800 9px/1.5 ui-monospace,Consolas,monospace;letter-spacing:1.1px;color:var(--muted);display:flex;justify-content:space-between;align-items:center;gap:8px}
+.su-subheading button{font-size:10px;color:var(--hot);letter-spacing:0}
+.su-muted{font-size:10px;line-height:1.8;color:var(--muted);margin:8px 0}
+.su-calc{gap:12px}
+.su-calcshell{border:1px solid var(--line);border-radius:11px;background:var(--panel2);padding:11px;box-shadow:inset 0 1px rgba(255,255,255,.025)}
+.su-calc-display{min-height:94px;display:flex;flex-direction:column;gap:4px;align-items:stretch;justify-content:center;text-align:right;padding:11px 13px 8px;border:1px solid var(--line2);background:var(--soft);border-radius:7px;margin-bottom:10px}
+.su-calc-display>span{font:750 8px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:1.2px;text-align:left}
+.su-calc-display input{font:500 19px/1.4 ui-monospace,Consolas,monospace;color:var(--ink);background:transparent;border:0;outline:0;text-align:right;min-width:0}
+.su-calc-display input:focus{outline:none;color:var(--hot)}
+.su-calc-display output{min-height:32px;font:760 28px/1.15 ui-monospace,Consolas,monospace;letter-spacing:-.055em;color:var(--ink);overflow-wrap:anywhere}
+.su-calc-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.su-calc-grid button{height:43px;border:1px solid var(--line);background:var(--soft);border-radius:5px;color:var(--ink);font-size:15px;font-weight:700;transition:background .16s,transform .13s}
+.su-calc-grid button:hover{background:var(--panel3);border-color:var(--hot)}
+.su-calc-grid button:active{transform:scale(.955)}
+.su-calc-grid button.su-calc-op{color:var(--hot);font-weight:830}
+.su-calc-grid button.su-calc-equals{color:#251722;background:var(--hot);border-color:var(--hot);font-weight:850}
+.su-calc-grid button:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.su-calc-history{margin-top:2px;min-height:100px;overflow:auto;flex:1}
+.su-calc-history>button{display:flex;align-items:center;justify-content:space-between;gap:12px;width:100%;padding:8px 10px;border-bottom:1px solid var(--line2);font:11px ui-monospace,Consolas,monospace;color:var(--sub);text-align:left}
+.su-calc-history>button strong{color:var(--hot);font-weight:780}
+.su-calc-history>button:hover{background:var(--soft)}
+.su-task-count{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}
+.su-task-count>div{padding:13px 16px;border:1px solid var(--line);border-top:2px solid var(--hot);background:var(--soft);display:grid;gap:7px}
+.su-task-count strong{font-size:25px;letter-spacing:-.06em}
+.su-task-count span{font:720 8px ui-monospace,Consolas,monospace;letter-spacing:1px;color:var(--muted)}
+.su-task-form{display:grid;grid-template-columns:minmax(130px,1fr) 135px 95px auto;gap:7px;align-items:end;padding:12px;border:1px solid var(--line);background:var(--panel2);border-radius:8px}
+.su-task-form label{display:grid;gap:7px;min-width:0}
+.su-task-form label span{font:750 8px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.9px}
+.su-task-form input,.su-task-form select{min-width:0;height:35px;width:100%;color:var(--ink);background:var(--panel);border:1px solid var(--line);border-radius:4px;padding:0 9px;outline:0;font-size:11px;color-scheme:inherit}
+.su-task-form input:focus,.su-task-form select:focus{border-color:var(--hot)}
+.su-task-form button{height:35px;padding:0 13px;border:1px solid var(--hot);background:var(--hot);font:800 9px ui-monospace,Consolas,monospace;color:#221820;white-space:nowrap;border-radius:4px}
+.su-task-form button:hover{filter:brightness(1.07)}
+.su-task-filters{display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--line);padding-bottom:9px;gap:8px}
+.su-task-filters>div{display:flex;gap:6px}
+.su-task-filters button{font-size:10px;color:var(--muted);padding:6px 9px;border-radius:4px;border:1px solid transparent}
+.su-task-filters button[aria-pressed="true"]{color:var(--hot);border-color:var(--line);background:var(--soft)}
+.su-task-filters button:hover{color:var(--ink)}
+.su-task-list{flex:1;min-height:100px;overflow:auto;scrollbar-width:thin}
+.su-task-row{display:flex;gap:10px;align-items:center;padding:12px 9px;min-height:61px;border:1px solid transparent;border-bottom-color:var(--line2);transition:background .15s}
+.su-task-row:hover{background:var(--soft)}
+.su-task-check{height:21px;width:21px;flex:0 0 21px;border:1px solid var(--line);background:var(--soft);border-radius:6px;color:#171520;font-size:13px;font-weight:900;display:grid;place-items:center}
+.su-task-check[aria-pressed="true"]{background:var(--hot);border-color:var(--hot)}
+.su-task-info{min-width:0;flex:1;display:grid;gap:6px}
+.su-task-info strong{font-size:11px;font-weight:680;overflow-wrap:anywhere}
+.su-task-row.is-done .su-task-info strong{opacity:.5;text-decoration:line-through}
+.su-task-info>span{font:700 9px ui-monospace,Consolas,monospace;letter-spacing:.45px;color:var(--muted)}
+.su-task-info i{font-style:normal;color:#b6a3b7;margin-right:7px}
+.su-task-info i[data-priority="high"]{color:#f09480}
+.su-task-info i[data-priority="low"]{color:#6fc9c2}
+.su-task-row>button:not(.su-task-check){font-size:10px;color:var(--sub);padding:6px 8px;border:1px solid var(--line);border-radius:4px}
+.su-task-row>button:hover{color:var(--hot);border-color:var(--hot)}
+.su-empty{min-height:150px;display:grid;place-content:center;gap:8px;text-align:center;color:var(--sub);font-size:11px}
+.su-empty p{max-width:320px;line-height:1.6;font-size:10px}
+.su-clock-top{background:linear-gradient(110deg,rgba(255,159,67,.12),rgba(150,100,210,.1));border:1px solid var(--line);border-left:3px solid var(--hot);padding:18px 20px;display:flex;flex-direction:column;gap:8px}
+.su-clock-top small{font:760 9px ui-monospace,Consolas,monospace;letter-spacing:1.2px;color:var(--hot)}
+.su-clock-top strong{font-size:clamp(18px,2.5vw,29px);line-height:1.3;letter-spacing:-.035em}
+.su-clock-top span{font-size:10px;color:var(--sub)}
+.su-clock-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px;flex:1;min-height:0}
+.su-clock-card{border:1px solid var(--line);border-radius:8px;background:var(--panel2);padding:18px 17px;display:flex;flex-direction:column;gap:17px}
+.su-clock-counter{font:780 clamp(22px,2.8vw,35px)/1.2 ui-monospace,Consolas,monospace;color:var(--ink);letter-spacing:-.055em;display:block;white-space:nowrap}
+.su-clock-presets,.su-clock-actions{display:flex;flex-wrap:wrap;gap:6px}
+.su-clock-presets button{border:1px solid var(--line);font-size:10px;color:var(--text);padding:7px 8px;border-radius:4px;background:var(--soft)}
+.su-clock-presets button:hover{border-color:var(--hot)}
+.su-clock-actions{margin-top:auto}
+.su-clock-actions button{padding:10px 12px;border:1px solid var(--line);color:var(--text);border-radius:4px;font-size:10px;font-weight:790;background:var(--soft)}
+.su-clock-actions button.primary{background:var(--hot);border-color:var(--hot);color:#211622}
+.su-app-count{font:730 9px ui-monospace,Consolas,monospace;letter-spacing:1.15px;color:var(--hot);border-bottom:1px solid var(--line);padding-bottom:13px}
+.su-app-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;overflow:auto;min-height:0;flex:1;align-content:start}
+.su-app-tile{min-width:0;min-height:141px;display:flex;align-items:flex-start;flex-direction:column;gap:8px;text-align:left;background:var(--panel2);border:1px solid var(--line);padding:15px;border-radius:7px;color:var(--text);transition:transform .18s,border-color .2s,box-shadow .2s}
+.su-app-tile:hover{transform:translateY(-3px);border-color:rgba(255,159,67,.65);box-shadow:0 14px 36px rgba(0,0,0,.13)}
+.su-app-symbol{height:38px;width:38px;border:1px solid rgba(255,159,67,.28);background:rgba(255,159,67,.095);color:var(--hot);display:grid;place-items:center;border-radius:10px}
+.su-app-symbol svg{height:21px;width:21px;fill:none;stroke:currentColor;stroke-width:1.8}
+.su-app-tile strong{font-size:13px;color:var(--ink)}
+.su-app-tile small{font:740 8px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.6px;line-height:1.5;overflow-wrap:anywhere}
+.su-app-open{margin-top:auto;align-self:flex-end;font:820 8px ui-monospace,Consolas,monospace;color:var(--hot);letter-spacing:1px}
+.su-catalog button:focus-visible,.su-clock button:focus-visible,.su-tasks button:focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+.fs-view-switch{display:flex;align-items:center;gap:4px;border:1px solid var(--line);border-radius:5px;padding:3px}
+.fs-view-switch button{padding:5px 9px;border-radius:3px;color:var(--muted);font-size:9px;font-weight:740}
+.fs-view-switch button[aria-pressed="true"]{background:var(--hot);color:#271b24}
+.fs-edit-surface{flex:1;min-height:80px;display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);border-radius:5px;overflow:hidden}
+.fs-edit-surface textarea{border:0;outline:0;resize:none;padding:14px!important;min-width:0;width:100%;height:100%;background:rgba(108,75,122,.035)}
+.fs-md-preview{min-width:0;min-height:0;overflow:auto;padding:14px 18px;font-size:11.5px;line-height:1.85;color:var(--text);overflow-wrap:anywhere;border-left:1px solid var(--line);scrollbar-width:thin}
+.fs-edit-surface[data-view="edit"]{grid-template-columns:1fr}
+.fs-edit-surface[data-view="edit"] .fs-md-preview{display:none}
+.fs-edit-surface[data-view="preview"]{grid-template-columns:1fr}
+.fs-edit-surface[data-view="preview"] textarea{display:none}
+.fs-md-preview h2,.fs-md-preview h3,.fs-md-preview h4{margin:10px 0 8px;color:var(--ink);font-weight:800}
+.fs-md-preview h2{font-size:21px}.fs-md-preview h3{font-size:16px}.fs-md-preview h4{font-size:13px}
+.fs-md-preview p{margin:4px 0;color:var(--text)}
+.fs-md-preview code{font:11px ui-monospace,Consolas,monospace;color:var(--hot);background:var(--soft);padding:2px 4px}
+.fs-md-preview pre{white-space:pre-wrap;font:11px/1.7 ui-monospace,Consolas,monospace;padding:12px;background:var(--panel2);border:1px solid var(--line);border-radius:4px;overflow-x:auto}
+.fs-md-preview pre code{background:none;padding:0;color:var(--text)}
+.fs-md-preview strong{color:var(--ink)}
+.fs-md-item{display:flex;align-items:flex-start;gap:9px;margin:3px 0}
+.fs-md-item span{color:var(--hot);font-weight:780}
+.fs-md-space{height:9px}
+.fs-md-preview hr{border:0;border-top:1px solid var(--line);margin:12px 0}
+.fs-dialog select{height:39px;width:100%;padding:0 10px;border-radius:4px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none}
+.fs-dialog select:focus{border-color:var(--hot)}
+@media(min-width:1400px){.su-app-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:700px){
+ .su-tasks,.su-calc,.su-clock,.su-catalog{padding:13px;gap:11px}
+ .su-task-form{grid-template-columns:minmax(0,1fr) minmax(88px,.5fr);gap:9px}
+ .su-task-form label:first-child{grid-column:1/-1}
+ .su-task-count strong{font-size:20px}
+ .su-app-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+ .su-app-tile{min-height:115px;padding:11px}
+ .su-calc-grid button{height:40px}
+ .su-clock-grid{grid-template-columns:1fr}
+ .su-clock-card{gap:12px}
+ .fs-notesbar #fsSaveStatus{display:none}
+ .fs-view-switch button{padding:4px}
+}
+@media(max-width:840px){
+ .dock-app[data-dock="terminal"],.dock-app[data-dock="activity"],.dock-app[data-dock="calculator"],.dock-app[data-dock="clock"]{display:none}
+ .dock-app[data-dock="apps"]{display:grid}
+}
+@media(max-width:390px){
+ .dock-app[data-dock="projects"]{display:none}
+ .su-tasks,.su-calc,.su-clock,.su-catalog{padding:10px}
+ .su-task-form{padding:9px}
+ .su-task-info strong{font-size:10px}
+ .su-clock-top strong{font-size:17px}
+ .su-clock-counter{font-size:28px}
+}
