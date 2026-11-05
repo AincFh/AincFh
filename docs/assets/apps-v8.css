@@ -104,7 +104,8 @@
 .fs-md-preview hr{border:0;border-top:1px solid var(--line);margin:12px 0}
 .fs-dialog select{height:39px;width:100%;padding:0 10px;border-radius:4px;border:1px solid var(--line);background:var(--panel2);color:var(--ink);outline:none}
 .fs-dialog select:focus{border-color:var(--hot)}
-@media(min-width:1400px){.su-app-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@container (min-width:850px){.su-app-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@container (max-width:610px){.su-app-grid{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media(max-width:700px){
  .su-tasks,.su-calc,.su-clock,.su-catalog{padding:13px;gap:11px}
  .su-task-form{grid-template-columns:minmax(0,1fr) minmax(88px,.5fr);gap:9px}
@@ -129,4 +130,28 @@
  .su-task-info strong{font-size:10px}
  .su-clock-top strong{font-size:17px}
  .su-clock-counter{font-size:28px}
+}
+
+
+/* App Center layout is based on WINDOW container width, not browser viewport. */
+.su-catalog{container-type:inline-size}
+.su-app-toolbar{display:grid;gap:10px;flex:0 0 auto}
+.su-app-toolbar>label{height:39px;display:flex;align-items:center;gap:10px;padding:0 11px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--muted)}
+.su-app-toolbar>label svg{width:17px;height:17px;fill:none;stroke:currentColor;stroke-width:1.8;flex-shrink:0}
+.su-app-toolbar>label input{flex:1;min-width:0;background:transparent;outline:0;border:0;color:var(--ink);font-size:12px}
+.su-app-filters{display:flex;flex-wrap:wrap;gap:6px}
+.su-app-filters button{font-size:10px;color:var(--sub);padding:7px 10px;border:1px solid var(--line2);border-radius:4px}
+.su-app-filters button:hover{color:var(--ink);border-color:var(--line)}
+.su-app-filters button[aria-pressed="true"]{color:var(--hot);border-color:var(--hot);background:rgba(255,159,67,.1)}
+.su-app-card{min-width:0;min-height:149px;position:relative}
+.su-app-card .su-app-tile{width:100%;height:100%;padding:17px 14px;min-height:149px}
+.su-app-pin{position:absolute;right:10px;top:10px;width:25px;height:25px;display:grid;place-items:center;border:1px solid var(--line);background:var(--panel);border-radius:5px;color:var(--muted);font-size:17px;line-height:1;cursor:pointer}
+.su-app-pin:hover,.su-app-pin.is-pinned{color:var(--hot);border-color:var(--hot)}
+.su-app-empty{grid-column:1/-1;display:flex;align-items:center;justify-content:center;min-height:160px;border:1px dashed var(--line);color:var(--muted);font-size:11px}
+@media(max-width:700px){
+ .su-app-toolbar>label{height:34px}
+ .su-app-filters{gap:4px}
+ .su-app-filters button{padding:5px 7px;font-size:9px}
+ .su-app-card,.su-app-card .su-app-tile{min-height:122px}
+ .su-app-card .su-app-tile{padding:12px}
 }
