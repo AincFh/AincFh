@@ -262,6 +262,43 @@
     mkdir:function(name){return createFromTerminal(name,'folder')},
     touch:function(name){return createFromTerminal(name,'text')},
     history:function(){return store.events.slice(0,12).map(function(e){return e.when.slice(0,19).replace('T',' ')+' · '+e.text}).join('\n')},
+
+    storageStats:function(){return {documents:store.items.filter(function(x){return x.type==='text'&&isVisible(x)}).length,bytes:JSON.stringify(store).length,events:store.events.length}},
+    exportBackup:function(){
+      var payload={schema:'aincfh-workspace-v1',exported:now(),version:store.version,items:store.items,events:store.events};
+      download(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),'AincFh-OS-workspace-'+new Date().toISOString().slice(0,10)+'.json');
+      return true;
+    },
+    importBackup:function(raw){
+      try{
+        var value=JSON.parse(raw);
+        if(!value||value.schema!=='aincfh-workspace-v1'||value.version!==1||!Array.isArray(value.items)||!Array.isArray(value.events))throw Error('不支持的备份格式');
+        if(value.items.length>MAX_FILES||raw.length>MAX_BYTES+130000)throw Error('备份内容超出容量限制');
+        var seen=new Set();
+        for(var i of value.items){
+          if(!i||typeof i.id!=='string'||i.id.length>120||seen.has(i.id))throw Error('文件 ID 无效或重复');
+          seen.add(i.id);
+          if(!['text','folder','link'].includes(i.type)||typeof i.name!=='string'||i.name.length>80||!i.name||typeof i.parent!=='string'||typeof i.body!=='string'||i.body.length>100000||typeof i.deleted!=='boolean')throw Error('文件结构无效');
+          if(i.type==='link'&&!/^https?:\/\//.test(String(i.url||'')))throw Error('链接格式无效');
+        }
+        for(var j of value.items){
+          if(j.parent!=='root'&&!seen.has(j.parent))throw Error('目录引用不存在');
+          var visited=new Set([j.id]),current=j.parent;
+          while(current!=='root'){
+            if(visited.has(current))throw Error('目录存在循环引用');
+            visited.add(current);var parent=value.items.find(function(x){return x.id===current});if(!parent||parent.type!=='folder')throw Error('父目录无效');
+            current=parent.parent;
+          }
+        }
+        var next={version:1,items:value.items,events:value.events.filter(function(x){return x&&typeof x.text==='string'&&typeof x.when==='string'}).slice(0,70)};
+        save(next);ui.folder='root';ui.selected=null;ui.notesId=null;ui.search='';ui.trash=false;
+        refresh();rerender('notes');report('备份已恢复到当前浏览器');return true;
+      }catch(e){report(e.message||'备份不合法');return false}
+    },
+    resetData:function(){
+      try{save(defaults());ui.folder='root';ui.selected=null;ui.search='';ui.trash=false;ui.notesId='ideas';refresh();rerender('notes');report('本地工作区已重置');return true}
+      catch(e){report('重置失败：'+e.message);return false}
+    },
     notify:activity,
     desktopMenu:function(x,y){
       var old=document.getElementById('osContextMenu');if(old)old.remove();
