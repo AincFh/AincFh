@@ -283,6 +283,54 @@ const Crows=[
 ];
 for(const x of Crows)C(...x);
 
+const shellControlTranslations=[
+['Dock style','Dock 样式','Dock 樣式','Dock のスタイル'],
+['Floating Dock','悬浮 Dock','懸浮 Dock','フローティング Dock'],
+['Taskbar','任务栏','工作列','タスクバー'],
+['Dock position','Dock 位置','Dock 位置','Dock の位置'],
+['Bottom','底部','底部','下'],
+['Left','左侧','左側','左'],
+['Right','右侧','右側','右'],
+['Icon size','图标大小','圖示大小','アイコンの大きさ'],
+['Small','小','小','小'],
+['Medium','中','中','中'],
+['Large','大','大','大'],
+['More space','节省空间','節省空間','省スペース'],
+['Balanced layout','平衡布局','均衡配置','バランスのよい配置'],
+['Easier targets','更容易点击','更容易點擊','押しやすいサイズ'],
+['Dock magnification','Dock 图标放大','Dock 圖示放大','Dock の拡大表示'],
+['Automatically hide Dock','自动隐藏 Dock','自動隱藏 Dock','Dock を自動的に隠す'],
+['Start menu layout','开始菜单布局','開始功能表配置','スタートメニューの表示'],
+['Grid','网格','網格','グリッド'],
+['List','列表','清單','リスト'],
+['App cards','应用卡片','應用程式卡片','アプリカード'],
+['Compact app rows','紧凑行','緊湊列','コンパクト表示'],
+['macOS-style floating shelf','macOS 风格悬浮栏','macOS 風格懸浮列','macOS 風のフローティング Dock'],
+['Windows-style full-width taskbar','Windows 风格完整任务栏','Windows 風格完整工作列','Windows 風のタスクバー'],
+['Below the desktop','桌面底部','桌面底部','デスクトップの下部'],
+['Vertical Dock','纵向 Dock','縱向 Dock','縦型 Dock'],
+['Hover magnifies nearby icons. Automatically disabled when reduced motion is active.','悬停时放大邻近图标，开启减少动态效果时自动停用。','游標停留時放大鄰近圖示，啟用減少動態效果時自動關閉。','ポインター付近のアイコンを拡大します。動きを減らす設定では無効になります。'],
+['Move the pointer to the screen edge to reveal the Dock.','将鼠标移至屏幕边缘即可显示 Dock。','將滑鼠移至螢幕邊緣即可顯示 Dock。','画面の端にポインターを移動すると Dock を表示します。'],
+['Start menu','开始菜单','開始功能表','スタートメニュー'],
+['Lock screen','锁定桌面','鎖定桌面','画面をロック'],
+['Sleep','睡眠','睡眠','スリープ'],
+['Restart','重新启动','重新啟動','再起動'],
+['Shut down','关机','關機','シャットダウン'],
+['Power','电源','電源','電源'],
+['Open Start menu','打开开始菜单','開啟開始功能表','スタートメニューを開く'],
+['Start menu','开始菜单','開始功能表','スタートメニュー'],
+['Start','开始','開始','スタート'],
+['Next','下一步','下一步','次へ'],
+['Previous','上一步','上一步','前へ'],
+['Use arrow keys','使用方向键','使用方向鍵','矢印キーを使用'],
+['SYSTEM BOOT','系统启动','系統啟動','システム起動'],
+['DESIGN / ENGINEERING / CREATIVE SYSTEMS','设计 / 工程 / 创意系统','設計 / 工程 / 創意系統','デザイン / 開発 / クリエイティブ'],
+['INITIALIZING WORKSPACE...','正在初始化工作区…','正在初始化工作區…','ワークスペースを起動中…'],
+['AT FIELD // CREATIVE ENGINEERING','AT FIELD // 创意工程','AT FIELD // 創意工程','AT FIELD // クリエイティブ開発'],
+['TIPS / SHORTCUTS','提示 / 快捷键','提示 / 快速鍵','ヒント / ショートカット']
+];for(const t of shellControlTranslations)C(...t);
+
+
 const Zrows=[
 ['从一个界面，到一套完整系统。','From an interface to a complete desktop experience.','從一個介面，到一套完整系統。','ひとつの画面から、ひとつの完成された体験へ。'],
 ['Web 平台、Windows 工具、AI 工作流与值得打磨的交互体验。','Web platforms, Windows tools and thoughtful AI-driven interfaces.','Web 平台、Windows 工具、AI 工作流程與值得打磨的互動體驗。','Web プラットフォーム、Windows ツール、AI ワークフロー。'],
@@ -435,6 +483,7 @@ const Zrows=[
 ['打开笔记窗口','Open Notes','開啟筆記視窗','ノートを開く']
 ];
 for(const x of Zrows)Z(...x);
+[['电源','Power','電源','電源'],['锁定桌面','Lock screen','鎖定桌面','画面をロック'],['睡眠','Sleep','睡眠','スリープ'],['重新启动','Restart','重新啟動','再起動'],['关机','Shut down','關機','シャットダウン'],['开始菜单','Start menu','開始功能表','スタートメニュー'],['浏览器桌面','Browser desktop','瀏覽器桌面','ブラウザーデスクトップ']].forEach(t=>Z(...t));
 // Locale strings used by the language selector itself.
 const localeText={
   languageTitle:{'en-US':'Language & Region','zh-CN':'语言与地区','zh-TW':'語言與地區','ja-JP':'言語と地域'},
