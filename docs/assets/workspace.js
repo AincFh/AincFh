@@ -67,16 +67,74 @@
   function rootOf(i){return i.parent==='root'?'Home':(item(i.parent)||{}).name||'Workspace'}
   function icon(type){return type==='folder'?'folder':type==='link'?'link':type==='image'?'image':'code'}
   function symbol(type){return '<svg aria-hidden="true"><use href="#i-'+icon(type)+'"></use></svg>'}
-  var ui={folder:'root',selected:null,search:'',trash:false,sort:'name',modal:null,notesId:'ideas'};
-  function labels(){return {root:'Home',workspace:'Workspace',notes:'Notes',links:'Links'};}
+  var ui={folder:'root',selected:null,search:'',trash:false,view:'folder',sort:'name',modal:null,notesId:'ideas',history:['root'],historyIndex:0};
+  var NAV_KEY='aincfh_files_navigation_v14';
+  var NAV_LABELS={
+    'zh-CN':{home:'主页',desktop:'桌面',workspace:'工作区',notes:'笔记',links:'链接',recent:'最近使用',favorites:'收藏位置',places:'快捷访问',folders:'目录',library:'资源库',system:'系统',trash:'回收站',storage:'浏览器存储',loading:'正在读取…',unavailable:'不可获取',back:'后退',forward:'前进',up:'上一级',expand:'展开目录',collapse:'折叠目录',pin:'添加到收藏',unpin:'取消收藏',emptyFavorite:'尚未添加收藏',sidebar:'文件导航',inspector:'文件详情',visible:'展开侧栏',hide:'收起侧栏',search:'搜索文件',items:'项目',starred:'收藏项目',name:'名称',modified:'修改时间',type:'类型',sortName:'名称排序',sortRecent:'最近修改',quick:'常用位置',all:'全部文件',refresh:'刷新',details:'详情'},
+    'zh-TW':{home:'主頁',desktop:'桌面',workspace:'工作區',notes:'筆記',links:'連結',recent:'最近使用',favorites:'收藏位置',places:'快速存取',folders:'目錄',library:'資源庫',system:'系統',trash:'資源回收筒',storage:'瀏覽器儲存空間',loading:'正在讀取…',unavailable:'無法取得',back:'返回',forward:'前進',up:'上一層',expand:'展開目錄',collapse:'收合目錄',pin:'加入收藏',unpin:'取消收藏',emptyFavorite:'尚無收藏',sidebar:'檔案導覽',inspector:'檔案資訊',visible:'展開側欄',hide:'收起側欄',search:'搜尋檔案',items:'項目',starred:'收藏項目',name:'名稱',modified:'修改時間',type:'類型',sortName:'名稱排序',sortRecent:'最近修改',quick:'常用位置',all:'所有檔案',refresh:'重新整理',details:'詳細資訊'},
+    'en-US':{home:'Home',desktop:'Desktop',workspace:'Workspace',notes:'Notes',links:'Links',recent:'Recents',favorites:'Favorites',places:'Quick access',folders:'Folders',library:'Library',system:'System',trash:'Trash',storage:'Browser storage',loading:'Checking…',unavailable:'Unavailable',back:'Back',forward:'Forward',up:'Parent folder',expand:'Expand folder',collapse:'Collapse folder',pin:'Add to Favorites',unpin:'Remove Favorite',emptyFavorite:'No favorites yet',sidebar:'File navigation',inspector:'Inspector',visible:'Show sidebar',hide:'Hide sidebar',search:'Search files',items:'items',starred:'Starred items',name:'Name',modified:'Modified',type:'Type',sortName:'Sort by name',sortRecent:'Recently modified',quick:'Quick access',all:'All files',refresh:'Refresh',details:'Details'},
+    'ja-JP':{home:'ホーム',desktop:'デスクトップ',workspace:'ワークスペース',notes:'メモ',links:'リンク',recent:'最近使用した項目',favorites:'お気に入り',places:'クイックアクセス',folders:'フォルダー',library:'ライブラリ',system:'システム',trash:'ゴミ箱',storage:'ブラウザーストレージ',loading:'確認中…',unavailable:'取得できません',back:'戻る',forward:'進む',up:'上のフォルダー',expand:'フォルダーを展開',collapse:'フォルダーを閉じる',pin:'お気に入りに追加',unpin:'お気に入りから削除',emptyFavorite:'お気に入りはありません',sidebar:'ファイルナビゲーション',inspector:'詳細情報',visible:'サイドバーを表示',hide:'サイドバーを閉じる',search:'ファイルを検索',items:'件',starred:'お気に入り',name:'名前',modified:'更新日時',type:'種類',sortName:'名前で並べ替え',sortRecent:'更新順に並べ替え',quick:'クイックアクセス',all:'すべてのファイル',refresh:'更新',details:'詳細'}
+  };
+  function nt(k){return (NAV_LABELS[window.AincI18n?.locale||'en-US']||NAV_LABELS['en-US'])[k]||k}
+  var nav={favorites:['workspace','notes','links'],expanded:['workspace','notes','links','desktop'],sidebarWidth:218,hideSidebar:false};
+  try{
+    var navStored=JSON.parse(localStorage.getItem(NAV_KEY)||'null');
+    if(navStored&&typeof navStored==='object'){
+      if(Array.isArray(navStored.favorites))nav.favorites=navStored.favorites.filter(x=>typeof x==='string'&&x.length<121).slice(0,30);
+      if(Array.isArray(navStored.expanded))nav.expanded=navStored.expanded.filter(x=>typeof x==='string'&&x.length<121).slice(0,300);
+      if(Number.isFinite(navStored.sidebarWidth))nav.sidebarWidth=Math.max(186,Math.min(320,navStored.sidebarWidth));
+      nav.hideSidebar=navStored.hideSidebar===true;
+    }
+  }catch(e){}
+  function saveNav(){try{localStorage.setItem(NAV_KEY,JSON.stringify(nav))}catch(e){}}
+  function isFavorite(id){return nav.favorites.includes(id)}
+  function toggleFavorite(id){
+    var i=item(id);if(!i||!isVisible(i))return false;
+    nav.favorites=isFavorite(id)?nav.favorites.filter(x=>x!==id):nav.favorites.concat(id).slice(-30);
+    saveNav();rerender('files');return true;
+  }
+  function navigateFolder(id,fromHistory){
+    if(id!=='root'&&(!item(id)||item(id).type!=='folder'||!isVisible(item(id))))return false;
+    ui.folder=id;ui.view='folder';ui.trash=false;ui.search='';ui.selected=null;
+    if(!fromHistory){
+      ui.history=ui.history.slice(0,ui.historyIndex+1);
+      if(ui.history[ui.history.length-1]!==id){ui.history.push(id);if(ui.history.length>40)ui.history.shift()}
+      ui.historyIndex=ui.history.length-1;
+    }
+    rerender('files');return true;
+  }
+  function navigateHistory(delta){
+    var next=ui.historyIndex+delta;
+    if(next<0||next>=ui.history.length)return;
+    var id=ui.history[next];ui.historyIndex=next;
+    navigateFolder(id,true);
+  }
+  function navigateView(mode){
+    if(!['recent','favorites','trash'].includes(mode))return;
+    ui.view=mode;ui.trash=mode==='trash';ui.selected=null;ui.search='';rerender('files');
+  }
+  function ensureDesktopFolder(){
+    if(item('desktop')?.type==='folder'&&isVisible(item('desktop')))return true;
+    if(item('desktop'))return false;
+    var t=now();
+    return transact(function(next){next.items.push({id:'desktop',name:'Desktop',type:'folder',parent:'root',body:'',url:'',created:t,modified:t,deleted:false})},'Desktop directory added');
+  }
+  function navLabel(id){return ['root','desktop','workspace','notes','links'].includes(id)?nt(id):(item(id)?.name||id)}
   function getEntries(){var list=store.items.filter(function(i){
     if(ui.trash)return i.deleted;
     if(!isVisible(i))return false;
     if(ui.search)return (i.name+' '+(i.type==='text'?i.body:'')).toLowerCase().includes(ui.search.toLowerCase());
+    if(ui.view==='recent')return i.type!=='folder';
+    if(ui.view==='favorites')return isFavorite(i.id);
     return i.parent===ui.folder;
   });
-  return list.sort(function(a,b){if(a.type==='folder'&&b.type!=='folder')return-1;if(b.type==='folder'&&a.type!=='folder')return 1;
-    return ui.sort==='date'?b.modified.localeCompare(a.modified):a.name.localeCompare(b.name,'zh-CN')});
+  return list.sort(function(a,b){
+    if(ui.view==='recent')return b.modified.localeCompare(a.modified);
+    if(ui.view==='favorites')return nav.favorites.indexOf(a.id)-nav.favorites.indexOf(b.id);
+    if(a.type==='folder'&&b.type!=='folder')return-1;
+    if(b.type==='folder'&&a.type!=='folder')return 1;
+    return ui.sort==='date'?b.modified.localeCompare(a.modified):a.name.localeCompare(b.name,'zh-CN')
+  }).slice(0,ui.view==='recent'?75:800);
   }
   function prettyDate(s){try{return new Date(s).toLocaleDateString('zh-CN',{month:'short',day:'numeric'})}catch(e){return '--'}}
   function getPath(folder){var cur=folder,arr=[{id:'root',name:'Home'}],seen=new Set();
