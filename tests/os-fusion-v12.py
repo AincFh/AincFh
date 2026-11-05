@@ -16,6 +16,13 @@ def no_overflow(page):
     assert sizes["scrollWidth"] <= sizes["width"] + 1, sizes
     assert sizes["scrollHeight"] <= sizes["height"] + 1, sizes
 
+def open_settings(page,mobile):
+    if mobile:
+        page.locator('#osStartButton').click()
+        page.locator('#osStartPanel .os-start-grid [data-shell-app="settings"]').click()
+    else:
+        page.locator('[data-dock="settings"]').click()
+
 def main():
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True)
@@ -28,7 +35,7 @@ def main():
             page.goto(URL,wait_until="load")
             page.wait_for_function("Boolean(window.AincDesktopFusion && window.AincSettings && window.AincShell)")
             no_overflow(page)
-            page.locator('[data-dock="settings"]').click()
+            open_settings(page,mobile)
             page.locator('#app-settings [data-sp-section="fusion"]').click()
             expect(page.locator('#app-settings .fusion-preset-card')).to_have_count(4)
             expect(page.locator('#app-settings .fusion-wallpaper-choice')).to_have_count(5)
@@ -102,7 +109,7 @@ def main():
                 assert page.evaluate("AincDesktopFusion.active")==2
                 no_overflow(page)
             else:
-                page.locator('[data-dock="settings"]').click()
+                open_settings(page,mobile)
                 page.locator('#app-settings [data-sp-section="fusion"]').click()
                 page.locator('#app-settings [data-fusion-overview]').click()
                 expect(page.locator('#fusionOverview')).to_be_visible()
