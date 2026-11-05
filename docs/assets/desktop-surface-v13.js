@@ -50,6 +50,18 @@ function findCell(col=0,row=0,skip=null){
 function wItems(){return bridge?.files?.listItems?.()||[]}
 function render(){
  if(!layer||applying)return;
+ // Desktop is a real Files directory: every file/folder created there appears
+ // automatically without duplicating the document or its content in shortcuts.
+ const desktopItems=bridge?.files?.listDesktopItems?.()||[];
+ let added=false;
+ for(const item of desktopItems){
+  const id='file:'+item.id;
+  if(!data.records.some(x=>x.id===id)){
+   const cell=findCell(0,data.records.length);
+   data.records.push({id,...cell});added=true;
+  }
+ }
+ if(added)save();
  const items=wItems(),valid=new Set(items.map(x=>x.id)),ncols=cols(),nrows=rows();
  const rendered=data.records.filter(rec=>{
   if(rec.id.startsWith('file:')&&!valid.has(rec.id.slice(5)))return false;
