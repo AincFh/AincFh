@@ -160,7 +160,7 @@
       }
       const preferred=entries.find(x=>x.id===data.focused&&!x.minimized);
       const lastVisible=[...entries].reverse().find(x=>!x.minimized);
-      $('.os-window.focused',layer).forEach(n=>n.classList.remove('focused'));
+      $$('.os-window.focused',layer).forEach(n=>n.classList.remove('focused'));
       if(preferred||lastVisible)focusWindow((preferred||lastVisible).id);
       syncDock();
       return true;
