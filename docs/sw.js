@@ -3,7 +3,7 @@
    and are never copied into this cache, nor sent to the server.
  */
 'use strict';
-const VERSION='aincfh-os-shell-14.0.0',PREFIX='aincfh-os-shell-';
+const VERSION='aincfh-os-shell-14.2.0',PREFIX='aincfh-os-shell-';
 const CORE=[
  './',
  './index.html',
@@ -14,7 +14,7 @@ const CORE=[
  './assets/styles.css?v=motion-5',
  './assets/os-desktop-v5.css?v=5.0.6',
  './assets/workspace.css?v=9.3',
- './assets/files-explorer-v14.css?v=14.0',
+ './assets/files-explorer-v14.css?v=14.2',
  './assets/system-v7.css?v=8.1',
  './assets/apps-v8.css?v=8.1',
  './assets/paint-v9.css?v=9.3',
@@ -29,7 +29,7 @@ const CORE=[
  './assets/i18n-catalog-v10.js?v=10.0',
  './assets/i18n-runtime-v10.js?v=11.0',
  './assets/storage-v8.js?v=8.1',
- './assets/workspace.js?v=14.0',
+ './assets/workspace.js?v=14.2',
  './assets/settings-panel.js?v=13.2',
  './assets/apps-v8.js?v=8.1',
  './assets/paint-v9.js?v=9.3',
