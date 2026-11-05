@@ -130,7 +130,7 @@ def test():
                 expect(page.locator('#fsDialog')).to_be_visible()
                 page.locator('#fsDialog button[type="submit"]').click()
                 expect(page.locator('#app-files .fs-row').filter(has_text="Start Here copy.txt")).to_have_count(0)
-                page.locator('#app-files [data-fs-nav-view="trash"]').click()
+                page.locator('#app-files [data-fs-action="trash"]').click()
                 trashed=page.locator('#app-files .fs-row').filter(has_text="Start Here copy.txt")
                 expect(trashed).to_be_visible()
                 trashed.focus()
