@@ -81,7 +81,7 @@ def main():
         x=box["x"]+box["width"]/2;y=box["y"]+box["height"]/2
         page.mouse.move(x,y);page.mouse.down()
         page.mouse.move(x-110,y+4,steps=9);page.mouse.up()
-        page.wait_for_function("""col=>AincDesktopSurface.state.records.find(x=>x.id==='app:files').col!==col""",old["col"])
+        page.wait_for_function("""col=>AincDesktopSurface.state.records.find(x=>x.id==='app:files').col!==col""",arg=old["col"])
         new=page.evaluate("AincDesktopSurface.state.records.find(x=>x.id==='app:files')")
         assert new["col"]!=old["col"],(old,new)
         # Theme snapshots are complete, do not copy files, and apply atomically.
