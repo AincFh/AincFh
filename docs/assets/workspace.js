@@ -362,7 +362,7 @@
         },'Duplicated '+i.name))refresh();break}
       case 'download':if(i?.type==='image'){var l=document.createElement('a');l.href=i.body;l.download=i.name;document.body.append(l);l.click();l.remove();activity('Exported '+i.name)}else exportText(i);break;
       case 'open':if(!i)return;if(i.type==='folder'){navigateFolder(i.id)}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body,i.id);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
-      case 'trash':navigateView(ui.trash?'recent':'trash');break;
+      case 'trash':if(ui.trash)navigateFolder(ui.folder);else navigateView('trash');break;
       case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
       case 'empty':ui.modal={action:'empty'};rerender('files');break;
       case 'sort':ui.sort=ui.sort==='name'?'date':'name';rerender('files');break;
@@ -412,6 +412,28 @@
   function handleDoubleClick(e){
     var row=e.target.closest('[data-fs-select]');if(row){e.preventDefault();ui.selected=row.dataset.fsSelect;action('open',ui.selected)}
   }
+  document.addEventListener('pointerdown',function(e){
+    var grip=e.target.closest?.('[data-fs-sidebar-resize]');
+    if(!grip||e.button!==0)return;
+    var browser=grip.closest('.fs-browser'),start=e.clientX;
+    if(!browser)return;
+    var original=nav.sidebarWidth;var parent=document;
+    e.preventDefault();
+    var move=function(ev){
+      var width=Math.max(186,Math.min(320,original+ev.clientX-start));
+      browser.style.setProperty('--fs-sidebar-width',width+'px');
+      nav.sidebarWidth=width;
+    };
+    var end=function(){
+      parent.removeEventListener('pointermove',move);
+      parent.removeEventListener('pointerup',end);
+      parent.removeEventListener('pointercancel',end);
+      saveNav();
+    };
+    parent.addEventListener('pointermove',move);
+    parent.addEventListener('pointerup',end);
+    parent.addEventListener('pointercancel',end);
+  },true);
   document.addEventListener('click',handleClick);
   document.addEventListener('dblclick',handleDoubleClick);
   document.addEventListener('submit',function(e){if(e.target.id==='fsDialog'){e.preventDefault();confirmModal(e.target)}});
@@ -505,6 +527,7 @@
   }
   var api={
     attach:function(b){bridge=b;updateCount()},
+    getNavigation:function(){return{folder:ui.folder,view:ui.view,trash:ui.trash,history:ui.history.slice(),favorites:nav.favorites.slice(),expanded:nav.expanded.slice(),sidebarWidth:nav.sidebarWidth,hidden:nav.hideSidebar}},
     // Desktop shell receives file metadata only; no file bodies are duplicated into
     // browser window globals. It opens the original item via the Files app.
     listItems:function(){return store.items.filter(isVisible).map(function(i){return{id:i.id,name:i.name,type:i.type,parent:i.parent,modified:i.modified}})},
@@ -639,5 +662,11 @@
     }
     return true;
   }).catch(function(e){storageError=e.message;return false})||Promise.resolve(false);
+  api.ready=api.ready.then(function(){
+    // Upgrade existing browser workspaces: the original three folders did not
+    // include Desktop. Wait for IndexedDB hydration before modifying the store.
+    if(!item('desktop')){ensureDesktopFolder();refresh()}
+    return true;
+  });
   try{if(!localStorage.getItem(KEY))localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}
 })();
