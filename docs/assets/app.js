@@ -588,6 +588,10 @@
     windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
     prefs:()=>({...state}),set:setPreference,toast:toast
   });
+  if(window.AincControlCenter)window.AincControlCenter.attach({
+    open:id=>openWindow(id),prefs:()=>({...state}),set:setPreference,
+    windows:()=>[...windows.entries()].map(([id,w])=>({id,minimized:w.minimized,maximized:w.maximized}))
+  });
   if(window.AincShell)window.AincShell.attach({
     open:(id)=>openWindow(id),focus:(id)=>focusWindow(id),
     minimize:(id)=>minimizeWindow(id),close:(id)=>closeWindow(id),
