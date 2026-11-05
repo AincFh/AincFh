@@ -232,7 +232,7 @@
       '<section class="fs-center">'+fsLocation()+
         '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="'+esc(nt('search'))+'" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="'+esc(nt(ui.sort==='name'?'sortRecent':'sortName'))+'">'+esc(nt(ui.sort==='name'?'sortName':'sortRecent'))+'</button></div>'+
         '<div class="fs-table-header" aria-hidden="true"><span>'+esc(nt('name'))+'</span><span>'+esc(nt('type'))+'</span><span>'+esc(nt('modified'))+'</span></div><div class="fs-list" role="listbox" aria-label="Files">'+
-          (data.length?data.map(function(i){return '<button class="fs-row '+(ui.selected===i.id?'selected':'')+'" data-fs-select="'+esc(i.id)+'" aria-selected="'+(ui.selected===i.id)+'" title="Double-click to open">'+
+          (data.length?data.map(function(i){return '<button role="option" tabindex="'+(ui.selected===i.id||(!ui.selected&&i===data[0])?0:-1)+'" class="fs-row '+(ui.selected===i.id?'selected':'')+'" data-fs-select="'+esc(i.id)+'" aria-selected="'+(ui.selected===i.id)+'" title="Double-click to open">'+
             '<span class="fs-row-icon">'+symbol(i.type)+'</span><span class="fs-row-name">'+esc(i.name)+'</span><span class="fs-row-type">'+esc(i.type.toUpperCase())+'</span><span class="fs-row-date">'+esc(prettyDate(i.modified))+'</span></button>'}).join(''):
           '<div class="fs-empty"><strong>'+(ui.trash?'Trash is empty':'Nothing here yet.')+'</strong><p>'+(ui.trash?'Deleted items appear here.':'Create a document or folder to start working.')+'</p></div>')+
         '</div><div class="fs-status">'+data.length+' item(s) · '+store.items.filter(isVisible).length+' in workspace'+(ui.trash?'<button data-fs-action="empty">Empty Trash</button>':'')+'</div></section>'+
@@ -379,7 +379,90 @@
       case 'clear-events':transact(function(s){s.events=[]});rerender('activity');updateCount();break;
     }
   }
+
+  // Files v14.4 — focusable Explorer rows, keyboard commands and an in-theme context menu.
+  function fsCloseContext(){document.getElementById('fsContextMenu')?.remove()}
+  function fsSelect(id,showInspector){
+    var i=item(id);if(!i)return;
+    ui.selected=id;
+    var body=document.querySelector('#app-files .window-content');
+    if(showInspector)ui.showInspector=(body?.clientWidth||innerWidth)<=780;
+    body?.querySelector('.fs-browser')?.classList.toggle('fs-inspector-open',ui.showInspector);
+    document.querySelectorAll('#app-files [data-fs-select]').forEach(function(row){
+      var active=row.dataset.fsSelect===id;
+      row.classList.toggle('selected',active);
+      row.setAttribute('aria-selected',String(active));
+      row.tabIndex=active?0:-1;
+    });
+    var inspector=body?.querySelector('.fs-inspector');
+    if(inspector)inspector.innerHTML='<div class="fs-inspector-heading"><div class="fs-side-caption">'+esc(nt('inspector'))+'</div><button type="button" class="fs-inspector-close" data-fs-toggle-inspector aria-label="'+esc(nt('hide'))+'">×</button></div>'+details(i);
+  }
+  function fsShowContext(id,x,y){
+    var i=item(id);if(!i||(!i.deleted&&!isVisible(i)))return;
+    fsCloseContext();fsSelect(id,false);
+    var names=i.deleted?['restore','destroy']:['open','rename','duplicate','favorite'].concat(['text','image'].includes(i.type)?['download']:[]).concat(['delete']);
+    var captions={open:'Open',rename:'Rename',duplicate:'Duplicate',favorite:'Toggle favorite',download:'Export',delete:'Move to Trash',destroy:'Delete permanently',restore:'Restore'};
+    var menu=document.createElement('div');
+    menu.id='fsContextMenu';menu.className='fs-context-menu';menu.setAttribute('role','menu');menu.setAttribute('aria-label','File actions');
+    menu.innerHTML='<div class="fs-context-heading">'+esc(i.name)+'</div>'+names.map(function(a){
+      return '<button type="button" role="menuitem" data-fs-menu-action="'+a+'" data-fs-id="'+esc(id)+'" class="'+(['delete','destroy'].includes(a)?'danger':'')+'">'+captions[a]+'</button>';
+    }).join('');
+    document.body.append(menu);
+    var bounds=menu.getBoundingClientRect();
+    menu.style.left=Math.max(8,Math.min(x,innerWidth-bounds.width-8))+'px';
+    menu.style.top=Math.max(8,Math.min(y,innerHeight-bounds.height-8))+'px';
+    menu.querySelector('button')?.focus({preventScroll:true});
+  }
+  document.addEventListener('contextmenu',function(e){
+    var row=e.target.closest?.('#app-files [data-fs-select]');
+    if(row){e.preventDefault();fsShowContext(row.dataset.fsSelect,e.clientX,e.clientY)}
+  });
+  document.addEventListener('pointerdown',function(e){
+    if(!e.target.closest?.('#fsContextMenu'))fsCloseContext();
+  },true);
+  document.addEventListener('keydown',function(e){
+    var menu=document.getElementById('fsContextMenu');
+    if(menu&&e.key==='Escape'){
+      e.preventDefault();fsCloseContext();
+      document.querySelector('#app-files [data-fs-select="'+ui.selected+'"]')?.focus();
+      return;
+    }
+    if(menu&&menu.contains(e.target)&&['ArrowUp','ArrowDown'].includes(e.key)){
+      var buttons=Array.from(menu.querySelectorAll('button'));
+      var ix=buttons.indexOf(e.target);
+      e.preventDefault();buttons[(ix+buttons.length+(e.key==='ArrowDown'?1:-1))%buttons.length]?.focus();return;
+    }
+    if(!e.target.closest?.('#app-files'))return;
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='f'){
+      e.preventDefault();fsCloseContext();document.getElementById('fsSearch')?.focus();return;
+    }
+    if(e.target.closest('input,textarea,select,[contenteditable="true"]')||ui.modal)return;
+    if(e.altKey&&['ArrowLeft','ArrowRight','ArrowUp'].includes(e.key)){
+      e.preventDefault();
+      if(e.key==='ArrowLeft')navigateHistory(-1);
+      else if(e.key==='ArrowRight')navigateHistory(1);
+      else if(ui.view==='folder')navigateFolder(item(ui.folder)?.parent||'root');
+      return;
+    }
+    var row=e.target.closest('[data-fs-select]');if(!row)return;
+    if(['ArrowDown','ArrowUp','Home','End'].includes(e.key)){
+      var rows=Array.from(document.querySelectorAll('#app-files .fs-row[data-fs-select]'));
+      var ix=rows.indexOf(row);
+      var next=e.key==='Home'?0:e.key==='End'?rows.length-1:ix+(e.key==='ArrowDown'?1:-1);
+      next=Math.max(0,Math.min(rows.length-1,next));if(!rows[next])return;
+      e.preventDefault();fsSelect(rows[next].dataset.fsSelect,false);rows[next].focus();return;
+    }
+    if(e.key==='Enter'){e.preventDefault();action('open',row.dataset.fsSelect);return}
+    if(e.key==='F2'&&!ui.trash){e.preventDefault();action('rename',row.dataset.fsSelect);document.getElementById('fsName')?.focus();return}
+    if(e.key==='Delete'){e.preventDefault();action(ui.trash?'destroy':'delete',row.dataset.fsSelect);return}
+    if(e.key==='F10'&&e.shiftKey){
+      e.preventDefault();var box=row.getBoundingClientRect();
+      fsShowContext(row.dataset.fsSelect,box.left+36,box.top+22);return;
+    }
+  });
   function handleClick(e){
+    var menuButton=e.target.closest?.('[data-fs-menu-action]');
+    if(menuButton){var cmd=menuButton.dataset.fsMenuAction,id=menuButton.dataset.fsId;fsCloseContext();action(cmd,id);return}
     var b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-fs-action')){action(b.dataset.fsAction,b.dataset.fsId);return}
     if(b.hasAttribute('data-fs-folder')){navigateFolder(b.dataset.fsFolder);return}
@@ -402,18 +485,7 @@
       else{nav.hideSidebar=!nav.hideSidebar;saveNav()}
       rerender('files');return
     }
-    if(b.hasAttribute('data-fs-select')){
-      var selected=b.dataset.fsSelect;
-      ui.selected=selected;
-      var filesContent=document.querySelector('#app-files .window-content');
-      ui.showInspector=(filesContent?.clientWidth||innerWidth)<=780;
-      if(ui.showInspector)filesContent?.querySelector('.fs-browser')?.classList.add('fs-inspector-open');
-      // Single click only selects; native dblclick opens. No timing heuristic.
-      document.querySelectorAll('#app-files [data-fs-select]').forEach(function(el){var active=el.dataset.fsSelect===selected;el.classList.toggle('selected',active);el.setAttribute('aria-selected',String(active))});
-      var inspector=document.querySelector('#app-files .fs-inspector');
-      if(inspector)inspector.innerHTML='<div class="fs-inspector-heading"><div class="fs-side-caption">'+esc(nt('inspector'))+'</div><button type="button" class="fs-inspector-close" data-fs-toggle-inspector aria-label="'+esc(nt('hide'))+'">×</button></div>'+details(item(selected));
-      return;
-    }
+    if(b.hasAttribute('data-fs-select')){fsCloseContext();fsSelect(b.dataset.fsSelect,true);return}
     if(b.hasAttribute('data-fs-view')){ui.noteView=b.dataset.fsView;rerender('notes');return}
     if(b.hasAttribute('data-fs-note')){ui.notesId=b.dataset.fsNote;rerender('notes');return}
     if(b.hasAttribute('data-fs-focus')){bridge&&bridge.focus(b.dataset.fsFocus);rerender('activity');return}
@@ -449,7 +521,7 @@
   document.addEventListener('submit',function(e){if(e.target.id==='fsDialog'){e.preventDefault();confirmModal(e.target)}});
   document.addEventListener('input',function(e){
     if(e.target.matches('[data-fs-search]')){
-      ui.search=e.target.value;var focus=e.target.selectionStart;rerender('files');var x=document.querySelector('#fsSearch');if(x){x.focus();x.setSelectionRange(focus,focus)}return;
+      ui.search=e.target.value;ui.selected=null;ui.showInspector=false;var focus=e.target.selectionStart;rerender('files');var x=document.querySelector('#fsSearch');if(x){x.focus();x.setSelectionRange(focus,focus)}return;
     }
     if(!e.target.matches('[data-fs-note-body],[data-fs-note-title]'))return;
     var target=item(ui.notesId);if(!target)return;
