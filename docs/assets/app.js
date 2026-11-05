@@ -634,6 +634,13 @@
   window.addEventListener('aincfh:languagechange',updateClock);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
   const resumed=restoreLastSession();
-  if(!resumed&&!isMobile()&&state.autoOpen&&state.startupApp!=='none')openWindow(state.startupApp,{announce:false,focusInput:false});
+  // Installable PWA shortcuts and ordinary deep links launch the same registered
+  // application through the real window manager; unknown IDs are ignored.
+  const requestedApp=new URLSearchParams(location.search).get('app');
+  if(requestedApp&&Object.prototype.hasOwnProperty.call(appInfo,requestedApp)){
+    openWindow(requestedApp,{announce:false,focusInput:false});
+  }else if(!resumed&&!isMobile()&&state.autoOpen&&state.startupApp!=='none'){
+    openWindow(state.startupApp,{announce:false,focusInput:false});
+  }
   window.addEventListener('pagehide',saveSession,{passive:true});
 })();
