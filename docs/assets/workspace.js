@@ -411,7 +411,7 @@
       // Single click only selects; native dblclick opens. No timing heuristic.
       document.querySelectorAll('#app-files [data-fs-select]').forEach(function(el){var active=el.dataset.fsSelect===selected;el.classList.toggle('selected',active);el.setAttribute('aria-selected',String(active))});
       var inspector=document.querySelector('#app-files .fs-inspector');
-      if(inspector)inspector.innerHTML='<div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(item(selected));
+      if(inspector)inspector.innerHTML='<div class="fs-inspector-heading"><div class="fs-side-caption">'+esc(nt('inspector'))+'</div><button type="button" class="fs-inspector-close" data-fs-toggle-inspector aria-label="'+esc(nt('hide'))+'">×</button></div>'+details(item(selected));
       return;
     }
     if(b.hasAttribute('data-fs-view')){ui.noteView=b.dataset.fsView;rerender('notes');return}
