@@ -35,7 +35,11 @@
     settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:470,height:555},
     files:{label:'FILE EXPLORER / LOCAL',name:'Files',icon:'folder',width:830,height:620},
     notes:{label:'NOTES / LOCAL EDITOR',name:'Notes',icon:'code',width:800,height:600},
-    activity:{label:'ACTIVITY / SESSION',name:'Activity',icon:'grid',width:720,height:570}
+    activity:{label:'ACTIVITY / SESSION',name:'Activity',icon:'grid',width:720,height:570},
+    calculator:{label:'CALCULATOR / LOCAL',name:'Calculator',icon:'calculator',width:650,height:650},
+    tasks:{label:'TASK BOARD / LOCAL',name:'Tasks',icon:'checklist',width:750,height:625},
+    clock:{label:'CLOCK / TIMER',name:'Clock',icon:'clock',width:680,height:590},
+    apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:745,height:625}
   };
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
@@ -320,7 +324,9 @@
       content.innerHTML=window.AincWorkspace.render(id);
       window.AincWorkspace.afterOpen(id);
     }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();}
-    else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
+    else if(window.AincApps&&['calculator','tasks','clock','apps'].includes(id)){
+      content.innerHTML=window.AincApps.render(id);
+    }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
   }
 
   // Three real CSS-driven motion states; this is a concept UI, not a recording of the remote product.
@@ -358,12 +364,16 @@
   function focusTerminal(){setTimeout(()=>$('#terminalInput')?.focus({preventScroll:true}),40);}
   function runCommand(raw){const command=raw.trim();if(!command){focusTerminal();return;}terminalState.history.push(command);terminalState.historyIndex=terminalState.history.length;let args=command.split(/\s+/),cmd=args[0].toLowerCase();terminalState.log.push({kind:'normal',line:'aincfh@os:~$ '+command});let result='';
     switch(cmd){
-    case 'help':result='help      list available commands\nprojects  list projects\nopen NAME open project / app\nfiles     open local File Explorer\nnotes     open editable Notes\nactivity  session and history\nls        list local files\ncat NAME  read text document\nmkdir NAME create a folder\ntouch NAME create a document\nhistory   recent local actions\nwhoami    profile summary\nstatus    local interface status\ntheme     dark | light | toggle\naccent    amber | violet | cyan\nmotion    on | off\ndate      local date / time\nclear     clear console\ngithub    open profile in new tab\nneofetch  show AincFh OS info';break;
+    case 'help':result='help      list available commands\ncalculator local math evaluator\ntasks     personal task board\nclock     timer and stopwatch\napps      application registry\nprojects  list projects\nopen NAME open project / app\nfiles     open local File Explorer\nnotes     open editable Notes\nactivity  session and history\nls        list local files\ncat NAME  read text document\nmkdir NAME create a folder\ntouch NAME create a document\nhistory   recent local actions\nwhoami    profile summary\nstatus    local interface status\ntheme     dark | light | toggle\naccent    amber | violet | cyan\nmotion    on | off\ndate      local date / time\nclear     clear console\ngithub    open profile in new tab\nneofetch  show AincFh OS info';break;
     case 'projects':result=projects.map((p,i)=>`${String(i+1).padStart(2,'0')}  ${p.label}  (${p.category})`).join('\n');break;
     case 'ls':result=window.AincWorkspace?window.AincWorkspace.list():'No local workspace loaded.';break;
     case 'files':openWindow('files');result='Opened local file explorer';break;
     case 'notes':openWindow('notes');result='Opened Notes editor';break;
     case 'activity':openWindow('activity');result='Opened Activity Center';break;
+    case 'calc':case 'calculator':openWindow('calculator');result='Opened Calculator';break;
+    case 'tasks':openWindow('tasks');result='Opened Task Board';break;
+    case 'clock':openWindow('clock');result='Opened Clock';break;
+    case 'apps':openWindow('apps');result='Opened App Center';break;
     case 'cat':{const name=args.slice(1).join(' ');if(!name){result='Usage: cat FILE_NAME (try: cat Start Here.txt)';break;}var doc=window.AincWorkspace&&window.AincWorkspace.readFile(name);result=doc===null?'File not found: '+name:doc;break;}
     case 'mkdir':{const name=args.slice(1).join(' ');if(!name){result='Usage: mkdir FOLDER_NAME';break;}result=window.AincWorkspace&&window.AincWorkspace.mkdir(name)?'Created folder: '+name:'Unable to create folder';break;}
     case 'touch':{const name=args.slice(1).join(' ');if(!name){result='Usage: touch FILE_NAME';break;}result=window.AincWorkspace&&window.AincWorkspace.touch(name)?'Created document: '+name:'Unable to create document';break;}
@@ -455,6 +465,13 @@
       id:id,name:appInfo[id].name,minimized:w.minimized,maximized:w.maximized
     })),
     toast: toast
+  });
+  if(window.AincApps)window.AincApps.attach({
+    open:id=>openWindow(id),
+    focus:id=>focusWindow(id),
+    refresh:id=>renderApp(id),
+    listApps:()=>Object.entries(appInfo).map(([id,m])=>({id,name:m.name,label:m.label,icon:m.icon})),
+    toast:toast
   });
   if(window.AincSettings)window.AincSettings.attach({
     prefs:()=>({...state}),
