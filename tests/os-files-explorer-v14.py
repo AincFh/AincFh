@@ -40,47 +40,55 @@ def test():
             assert colors["row"] not in ("rgb(107, 107, 107)","rgb(128, 128, 128)"),colors
             assert colors["nav"] not in ("rgb(107, 107, 107)","rgb(128, 128, 128)"),colors
             assert page.evaluate("AincWorkspace.listItems().some(i=>i.id==='desktop')"),"Desktop folder missing from Files"
-            page.locator('#app-files [data-fs-folder="desktop"]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
-            page.locator('#app-files [data-fs-folder="root"]').first.click()
-            page.locator('#app-files [data-fs-nav-view="recent"]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().view")=="recent"
-            assert page.locator('#app-files [data-fs-select="welcome"]').count()==1
-            page.locator('#app-files [data-fs-nav-view="favorites"]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().view")=="favorites"
-            assert page.locator('#app-files .fs-row').count()>=3
-            # A real folder can be starred/unstarred from the tree.
-            page.locator('#app-files [data-fs-favorite="desktop"]').first.click()
-            assert "desktop" in page.evaluate("AincWorkspace.getNavigation().favorites")
-            page.locator('#app-files [data-fs-nav-folder="desktop"]').first.click()
-            assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
-            # Parent navigation, back and forward operate on real directories.
-            page.locator('#app-files [data-fs-nav-up]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().folder")=="root"
-            page.locator('#app-files [data-fs-history="-1"]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
-            page.locator('#app-files [data-fs-history="1"]').click()
-            assert page.evaluate("AincWorkspace.getNavigation().folder")=="root"
-            # The sidebar must be hideable; undo restores the full navigation.
-            page.locator('#app-files [data-fs-sidebar-toggle]').click()
-            assert "fs-sidebar-hidden" in page.locator('#app-files .fs-browser').get_attribute("class")
-            page.locator('#app-files [data-fs-sidebar-toggle]').click()
-            assert "fs-sidebar-hidden" not in page.locator('#app-files .fs-browser').get_attribute("class")
             if not mobile:
-                grip=page.locator('#app-files [data-fs-sidebar-resize]')
-                b=grip.bounding_box()
-                if b:
-                    page.mouse.move(b["x"]+b["width"]/2,b["y"]+70)
-                    page.mouse.down()
-                    page.mouse.move(b["x"]+b["width"]/2+24,b["y"]+70,steps=5)
-                    page.mouse.up()
-                    assert page.evaluate("AincWorkspace.getNavigation().sidebarWidth")>=220
+                page.locator('#app-files [data-fs-folder="desktop"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
+                page.locator('#app-files [data-fs-folder="root"]').first.click()
+                page.locator('#app-files [data-fs-nav-view="recent"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().view")=="recent"
+                assert page.locator('#app-files [data-fs-select="welcome"]').count()==1
+                page.locator('#app-files [data-fs-nav-view="favorites"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().view")=="favorites"
+                assert page.locator('#app-files .fs-row').count()>=3
+                # A real folder can be starred/unstarred from the tree.
+                page.locator('#app-files [data-fs-favorite="desktop"]').first.click()
+                assert "desktop" in page.evaluate("AincWorkspace.getNavigation().favorites")
+                page.locator('#app-files [data-fs-nav-folder="desktop"]').first.click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
+                # Parent navigation, back and forward operate on real directories.
+                page.locator('#app-files [data-fs-nav-up]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="root"
+                page.locator('#app-files [data-fs-history="-1"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
+                page.locator('#app-files [data-fs-history="1"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="root"
+                # The sidebar must be hideable; undo restores the full navigation.
+                page.locator('#app-files [data-fs-sidebar-toggle]').click()
+                assert "fs-sidebar-hidden" in page.locator('#app-files .fs-browser').get_attribute("class")
+                page.locator('#app-files [data-fs-sidebar-toggle]').click()
+                assert "fs-sidebar-hidden" not in page.locator('#app-files .fs-browser').get_attribute("class")
+                if not mobile:
+                    grip=page.locator('#app-files [data-fs-sidebar-resize]')
+                    b=grip.bounding_box()
+                    if b:
+                        page.mouse.move(b["x"]+b["width"]/2,b["y"]+70)
+                        page.mouse.down()
+                        page.mouse.move(b["x"]+b["width"]/2+24,b["y"]+70,steps=5)
+                        page.mouse.up()
+                        assert page.evaluate("AincWorkspace.getNavigation().sidebarWidth")>=220
+            else:
+                expect(page.locator('#app-files .fs-sidebar')).to_be_hidden()
+                page.locator('#app-files [data-fs-sidebar-toggle]').click()
+                expect(page.locator('#app-files .fs-sidebar')).to_be_visible()
+                page.locator('#app-files [data-fs-folder="desktop"]').click()
+                assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
+                expect(page.locator('#app-files .fs-sidebar')).to_be_hidden()
             page.screenshot(path=str(OUT/f"files-v14-{width}-{locale}.png"),full_page=True)
             v=page.evaluate("""()=>({sw:document.documentElement.scrollWidth,w:innerWidth,sh:document.documentElement.scrollHeight,h:innerHeight})""")
             assert v["sw"]<=v["w"]+1 and v["sh"]<=v["h"]+1,v
             page.reload(wait_until="load")
             page.wait_for_function("Boolean(window.AincWorkspace)")
-            assert "desktop" in page.evaluate("AincWorkspace.getNavigation().favorites")
+            if not mobile: assert "desktop" in page.evaluate("AincWorkspace.getNavigation().favorites")
             assert not errors,(locale,errors)
             print(f"PASS Files v14 {width}x{height} {locale}: navigation, real recents, favorites, history, responsive sidebar and native dark buttons",flush=True)
             context.close()
