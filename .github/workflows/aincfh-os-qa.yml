@@ -8,12 +8,14 @@ on:
       - 'docs/**'
       - 'assets/launch-workspace.svg'
       - 'tests/os-smoke.py'
+      - 'tests/os-apps-v8.py'
       - '.github/workflows/aincfh-os-qa.yml'
   pull_request:
     paths:
       - 'docs/**'
       - 'assets/launch-workspace.svg'
       - 'tests/os-smoke.py'
+      - 'tests/os-apps-v8.py'
       - '.github/workflows/aincfh-os-qa.yml'
   workflow_dispatch:
 
@@ -44,4 +46,6 @@ jobs:
       - name: Run browser smoke tests
         env:
           OS_URL: http://127.0.0.1:8765/
-        run: python tests/os-smoke.py
+        run: |
+          python tests/os-smoke.py
+          python tests/os-apps-v8.py
