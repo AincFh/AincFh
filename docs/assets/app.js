@@ -41,16 +41,50 @@
   const state = {
     theme: ['dark','light'].includes(read('theme','dark')) ? read('theme','dark') : 'dark',
     accent: ['amber','violet','cyan'].includes(read('accent','amber')) ? read('accent','amber') : 'amber',
-    motion: read('motion', matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'on') === 'on'
+    motion: read('motion', matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'on') === 'on',
+    contrast: read('contrast','normal')==='high'?'high':'normal',
+    textSize: ['compact','normal','large'].includes(read('textSize','normal'))?read('textSize','normal'):'normal',
+    glass: read('glass','on')!=='off',
+    wallpaper: read('wallpaper','on')!=='off',
+    dockSize: read('dockSize','regular')==='compact'?'compact':'regular',
+    clockMode: read('clockMode','24')==='12'?'12':'24',
+    autoOpen: read('autoOpen','on')!=='off',
+    rememberWindows: read('rememberWindows','on')!=='off',
+    snap: read('snap','on')!=='off',
+    contextMenu: read('contextMenu','on')!=='off'
   };
   const desktop = $('#desktop'), layer = $('#windowLayer');
   function applySettings() {
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.dataset.accent = state.accent;
     document.documentElement.classList.toggle('motion-off',!state.motion);
+    document.documentElement.dataset.contrast=state.contrast;
+    document.documentElement.dataset.textSize=state.textSize;
+    document.documentElement.dataset.dockSize=state.dockSize;
+    document.documentElement.dataset.contextMenu=state.contextMenu?'on':'off';
+    document.documentElement.classList.toggle('os-opaque',!state.glass);
+    document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
     $('meta[name="theme-color"]').content = state.theme === 'dark' ? '#10111a' : '#efebea';
     $$('[data-toggle-theme]').forEach(b => { b.innerHTML = ICON(state.theme === 'dark' ? 'sun' : 'moon'); b.setAttribute('aria-label', state.theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'); });
     if (windows.has('settings')) renderApp('settings');
+    updateClock();
+  }
+  function setPreference(key,value){
+    if(!Object.prototype.hasOwnProperty.call(state,key))return;
+    if(key==='theme'){setTheme(value);return}
+    if(key==='accent'){setAccent(value);return}
+    if(key==='motion'){setMotion(value);return}
+    if(typeof state[key]==='boolean')value=!!value;
+    state[key]=value;
+    write(key,typeof value==='boolean'?(value?'on':'off'):value);
+    if(key==='rememberWindows'&&!value){for(const id of Object.keys(appInfo)){try{localStorage.removeItem('aincfh_win_'+id)}catch{}}}
+    applySettings();toast('设置已应用');
+  }
+  function resetPreferences(){
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','snap','contextMenu'];
+    for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,snap:true,contextMenu:true});
+    applySettings();toast('设置已恢复默认');
   }
   function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
   function setAccent(a) { state.accent = a;write('accent',a);applySettings();toast('主题色已更新'); }
