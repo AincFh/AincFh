@@ -6,7 +6,7 @@
 'use strict';
 const POWER_KEY='aincfh_shell_power_v10',PIN_KEY='aincfh_dock_pins_v10',ORDER_KEY='aincfh_dock_order_v10',RECENT_KEY='aincfh_recent_apps_v10';
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>Array.from(r.querySelectorAll(s));
-const initialPins=['apps','projects','files','notes','tasks','calculator','clock','paint','terminal','settings','activity','taskmanager','about','contact','stack'];
+const initialPins=['apps','projects','files','notes','paint','tasks','terminal','taskmanager','settings'];
 let bridge=null,open=false,powerState='on',confirming=null,contextApp='',hoverApp=null,hoverTimer=0,hideTimer=0,lastFocus=null;
 let category='all',searchValue='',pinSet=new Set(initialPins),order=[],recent=[];
 const html=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
