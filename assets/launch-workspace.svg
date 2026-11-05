@@ -1,30 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="178" viewBox="0 0 900 178" role="img" aria-label="Launch AincFh OS interactive workspace">
-<defs><style>
-:root{--bg:#FAFAFA;--fg:#161923;--muted:#5F6579;--stroke:rgba(255,159,67,.35);--panel:#F3F2F7}
-@media(prefers-color-scheme:dark){:root{--bg:#1C1F2B;--fg:#F5F5FA;--muted:#9DA7BA;--stroke:rgba(255,159,67,.3);--panel:#252638}}
-@media(prefers-reduced-motion:reduce){.scan,.pulse,.spin{animation:none!important}}
-.txt{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
-.scan{animation:scan 5s linear infinite;transform-origin:center}
-@keyframes scan{0%{transform:translateX(-560px);opacity:0}12%{opacity:.7}87%{opacity:.7}100%{transform:translateX(510px);opacity:0}}
-.pulse{animation:pulse 2.4s ease-in-out infinite}
-@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
-.spin{transform-origin:700px 89px;animation:turn 24s linear infinite}
-@keyframes turn{to{transform:rotate(360deg)}}
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="AincFh OS interactive workspace: launch the full web desktop, project explorer, terminal and system settings">
+<defs>
+<style>
+:root{--bg:#fafafa;--pane:#f5f2f3;--win:#f9f5f6;--ink:#23202e;--sub:#675f70;--line:#b9aab3;--hex:rgba(255,159,67,.2)}
+@media(prefers-color-scheme:dark){:root{--bg:#1c1f2b;--pane:#222131;--win:#181924;--ink:#f4f1f4;--sub:#a9a5ba;--line:#4a4055;--hex:rgba(255,159,67,.17)}}
+.t{font-family:Inter,'Segoe UI',-apple-system,'Noto Sans SC',Arial,sans-serif}.m{font-family:Consolas,'SFMono-Regular',monospace}
+.spin{transform-origin:697px 187px;animation:rot 30s linear infinite}.spin2{transform-origin:697px 187px;animation:rot 22s linear infinite reverse}
+.trace{animation:trace 9s linear infinite}.blink{animation:blink 2.1s steps(1) infinite}.pulse{animation:pulse 3.2s ease-in-out infinite}.slide{animation:slide 8s ease-in-out infinite alternate}
+@keyframes rot{to{transform:rotate(360deg)}}@keyframes trace{to{stroke-dashoffset:-470}}@keyframes blink{50%{opacity:0}}@keyframes pulse{50%{opacity:.28}}@keyframes slide{to{transform:translateX(15px)}}
+@media(prefers-reduced-motion:reduce){.spin,.spin2,.trace,.blink,.pulse,.slide{animation:none}}
 </style>
-<linearGradient id="light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9F43"/><stop offset="1" stop-color="#FF6B6B"/></linearGradient>
-<linearGradient id="purple" x1="0" x2="1"><stop stop-color="#FF9F43"/><stop offset=".58" stop-color="#8B5CF6"/><stop offset="1" stop-color="#FF9F43"/></linearGradient>
-<clipPath id="cut"><rect width="900" height="178" rx="0"/></clipPath></defs>
-<g clip-path="url(#cut)"><rect width="900" height="178" fill="var(--bg)"/>
-<path d="M20 20H880V158H20Z" fill="var(--panel)" stroke="var(--stroke)" stroke-width="1"/>
-<path d="M30 30V23H38M862 23H870V31M30 148V156H38M862 156H870V148" stroke="#8B5CF6" stroke-width="2" fill="none"/>
-<g class="spin" fill="none" stroke="#FF9F43" stroke-opacity=".17" stroke-width="1"><polygon points="700,20 760,55 760,124 700,158 640,124 640,55"/><polygon points="700,35 747,62 747,116 700,143 653,116 653,62"/><polygon points="700,50 734,69 734,108 700,128 666,108 666,69"/></g>
-<path class="scan" d="M120 28L204 28L204 150L120 150Z" fill="#FF9F43" fill-opacity=".06"/>
-<rect x="52" y="39" width="7" height="7" rx="3.5" fill="#34D399" class="pulse"/><text x="69" y="47" class="txt" font-size="10.5" font-weight="700" fill="#FF9F43" letter-spacing="2.6">LIVE INTERFACE · PROJECT SPACE</text>
-<text x="51" y="99" class="txt" font-size="37" font-weight="750" letter-spacing="-.9" fill="var(--fg)">AincFh OS <tspan fill="#FF9F43">/</tspan> Workspace</text>
-<text x="52" y="123" class="txt" font-size="12.5" font-weight="500" fill="var(--muted)">Project windows    •    Dock navigation    •    Command palette    •    Terminal</text>
-<text x="52" y="146" class="txt" font-size="10.5" letter-spacing="1.65" fill="var(--muted)">CLICK THE IMAGE TO OPEN THE INTERACTIVE VERSION</text>
-<rect x="700" y="58" width="148" height="64" rx="12" fill="#FF9F43" fill-opacity=".11" stroke="url(#light)" stroke-width="1.3"/>
-<text x="774" y="84" class="txt" text-anchor="middle" font-size="11.5" fill="var(--fg)" font-weight="700" letter-spacing=".8">ENTER WORKSPACE</text>
-<path d="M760 102H791M783 95L791 102L783 109" stroke="#FF9F43" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M20 174H880" stroke="url(#purple)" stroke-width="4"/><rect width="900" height="178" fill="none" stroke="#FF9F43" stroke-opacity=".14"/></g>
-</svg>
+<linearGradient id="brand" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff9f43"/><stop offset=".53" stop-color="#ff795d"/><stop offset="1" stop-color="#a477ed"/></linearGradient>
+<radialGradient id="glow"><stop stop-color="#ff9f43" stop-opacity=".19"/><stop offset="1" stop-color="#ff9f43" stop-opacity="0"/></radialGradient>
+<linearGradient id="low" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff9f43" stop-opacity=".2"/><stop offset="1" stop-color="#9b77ef" stop-opacity=".05"/></linearGradient>
+<pattern id="grid" width="69" height="60" patternUnits="userSpaceOnUse"><path d="m17 0 17 10v20L17 40 0 30V10ZM52 30l17 10v20L52 70 35 60V40Z" fill="none" stroke="var(--hex)" stroke-width=".8"/></pattern>
+<clipPath id="clip"><rect width="900" height="360"/></clipPath>
+</defs>
+<g clip-path="url(#clip)">
+<rect width="900" height="360" fill="var(--bg)"/><rect width="900" height="360" fill="url(#grid)" opacity=".5"/><ellipse cx="710" cy="140" rx="300" ry="290" fill="url(#glow)"/><rect x="15" y="15" width="870" height="330" fill="var(--pane)" stroke="var(--line)" stroke-opacity=".6"/>
+<path d="M25 33V25H33m834 0h8v8M25 327v8h8m834 0h8v-8" stroke="#9b77ef" stroke-width="1.8" fill="none"/>
+<path d="M15 347H885" stroke="url(#brand)" stroke-width="4"/>
+<circle cx="55" cy="54" r="4" fill="#61dcaa" class="pulse"/><text x="67" y="58" class="m" font-size="10" fill="#ff9f43" letter-spacing="2.3">LIVE PREVIEW / CLICK TO ENTER</text>
+<text x="53" y="119" class="t" font-size="48" font-weight="800" fill="var(--ink)" letter-spacing="-2.5">AincFh<tspan fill="#ff9f43">_OS</tspan></text>
+<text x="55" y="158" class="t" font-size="16" font-weight="700" fill="var(--ink)">A complete interactive workspace.</text>
+<text x="55" y="189" class="t" font-size="12.5" fill="var(--sub)">项目窗口 / 动态桌面 / Command Center</text>
+<text x="55" y="209" class="t" font-size="12.5" fill="var(--sub)">Terminal / 主题切换 / 多窗口操作</text>
+<g class="slide"><rect x="54" y="236" width="227" height="52" rx="2" fill="url(#brand)"/><text x="76" y="268" class="t" font-size="13" font-weight="800" letter-spacing="1" fill="#151019">ENTER INTERACTIVE OS</text><path d="M248 263h16m-6-6 6 6-6 6" fill="none" stroke="#151019" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g>
+<text x="55" y="324" class="m" font-size="9.5" fill="var(--sub)" letter-spacing="1.4">ANIMATED SVG PREVIEW · FULL EXPERIENCE OPENS IN BROWSER</text>
+<!-- Project window, drawn as original vector UI instead of a minified screenshot. -->
+<g transform="translate(455 42)">
+<rect width="402" height="264" rx="9" fill="var(--win)" stroke="#ff9f43" stroke-opacity=".6"/>
+<rect width="402" height="36" rx="9" fill="url(#low)"/><path d="M0 36h402" stroke="var(--line)" stroke-opacity=".5"/>
+<circle cx="18" cy="18" r="5" fill="#fa6866"/><circle cx="34" cy="18" r="5" fill="#f4c05d"/><circle cx="50" cy="18" r="5" fill="#4ece93"/>
+<path d="m175 13 6 4v7l-6 4-6-4v-7z" stroke="#ff9f43" fill="none" stroke-width="1"/><text x="187" y="21" class="m" font-size="10" fill="var(--ink)" font-weight="700">PROJECT EXPLORER</text><text x="371" y="21" class="m" font-size="9" fill="#ff9f43">AF/01</text>
+<text x="23" y="61" class="m" font-size="9" fill="#ff9f43" letter-spacing="1.7">SELECTED WORK / 01—04</text>
+<rect x="20" y="70" width="98" height="27" fill="#ff9f43"/><text x="30" y="87" class="m" font-size="9" fill="#1b1620">01 / A.T. FIELD</text>
+<rect x="124" y="70" width="118" height="27" fill="none" stroke="var(--line)"/><text x="134" y="87" class="m" font-size="9" fill="var(--sub)">02 / ST. LAURENT</text>
+<rect x="248" y="70" width="125" height="27" fill="none" stroke="var(--line)"/><text x="258" y="87" class="m" font-size="9" fill="var(--sub)">03 / WINDOWS</text>
+<text x="22" y="135" class="t" font-size="25" font-weight="800" fill="var(--ink)">Work that ships.</text>
+<text x="23" y="153" class="t" font-size="10.5" fill="var(--sub)">Interfaces · Systems · Engineering</text>
+<rect x="21" y="170" width="356" height="71" fill="url(#low)" stroke="var(--line)" stroke-opacity=".45"/>
+<g class="spin" transform="translate(-455 -42)" fill="none" stroke="#ff9f43" stroke-opacity=".32" stroke-width="1.3"><polygon points="697,121 756,155 756,223 697,257 638,223 638,155"/><polygon points="697,137 742,163 742,215 697,241 652,215 652,163"/></g>
+<path class="trace" d="M25 232V179H370" fill="none" stroke="#ff9f43" stroke-width="2" stroke-dasharray="6 470"/>
+<path d="M41 191h123" stroke="#ff9f43" stroke-width="6"/><path d="M41 209h170M41 223h110" stroke="var(--line)" stroke-width="4"/>
+<rect x="284" y="189" width="28" height="24" fill="#8b5cf6" fill-opacity=".35"/><rect x="318" y="189" width="28" height="24" fill="#8b5cf6" fill-opacity=".24"/>
+</g>
+<g class="spin2" fill="none" stroke="#9b77ef" stroke-opacity=".13"><polygon points="697,35 826,110 826,264 697,338 568,264 568,110"/></g>
+</g></svg>
