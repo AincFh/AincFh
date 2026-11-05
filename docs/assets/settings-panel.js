@@ -32,7 +32,7 @@ function render(){
    break;
  }
  case 'fusion':
- body=(window.AincDesktopFusion?.renderStudio?.()||'<p>Desktop theme studio unavailable.</p>')+(window.AincDesktopSurface?.renderSettings?.()||'');
+ body=(window.AincDesktopFusion?.renderStudio?.()||'<p>Desktop theme studio unavailable.</p>')+(window.AincDesktopSurface?.renderSettings?.()||'')+(window.AincThemeLibrary?.render?.()||'');
  break;
  case 'appearance':
  body=heading('01','Appearance','橙紫六边形视觉系统与桌面展示效果。所有选项立即应用，并保存到当前浏览器。')+
