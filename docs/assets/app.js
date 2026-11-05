@@ -194,7 +194,9 @@
     const w=windows.get(id); if(!w)return;
     if(w.minimized){w.minimized=false;w.node.classList.remove('is-minimized');}
     $$('.os-window.focused',layer).forEach(el=>el.classList.remove('focused'));
-    w.node.style.zIndex=++focusZ;w.node.classList.add('focused');syncDock();saveSession();
+    w.node.style.zIndex=++focusZ;w.node.classList.add('focused');
+    if(id==='taskmanager')window.AincSystemMonitor?.onRender();else window.AincSystemMonitor?.onClose();
+    syncDock();saveSession();
   }
   // The physical viewport, not the document's scrollable height, owns window geometry.
   function workBounds() {
@@ -255,6 +257,7 @@
   function minimizeWindow(id){
     const w=windows.get(id);if(!w)return;
     w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
+    if(id==='taskmanager')window.AincSystemMonitor?.onClose();
     const remain=[...windows.entries()].filter(([,x])=>!x.minimized);
     if(remain.length)focusWindow(remain[remain.length-1][0]);else syncDock();saveSession();
   }
@@ -545,6 +548,7 @@
   // Window shortcuts: Ctrl+Tab cycles, Ctrl+Shift+F maximizes, Ctrl+Alt+arrows snaps.
   document.addEventListener('keydown',e=>{
     if(state.shortcuts&&e.ctrlKey&&e.key==='Tab'&&!e.metaKey){e.preventDefault();cycleWindows();}
+    else if(state.shortcuts&&e.ctrlKey&&e.shiftKey&&e.key==='Escape'){e.preventDefault();openWindow('taskmanager');}
     else if(state.shortcuts&&e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();const n=$('.os-window.focused',layer);if(n)toggleMax(n.id.slice(4));}
     else if(state.shortcuts&&e.ctrlKey&&e.altKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();snapWindow(e.key==='ArrowLeft'?'left':'right');}
   });
