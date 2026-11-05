@@ -32,7 +32,7 @@ function render(){
    break;
  }
  case 'fusion':
- body=window.AincDesktopFusion?.renderStudio?.()||'<p>Desktop theme studio unavailable.</p>';
+ body=(window.AincDesktopFusion?.renderStudio?.()||'<p>Desktop theme studio unavailable.</p>')+(window.AincDesktopSurface?.renderSettings?.()||'');
  break;
  case 'appearance':
  body=heading('01','Appearance','橙紫六边形视觉系统与桌面展示效果。所有选项立即应用，并保存到当前浏览器。')+
@@ -149,7 +149,7 @@ document.addEventListener('change',function(e){
  f.text().then(function(s){var ok=window.AincWorkspace?.importBackup?.(s);if(ok)refresh()}).catch(function(){bridge?.toast('备份读取失败')});
  e.target.value='';
 });
-window.AincSettings={attach:function(x){bridge=x},render:render,onRender:function(root){
+window.AincSettings={attach:function(x){bridge=x},render:render,openSection:function(id){if(sections.some(function(x){return x[0]===id})){section=id;bridge?.refresh()}},onRender:function(root){
   var el=root?.querySelector('#spQuota');if(!el)return;
   window.AincStorage?.quota().then(function(q){
     if(!el.isConnected)return;
