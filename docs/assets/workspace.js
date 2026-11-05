@@ -122,17 +122,43 @@
         '<aside class="fs-inspector"><div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
       '</div>'+modal()+'</div>';
   }
+  // Escaped Markdown subset. HTML and script execution are never allowed.
+  function markdown(text){
+    var escaped=function(x){return esc(x).replace(/\x60([^\x60]+)\x60/g,'<code>$1</code>').replace(/\*\*([^*]+)\*\*/g,'<strong>$1</strong>').replace(/\*([^*]+)\*/g,'<em>$1</em>')};
+    var rows=String(text).split(/\r?\n/),html=[],inCode=false,code=[];
+    for(var line of rows){
+      if(/^\x60{3}\s*/.test(line)){
+        if(inCode){html.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');code=[];inCode=false}
+        else inCode=true;
+      }else if(inCode)code.push(line);
+      else if(/^###\s+/.test(line))html.push('<h4>'+escaped(line.replace(/^###\s+/,''))+'</h4>');
+      else if(/^##\s+/.test(line))html.push('<h3>'+escaped(line.replace(/^##\s+/,''))+'</h3>');
+      else if(/^#\s+/.test(line))html.push('<h2>'+escaped(line.replace(/^#\s+/,''))+'</h2>');
+      else if(/^[-*]\s+/.test(line))html.push('<div class="fs-md-item"><span>•</span>'+escaped(line.replace(/^[-*]\s+/,''))+'</div>');
+      else if(/^\d+\.\s+/.test(line))html.push('<div class="fs-md-item"><span>'+esc(line.match(/^\d+/)[0])+'.</span>'+escaped(line.replace(/^\d+\.\s+/,''))+'</div>');
+      else if(/^\s*---+\s*$/.test(line))html.push('<hr>');
+      else if(line.trim())html.push('<p>'+escaped(line)+'</p>');
+      else html.push('<div class="fs-md-space"></div>');
+    }
+    if(inCode)html.push('<pre><code>'+esc(code.join('\n'))+'</code></pre>');
+    return html.join('');
+  }
+  ui.noteView='split';
   function renderNotes(){
     var notes=store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).sort(function(a,b){return b.modified.localeCompare(a.modified)});
     var current=item(ui.notesId);if(!current||!isVisible(current)||current.type!=='text'){current=notes[0]||null;ui.notesId=current?current.id:null}
-    return '<div class="fs-notes"><div class="fs-topline"><div><span class="win-eyebrow">LOCAL TEXT EDITOR / NOTES</span><h2>Notes<span class="fs-hot">.</span></h2></div><span class="fs-runtime">AUTO-SAVED IN YOUR BROWSER</span></div>'+
-      '<div class="fs-notesbar"><button data-fs-action="new-note" class="fs-tool primary">+ New note</button><button data-fs-action="export" class="fs-tool" '+(!current?'disabled':'')+'>Export text</button><span id="fsSaveStatus" aria-live="polite">All changes saved locally</span></div>'+
+    var view=ui.noteView;
+    return '<div class="fs-notes"><div class="fs-topline"><div><span class="win-eyebrow">LOCAL TEXT EDITOR / NOTES</span><h2>Notes<span class="fs-hot">.</span></h2></div><span class="fs-runtime">INDEXEDDB / LOCAL · NO CLOUD SYNC</span></div>'+
+      '<div class="fs-notesbar"><button data-fs-action="new-note" class="fs-tool primary">+ New note</button><button data-fs-action="export" class="fs-tool" '+(!current?'disabled':'')+'>Export text</button>'+
+      '<div class="fs-view-switch"><button data-fs-view="edit" aria-pressed="'+(view==='edit')+'">Edit</button><button data-fs-view="split" aria-pressed="'+(view==='split')+'">Split</button><button data-fs-view="preview" aria-pressed="'+(view==='preview')+'">Preview</button></div>'+
+      '<span id="fsSaveStatus" aria-live="polite">Changes saved locally</span></div>'+
       '<div class="fs-notesbody"><aside class="fs-notelist"><div class="fs-side-caption">DOCUMENTS / '+notes.length+'</div>'+
       (notes.length?notes.map(function(i){return '<button data-fs-note="'+esc(i.id)+'" class="'+(current&&current.id===i.id?'active':'')+'"><strong>'+esc(i.name)+'</strong><small>'+esc(i.body.replace(/\s+/g,' ').slice(0,54)||'Empty document')+'</small></button>'}).join(''):'<p class="fs-no-note">Create a note to begin.</p>')+'</aside>'+
       '<section class="fs-editor">'+(current?'<label class="fs-editor-caption" for="fsNoteTitle">DOCUMENT NAME</label><input id="fsNoteTitle" data-fs-note-title maxlength="80" value="'+esc(current.name)+'" autocomplete="off"/>'+
-        '<div class="fs-editor-sub"><span>PLAIN TEXT / MARKDOWN</span><span id="fsChars">'+current.body.length+' characters</span></div>'+
-        '<textarea id="fsNoteBody" data-fs-note-body spellcheck="true" placeholder="Write something worth keeping…">'+esc(current.body)+'</textarea>'+
-        '<div class="fs-editor-footer"><span>Private to this browser · no cloud sync</span><button data-fs-action="delete-note" data-fs-id="'+esc(current.id)+'">Move to Trash</button></div>':
+        '<div class="fs-editor-sub"><span>MARKDOWN · LIVE PREVIEW</span><span id="fsChars">'+current.body.length+' chars · '+(current.body.trim()?current.body.trim().split(/\s+/).length:0)+' words</span></div>'+
+        '<div class="fs-edit-surface" data-view="'+view+'"><textarea id="fsNoteBody" data-fs-note-body spellcheck="true" placeholder="Write something worth keeping…">'+esc(current.body)+'</textarea>'+
+        '<article class="fs-md-preview" data-allow-select aria-label="Markdown preview">'+markdown(current.body)+'</article></div>'+
+        '<div class="fs-editor-footer"><span>Ctrl+S save · browser sandbox · editable text</span><button data-fs-action="delete-note" data-fs-id="'+esc(current.id)+'">Move to Trash</button></div>':
       '<div class="fs-empty-detail"><strong>No document selected</strong><p>Create your first note.</p></div>')+'</section></div></div>';
   }
   function renderActivity(){
@@ -249,6 +275,7 @@
       if(inspector)inspector.innerHTML='<div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(item(selected));
       return;
     }
+    if(b.hasAttribute('data-fs-view')){ui.noteView=b.dataset.fsView;rerender('notes');return}
     if(b.hasAttribute('data-fs-note')){ui.notesId=b.dataset.fsNote;rerender('notes');return}
     if(b.hasAttribute('data-fs-focus')){bridge&&bridge.focus(b.dataset.fsFocus);rerender('activity');return}
     if(b.hasAttribute('data-fs-close')){bridge&&bridge.close(b.dataset.fsClose);rerender('activity');return}
@@ -270,8 +297,19 @@
     if(field==='name'&&(!text.trim()||text.length>80))return;
     if(field==='body'&&text.length>100000){report('单个文档最多 100,000 字符');return}
     var ok=transact(function(s){var x=s.items.find(function(i){return i.id===target.id});x[field]=text;x.modified=now()});
-    var status=document.getElementById('fsSaveStatus');if(status)status.textContent=ok?'Saved locally ✓':'Save failed';
-    var chars=document.getElementById('fsChars');if(chars&&field==='body')chars.textContent=text.length+' characters';
+    var status=document.getElementById('fsSaveStatus');
+    if(status)status.textContent=ok?'Saving locally…':'Save failed';
+    if(ok&&window.AincStorage){
+      window.AincStorage.whenIdle().then(function(result){
+        if(status?.isConnected)status.textContent=result===false?'Storage error':'Saved locally ✓';
+      });
+    }else if(status&&ok)status.textContent='Saved locally ✓';
+    var chars=document.getElementById('fsChars');
+    if(chars&&field==='body'){
+      chars.textContent=text.length+' chars · '+(text.trim()?text.trim().split(/\s+/).length:0)+' words';
+      var preview=document.querySelector('#app-notes .fs-md-preview');
+      if(preview)preview.innerHTML=markdown(text);
+    }
   });
   document.addEventListener('change',function(e){
     if(e.target.id==='fsImport'){
@@ -364,7 +402,12 @@
     }
     if(!e.target.closest('#osContextMenu'))api.closeDesktopMenu();
   });
-  document.addEventListener('keydown',function(e){if(e.key==='Escape'){api.closeDesktopMenu();if(ui.modal){ui.modal=null;rerender('files')}}});
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape'){api.closeDesktopMenu();if(ui.modal){ui.modal=null;rerender('files')}}
+    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='s'&&e.target.closest('#app-notes')){
+      e.preventDefault();report('文档已保存到当前浏览器');
+    }
+  });
   window.AincWorkspace=api;
   // Load the durable IndexedDB snapshot without overwriting edits made during startup.
   api.ready=window.AincStorage?.read('workspace').then(function(saved){
