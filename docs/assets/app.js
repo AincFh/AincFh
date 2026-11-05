@@ -164,6 +164,13 @@
       if(preferred||lastVisible)focusWindow((preferred||lastVisible).id);
       syncDock();
       return true;
+    }catch(error){
+      console.warn('[AincFh OS] Session recovery failed:',error);
+      for(const [,w] of windows)w.node.remove();
+      windows.clear();syncDock();
+      write('session_v1','');
+      toast('上次桌面会话无法恢复，已回到新桌面');
+      return false;
     }finally{restoringSession=false}
   }
   function focusWindow(id) {
