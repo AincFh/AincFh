@@ -28,6 +28,7 @@ const CORE=[
  './assets/clipboard-guard.js?v=7.0',
  './assets/system-shell-v10.js?v=10.0',
  './assets/system-monitor-v11.js?v=11.0',
+ './assets/pwa-v11.js?v=11.0',
  './assets/ui-controls-v10.js?v=10.0',
  './assets/app.js?v=11.0'
 ];
@@ -75,7 +76,7 @@ self.addEventListener('fetch',event=>{
   if(cached)return cached;
   try{
    const response=await fetch(request);
-   if(response.ok&&response.type!=='opaque')event.waitUntil(cache.put(request,response.clone()));
+   if(response.ok&&response.type!=='opaque')await cache.put(request,response.clone()).catch(()=>{});
    return response;
   }catch(error){return new Response('',{status:503,statusText:'Offline asset unavailable'})}
  })());
