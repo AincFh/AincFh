@@ -3,6 +3,14 @@ import os
 from playwright.sync_api import sync_playwright, expect
 
 URL=os.environ.get("OS_URL","http://127.0.0.1:8765/")
+def open_app(page, app_id):
+    dock=page.locator(f'[data-dock="{app_id}"]')
+    if dock.is_visible():
+        dock.click()
+    else:
+        page.locator('[data-dock="apps"]').click()
+        page.locator(f'#app-apps [data-catalog-open="{app_id}"]').click()
+
 def run():
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True)
@@ -68,12 +76,12 @@ def run():
    page.locator('#app-files [data-fs-action="duplicate"]').click()
    assert page.locator('#app-files [data-fs-select]').filter(has_text="QA-workflow-v8 copy.md").count()==1
    # Actual task persistence, not a decorative card.
-   page.locator('[data-dock="tasks"]').click()
+   open_app(page, 'tasks')
    page.locator('#suTaskName').fill("Build the complete desktop")
    page.locator('#suTaskForm button[type="submit"]').click()
    assert page.locator('#app-tasks .su-task-row').filter(has_text="Build the complete desktop").count()==1
    page.reload(wait_until="load")
-   page.locator('[data-dock="tasks"]').click()
+   open_app(page, 'tasks')
    assert page.locator('#app-tasks .su-task-row').filter(has_text="Build the complete desktop").count()==1
    # Preferences alter the environment, including accessibility and settings panels.
    if width > 840:
