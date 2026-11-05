@@ -230,7 +230,7 @@
  appearance:none;-webkit-appearance:none;display:block;width:100%;
  text-align:left;background:transparent!important;color:var(--text);
  min-height:33px;padding:8px 12px;border:1px solid transparent;border-radius:7px;
- font:700 11px/1.4 inherit;transition:background .14s,color .14s
+ font-family:inherit;font-size:11px;font-weight:700;line-height:1.4;transition:background .14s,color .14s
 }
 .fs-context-menu button:hover,.fs-context-menu button:focus-visible{
  background:var(--soft)!important;color:var(--hot);border-color:var(--line);outline:0
