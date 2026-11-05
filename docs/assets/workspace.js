@@ -265,11 +265,9 @@
     if(b.hasAttribute('data-fs-action')){action(b.dataset.fsAction,b.dataset.fsId);return}
     if(b.hasAttribute('data-fs-folder')){ui.folder=b.dataset.fsFolder;ui.trash=false;ui.search='';ui.selected=null;rerender('files');return}
     if(b.hasAttribute('data-fs-select')){
-      var selected=b.dataset.fsSelect,stamp=Date.now();
-      if(ui.lastClick&&ui.lastClick.id===selected&&stamp-ui.lastClick.time<480){
-        ui.lastClick=null;action('open',selected);return;
-      }
-      ui.lastClick={id:selected,time:stamp};ui.selected=selected;
+      var selected=b.dataset.fsSelect;
+      ui.selected=selected;
+      // Single click only selects; native dblclick opens. No timing heuristic.
       document.querySelectorAll('#app-files [data-fs-select]').forEach(function(el){var active=el.dataset.fsSelect===selected;el.classList.toggle('selected',active);el.setAttribute('aria-selected',String(active))});
       var inspector=document.querySelector('#app-files .fs-inspector');
       if(inspector)inspector.innerHTML='<div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(item(selected));
