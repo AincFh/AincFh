@@ -3,7 +3,7 @@
    and are never copied into this cache, nor sent to the server.
  */
 'use strict';
-const VERSION='aincfh-os-shell-11.0.0',PREFIX='aincfh-os-shell-';
+const VERSION='aincfh-os-shell-11.1.0',PREFIX='aincfh-os-shell-';
 const CORE=[
  './',
  './index.html',
@@ -18,6 +18,7 @@ const CORE=[
  './assets/ui-controls-v10.css?v=10.0',
  './assets/system-monitor-v11.css?v=11.0',
  './assets/system-performance-v11.css?v=11.0',
+ './assets/control-center-v11.css?v=11.1',
  './assets/i18n-catalog-v10.js?v=10.0',
  './assets/i18n-runtime-v10.js?v=11.0',
  './assets/storage-v8.js?v=8.1',
@@ -28,9 +29,10 @@ const CORE=[
  './assets/clipboard-guard.js?v=7.0',
  './assets/system-shell-v10.js?v=10.0',
  './assets/system-monitor-v11.js?v=11.0',
+ './assets/control-center-v11.js?v=11.1',
  './assets/pwa-v11.js?v=11.0',
  './assets/ui-controls-v10.js?v=10.0',
- './assets/app.js?v=11.0'
+ './assets/app.js?v=11.1'
 ];
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
