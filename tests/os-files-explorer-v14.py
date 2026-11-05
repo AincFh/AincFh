@@ -19,7 +19,7 @@ def test():
             page.evaluate("window.AincWorkspace.ready")
             if mobile:
                 page.locator('#osStartButton').click()
-                page.locator('#osStartPanel [data-shell-app="files"]').click()
+                page.locator('#osStartPanel .os-start-grid [data-shell-app="files"]').click()
             else:
                 page.locator('[data-dock="files"]').click()
             expect(page.locator('#app-files .fs-sidebar')).to_have_count(1)
