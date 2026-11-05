@@ -35,6 +35,7 @@ function render(){
  choice('clockMode','Clock format',[['24','24-hour','09:41'],['12','12-hour','9:41 AM']])+
  toggle('autoOpen','Show startup workspace','下次载入桌面时自动打开你在 Apps & Startup 里选择的应用。')+
  toggle('rememberWindows','Remember window positions','重新打开窗口时恢复上次的位置和大小。')+
+ toggle('restoreSession','Resume last desktop session','重新载入时恢复已打开的应用、层级和窗口状态。仅桌面设备生效。')+
  toggle('snap','Window snapping','拖拽到左右屏幕边缘时自动停靠到半屏。')+
  toggle('contextMenu','Desktop context menu','右键点击桌面打开快速操作。')+
  '<div class="sp-actions"><button data-sp-action="tile">Tile windows</button><button data-sp-action="cascade">Cascade windows</button><button data-sp-action="reset-layout">Reset layout</button></div>';
