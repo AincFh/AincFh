@@ -1,10 +1,15 @@
 """AincFh OS optional desktop session persistence / lifecycle regression."""
 import os
+from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
 URL=os.environ.get("OS_URL","http://127.0.0.1:8765/")
 
 def main():
+    # Catch a regression where the single-element helper is accidentally used
+    # as though it returned a collection (and .forEach crashes session restore).
+    js=(Path(__file__).resolve().parents[1] / "docs" / "assets" / "app.js").read_text()
+    assert "      $('.os-window.focused',layer).forEach" not in js
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True)
         context=browser.new_context(viewport={"width":1440,"height":900},reduced_motion="reduce")
