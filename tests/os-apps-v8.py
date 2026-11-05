@@ -24,6 +24,14 @@ def run():
    # Application registry can launch real, registered apps.
    page.locator('[data-dock="apps"]').click()
    assert page.locator('#app-apps [data-catalog-open="calculator"]').count()==1
+   assert page.locator('#app-apps [data-catalog-open]').count()>=13
+   page.locator('#suAppSearch').fill("calculator")
+   assert page.locator('#app-apps [data-catalog-open]').count()==1
+   page.locator('#suAppSearch').fill("")
+   page.locator('#app-apps [data-catalog-pin="calculator"]').click()
+   page.locator('#app-apps [data-catalog-filter="favorites"]').click()
+   assert page.locator('#app-apps [data-catalog-open="calculator"]').count()==1
+   page.locator('#app-apps [data-catalog-filter="all"]').click()
    page.locator('#app-apps [data-catalog-open="calculator"]').click()
    page.locator('#suCalcExpr').fill("2*(3+4)")
    page.locator('#suCalcExpr').press("Enter")
@@ -80,8 +88,22 @@ def run():
    page.locator('#app-settings [data-sp-section="desktop"]').click()
    page.locator('#app-settings [data-sp-set="dockSize"][data-sp-value="compact"]').click()
    assert page.evaluate("document.documentElement.dataset.dockSize==='compact'")
+   assert page.locator('#app-settings [data-sp-section]').count()>=8
+   page.locator('#app-settings [data-sp-section="apps"]').click()
+   page.locator('#app-settings [data-sp-set="startupApp"][data-sp-value="files"]').click()
+   assert page.locator('#app-settings [data-sp-set="startupApp"][data-sp-value="files"]').get_attribute("aria-pressed")=="true"
+   page.locator('#app-settings [data-sp-set="startupApp"][data-sp-value="projects"]').click()
+   page.locator('#app-settings [data-sp-section="notifications"]').click()
+   page.locator('#app-settings [data-sp-toggle="activityBadge"]').click()
+   assert page.evaluate("document.documentElement.classList.contains('os-hide-badge')===true")
+   page.locator('#app-settings [data-sp-toggle="activityBadge"]').click()
+   page.locator('#app-settings [data-sp-section="shortcuts"]').click()
+   page.locator('#app-settings [data-sp-toggle="shortcuts"]').click()
+   assert page.locator('#app-settings [data-sp-toggle="shortcuts"]').get_attribute("aria-checked")=="false"
+   page.locator('#app-settings [data-sp-toggle="shortcuts"]').click()
    page.locator('#app-settings [data-sp-section="privacy"]').click()
    assert page.locator('#app-settings [data-sp-action="export-workspace"]').count()==1
+   assert page.locator('#spQuota').count()==1
    # Real timer controls exist.
    page.locator('[data-dock="apps"]').click()
    page.locator('#app-apps [data-catalog-open="clock"]').click()
