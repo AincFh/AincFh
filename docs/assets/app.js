@@ -101,6 +101,7 @@
     document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
     window.AincShell?.applyDock();
     window.AincDesktopFusion?.apply();
+    window.AincDesktopSurface?.render();
     $('meta[name="theme-color"]').content = state.theme === 'dark' ? '#10111a' : '#efebea';
     $$('[data-toggle-theme]').forEach(b => { b.innerHTML = ICON(state.theme === 'dark' ? 'sun' : 'moon'); b.setAttribute('aria-label', state.theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'); });
     if (windows.has('settings')) renderApp('settings');
@@ -653,6 +654,11 @@
   if(window.AincControlCenter)window.AincControlCenter.attach({
     open:id=>openWindow(id),prefs:()=>({...state}),set:setPreference,
     windows:()=>[...windows.entries()].map(([id,w])=>({id,minimized:w.minimized,maximized:w.maximized}))
+  });
+  if(window.AincDesktopSurface)window.AincDesktopSurface.attach({
+    open:id=>openWindow(id),files:window.AincWorkspace,toast,
+    prefs:()=>({...state}),
+    showDesktopSettings:()=>window.AincSettings?.openSection?.('fusion')
   });
   if(window.AincDesktopFusion)window.AincDesktopFusion.attach({
     open:id=>openWindow(id),focus:id=>focusWindow(id),close:id=>closeWindow(id),
