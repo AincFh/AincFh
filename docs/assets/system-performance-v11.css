@@ -1,0 +1,26 @@
+/* AincFh OS v11 performance governor.
+ * Yield CPU/GPU work when the page is hidden and honor reduced motion.
+ * Never fake machine metrics or override essential controls.
+ */
+html.os-background :is(.hero-holo,.hero-line,.hero-grid,.orbit,.orbital,.ambient-orbit,.motion-preview,.os-boot,.hero-glow,.preview-live){
+ animation-play-state:paused!important;
+ transition:none!important;
+}
+html.os-performance-save :is(.hero-holo,.hero-line,.hero-grid,.orbit,.orbital,.ambient-orbit,.hero-glow,.motion-preview,.preview-live,.os-boot-track i){
+ animation:none!important;
+ transition:none!important;
+}
+html.os-performance-save :is(.os-window,.dock,.os-start-panel,.os-power-popup,.os-dock-context,.sp-layout,.os-dock-peek){
+ backdrop-filter:none!important;-webkit-backdrop-filter:none!important
+}
+html.os-performance-save .hero-stage{filter:none!important}
+html.os-performance-save .dock .dock-app:hover{transform:none!important}
+html[data-performance-profile="smooth"] .os-window{transition-duration:.13s}
+html[data-performance-profile="balanced"] .os-window{transition-duration:.10s}
+.os-window{overscroll-behavior:contain}
+.os-window .window-content{overscroll-behavior:contain;min-height:0}
+.os-window.is-minimized{content-visibility:hidden}
+@media(prefers-reduced-motion:reduce){
+ html .os-window,html .os-start-panel,html .dock{transition:none!important}
+ html :is(.hero-holo,.hero-line,.hero-grid,.orbit,.orbital,.ambient-orbit,.hero-glow){animation:none!important}
+}
