@@ -242,7 +242,7 @@
           });ui.selected=copyId;
         },'Duplicated '+i.name))refresh();break}
       case 'download':if(i?.type==='image'){var l=document.createElement('a');l.href=i.body;l.download=i.name;document.body.append(l);l.click();l.remove();activity('Exported '+i.name)}else exportText(i);break;
-      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
+      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body,i.id);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
       case 'trash':ui.trash=!ui.trash;ui.selected=null;ui.search='';rerender('files');break;
       case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
       case 'empty':ui.modal={action:'empty'};rerender('files');break;
@@ -348,21 +348,29 @@
     },'Created '+name);
     if(ok)refresh();return ok;
   }
-  function saveImage(name,png,parent){
+  function saveImage(name,png,parent,existingId){
     name=String(name||'Drawing.png').trim().replace(/[\\/]/g,'_').slice(0,80);
     if(!name.toLowerCase().endsWith('.png'))name=name.slice(0,76)+'.png';
     if(!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(String(png||''))||png.length>6000000){report('PNG 文件无效或大于 4.5 MB');return false}
+    const original=existingId?item(existingId):null;
+    if(original&&!original.deleted&&original.type==='image'){
+      const ok=transact(function(next){
+        const x=next.items.find(i=>i.id===existingId);x.body=png;x.modified=now();
+      },'Updated artwork · '+original.name);
+      if(ok){ui.selected=existingId;refresh()}
+      return ok?existingId:false;
+    }
     parent=parent||'workspace';
     if(parent!=='root'&&(!item(parent)||item(parent).type!=='folder'||item(parent).deleted))parent='workspace';
-    var chosen=name,count=2,t=now(),folder=parent;
-    while(store.items.some(function(x){return !x.deleted&&x.parent===folder&&x.name.toLowerCase()===chosen.toLowerCase()})){
+    let chosen=name,count=2;const t=now(),folder=parent;
+    while(store.items.some(x=>!x.deleted&&x.parent===folder&&x.name.toLowerCase()===chosen.toLowerCase())){
       chosen=name.replace(/\.png$/i,'')+'-'+count+++'.png';
     }
     const id=uid(),ok=transact(function(next){
       next.items.push({id,name:chosen,type:'image',parent:folder,body:png,url:'',created:t,modified:t,deleted:false});
     },'Saved artwork · '+chosen);
     if(ok){ui.selected=id;refresh()}
-    return ok;
+    return ok?id:false;
   }
   var api={
     attach:function(b){bridge=b;updateCount()},
