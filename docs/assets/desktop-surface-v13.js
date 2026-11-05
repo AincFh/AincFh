@@ -204,7 +204,7 @@ function bind(){
   const menuButton=e.target.closest?.('[data-desktop-menu]');
   if(menuButton){handleMenuAction(menuButton.dataset.desktopMenu,menu?.dataset.item||null);return}
   const tile=e.target.closest?.('[data-desktop-item]');
-  if(tile){if(dragging){dragging=false;return}selected=tile.dataset.desktopItem;for(const x of $('.desktop-icon',layer))x.classList.toggle('is-selected',x.dataset.desktopItem===selected);return}
+  if(tile){if(dragging){dragging=false;return}selected=tile.dataset.desktopItem;for(const x of layer.querySelectorAll('.desktop-icon'))x.classList.toggle('is-selected',x.dataset.desktopItem===selected);return}
   if(!e.target.closest?.('#osDesktopSurfaceMenu'))closeMenu();
   if(!e.target.closest?.('#osDesktopDialog')){if(selected){selected=null;schedule()}}
  },false);
@@ -218,7 +218,7 @@ function bind(){
   e.preventDefault();e.stopImmediatePropagation();
   const tile=e.target.closest?.('[data-desktop-item]');
   const id=tile?.dataset.desktopItem||null;
-  if(id){selected=id;for(const x of $('.desktop-icon',layer))x.classList.toggle('is-selected',x.dataset.desktopItem===selected)}
+  if(id){selected=id;for(const x of layer.querySelectorAll('.desktop-icon'))x.classList.toggle('is-selected',x.dataset.desktopItem===selected)}
   addMenu(e.clientX,e.clientY,id);
  },true);
  document.addEventListener('pointerdown',e=>{
