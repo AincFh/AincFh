@@ -68,3 +68,88 @@ html.motion-off *,html.motion-off *:before,html.motion-off *:after{animation-dur
 .os-window .window-content>*:first-child{animation:content-reveal .35s ease both}
 @keyframes content-reveal{from{opacity:.42;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
 @media(max-width:840px){.win-resize-handle{display:none}}
+
+
+/* MOTION CONCEPT PREVIEWS — a miniature animated app, not a still image.
+   Three visual states loop while the user can pause or change the chosen project. */
+.project-canvas.motion-preview{
+  height:190px;position:relative;border-radius:7px;isolation:isolate;
+  --preview-hot:#ffa451;
+  background:radial-gradient(circle at 75% 50%,rgba(161,105,235,.21),transparent 60%),linear-gradient(126deg,rgba(255,159,67,.11),rgba(62,40,80,.22));
+}
+.motion-preview[data-art="saint"]{--preview-hot:#aa82ff}
+.motion-preview[data-art="windows"]{--preview-hot:#83d4e8}
+.motion-preview[data-art="fishing"]{--preview-hot:#74dfa4}
+.motion-preview::before{opacity:.33;animation:preview-grid-shift 15s linear infinite}
+.motion-preview::after{pointer-events:none;opacity:.25;z-index:0}
+.motion-preview .preview-toolbar{position:absolute;top:10px;left:13px;right:13px;z-index:4;display:flex;align-items:center;justify-content:space-between;gap:10px;font:700 8px/1.3 ui-monospace,Consolas,monospace;letter-spacing:1px;color:var(--sub)}
+.motion-preview .preview-toolbar>span{display:inline-flex;align-items:center;gap:7px;min-width:0}
+.preview-live{display:inline-block;width:5px;height:5px;background:#5debb4;border-radius:50%;box-shadow:0 0 13px #5debb4;animation:preview-live 2s ease-in-out infinite}
+.motion-preview .preview-toolbar button{border:1px solid var(--line);background:var(--panel);border-radius:3px;color:var(--ink);font:700 9px/1.2 ui-monospace,Consolas,monospace;letter-spacing:.9px;padding:5px 10px;cursor:pointer;position:relative;z-index:5}
+.motion-preview .preview-toolbar button:hover{border-color:var(--preview-hot);color:var(--preview-hot)}
+.motion-preview .preview-frame{
+  position:absolute;z-index:2;left:19px;right:25px;top:38px;bottom:21px;
+  overflow:hidden;background:rgba(17,18,28,.94);color:#f0ecf4;
+  border:1px solid rgba(255,178,92,.42);border-radius:5px;
+  box-shadow:0 14px 35px rgba(0,0,0,.32);
+  transform:perspective(700px) rotateY(-3deg) rotateX(1deg);
+  animation:preview-float 6s ease-in-out infinite alternate;
+}
+.preview-frame-top{height:25px;display:flex;align-items:center;gap:5px;padding:0 11px;border-bottom:1px solid rgba(255,255,255,.08);background:linear-gradient(90deg,rgba(255,159,67,.1),rgba(156,115,237,.07))}
+.preview-frame-top i{width:5px;height:5px;border-radius:50%;background:var(--preview-hot)}
+.preview-frame-top span{font:700 8px ui-monospace,Consolas,monospace;letter-spacing:1px;margin-left:8px;color:#cfc6d6}
+.preview-frame-top b{margin-left:auto;font:700 8px ui-monospace,Consolas,monospace;color:#6ce3ad;letter-spacing:1px}
+.preview-scene{position:absolute;left:14px;right:14px;top:34px;bottom:8px;display:flex;flex-direction:column;align-items:flex-start;gap:5px;opacity:0;pointer-events:none}
+.preview-scene small{font:700 8px ui-monospace,Consolas,monospace;letter-spacing:1.25px;color:var(--preview-hot)}
+.preview-scene strong{font-size:19px;line-height:1.1;letter-spacing:-.04em;font-weight:820}
+.preview-scene-a{animation:preview-scene-a 15s infinite linear}
+.preview-scene-b{animation:preview-scene-b 15s infinite linear}
+.preview-scene-c{animation:preview-scene-c 15s infinite linear}
+.preview-scene-a .preview-lines{position:absolute;right:11%;top:11px;width:42%;display:flex;flex-direction:column;gap:6px}
+.preview-lines i{height:5px;border-radius:2px;background:var(--preview-hot);transform-origin:left;animation:preview-line 2.8s ease-in-out infinite alternate}
+.preview-lines i:nth-child(2){width:75%;opacity:.5;animation-delay:.5s}
+.preview-lines i:nth-child(3){width:55%;opacity:.28;animation-delay:1s}
+.preview-chips{display:flex;gap:5px;margin-top:auto;max-width:100%;overflow:hidden}
+.preview-chips span{padding:3px 6px;border:1px solid rgba(255,255,255,.12);font-size:8px;white-space:nowrap;color:#dad1df}
+.preview-sweep{position:absolute;top:-15px;bottom:-15px;width:62px;background:linear-gradient(90deg,transparent,rgba(255,159,67,.12),transparent);animation:preview-scan 3.1s linear infinite}
+.preview-scene-b .preview-meter{height:8px;width:min(300px,83%);background:rgba(255,255,255,.1);border-radius:2px;overflow:hidden;margin-top:6px}
+.preview-scene-b .preview-meter span{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;background:linear-gradient(90deg,#ff9f43,#b387ff);animation:preview-build 5s ease-in-out infinite}
+.preview-flow{display:flex;align-items:center;gap:9px;font:700 9px ui-monospace,Consolas,monospace;letter-spacing:.5px;color:#c8c1d4;margin-top:4px}
+.preview-flow em{font-style:normal;color:var(--preview-hot)}
+.preview-log{font:10px/1.6 ui-monospace,Consolas,monospace;display:grid;gap:0;color:#6dddb1;margin-top:2px;max-width:100%}
+.preview-log span{white-space:nowrap;overflow:hidden;max-width:100%;display:block;animation:preview-log 2s steps(24,end) infinite alternate}
+.preview-log span:nth-child(2){animation-delay:.4s}
+.preview-log span:nth-child(3){animation-delay:.8s}
+.preview-log b{color:var(--preview-hot)}
+.preview-caret{display:block;width:6px;height:11px;background:var(--preview-hot);animation:preview-caret .9s steps(1) infinite}
+.preview-timeline{position:absolute;left:14px;right:14px;bottom:8px;height:2px;background:rgba(255,255,255,.14);z-index:3;overflow:hidden}
+.preview-timeline span{display:block;height:100%;background:var(--preview-hot);transform-origin:left;animation:preview-timeline 15s linear infinite}
+.preview-pointer{position:absolute;right:6px;bottom:5px;z-index:3;font-size:19px;color:var(--preview-hot);text-shadow:0 0 15px rgba(255,159,67,.6);animation:preview-pointer 5s ease-in-out infinite alternate}
+.preview-paused .preview-frame,.preview-paused .preview-frame *, .preview-paused .preview-toolbar *, .preview-paused::before, .preview-paused .preview-timeline span, .preview-paused .preview-pointer{animation-play-state:paused!important}
+@keyframes preview-grid-shift{to{background-position:50px 0,0 50px}}
+@keyframes preview-live{50%{opacity:.24;box-shadow:0 0 2px #5debb4}}
+@keyframes preview-float{to{transform:perspective(700px) rotateY(1deg) rotateX(-1deg) translateY(-4px)}}
+@keyframes preview-scene-a{0%,28%{opacity:1;transform:translateY(0)}31%,100%{opacity:0;transform:translateY(-9px)}}
+@keyframes preview-scene-b{0%,32%{opacity:0;transform:translateY(9px)}36%,61%{opacity:1;transform:translateY(0)}64%,100%{opacity:0;transform:translateY(-9px)}}
+@keyframes preview-scene-c{0%,65%{opacity:0;transform:translateY(9px)}70%,96%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-9px)}}
+@keyframes preview-line{to{transform:scaleX(.61);opacity:.45}}
+@keyframes preview-scan{from{transform:translateX(-95px)}to{transform:translateX(450px)}}
+@keyframes preview-build{0%{transform:scaleX(.06)}65%,90%{transform:scaleX(1)}100%{transform:scaleX(.18)}}
+@keyframes preview-log{from{clip-path:inset(0 100% 0 0)}to{clip-path:inset(0 0 0 0)}}
+@keyframes preview-caret{50%{opacity:0}}
+@keyframes preview-timeline{from{transform:scaleX(0)}to{transform:scaleX(1)}}
+@keyframes preview-pointer{to{transform:translate(-14px,-9px)}}
+html.motion-off .preview-scene{animation:none!important;transform:none!important}
+html.motion-off .preview-scene-a{opacity:1!important}
+html.motion-off .preview-scene-b,html.motion-off .preview-scene-c{opacity:0!important}
+@media(prefers-reduced-motion:reduce){.preview-scene{animation:none!important;transform:none!important}.preview-scene-a{opacity:1!important}.preview-scene-b,.preview-scene-c{opacity:0!important}}
+@media(max-width:560px){
+  .project-canvas.motion-preview{height:165px}
+  .motion-preview .preview-frame{left:11px;right:12px;top:35px;bottom:17px;transform:none}
+  .preview-frame-top{height:22px}
+  .preview-scene{top:29px;left:9px;right:9px}
+  .preview-scene strong{font-size:15px}
+  .preview-scene-a .preview-lines{opacity:.65}
+  .preview-log{font-size:8px}
+  .preview-flow{font-size:8px;gap:5px}
+}
