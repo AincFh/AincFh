@@ -99,6 +99,8 @@
     if(key==='motion'){setMotion(value);return}
     if(typeof state[key]==='boolean')value=!!value;
     state[key]=value;
+    if(key==='dockMode'&&value==='taskbar'){state.dockPosition='bottom';write('dockPosition','bottom');}
+    if(key==='dockPosition'&&value!=='bottom'&&state.dockMode==='taskbar'){state.dockMode='floating';write('dockMode','floating');}
     write(key,typeof value==='boolean'?(value?'on':'off'):value);
     if(key==='rememberWindows'&&!value){for(const id of Object.keys(appInfo)){try{localStorage.removeItem('aincfh_win_'+id)}catch{}}}
     if(key==='restoreSession'){
@@ -596,7 +598,7 @@
     else{charIndex=Math.max(0,charIndex-1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===0){removing=false;lineIndex=(lineIndex+1)%typeLines.length;setTimeout(typeLoop,400);return;}}
     setTimeout(typeLoop,removing?38:78);
   }
-  function updateClock(){const t=new Date();$('#menuClock').textContent=t.toLocaleTimeString(state.clockMode==='12'?'en-US':'en-GB',{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
+  function updateClock(){const t=new Date(),locale=window.AincI18n?.locale||navigator.language||'en-US';$('#menuClock').textContent=t.toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
   applySettings();typeLoop();updateClock();setInterval(updateClock,30_000);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
   const resumed=restoreLastSession();
