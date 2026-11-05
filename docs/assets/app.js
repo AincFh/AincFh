@@ -154,7 +154,7 @@
   }
   function openWindow(id,options={}) {
     if(!appInfo[id])return;
-    if(windows.has(id)){focusWindow(id);if(options.project)selectProject(options.project);if(id==='terminal'&&options.focusInput!==false)focusTerminal();return;}
+    if(windows.has(id)){focusWindow(id);window.AincApps?.recordOpen(id);if(options.project)selectProject(options.project);if(id==='terminal'&&options.focusInput!==false)focusTerminal();return;}
     const m=appInfo[id],pos=windowPosition(id);
     const node=document.createElement('section');
     node.className='os-window';node.id='app-'+id;
@@ -165,7 +165,7 @@
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
     node.classList.toggle('terminal-window',id==='terminal');
-    renderApp(id);focusWindow(id);
+    renderApp(id);focusWindow(id);window.AincApps?.recordOpen(id);
     if(options.project)selectProject(options.project);
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
@@ -480,6 +480,7 @@
     focus:id=>focusWindow(id),
     refresh:id=>renderApp(id),
     listApps:()=>Object.entries(appInfo).map(([id,m])=>({id,name:m.name,label:m.label,icon:m.icon})),
+    windows:()=>[...windows.entries()].map(([id,w])=>({id,minimized:w.minimized,maximized:w.maximized})),
     toast:toast
   });
   if(window.AincSettings)window.AincSettings.attach({
