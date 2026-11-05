@@ -276,7 +276,7 @@
     node.setAttribute('role','dialog');node.setAttribute('aria-label',m.name+' 窗口');
     node.style.cssText='left:'+pos.x+'px;top:'+pos.y+'px;width:'+pos.w+'px;height:'+pos.h+'px';
     const edges=['n','e','s','w','ne','nw','se','sw'].map(edge=>'<span class="win-edge win-edge-'+edge+'" data-resize="'+edge+'" aria-hidden="true"></span>').join('');
-    node.innerHTML='<header class="winbar" data-drag="'+id+'" title="拖动移动 · 双击最大化 · 最大化时拖动可恢复"><div class="win-controls"><button class="win-control close" data-win-action="close" title="关闭" aria-label="关闭 '+m.name+'"></button><button class="win-control minimize" data-win-action="minimize" title="最小化" aria-label="最小化 '+m.name+'"></button><button class="win-control maximize" data-win-action="maximize" title="最大化或还原" aria-label="最大化 '+m.name+'"></button></div><div class="winbar-title">'+ICON(m.icon)+'<span>'+m.label+'</span></div><div class="winbar-end"><span class="win-id">AF/</span><span>'+String(windows.size+1).padStart(2,'0')+'</span></div></header><div class="window-content"></div>'+edges;
+    node.innerHTML='<header class="winbar" data-drag="'+id+'" title="拖动移动 · 双击最大化 · 最大化时拖动可恢复"><div class="win-controls"><button class="win-control close" data-win-action="close" title="关闭" aria-label="关闭 '+m.name+'"></button><button class="win-control minimize" data-win-action="minimize" title="最小化" aria-label="最小化 '+m.name+'"></button><button class="win-control maximize" data-win-action="maximize" title="最大化或还原" aria-label="最大化 '+m.name+'"></button><button class="win-control layout" data-win-action="layout" title="窗口吸附布局" aria-label="排列 '+m.name+'"><svg><use href="#i-apps"/></svg></button></div><div class="winbar-title">'+ICON(m.icon)+'<span>'+m.label+'</span></div><div class="winbar-end"><span class="win-id">AF/</span><span>'+String(windows.size+1).padStart(2,'0')+'</span></div></header><div class="window-content"></div>'+edges;
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
     window.AincDesktopFusion?.registerWindow(id);
@@ -348,6 +348,34 @@
     node.style.width=width+'px';node.style.height=height+'px';
     saveWindow(id);
     toast(direction==='left'?'窗口已停靠左侧':'窗口已停靠右侧');
+  }
+  function snapWindowTo(id,layout){
+    if(isMobile()||!state.snap)return false;
+    const w=windows.get(id),b=workBounds();if(!w||!layout)return false;
+    const usableW=b.width-b.inset*2,usableH=b.height-b.top-b.bottom,gap=10;
+    const halfW=Math.floor((usableW-gap)/2),halfH=Math.floor((usableH-gap)/2);
+    const centerWidth=Math.min(usableW,Math.max(b.minWidth,Math.round(usableW*.71)));
+    const centerHeight=Math.min(usableH,Math.max(b.minHeight,Math.round(usableH*.77)));
+    const zones={
+      left:{x:b.inset,y:b.top,w:halfW,h:usableH},
+      right:{x:b.inset+halfW+gap,y:b.top,w:halfW,h:usableH},
+      'top-left':{x:b.inset,y:b.top,w:halfW,h:halfH},
+      'top-right':{x:b.inset+halfW+gap,y:b.top,w:halfW,h:halfH},
+      'bottom-left':{x:b.inset,y:b.top+halfH+gap,w:halfW,h:halfH},
+      'bottom-right':{x:b.inset+halfW+gap,y:b.top+halfH+gap,w:halfW,h:halfH},
+      center:{x:b.inset+(usableW-centerWidth)/2,y:b.top+(usableH-centerHeight)/2,w:centerWidth,h:centerHeight}
+    };
+    if(layout==='maximize'){if(!w.maximized)toggleMax(id);else focusWindow(id);return true}
+    const zone=zones[layout];if(!zone)return false;
+    const n=w.node;
+    w.maximized=false;n.classList.remove('is-maximized');
+    const width=Math.max(Math.min(b.minWidth,usableW),Math.min(zone.w,usableW));
+    const height=Math.max(Math.min(b.minHeight,usableH),Math.min(zone.h,usableH));
+    const x=clampValue(zone.x,b.inset,b.width-width-b.inset);
+    const y=clampValue(zone.y,b.top,b.height-height-b.bottom);
+    n.style.left=x+'px';n.style.top=y+'px';n.style.width=width+'px';n.style.height=height+'px';
+    w.position={x,y,w:width,h:height};
+    saveWindow(id);focusWindow(id);return true;
   }
   function cycleWindows(){
     const list=[...windows.entries()].filter(([,w])=>!w.minimized).sort((a,b)=>(parseInt(a[1].node.style.zIndex)||0)-(parseInt(b[1].node.style.zIndex)||0));
@@ -531,7 +559,7 @@
     if(control.matches('[data-open]')){openWindow(control.dataset.open);closeMenu();return;}
     if(control.matches('[data-dock]')){const id=control.dataset.dock,w=windows.get(id);if(!w)openWindow(id);else if(!w.minimized&&w.node.classList.contains('focused'))minimizeWindow(id);else focusWindow(id);return;}
     if(control.matches('[data-home]')){showDesktop();return;}
-    if(control.matches('[data-win-action]')){const parent=control.closest('.os-window');if(!parent)return;const id=parent.id.slice(4);const action=control.dataset.winAction;if(action==='close')closeWindow(id);if(action==='minimize')minimizeWindow(id);if(action==='maximize')toggleMax(id);return;}
+    if(control.matches('[data-win-action]')){const parent=control.closest('.os-window');if(!parent)return;const id=parent.id.slice(4);const action=control.dataset.winAction;if(action==='close')closeWindow(id);if(action==='minimize')minimizeWindow(id);if(action==='maximize')toggleMax(id);if(action==='layout')window.AincDesktopFusion?.openSnap?.(id,control);return;}
     if(control.matches('[data-toggle-theme]')){setTheme(state.theme==='dark'?'light':'dark');return;}
     if(control.matches('[data-preview-pause]')){previewPaused=!previewPaused;write('preview_paused',previewPaused?'true':'false');renderApp('projects');toast(previewPaused?'概念演示已暂停':'概念演示已恢复');return;}
     if(control.matches('[data-select-project]')){selectProject(control.dataset.selectProject);return;}
@@ -630,7 +658,7 @@
     open:id=>openWindow(id),focus:id=>focusWindow(id),close:id=>closeWindow(id),
     apps:()=>Object.entries(appInfo).map(([id,x])=>({id,...x})),
     windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
-    prefs:()=>({...state}),set:setPreference,preset:applyDesktopPreset,toast
+    prefs:()=>({...state}),set:setPreference,preset:applyDesktopPreset,snapTo:snapWindowTo,toast
   });
   if(window.AincShell)window.AincShell.attach({
     open:(id)=>openWindow(id),focus:(id)=>focusWindow(id),
