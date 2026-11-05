@@ -1,0 +1,269 @@
+/* AincFh OS Workspace Core — local, private, versioned document store.
+   A web app workspace, NOT direct access to computer files or cloud accounts. */
+(function () {
+  'use strict';
+  var KEY='aincfh_workspace_v1',MAX_BYTES=600000,MAX_FILES=240,bridge=null;
+  var esc=function(v){return String(v===undefined?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
+  var now=function(){return new Date().toISOString()};
+  var uid=function(){return typeof crypto!=='undefined' && crypto.randomUUID?crypto.randomUUID():'f-'+Date.now()+'-'+Math.random().toString(36).slice(2,9)};
+  function defaults(){
+    var t=now(),folder=function(id,name){return{id:id,name:name,type:'folder',parent:'root',body:'',url:'',created:t,modified:t,deleted:false}};
+    var file=function(id,parent,name,body){return{id:id,name:name,type:'text',parent:parent,body:body,url:'',created:t,modified:t,deleted:false}};
+    return{version:1,items:[
+      folder('workspace','Workspace'),folder('notes','Notes'),folder('links','Links'),
+      file('welcome','workspace','Start Here.txt','Welcome to AincFh OS\n\nThis is an interactive browser workspace — not a real operating system.\n\nCreate files and folders in Files. Double-click a text document to edit it in Notes. Your changes stay in this browser unless you export them.\n\nShortcuts\nCtrl / Cmd + K — command center\nDouble-click title bar — maximize or restore\nRight-click the desktop — quick actions\n\nNo cloud sync or access to your computer files is implied.'),
+      file('ideas','notes','Ideas.md','# Workspace notes\n\n- Build with intent.\n- Make interactions useful.\n- Test every real action.\n\nThis document is editable. Changes save automatically to local browser storage.'),
+      file('guide','workspace','Project Index.md','# Selected projects\n\nA.T. Field — https://aincfh.dpdns.org\nSaint Laurent — https://yslfivem.com\nWindows desktop tools — private source\nFishing World 3D — experimental\n\nProject descriptions are examples of publicly shareable information, not a mirror of private repositories.')
+    ].concat([
+      {id:'link-github',name:'GitHub',type:'link',parent:'links',body:'',url:'https://github.com/AincFh',created:t,modified:t,deleted:false},
+      {id:'link-field',name:'A.T. Field',type:'link',parent:'links',body:'',url:'https://aincfh.dpdns.org',created:t,modified:t,deleted:false}
+    ]),events:[{id:uid(),when:t,kind:'info',text:'Workspace initialized · browser-only storage'}]};
+  }
+  var store;try{
+    var raw=localStorage.getItem(KEY),parsed=raw?JSON.parse(raw):null;
+    store=parsed&&parsed.version===1&&Array.isArray(parsed.items)&&Array.isArray(parsed.events)?parsed:defaults();
+  }catch(e){store=defaults()}
+  function save(next){
+    if(next.items.length>MAX_FILES)throw Error('文件数量达到上限 '+MAX_FILES);
+    var raw=JSON.stringify(next);
+    if(raw.length>MAX_BYTES)throw Error('浏览器工作区已接近容量上限，请导出备份。');
+    try{localStorage.setItem(KEY,raw)}catch(e){throw Error('浏览器未允许保存：请检查隐私模式或剩余空间')}
+    store=next;return true;
+  }
+  function report(message){if(bridge&&bridge.toast)bridge.toast(message);else console.info('[AincFh OS]',message)}
+  function activity(text,kind){
+    var copy=JSON.parse(JSON.stringify(store));
+    copy.events.unshift({id:uid(),text:String(text).slice(0,180),kind:kind||'info',when:now()});
+    copy.events=copy.events.slice(0,80);
+    try{save(copy)}catch(e){console.warn(e)}
+    updateCount();
+  }
+  function transact(fn,message){
+    var copy=JSON.parse(JSON.stringify(store));
+    try{var result=fn(copy);if(result===false)return false;
+      if(message)copy.events.unshift({id:uid(),text:message,kind:'success',when:now()});
+      copy.events=copy.events.slice(0,80);save(copy);updateCount();return true;
+    }catch(e){report(e.message||'保存失败');return false}
+  }
+  function item(id){return store.items.find(function(i){return i.id===id})||null}
+  function isVisible(i){if(i.deleted)return false;var cur=i,guard=0;
+    while(cur&&cur.parent!=='root'&&guard++<60){cur=item(cur.parent);if(!cur||cur.deleted)return false}return guard<60}
+  function isChildOf(id,ancestor){var cur=item(id),guard=0;while(cur&&guard++<80){if(cur.parent===ancestor)return true;cur=item(cur.parent)}return false}
+  function directoryList(){return store.items.filter(function(i){return i.type==='folder'&&isVisible(i)})}
+  function rootOf(i){return i.parent==='root'?'Home':(item(i.parent)||{}).name||'Workspace'}
+  function icon(type){return type==='folder'?'folder':type==='link'?'link':'code'}
+  function symbol(type){return '<svg aria-hidden="true"><use href="#i-'+icon(type)+'"></use></svg>'}
+  var ui={folder:'root',selected:null,search:'',trash:false,sort:'name',modal:null,notesId:'ideas'};
+  function labels(){return {root:'Home',workspace:'Workspace',notes:'Notes',links:'Links'};}
+  function getEntries(){var list=store.items.filter(function(i){
+    if(ui.trash)return i.deleted;
+    if(!isVisible(i))return false;
+    if(ui.search)return (i.name+' '+(i.type==='text'?i.body:'')).toLowerCase().includes(ui.search.toLowerCase());
+    return i.parent===ui.folder;
+  });
+  return list.sort(function(a,b){if(a.type==='folder'&&b.type!=='folder')return-1;if(b.type==='folder'&&a.type!=='folder')return 1;
+    return ui.sort==='date'?b.modified.localeCompare(a.modified):a.name.localeCompare(b.name,'zh-CN')});
+  }
+  function prettyDate(s){try{return new Date(s).toLocaleDateString('zh-CN',{month:'short',day:'numeric'})}catch(e){return '--'}}
+  function getPath(folder){var cur=folder,arr=[{id:'root',name:'Home'}],seen=new Set();
+    while(cur&&cur!=='root'&&!seen.has(cur)){seen.add(cur);var f=item(cur);if(!f)break;arr.push({id:f.id,name:f.name});cur=f.parent}
+    return arr.slice(0,1).concat(arr.slice(1).reverse());
+  }
+  function details(i){if(!i)return '<div class="fs-empty-detail"><span class="fs-detail-hex">⬡</span><strong>Select an item</strong><p>选择文件查看信息；双击文本文件可以在 Notes 中编辑。</p></div>';
+    return '<div class="fs-detail-icon">'+symbol(i.type)+'</div><h3>'+esc(i.name)+'</h3><div class="fs-item-type">'+esc(i.type.toUpperCase())+' / '+esc(rootOf(i))+'</div>'+
+      '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':'—')+'</b></div></div>'+
+      (i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
+      '<div class="fs-detail-actions">'+(i.deleted?'<button data-fs-action="restore" data-fs-id="'+esc(i.id)+'">Restore</button><button data-fs-action="destroy" data-fs-id="'+esc(i.id)+'">Delete forever</button>':
+      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
+  }
+  function modal(){
+    if(!ui.modal)return '';
+    var m=ui.modal,i=m.id?item(m.id):null;
+    var title=m.action==='create-folder'?'New folder':m.action==='create-text'?'New document':m.action==='rename'?'Rename item':m.action==='delete'?'Move to Trash':m.action==='destroy'?'Delete permanently':'Empty Trash';
+    var needsName=['create-folder','create-text','rename'].includes(m.action);
+    return '<div class="fs-modal-layer" role="presentation"><form class="fs-dialog" id="fsDialog" aria-label="'+title+'">'+
+      '<div class="fs-kicker">AINCFH / FILE OPERATION</div><h3>'+title+'</h3>'+
+      '<p>'+(['destroy','empty'].includes(m.action)?'This action cannot be undone.':'Changes are saved in this browser only.')+'</p>'+
+      (needsName?'<label for="fsName">Name</label><input maxlength="80" id="fsName" name="name" required autocomplete="off" value="'+esc(i?i.name:(m.action==='create-folder'?'New Folder':'Untitled.txt'))+'"/>':'')+
+      '<div class="fs-dialog-actions"><button type="button" data-fs-action="cancel">Cancel</button><button class="primary" type="submit">'+(needsName?'Save':'Confirm')+'</button></div></form></div>';
+  }
+  function renderFiles(){
+    if(ui.folder!=='root'&&(!item(ui.folder)||!isVisible(item(ui.folder))))ui.folder='root';
+    var data=getEntries(),selected=item(ui.selected);
+    return '<div class="fs-shell">'+
+      '<div class="fs-topline"><div><span class="win-eyebrow">LOCAL WORKSPACE / FILES</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">BROWSER STORAGE · LOCAL ONLY</span></div>'+
+      '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain" hidden /></div>'+
+      '<div class="fs-browser"><aside class="fs-sidebar"><div class="fs-side-caption">LOCATIONS</div>'+
+        '<button data-fs-folder="root" class="'+(ui.folder==='root'&&!ui.trash?'active':'')+'">'+symbol('folder')+' Home</button>'+
+        directoryList().filter(function(x){return x.parent==='root'}).map(function(x){return '<button data-fs-folder="'+esc(x.id)+'" class="'+(ui.folder===x.id&&!ui.trash?'active':'')+'">'+symbol('folder')+' '+esc(x.name)+'</button>'}).join('')+
+        '<div class="fs-side-caption">SYSTEM</div><button data-fs-action="trash" class="'+(ui.trash?'active':'')+'">'+symbol('text')+' Trash <small>'+store.items.filter(function(x){return x.deleted}).length+'</small></button>'+
+      '</aside><section class="fs-center"><div class="fs-location">'+(ui.trash?'<strong>Trash</strong>':getPath(ui.folder).map(function(p){return '<button data-fs-folder="'+esc(p.id)+'">'+esc(p.name)+'</button>'}).join('<span>/</span>'))+'</div>'+
+        '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="Search this workspace" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="Switch sort">SORT: '+(ui.sort==='name'?'NAME':'RECENT')+'</button></div>'+
+        '<div class="fs-list" role="listbox" aria-label="Files">'+
+          (data.length?data.map(function(i){return '<button class="fs-row '+(ui.selected===i.id?'selected':'')+'" data-fs-select="'+esc(i.id)+'" aria-selected="'+(ui.selected===i.id)+'" title="Double-click to open">'+
+            '<span class="fs-row-icon">'+symbol(i.type)+'</span><span class="fs-row-name">'+esc(i.name)+'</span><span class="fs-row-type">'+esc(i.type.toUpperCase())+'</span><span class="fs-row-date">'+esc(prettyDate(i.modified))+'</span></button>'}).join(''):
+          '<div class="fs-empty"><strong>'+(ui.trash?'Trash is empty':'Nothing here yet.')+'</strong><p>'+(ui.trash?'Deleted items appear here.':'Create a document or folder to start working.')+'</p></div>')+
+        '</div><div class="fs-status">'+data.length+' item(s) · '+store.items.filter(isVisible).length+' in workspace'+(ui.trash?'<button data-fs-action="empty">Empty Trash</button>':'')+'</div></section>'+
+        '<aside class="fs-inspector"><div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
+      '</div>'+modal()+'</div>';
+  }
+  function renderNotes(){
+    var notes=store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).sort(function(a,b){return b.modified.localeCompare(a.modified)});
+    var current=item(ui.notesId);if(!current||!isVisible(current)||current.type!=='text'){current=notes[0]||null;ui.notesId=current?current.id:null}
+    return '<div class="fs-notes"><div class="fs-topline"><div><span class="win-eyebrow">LOCAL TEXT EDITOR / NOTES</span><h2>Notes<span class="fs-hot">.</span></h2></div><span class="fs-runtime">AUTO-SAVED IN YOUR BROWSER</span></div>'+
+      '<div class="fs-notesbar"><button data-fs-action="new-note" class="fs-tool primary">+ New note</button><button data-fs-action="export" class="fs-tool" '+(!current?'disabled':'')+'>Export text</button><span id="fsSaveStatus" aria-live="polite">All changes saved locally</span></div>'+
+      '<div class="fs-notesbody"><aside class="fs-notelist"><div class="fs-side-caption">DOCUMENTS / '+notes.length+'</div>'+
+      (notes.length?notes.map(function(i){return '<button data-fs-note="'+esc(i.id)+'" class="'+(current&&current.id===i.id?'active':'')+'"><strong>'+esc(i.name)+'</strong><small>'+esc(i.body.replace(/\s+/g,' ').slice(0,54)||'Empty document')+'</small></button>'}).join(''):'<p class="fs-no-note">Create a note to begin.</p>')+'</aside>'+
+      '<section class="fs-editor">'+(current?'<label class="fs-editor-caption" for="fsNoteTitle">DOCUMENT NAME</label><input id="fsNoteTitle" data-fs-note-title maxlength="80" value="'+esc(current.name)+'" autocomplete="off"/>'+
+        '<div class="fs-editor-sub"><span>PLAIN TEXT / MARKDOWN</span><span id="fsChars">'+current.body.length+' characters</span></div>'+
+        '<textarea id="fsNoteBody" data-fs-note-body spellcheck="true" placeholder="Write something worth keeping…">'+esc(current.body)+'</textarea>'+
+        '<div class="fs-editor-footer"><span>Private to this browser · no cloud sync</span><button data-fs-action="delete-note" data-fs-id="'+esc(current.id)+'">Move to Trash</button></div>':
+      '<div class="fs-empty-detail"><strong>No document selected</strong><p>Create your first note.</p></div>')+'</section></div></div>';
+  }
+  function renderActivity(){
+    var running=bridge&&bridge.windows?bridge.windows():[];
+    return '<div class="fs-activity"><div class="fs-topline"><div><span class="win-eyebrow">SYSTEM / SESSION CENTER</span><h2>Activity<span class="fs-hot">.</span></h2></div><span class="fs-runtime">LIVE BROWSER SESSION</span></div>'+
+      '<div class="fs-sysmetrics"><div><small>OPEN APPS</small><strong>'+running.length+'</strong></div><div><small>LOCAL DOCUMENTS</small><strong>'+store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).length+'</strong></div><div><small>STORAGE MODE</small><strong>LOCAL</strong></div></div>'+
+      '<div class="fs-activity-columns"><section><div class="fs-section-heading">RUNNING WINDOWS</div>'+
+        (running.length?running.map(function(w){return '<div class="fs-process"><div><strong>'+esc(w.name)+'</strong><small>'+esc(w.minimized?'Minimized':w.maximized?'Maximized':'Window')+'</small></div><button data-fs-focus="'+esc(w.id)+'">Focus</button><button data-fs-close="'+esc(w.id)+'">Close</button></div>'}).join(''):'<div class="fs-empty"><strong>No open app windows.</strong></div>')+
+        '<div class="fs-activity-foot">Numbers describe this webpage only, not your computer CPU or memory.</div></section>'+
+        '<section><div class="fs-section-heading">ACTIVITY HISTORY <button data-fs-action="clear-events">Clear</button></div>'+
+          (store.events.length?store.events.map(function(e){return '<div class="fs-event"><span class="fs-event-pip"></span><div><strong>'+esc(e.text)+'</strong><small>'+esc(new Date(e.when).toLocaleString('zh-CN'))+'</small></div></div>'}).join(''):'<div class="fs-empty">No recent activity.</div>')+
+      '</section></div></div>';
+  }
+  function rerender(which){var id=which||'files';var el=document.querySelector('#app-'+id+' .window-content');if(el)el.innerHTML=api.render(id)}
+  function refresh(){rerender('files');rerender('activity')}
+  function updateCount(){var badge=document.getElementById('osActivityCount');if(badge)badge.textContent=String(store.events.length)}
+  function commitDelete(id,forever){
+    if(!item(id))return;
+    if(forever){
+      transact(function(s){var ids=new Set([id]);var changed=true;while(changed){changed=false;s.items.forEach(function(i){if(ids.has(i.parent)&&!ids.has(i.id)){ids.add(i.id);changed=true}})}s.items=s.items.filter(function(i){return !ids.has(i.id)})},'Permanently removed file or folder');
+    }else transact(function(s){s.items.find(function(i){return i.id===id}).deleted=true},'Moved item to Trash');
+    ui.selected=null;refresh();rerender('notes');
+  }
+  function exportText(i){
+    if(!i||i.type!=='text')return;
+    download(new Blob([i.body],{type:'text/plain;charset=utf-8'}),i.name);
+  }
+  function download(blob,name){
+    var u=URL.createObjectURL(blob),link=document.createElement('a');link.href=u;link.download=name;document.body.append(link);link.click();link.remove();setTimeout(function(){URL.revokeObjectURL(u)},1500);
+    activity('Exported '+name);
+  }
+  function confirmModal(form){
+    var m=ui.modal;if(!m)return;var i=m.id?item(m.id):null;var name=(form.querySelector('#fsName')||{}).value;
+    if(name!==undefined){name=name.trim();if(!name||name.includes('/')||name.includes('\\')||name==='.'||name==='..'){report('文件名不能为空，也不能包含斜杠');return}if(name.length>80){report('文件名最多 80 个字符');return}}
+    var ok=true;
+    if(m.action==='create-folder'||m.action==='create-text'){
+      var type=m.action==='create-folder'?'folder':'text',parent=ui.trash?'root':ui.folder;
+      ok=transact(function(s){if(s.items.some(function(i){return i.parent===parent&&!i.deleted&&i.name===name})){throw Error('同一位置已有这个名称')}
+        var t=now(),id=uid();s.items.push({id:id,type:type,parent:parent,name:name,body:'',url:'',created:t,modified:t,deleted:false});ui.selected=id;
+        if(type==='text'){ui.notesId=id}
+      },'Created '+name);
+    }else if(m.action==='rename'&&i)ok=transact(function(s){var x=s.items.find(function(i){return i.id===m.id});x.name=name;x.modified=now()},'Renamed to '+name);
+    else if(m.action==='delete'&&i){commitDelete(i.id,false)}
+    else if(m.action==='destroy'&&i){commitDelete(i.id,true)}
+    else if(m.action==='empty'){ok=transact(function(s){s.items=s.items.filter(function(i){return !i.deleted&&!isChildOfFrom(s.items,i.id)})},'Emptied Trash');ui.selected=null}
+    if(ok){ui.modal=null;refresh();rerender('notes');if((m.action==='create-text')&&bridge)bridge.open('notes')}
+  }
+  function isChildOfFrom(items,id){
+    var cur=items.find(function(x){return x.id===id}),visited=new Set();
+    while(cur&&!visited.has(cur.id)){visited.add(cur.id);var parent=items.find(function(x){return x.id===cur.parent});
+      if(parent&&parent.deleted)return true;cur=parent}return false;
+  }
+  function action(a,id){
+    var i=id?item(id):null;
+    switch(a){
+      case 'create-folder':case 'create-text':ui.modal={action:a};rerender('files');break;
+      case 'cancel':ui.modal=null;rerender('files');break;
+      case 'rename':case 'delete':case 'destroy':if(i){ui.modal={action:a,id:id};rerender('files')}break;
+      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
+      case 'trash':ui.trash=!ui.trash;ui.selected=null;ui.search='';rerender('files');break;
+      case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
+      case 'empty':ui.modal={action:'empty'};rerender('files');break;
+      case 'sort':ui.sort=ui.sort==='name'?'date':'name';rerender('files');break;
+      case 'import':document.getElementById('fsImport')?.click();break;
+      case 'backup':download(new Blob([JSON.stringify({version:store.version,items:store.items},null,2)],{type:'application/json'}),'AincFh-OS-workspace-backup.json');break;
+      case 'new-note':{
+        var id=uid(),t=now();
+        if(transact(function(s){s.items.push({id:id,name:'Untitled '+new Date().toLocaleDateString('zh-CN')+'.md',type:'text',parent:'notes',body:'',url:'',created:t,modified:t,deleted:false})},'Created note')){
+          ui.notesId=id;rerender('notes');refresh();document.getElementById('fsNoteTitle')?.focus();
+        }break;
+      }
+      case 'delete-note':if(i){commitDelete(i.id,false);ui.notesId=null;rerender('notes')}break;
+      case 'export':exportText(item(ui.notesId));break;
+      case 'clear-events':transact(function(s){s.events=[]});rerender('activity');updateCount();break;
+    }
+  }
+  function handleClick(e){
+    var b=e.target.closest('button');if(!b)return;
+    if(b.hasAttribute('data-fs-action')){action(b.dataset.fsAction,b.dataset.fsId);return}
+    if(b.hasAttribute('data-fs-folder')){ui.folder=b.dataset.fsFolder;ui.trash=false;ui.search='';ui.selected=null;rerender('files');return}
+    if(b.hasAttribute('data-fs-select')){ui.selected=b.dataset.fsSelect;rerender('files');return}
+    if(b.hasAttribute('data-fs-note')){ui.notesId=b.dataset.fsNote;rerender('notes');return}
+    if(b.hasAttribute('data-fs-focus')){bridge&&bridge.focus(b.dataset.fsFocus);rerender('activity');return}
+    if(b.hasAttribute('data-fs-close')){bridge&&bridge.close(b.dataset.fsClose);rerender('activity');return}
+  }
+  function handleDoubleClick(e){
+    var row=e.target.closest('[data-fs-select]');if(row){e.preventDefault();ui.selected=row.dataset.fsSelect;action('open',ui.selected)}
+  }
+  document.addEventListener('click',handleClick);
+  document.addEventListener('dblclick',handleDoubleClick);
+  document.addEventListener('submit',function(e){if(e.target.id==='fsDialog'){e.preventDefault();confirmModal(e.target)}});
+  document.addEventListener('input',function(e){
+    if(e.target.matches('[data-fs-search]')){
+      ui.search=e.target.value;var focus=e.target.selectionStart;rerender('files');var x=document.querySelector('#fsSearch');if(x){x.focus();x.setSelectionRange(focus,focus)}return;
+    }
+    if(!e.target.matches('[data-fs-note-body],[data-fs-note-title]'))return;
+    var target=item(ui.notesId);if(!target)return;
+    var field=e.target.matches('[data-fs-note-body]')?'body':'name';
+    var text=e.target.value;
+    if(field==='name'&&(!text.trim()||text.length>80))return;
+    if(field==='body'&&text.length>100000){report('单个文档最多 100,000 字符');return}
+    var ok=transact(function(s){var x=s.items.find(function(i){return i.id===target.id});x[field]=text;x.modified=now()});
+    var status=document.getElementById('fsSaveStatus');if(status)status.textContent=ok?'Saved locally ✓':'Save failed';
+    var chars=document.getElementById('fsChars');if(chars&&field==='body')chars.textContent=text.length+' characters';
+  });
+  document.addEventListener('change',function(e){
+    if(e.target.id==='fsImport'){
+      var file=e.target.files&&e.target.files[0];if(!file)return;
+      if(file.size>120000){report('只能导入不超过 120 KB 的文本文件');return}
+      file.text().then(function(body){
+        var name=file.name.slice(0,80),parent=ui.trash?'root':ui.folder,t=now();
+        if(transact(function(s){s.items.push({id:uid(),name:name,type:'text',parent:parent,body:body.slice(0,100000),url:'',created:t,modified:t,deleted:false})},'Imported '+name)){refresh();report('已导入 '+name)}
+      }).catch(function(){report('读取文件失败')});
+      e.target.value='';
+    }
+  });
+  var api={
+    attach:function(b){bridge=b;updateCount()},
+    render:function(id){if(id==='files')return renderFiles();if(id==='notes')return renderNotes();if(id==='activity')return renderActivity();return ''},
+    afterOpen:function(id){if(id==='files'||id==='notes'||id==='activity')updateCount()},
+    summary:function(){return {files:store.items.filter(isVisible).length,notes:store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).length,events:store.events.length}},
+    search:function(q){var s=q.toLowerCase().trim();if(!s)return[];return store.items.filter(isVisible).filter(function(i){return i.name.toLowerCase().includes(s)}).slice(0,6).map(function(i){return{id:i.id,title:i.name,sub:'LOCAL '+i.type.toUpperCase(),terms:'files notes document '+i.name,icon:icon(i.type),action:function(){if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes')}else{ui.folder=i.type==='folder'?i.id:i.parent;ui.selected=i.id;bridge&&bridge.open('files')}}}})},
+    openByName:function(name){var i=store.items.find(function(x){return isVisible(x)&&x.name.toLowerCase()===String(name).toLowerCase()});if(!i)return false;action('open',i.id);return true},
+    list:function(){return store.items.filter(isVisible).map(function(i){return (i.type==='folder'?'DIR ':i.type==='link'?'LINK':'FILE')+' '+i.name}).join('\n')},
+    notify:activity,
+    desktopMenu:function(x,y){
+      var old=document.getElementById('osContextMenu');if(old)old.remove();
+      var menu=document.createElement('div');menu.id='osContextMenu';menu.className='os-context-menu';
+      menu.innerHTML='<div class="os-context-label">AINCFH OS / DESKTOP</div><button data-os-context="files">Open Files</button><button data-os-context="notes">Open Notes</button><button data-os-context="activity">Activity Center</button><div class="os-context-divider"></div><button data-os-context="tile">Tile Windows</button><button data-os-context="settings">Preferences</button>';
+      menu.style.left=Math.max(8,Math.min(x,innerWidth-222))+'px';menu.style.top=Math.max(60,Math.min(y,innerHeight-255))+'px';
+      document.body.append(menu);
+    },
+    closeDesktopMenu:function(){document.getElementById('osContextMenu')?.remove()}
+  };
+  document.addEventListener('contextmenu',function(e){
+    if(e.target.closest('#desktop')&&!e.target.closest('.os-window')&&!e.target.closest('input,textarea,[contenteditable]')){e.preventDefault();api.desktopMenu(e.clientX,e.clientY)}
+  });
+  document.addEventListener('click',function(e){
+    var m=e.target.closest('[data-os-context]');if(m){
+      var cmd=m.dataset.osContext;api.closeDesktopMenu();
+      if(cmd==='tile'){bridge&&bridge.arrange('tile')}else{bridge&&bridge.open(cmd)}
+      return;
+    }
+    if(!e.target.closest('#osContextMenu'))api.closeDesktopMenu();
+  });
+  document.addEventListener('keydown',function(e){if(e.key==='Escape'){api.closeDesktopMenu();if(ui.modal){ui.modal=null;rerender('files')}}});
+  window.AincWorkspace=api;
+  if(!localStorage.getItem(KEY)){try{save(store)}catch(e){}}
+})();
