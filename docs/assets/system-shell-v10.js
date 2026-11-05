@@ -13,6 +13,11 @@ const html=x=>String(x??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'
 function read(k,f){try{const x=JSON.parse(localStorage.getItem(k));return x??f}catch{return f}}
 function save(k,v){try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}}
 pinSet=new Set(read(PIN_KEY,initialPins));order=read(ORDER_KEY,[]);recent=read(RECENT_KEY,[]);
+const OLD_DEFAULT_DOCK=['apps','projects','files','notes','tasks','calculator','clock','paint','terminal','settings','activity','taskmanager','about','contact','stack'];
+// Only migrate the exact previous 15-app defaults. Never overwrite custom pins.
+if(pinSet.size===OLD_DEFAULT_DOCK.length&&OLD_DEFAULT_DOCK.every(id=>pinSet.has(id))){
+ pinSet=new Set(initialPins);order=[];save(PIN_KEY,[...pinSet]);save(ORDER_KEY,[]);
+}
 if(!Array.isArray(order))order=[];if(!Array.isArray(recent))recent=[];
 const dictionary={
 'en-US':{start:'Start',search:'Search applications and commands…',pinned:'Pinned',all:'All apps',running:'Running',recent:'Recently opened',empty:'No matching applications',quick:'Quick access',system:'System',files:'Files',settings:'Settings',activity:'Activity Center',power:'Power',sleep:'Sleep',lock:'Lock screen',restart:'Restart',shutdown:'Shut down',cancel:'Cancel',confirm:'Confirm',wake:'Wake up',unlock:'Unlock desktop',powerOn:'Turn on AincFh OS',off:'AincFh OS is shut down',offDetail:'This browser desktop has been shut down. Your computer remains on.',sleepDetail:'The browser desktop is sleeping. Click or press a key to wake.',lockDetail:'This is a visual lock screen, not password protection.',restartTitle:'Restart AincFh OS?',restartDetail:'Reload the web desktop. Saved browser data is retained.',shutdownTitle:'Shut down AincFh OS?',shutdownDetail:'Close the virtual desktop session. This never shuts down your device.',minimize:'Minimize',close:'Close window',focus:'Bring to front',open:'Open',pin:'Keep in Dock',unpin:'Remove from Dock',preview:'Window controls',notRunning:'Not running',status:'Browser desktop · local only',showDesktop:'Show desktop',tile:'Tile windows',apps:'Applications',allApps:'All applications',recently:'Recent',browse:'Browse',launch:'Launch',active:'Active',window:'Window',desktop:'Desktop',noRecent:'No recent apps',browserOnly:'Browser session only',confirmRequired:'Choose an action to continue',powerMenu:'Power options'},
@@ -334,6 +339,11 @@ function attach(data){
 }
 window.AincShell={
  attach,syncDock,recordOpen,applyDock,togglePin,showStart,
+ resetDock:()=>{
+  pinSet=new Set(initialPins);order=[];
+  save(PIN_KEY,[...pinSet]);save(ORDER_KEY,order);
+  syncDock();return true;
+ },
  power:kind=>{if(['sleep','lock'].includes(kind))enterPower(kind,false);else powerConfirm(kind)},
  get state(){return{power:powerState,startOpen:open,pins:[...pinSet],recent:recent.slice()}}
 };
