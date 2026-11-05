@@ -1,0 +1,240 @@
+/* AincFh Files 14 — native-feeling Finder / Explorer / Plasma sidebar.
+   No browser-default ButtonFace surfaces; complete system theme inheritance. */
+#app-files .window-content{container-type:inline-size;container-name:files;isolation:isolate}
+#app-files .fs-shell{font-family:inherit;background:var(--panel);color:var(--ink)}
+#app-files .fs-browser{position:relative;overflow:hidden;background:var(--panel);border-top:1px solid var(--line2)}
+#app-files .fs-sidebar{
+ position:relative;z-index:2;flex:0 0 var(--fs-sidebar-width,218px);width:var(--fs-sidebar-width,218px);min-width:0;
+ display:flex;flex-direction:column;overflow:hidden;padding:0;
+ border-right:1px solid var(--line);background:linear-gradient(150deg,color-mix(in srgb,var(--panel2) 94%,var(--bg)),var(--panel2));
+ scrollbar-width:thin;scrollbar-color:var(--line) transparent;user-select:none;-webkit-user-select:none
+}
+#app-files .fs-sidebar-brand{
+ display:flex;align-items:center;gap:12px;padding:18px 17px 16px;border-bottom:1px solid var(--line2);flex:0 0 auto;
+ background:linear-gradient(110deg,color-mix(in srgb,var(--hot) 6%,transparent),transparent 84%);
+}
+#app-files .fs-brand-symbol{
+ flex:0 0 32px;width:32px;height:32px;border-radius:10px;display:grid;place-items:center;
+ font:860 11px ui-monospace,Consolas,monospace;letter-spacing:-.03em;
+ color:var(--hot);border:1px solid color-mix(in srgb,var(--hot) 37%,transparent);background:color-mix(in srgb,var(--hot) 9%,var(--panel));
+ box-shadow:inset 0 1px color-mix(in srgb,var(--hot) 12%,transparent)
+}
+#app-files .fs-sidebar-brand>div:last-child{display:flex;flex-direction:column;gap:5px;min-width:0}
+#app-files .fs-sidebar-brand b{font-size:12px;font-weight:850;white-space:nowrap;letter-spacing:-.035em}
+#app-files .fs-sidebar-brand em{font-style:normal;color:var(--hot)}
+#app-files .fs-sidebar-brand small{font:700 8px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.07em}
+#app-files .fs-sidebar-scroller{flex:1;min-height:0;overflow-y:auto;overflow-x:hidden;padding:13px 10px 16px;scrollbar-width:thin;scrollbar-color:color-mix(in srgb,var(--hot) 23%,transparent) transparent}
+#app-files .fs-nav-group{margin-bottom:17px;min-width:0}
+#app-files .fs-nav-group:last-child{margin-bottom:0}
+#app-files .fs-nav-heading{
+ display:flex;align-items:center;justify-content:space-between;gap:10px;
+ padding:7px 9px 10px;color:var(--muted);font:790 9px ui-monospace,Consolas,monospace;letter-spacing:.085em
+}
+#app-files .fs-nav-heading>span{font:730 9px ui-monospace,Consolas,monospace;letter-spacing:0;color:var(--muted)}
+#app-files .fs-sidebar :is(.fs-nav-entry,.fs-nav-link,.fs-tree-open,.fs-tree-expander,.fs-tree-star,.fs-fav-remove){
+ -webkit-appearance:none;appearance:none;background:transparent!important;box-shadow:none;border:1px solid transparent;
+ font-family:inherit;color:var(--sub);cursor:pointer;
+}
+#app-files .fs-nav-entry{
+ width:100%;display:flex;align-items:center;gap:10px;min-height:35px;
+ padding:8px 10px;border-radius:8px;text-align:left;font-size:11px;font-weight:660;line-height:1.35;white-space:nowrap;overflow:hidden
+}
+#app-files .fs-nav-entry svg{width:17px;height:17px;flex:0 0 17px;color:var(--muted)}
+#app-files .fs-nav-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;flex:1}
+#app-files .fs-nav-entry:hover,#app-files .fs-nav-link:hover,
+#app-files .fs-tree-line:hover{background:color-mix(in srgb,var(--hot) 7%,var(--soft))!important;color:var(--ink)}
+#app-files .fs-sidebar :is(.fs-nav-entry.is-active,.fs-nav-link.is-active),
+#app-files .fs-tree-line.is-active{
+ background:color-mix(in srgb,var(--hot) 13%,transparent)!important;color:var(--hot);
+ border-color:color-mix(in srgb,var(--hot) 26%,transparent)!important
+}
+#app-files .fs-sidebar :is(.fs-nav-entry.is-active,.fs-nav-link.is-active) svg,
+#app-files .fs-tree-line.is-active svg{color:var(--hot)}
+#app-files .fs-nav-entry.is-active:before,#app-files .fs-tree-line.is-active:before{
+ content:"";position:absolute;width:2px;height:19px;background:var(--hot);border-radius:2px;left:0
+}
+#app-files .fs-nav-entry{position:relative}
+#app-files .fs-nav-badge{
+ flex:0 0 auto;min-width:18px;border-radius:4px;
+ color:var(--muted);font:750 9px ui-monospace,Consolas,monospace;text-align:right
+}
+#app-files .fs-fav-row{display:flex;align-items:center;min-width:0;border-radius:8px;position:relative}
+#app-files .fs-fav-row .fs-nav-entry{flex:1;min-width:0;padding-right:3px}
+#app-files .fs-fav-row .fs-fav-remove{
+ flex:0 0 24px;width:24px;height:25px;display:grid;place-items:center;padding:0;
+ opacity:0;font-size:16px;border-radius:6px;color:var(--muted);background:transparent!important
+}
+#app-files .fs-fav-row:hover .fs-fav-remove,#app-files .fs-fav-remove:focus-visible{opacity:1}
+#app-files .fs-fav-remove:hover{color:#e87886!important;background:color-mix(in srgb,#e87886 13%,transparent)!important}
+#app-files .fs-nav-link{
+ display:flex;align-items:center;gap:9px;width:100%;font-size:10px;min-height:33px;font-weight:720;
+ padding:8px 11px;border-radius:8px;text-align:left;color:var(--sub);margin-top:5px
+}
+#app-files .fs-nav-link svg{width:15px;height:15px;color:var(--hot)}
+#app-files .fs-nav-empty{font-size:10px;color:var(--muted);padding:9px 12px;line-height:1.5;margin:0}
+#app-files .fs-tree{min-width:0}
+#app-files .fs-tree-node{min-width:0}
+#app-files .fs-tree-line{
+ position:relative;display:flex;align-items:center;gap:2px;min-width:0;
+ border:1px solid transparent;border-radius:8px;margin:1px 0;
+ padding-left:calc(var(--tree-depth,0)*12px + 2px);min-height:34px
+}
+#app-files .fs-tree-expander,#app-files .fs-tree-placeholder{
+ display:grid;place-items:center;flex:0 0 19px;width:19px;height:24px;padding:0;
+}
+#app-files .fs-tree-expander svg{width:12px;height:12px;opacity:.6;transform:rotate(0deg);transition:transform .16s}
+#app-files .fs-tree-expander.expanded svg{transform:rotate(90deg)}
+#app-files .fs-tree-expander:hover svg{opacity:1;color:var(--hot)}
+#app-files .fs-tree-open{
+ display:flex;align-items:center;gap:8px;flex:1;min-width:0;
+ padding:6px 0;min-height:32px;text-align:left;font-size:11px;font-weight:670
+}
+#app-files .fs-tree-open>svg{width:15px;height:15px;flex:0 0 15px;color:var(--muted)}
+#app-files .fs-tree-open>span{flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#app-files .fs-tree-open>small{font:690 9px ui-monospace,Consolas,monospace;color:var(--muted);padding-right:4px}
+#app-files .fs-tree-star{flex:0 0 22px;width:22px;height:24px;display:grid;place-items:center;padding:0;opacity:0;border-radius:6px}
+#app-files .fs-tree-star svg{width:14px;height:14px}
+#app-files .fs-tree-line:hover .fs-tree-star,#app-files .fs-tree-star:focus-visible,#app-files .fs-tree-star.is-starred{opacity:1}
+#app-files .fs-tree-star.is-starred svg{color:var(--hot)}
+#app-files .fs-tree-star:hover{color:var(--hot)!important}
+#app-files .fs-storage{flex:0 0 auto;border-top:1px solid var(--line2);padding:13px 18px 16px;background:color-mix(in srgb,var(--bg) 17%,transparent)}
+#app-files .fs-storage-title{display:flex;align-items:center;gap:9px;color:var(--sub);font-size:10px;font-weight:730}
+#app-files .fs-storage-title svg{width:15px;height:15px;color:var(--hot)}
+#app-files .fs-storage-meter{height:4px;border-radius:4px;overflow:hidden;background:var(--line);margin:11px 0 8px}
+#app-files .fs-storage-meter i{display:block;height:100%;background:linear-gradient(90deg,var(--hot),color-mix(in srgb,var(--hot) 60%,#8d7cdb));border-radius:4px;transition:width .25s}
+#app-files .fs-storage-detail{font:700 9px ui-monospace,Consolas,monospace;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+#app-files .fs-sidebar-resizer{position:relative;z-index:3;flex:0 0 5px;cursor:col-resize;background:transparent;touch-action:none;margin-left:-3px;margin-right:-2px}
+#app-files .fs-sidebar-resizer:hover,#app-files .fs-sidebar-resizer:active{background:color-mix(in srgb,var(--hot) 34%,transparent)}
+#app-files .fs-browser.fs-sidebar-hidden .fs-sidebar,#app-files .fs-browser.fs-sidebar-hidden .fs-sidebar-resizer{display:none!important}
+/* File table uses explicit native-style surfaces, never browser default button UI. */
+#app-files .fs-center{min-width:0;flex:1;background:var(--panel)}
+#app-files .fs-location{
+ min-height:47px;flex:0 0 auto;display:flex;align-items:center;gap:9px;
+ padding:7px 13px;border-bottom:1px solid var(--line2);background:color-mix(in srgb,var(--panel2) 24%,var(--panel))
+}
+#app-files .fs-history{display:flex;align-items:center;gap:2px;flex:0 0 auto;padding-right:8px;border-right:1px solid var(--line2)}
+#app-files .fs-history button{
+ flex:0 0 28px;width:28px;height:28px;display:grid;place-items:center;background:transparent!important;
+ color:var(--sub);border:1px solid transparent;border-radius:7px;padding:5px
+}
+#app-files .fs-history button svg{width:16px;height:16px}
+#app-files .fs-history button:hover:not(:disabled){background:var(--soft)!important;color:var(--hot);border-color:var(--line)}
+#app-files .fs-history button:disabled{opacity:.3;cursor:default}
+#app-files .fs-crumbs{display:flex;align-items:center;gap:5px;min-width:0;overflow-x:auto;scrollbar-width:none;white-space:nowrap;font-size:11px;color:var(--text)}
+#app-files .fs-crumbs button{background:transparent!important;color:var(--sub);padding:7px 8px;border-radius:6px;font-weight:690;font-size:11px}
+#app-files .fs-crumbs button:last-of-type,#app-files .fs-crumbs strong{color:var(--ink);font-weight:770}
+#app-files .fs-crumbs button:hover{color:var(--hot);background:var(--soft)!important}
+#app-files .fs-path-divider{color:var(--muted);font-size:10px}
+#app-files .fs-controls{padding:12px 14px 11px}
+#app-files .fs-controls label{height:35px;border-radius:8px;border-color:var(--line);background:var(--soft);transition:border-color .13s}
+#app-files .fs-controls label:focus-within{border-color:var(--hot);box-shadow:0 0 0 2px color-mix(in srgb,var(--hot) 12%,transparent)}
+#app-files .fs-controls input{font-size:11px}
+#app-files .fs-controls button{min-height:35px;border-radius:8px;background:transparent!important;color:var(--sub);padding:8px 11px}
+#app-files .fs-controls button:hover{background:var(--soft)!important;color:var(--hot)}
+#app-files .fs-table-header{
+ display:grid;grid-template-columns:minmax(105px,1fr) 57px 70px;gap:8px;align-items:center;
+ font:770 9px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.045em;
+ padding:9px 20px 10px 54px;min-height:29px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);
+ background:color-mix(in srgb,var(--panel2) 34%,var(--panel))
+}
+#app-files .fs-table-header span:last-child{text-align:right}
+#app-files .fs-table-header span:nth-child(2){text-align:right}
+#app-files .fs-list{padding:6px 8px 10px;overflow-y:auto;overflow-x:hidden}
+#app-files .fs-row{
+ appearance:none;-webkit-appearance:none;display:grid;grid-template-columns:26px minmax(105px,1fr) 57px 70px;
+ gap:8px;min-height:46px;width:100%;background:transparent!important;color:var(--text);
+ padding:0 11px;border:1px solid transparent;border-bottom-color:var(--line2);
+ border-radius:7px;margin:1px 0;box-shadow:none;text-align:left
+}
+#app-files .fs-row:hover{background:color-mix(in srgb,var(--hot) 5%,var(--soft))!important;border-color:var(--line);color:var(--ink)}
+#app-files .fs-row.selected{
+ background:color-mix(in srgb,var(--hot) 12%,transparent)!important;
+ border-color:color-mix(in srgb,var(--hot) 34%,transparent);color:var(--ink)
+}
+#app-files .fs-row:focus-visible{outline:2px solid var(--hot);outline-offset:-2px}
+#app-files .fs-row-icon{width:27px;height:27px;border:1px solid var(--line2);border-radius:8px;background:color-mix(in srgb,var(--hot) 8%,var(--soft));color:var(--hot)}
+#app-files .fs-row-icon svg{width:16px;height:16px}
+#app-files .fs-row-name{font-size:11px;font-weight:730;letter-spacing:-.008em}
+#app-files .fs-row-type,#app-files .fs-row-date{font-size:9px}
+#app-files .fs-inspector{background:var(--panel2);width:190px;flex:0 0 190px;padding:15px 14px}
+#app-files .fs-inspector .fs-side-caption{margin:0 0 17px}
+#app-files .fs-inspector-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+#app-files .fs-inspector-close{display:none;background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--sub);font-size:18px}
+#app-files .fs-inspector-close:hover{color:var(--hot);border-color:var(--hot)}
+
+#app-files .fs-status{background:color-mix(in srgb,var(--panel2) 26%,var(--panel));padding:7px 14px;font-size:9.5px}
+#app-files .fs-toolbar .fs-tool,#app-files .fs-detail-actions button{appearance:none;-webkit-appearance:none}
+#app-files .fs-topline{padding:16px 21px 8px}
+#app-files .fs-topline h2{font-size:27px}
+#app-files .fs-toolbar{padding:9px 21px 13px}
+#app-files .fs-tool{border-radius:7px;min-height:34px;font-size:10px}
+#app-files .fs-tool:not(.primary){background:var(--soft);color:var(--text)}
+#app-files .fs-tool:hover{box-shadow:inset 0 0 0 1px color-mix(in srgb,var(--hot) 20%,transparent)}
+/* Responsive by the actual window width (not the outer browser viewport). */
+@container files (max-width:780px){
+ #app-files .fs-inspector{display:none}
+ #app-files .fs-browser.fs-inspector-open .fs-inspector{
+   display:block;position:absolute;right:0;top:47px;bottom:0;z-index:18;
+   width:min(308px,86%);max-width:86%;flex-basis:auto;
+   border-left:1px solid var(--line);box-shadow:-22px 0 55px rgba(0,0,0,.35);
+   overflow-y:auto;background:var(--panel2)
+ }
+ #app-files .fs-browser.fs-inspector-open .fs-inspector-close{display:block}
+ #app-files .fs-sidebar{flex-basis:min(var(--fs-sidebar-width,218px),37%);width:min(var(--fs-sidebar-width,218px),37%)}
+ #app-files .fs-table-header{grid-template-columns:minmax(100px,1fr) 57px 70px}
+}
+@container files (max-width:580px){
+ #app-files .fs-sidebar{position:absolute;left:0;top:0;bottom:0;z-index:15;width:min(270px,85%)!important;max-width:85%;box-shadow:22px 0 60px rgba(0,0,0,.4)}
+ #app-files .fs-browser:not(.fs-mobile-sidebar-open) .fs-sidebar{display:none}
+ #app-files .fs-browser.fs-mobile-sidebar-open .fs-sidebar{display:flex}
+ #app-files .fs-sidebar-resizer{display:none!important}
+ #app-files .fs-center{width:100%}
+ #app-files .fs-table-header{grid-template-columns:minmax(80px,1fr) 57px;padding-left:52px}
+ #app-files .fs-table-header span:last-child,#app-files .fs-row-date{display:none}
+ #app-files .fs-row{grid-template-columns:26px minmax(85px,1fr) 57px}
+ #app-files .fs-nav-link{font-size:10px}
+ #app-files .fs-history{gap:0}
+ #app-files .fs-history button{width:23px;flex-basis:23px}
+ #app-files .fs-location{padding:6px 9px}
+ #app-files .fs-toolbar{padding:8px 10px;gap:5px}
+ #app-files .fs-topline{padding:10px 13px 5px}
+ #app-files .fs-topline h2{font-size:23px}
+}
+@media(prefers-reduced-motion:reduce){
+ #app-files :is(.fs-sidebar button,.fs-row,.fs-storage-meter i,.fs-tree-expander svg){transition:none!important}
+}
+
+/* Files v14.4: accessible keyboard hints and an OS-themed file context menu. */
+#app-files .fs-keyboard-hint{
+ padding:6px 16px 9px;color:var(--muted);font:650 9px/1.5 ui-monospace,Consolas,monospace;
+ border-bottom:1px solid var(--line2);white-space:normal
+}
+#app-files .fs-row[role="option"]:focus-visible{
+ outline:2px solid var(--hot);outline-offset:-2px;
+ box-shadow:inset 3px 0 0 var(--hot)
+}
+.fs-context-menu{
+ position:fixed;z-index:3000;min-width:192px;max-width:min(275px,calc(100vw - 16px));
+ border-radius:12px;border:1px solid var(--line);padding:7px;
+ box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 1px 0 var(--line2);
+ background:var(--panel2);backdrop-filter:blur(30px) saturate(145%);color:var(--ink);
+ animation:menuin .14s ease-out both
+}
+.fs-context-heading{
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ margin:0 5px 6px;padding:8px 8px 11px;
+ border-bottom:1px solid var(--line2);color:var(--sub);
+ font:800 10px/1.5 ui-monospace,Consolas,monospace
+}
+.fs-context-menu button{
+ appearance:none;-webkit-appearance:none;display:block;width:100%;
+ text-align:left;background:transparent!important;color:var(--text);
+ min-height:33px;padding:8px 12px;border:1px solid transparent;border-radius:7px;
+ font-family:inherit;font-size:11px;font-weight:700;line-height:1.4;transition:background .14s,color .14s
+}
+.fs-context-menu button:hover,.fs-context-menu button:focus-visible{
+ background:var(--soft)!important;color:var(--hot);border-color:var(--line);outline:0
+}
+.fs-context-menu button.danger{color:#e87979}
+.fs-context-menu button.danger:hover{background:rgba(232,121,121,.09)!important;color:#f7a6a6}
+@media(prefers-reduced-motion:reduce){.fs-context-menu{animation:none!important}}

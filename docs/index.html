@@ -1,0 +1,250 @@
+<!doctype html>
+<html lang="zh-CN" data-theme="dark" data-accent="amber">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#10121c" />
+  <meta name="description" content="AincFh OS — an interactive studio workspace for software, systems and design. Explore real projects, open app windows, and discover what gets built." />
+  <meta property="og:title" content="AincFh OS — Personal Workspace" />
+  <meta property="og:description" content="Design / Code / Systems — An interactive creative developer portfolio." />
+  <title>AincFh OS · Design / Code / Systems</title>
+  <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
+  <link rel="manifest" href="./manifest.webmanifest?v=11.2" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <link rel="apple-touch-icon" href="./assets/icon-192.png" />
+  <link rel="stylesheet" href="./assets/styles.css?v=motion-5" />
+  <link rel="stylesheet" href="./assets/os-desktop-v5.css?v=5.0.6" />
+  <link rel="stylesheet" href="./assets/workspace.css?v=9.3" />
+  <link rel="stylesheet" href="./assets/files-explorer-v14.css?v=14.4" />
+  <link rel="stylesheet" href="./assets/system-v7.css?v=8.1" />
+  <link rel="stylesheet" href="./assets/apps-v8.css?v=8.1" />
+  <link rel="stylesheet" href="./assets/paint-v9.css?v=9.3" />
+  <link rel="stylesheet" href="./assets/system-shell-v10.css?v=10.0" />
+  <link rel="stylesheet" href="./assets/ui-controls-v10.css?v=10.0" />
+  <link rel="stylesheet" href="./assets/system-monitor-v11.css?v=11.0" />
+  <link rel="stylesheet" href="./assets/system-performance-v11.css?v=11.0" />
+  <link rel="stylesheet" href="./assets/control-center-v11.css?v=11.3" />
+  <link rel="stylesheet" href="./assets/desktop-fusion-v12.css?v=12.1" />
+  <link rel="stylesheet" href="./assets/desktop-surface-v13.css?v=13.0" />
+  <link rel="stylesheet" href="./assets/theme-library-v13.css?v=13.0" />
+  <script src="./assets/i18n-catalog-v10.js?v=10.0" defer></script>
+  <script src="./assets/i18n-runtime-v10.js?v=11.0" defer></script>
+  <script src="./assets/storage-v8.js?v=8.1" defer></script>
+  <script src="./assets/workspace.js?v=14.4" defer></script>
+  <script src="./assets/settings-panel.js?v=13.2" defer></script>
+  <script src="./assets/apps-v8.js?v=8.1" defer></script>
+  <script src="./assets/paint-v9.js?v=9.3" defer></script>
+  <script src="./assets/clipboard-guard.js?v=7.0" defer></script>
+  <script src="./assets/system-shell-v10.js?v=13.2" defer></script>
+  <script src="./assets/system-monitor-v11.js?v=11.0" defer></script>
+  <script src="./assets/control-center-v11.js?v=11.3" defer></script>
+  <script src="./assets/desktop-fusion-v12.js?v=12.1" defer></script>
+  <script src="./assets/desktop-surface-v13.js?v=13.2" defer></script>
+  <script src="./assets/theme-library-v13.js?v=13.0" defer></script>
+  <script src="./assets/pwa-v11.js?v=11.3" defer></script>
+  <script src="./assets/ui-controls-v10.js?v=10.0" defer></script>
+  <script src="./assets/app.js?v=13.1" defer></script>
+</head>
+<body>
+  <div class="os-boot" aria-hidden="true">
+    <div class="os-boot-mark"><svg viewBox="0 0 80 80" aria-hidden="true"><path d="M40 4 72 22v36L40 76 8 58V22Z" fill="none" stroke="currentColor" stroke-width="2"/><path d="M40 18 59 29v22L40 62 21 51V29Z" fill="none" stroke="currentColor" stroke-opacity=".35"/></svg><strong>A</strong></div>
+    <div class="os-boot-name">AincFh <span>OS</span></div>
+    <div class="os-boot-caption">DESIGN / ENGINEERING / CREATIVE SYSTEMS</div>
+    <div class="os-boot-track"><i></i></div>
+    <div class="os-boot-caption os-boot-ready">INITIALIZING WORKSPACE...</div>
+  </div>
+  <svg class="svg-defs" aria-hidden="true" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+      <symbol id="i-hex" viewBox="0 0 24 24"><path d="M12 2 21 7.2v9.6L12 22l-9-5.2V7.2z"/></symbol>
+      <symbol id="i-grid" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></symbol>
+
+      <symbol id="i-fs-home" viewBox="0 0 24 24"><path d="m3 10 9-7 9 7v10H3z"/><path d="M9 20v-7h6v7"/></symbol>
+      <symbol id="i-fs-desktop" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="15" rx="2"/><path d="M9 21h6m-3-2v2"/></symbol>
+      <symbol id="i-fs-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10H3z"/></symbol>
+      <symbol id="i-fs-recent" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3.5 2.3"/></symbol>
+      <symbol id="i-fs-star" viewBox="0 0 24 24"><path d="m12 2.6 2.94 5.96 6.58.96-4.76 4.64 1.12 6.56L12 17.62l-5.88 3.1 1.12-6.56-4.76-4.64 6.58-.96z"/></symbol>
+      <symbol id="i-fs-trash" viewBox="0 0 24 24"><path d="M4 7h16M9 4h6m-9 3 1 13h10l1-13M10 11v6m4-6v6"/></symbol>
+      <symbol id="i-fs-drive" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="3"/><path d="M3 14h18M7 17h.01M10 17h.01"/></symbol>
+      <symbol id="i-fs-chevron" viewBox="0 0 24 24"><path d="m9 5 7 7-7 7"/></symbol>
+      <symbol id="i-fs-back" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7"/></symbol>
+      <symbol id="i-fs-forward" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7"/></symbol>
+      <symbol id="i-fs-up" viewBox="0 0 24 24"><path d="m5 14 7-7 7 7m-7-7v13"/></symbol>
+      <symbol id="i-fs-sidebar" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M10 4v16"/></symbol>
+      <symbol id="i-folder" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v10H3z"/></symbol>
+      <symbol id="i-code" viewBox="0 0 24 24"><path d="M8 5 2 12l6 7m8-14 6 7-6 7M14 3l-4 18"/></symbol>
+      <symbol id="i-terminal" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="17" rx="2.5"/><path d="m6 9 3.5 3L6 15m6 0h6"/></symbol>
+      <symbol id="i-user" viewBox="0 0 24 24"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-8 16-8 16 0"/></symbol>
+      <symbol id="i-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="m11 2-.5 2.2-2 1-2.2-.6-2 3.4 1.5 1.7v2.5L4 14l2 3.4 2.2-.6 2 1L11 20h3l.5-2.2 2-1 2.2.6 2-3.4-1.5-1.7v-2.5L20 8l-2-3.4-2.2.6-2-1L13 2z"/></symbol>
+      <symbol id="i-mail" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="m3 7 9 7 9-7"/></symbol>
+      <symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 6 6"/></symbol>
+      <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h16m-7-7 7 7-7 7"/></symbol>
+      <symbol id="i-link" viewBox="0 0 24 24"><path d="M9 15 15 9M13 5h6v6M19 14v5H5V5h5"/></symbol>
+      <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 15a8 8 0 0 1-11-11 8.6 8.6 0 1 0 11 11z"/></symbol>
+      <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.42 1.42m11.3 11.3 1.42 1.42M2 12h2m16 0h2M4.93 19.07l1.42-1.42m11.3-11.3 1.42-1.42"/></symbol>
+      <symbol id="i-motion" viewBox="0 0 24 24"><path d="M2 16c3 0 3-8 6-8s3 8 6 8 3-8 6-8h2"/></symbol>
+      <symbol id="i-max" viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></symbol>
+      <symbol id="i-copy" viewBox="0 0 24 24"><rect x="8" y="8" width="12" height="12" rx="2"/><path d="M16 8V4a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h3"/></symbol>
+      <symbol id="i-check" viewBox="0 0 24 24"><path d="m3 12 6 6L21 5"/></symbol>
+      <symbol id="i-calculator" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><rect x="7" y="5" width="10" height="4" rx="1"/><path d="M8 13h1m4 0h1m4 0h1M8 17h1m4 0h1m4 0h1"/></symbol>
+      <symbol id="i-checklist" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="m6 8 1.5 1.5L10 7m2 1h6M6 15l1.5 1.5L10 14m2 1h6"/></symbol>
+      <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 3"/></symbol>
+      <symbol id="i-apps" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></symbol>
+      <symbol id="i-paint" viewBox="0 0 24 24"><path d="M12 3a9 9 0 1 0 0 18h1.3a2.3 2.3 0 0 0 1.7-3.9 2 2 0 0 1 1.5-3.3H18a3 3 0 0 0 3-3A9 9 0 0 0 12 3Z"/><circle cx="7.5" cy="10" r=".8"/><circle cx="11.5" cy="6.8" r=".8"/><circle cx="16.5" cy="9" r=".8"/><circle cx="8.5" cy="15" r=".8"/></symbol>
+      <symbol id="i-file" viewBox="0 0 24 24"><path d="M5 2h9l5 5v14H5z"/><path d="M14 2v6h5M8 13h8M8 17h6"/></symbol>
+      <symbol id="i-image" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8" cy="9" r="2"/><path d="m3 17 6-5 4 3 3-3 5 5"/></symbol>
+      <symbol id="i-note" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
+      <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/></symbol>
+      <symbol id="i-sliders" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2.5"/><circle cx="16" cy="17" r="2.5"/></symbol>
+      <symbol id="i-trash-2" viewBox="0 0 24 24"><path d="M4 7h16M10 4h4m-8 3 1 13h10l1-13M10 11v6m4-6v6"/></symbol>
+      <symbol id="i-monitor" viewBox="0 0 24 24"><rect x="2.5" y="3.5" width="19" height="15" rx="2"/><path d="m4.5 12 4-3 2.6 5 3.2-7 2.1 5 3.1-2M9 21h6m-3-2v2"/></symbol>
+      <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M7.1 5.8a8.5 8.5 0 1 0 9.8 0"/></symbol>
+      <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 8V3h-5M20 3A9 9 0 1 0 21 14"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M4 12h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="m8 3 9 9-2 2-2-2-5 5-2 4-2-2 4-2 5-5-2-2z"/></symbol>
+    </defs>
+  </svg>
+
+  <div class="world" aria-hidden="true">
+    <div class="world-gradient"></div>
+    <svg class="world-grid" viewBox="0 0 1440 920" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <pattern id="honeycomb" width="100" height="86.6" patternUnits="userSpaceOnUse">
+          <path d="M25 0 50 14.45v28.87L25 57.77 0 43.32V14.45Zm50 43.3 25 14.45v28.87L75 101.07 50 86.62V57.75Z" fill="none" stroke="currentColor" stroke-width=".8"/>
+        </pattern>
+        <radialGradient id="hexfade"><stop offset="0" stop-color="white"/><stop offset="1" stop-color="black"/></radialGradient>
+        <mask id="hex-mask"><ellipse cx="930" cy="390" rx="680" ry="580" fill="url(#hexfade)"/></mask>
+      </defs>
+      <rect width="1440" height="920" fill="url(#honeycomb)" mask="url(#hex-mask)"/>
+    </svg>
+    <div class="world-grain"></div><div class="world-beam beam-a"></div><div class="world-beam beam-b"></div>
+    <div class="world-orb orb-a"></div><div class="world-orb orb-b"></div>
+    <div class="pointer-light" id="pointerLight"></div>
+  </div>
+
+  <header class="menubar">
+    <div class="menubar-left">
+      <button class="system-logo" id="systemMenuTrigger" aria-label="打开系统菜单" aria-expanded="false" aria-controls="systemMenu"><svg class="logo-outline"><use href="#i-hex"/></svg><span class="logo-center">A</span></button>
+      <button class="menubar-title" id="menuHome">AincFh<span>_OS</span></button>
+      <span class="menubar-separator" aria-hidden="true"></span>
+      <button class="menubar-link" data-open="projects">PROJECTS</button>
+      <button class="menubar-link" data-open="about">ABOUT</button>
+      <button class="menubar-link" data-open="terminal">TERMINAL</button>
+      <span class="menu-build">PERSONAL WORKSPACE / 2026</span>
+    </div>
+    <div class="menubar-right">
+      <span class="menu-status"><i class="live-point"></i> INTERFACE ACTIVE</span>
+      <span id="osNetworkStatus" class="os-network-indicator" aria-live="polite" hidden></span>
+      <button class="icon-btn os-activity-trigger" data-open="activity" title="Activity Center" aria-label="查看活动中心"><svg><use href="#i-bell"/></svg><span class="os-activity-count" id="osActivityCount">0</span></button>
+      <button class="icon-btn" id="globalSearch" aria-label="打开命令中心" title="命令中心 · Ctrl / ⌘ + K"><svg><use href="#i-search"/></svg><kbd>⌘ K</kbd></button>
+      <button class="icon-btn theme-switch" data-toggle-theme aria-label="切换深浅主题" title="切换主题"><svg><use href="#i-moon"/></svg></button>
+      <time class="menubar-time" id="menuClock" aria-label="本地时间">--:--</time>
+    </div>
+    <div id="systemMenu" class="system-menu" role="menu" hidden>
+      <strong>AincFh OS <span>v12 / FUSION DESKTOP</span></strong>
+      <button role="menuitem" data-open="projects"><svg><use href="#i-folder"/></svg>打开项目工作台</button>
+      <button role="menuitem" data-open="files"><svg><use href="#i-folder"/></svg>打开文件管理器</button>
+      <button role="menuitem" data-open="notes"><svg><use href="#i-note"/></svg>打开便笺编辑器</button>
+      <button role="menuitem" data-open="activity"><svg><use href="#i-bell"/></svg>活动与窗口管理</button>
+      <button role="menuitem" data-open="taskmanager"><svg><use href="#i-monitor"/></svg>任务管理器</button>
+      <button role="menuitem" data-open="settings"><svg><use href="#i-settings"/></svg>桌面环境与主题</button>
+      <button role="menuitem" data-fusion-overview><svg><use href="#i-apps"/></svg>工作区总览</button>
+      <button role="menuitem" data-open="apps"><svg><use href="#i-apps"/></svg>应用中心</button>
+      <button role="menuitem" data-open="tasks"><svg><use href="#i-checklist"/></svg>任务板</button>
+      <button role="menuitem" data-open="paint"><svg><use href="#i-paint"/></svg>绘图工作台</button>
+      <button role="menuitem" data-open="calculator"><svg><use href="#i-calculator"/></svg>计算器</button>
+      <button role="menuitem" data-open="clock"><svg><use href="#i-clock"/></svg>时钟</button>
+      <button role="menuitem" data-open="terminal"><svg><use href="#i-terminal"/></svg>打开终端</button>
+      <button role="menuitem" data-open="settings"><svg><use href="#i-settings"/></svg>外观与动效</button>
+      <div class="menu-rule"></div>
+      <button role="menuitem" data-arrange="tile">平铺所有窗口</button>
+      <button role="menuitem" data-arrange="cascade">层叠排列窗口</button>
+      <button role="menuitem" data-snap="left">当前窗口靠左</button>
+      <button role="menuitem" data-snap="right">当前窗口靠右</button>
+      <div class="menu-rule"></div>
+      <button role="menuitem" id="menuReset">重置窗口布局</button>
+      <div class="menu-rule"></div>
+      <button role="menuitem" data-shell-power="lock"><svg><use href="#i-lock"/></svg>锁定桌面</button>
+      <button role="menuitem" data-shell-power="sleep"><svg><use href="#i-moon"/></svg>睡眠</button>
+      <button role="menuitem" data-shell-power="restart"><svg><use href="#i-rotate"/></svg>重新启动</button>
+      <button role="menuitem" data-shell-power="shutdown"><svg><use href="#i-power"/></svg>关机</button>
+    </div>
+  </header>
+
+  <main class="desktop" id="desktop" aria-label="AincFh OS 交互式桌面">
+    <section class="hero-stage" aria-labelledby="heroTitle">
+      <div class="hero-boot"><span class="boot-dash"></span> <span>AT FIELD // CREATIVE ENGINEERING</span><span class="boot-id">SYS://AINCFH</span></div>
+      <div class="hero-content">
+        <div class="hero-pretitle"><span class="hero-mark">◆</span> REAL SOFTWARE. ORIGINAL EXPERIENCES.</div>
+        <h1 id="heroTitle"><span>AincFh</span><span class="hero-outline">OS<span class="hero-dot">.</span></span></h1>
+        <div class="hero-subtitle"><span class="type-prefix">&gt;_</span> <span id="typeText">Design. Build. Ship.</span><span class="type-cursor">▍</span></div>
+        <p class="hero-description">从一个界面，到一套完整系统。<br />Web 平台、Windows 工具、AI 工作流与值得打磨的交互体验。</p>
+        <div class="hero-ctas">
+          <button class="action-primary" data-open="projects">EXPLORE WORK <svg><use href="#i-arrow"/></svg></button>
+          <button class="action-quiet" data-open="terminal">OPEN TERMINAL <span>↗</span></button>
+        </div>
+        <div class="hero-footnote"><span><i class="live-point"></i> AVAILABLE AS AN INTERACTIVE EXPERIENCE</span><span>CLICK / DRAG / EXPLORE</span></div>
+      </div>
+      <div class="hero-holo" aria-hidden="true">
+        <svg class="holo-svg" viewBox="0 0 440 430" fill="none">
+          <defs><linearGradient id="hgrad" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff9f43"/><stop offset="1" stop-color="#8b5cf6"/></linearGradient></defs>
+          <g class="holo-rotate holo-rotate-outer"><polygon points="220,10 384,107 384,303 220,400 56,303 56,107" stroke="url(#hgrad)" stroke-width="1.6"/><polygon points="220,36 362,120 362,290 220,374 78,290 78,120" stroke="currentColor" stroke-opacity=".22" stroke-width="1" stroke-dasharray="8 12"/><path d="M220 10V400M56 107 384 303M384 107 56 303" stroke="currentColor" stroke-opacity=".07"/></g>
+          <g class="holo-rotate holo-rotate-inner"><polygon points="220,76 329,141 329,269 220,334 111,269 111,141" stroke="url(#hgrad)" stroke-opacity=".7"/><polygon points="220,110 300,156 300,254 220,300 140,254 140,156" stroke="currentColor" stroke-opacity=".28" stroke-dasharray="5 8"/></g>
+          <path class="holo-path" d="M220 15 382 108 382 301 220 395 58 301 58 108Z" stroke="#ff9f43" stroke-width="2" stroke-linecap="round" stroke-dasharray="3 610"/><circle cx="220" cy="205" r="47" stroke="#ff9f43" stroke-opacity=".55"/><path d="m202 217 18-31 18 31-18-10z" fill="#ff9f43" fill-opacity=".9"/>
+        </svg>
+        <div class="holo-center"><span>AF</span><small>CREATIVE<br/>SYSTEMS</small></div>
+        <span class="holo-coordinate holo-coordinate-a">35° / DX-01</span><span class="holo-coordinate holo-coordinate-b">CODE × DESIGN</span>
+      </div>
+    </section>
+
+    <section class="desktop-launchers" aria-label="桌面快捷入口">
+      <div class="launcher-heading"><span class="nmark">01</span> <span>EXPLORE THE SYSTEM</span><span class="launcher-line"></span> <span class="launcher-hint">INTERACTIVE MODULES</span></div>
+      <div class="launcher-grid">
+        <button class="launcher" data-open="projects"><span class="launcher-index">01 / WORK</span><span class="launcher-title">Projects <svg><use href="#i-folder"/></svg></span><span class="launcher-note">真实项目与技术选择</span></button>
+        <button class="launcher" data-open="stack"><span class="launcher-index">02 / ENGINE</span><span class="launcher-title">Stack <svg><use href="#i-code"/></svg></span><span class="launcher-note">技术栈、架构与工具</span></button>
+        <button class="launcher" data-open="about"><span class="launcher-index">03 / STORY</span><span class="launcher-title">About <svg><use href="#i-user"/></svg></span><span class="launcher-note">关于我和工程理念</span></button>
+        <button class="launcher" data-open="terminal"><span class="launcher-index">04 / CONSOLE</span><span class="launcher-title">Terminal <svg><use href="#i-terminal"/></svg></span><span class="launcher-note">输入命令探索桌面</span></button>
+      </div>
+      <p class="desktop-hint" id="desktopHint">TIP: <kbd>Ctrl</kbd> + <kbd>K</kbd> 打开命令中心 · 双击窗口标题栏放大 · 拖动窗口以重新排列</p>
+    </section>
+
+    <div id="windowLayer" class="window-layer" aria-live="polite"></div>
+  </main>
+
+  <nav class="dock" aria-label="应用程序坞">
+    <button class="dock-app home-app" data-home title="返回桌面" aria-label="返回桌面"><svg><use href="#i-hex"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="apps" title="App Center" aria-label="打开应用中心"><svg><use href="#i-apps"/></svg><span class="dock-dot"></span></button>
+    <span class="dock-divider"></span>
+    <button class="dock-app" data-dock="projects" title="Projects" aria-label="打开项目窗口"><svg><use href="#i-folder"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="stack" title="Tech Stack" aria-label="打开技术栈窗口"><svg><use href="#i-code"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="about" title="About" aria-label="打开关于窗口"><svg><use href="#i-user"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="terminal" title="Terminal" aria-label="打开终端"><svg><use href="#i-terminal"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="contact" title="Contact" aria-label="打开联系窗口"><svg><use href="#i-mail"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="files" title="Files" aria-label="打开文件管理器"><svg><use href="#i-folder"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="notes" title="Notes" aria-label="打开便笺"><svg><use href="#i-note"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="activity" title="Activity Center" aria-label="打开活动中心"><svg><use href="#i-bell"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="taskmanager" title="Task Manager" aria-label="打开任务管理器"><svg><use href="#i-monitor"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="tasks" title="Task Board" aria-label="打开任务板"><svg><use href="#i-checklist"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="calculator" title="Calculator" aria-label="打开计算器"><svg><use href="#i-calculator"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="clock" title="Clock" aria-label="打开时钟"><svg><use href="#i-clock"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app" data-dock="paint" title="Paint" aria-label="打开绘图工作台"><svg><use href="#i-paint"/></svg><span class="dock-dot"></span></button>
+    <span class="dock-divider"></span>
+    <button class="dock-app" data-dock="settings" title="Settings" aria-label="打开设置窗口"><svg><use href="#i-settings"/></svg><span class="dock-dot"></span></button>
+    <button class="dock-app dock-search" id="dockSearch" title="Command Center" aria-label="打开命令中心"><svg><use href="#i-search"/></svg></button>
+  </nav>
+
+  <div class="palette-backdrop" id="paletteBackdrop" hidden>
+    <section class="palette" role="dialog" aria-modal="true" aria-label="命令中心">
+      <div class="palette-search"><svg><use href="#i-search"/></svg><input type="search" id="paletteInput" aria-label="搜索命令或项目" placeholder="搜索项目、应用或命令…" autocomplete="off" spellcheck="false" /><kbd>ESC</kbd></div>
+      <div class="palette-results" id="paletteResults" role="listbox" aria-label="搜索结果"></div>
+      <div class="palette-footer"><span>↑ ↓ 导航　↵ 执行　Esc 关闭</span><span>AINCFH OS / COMMAND CENTER</span></div>
+    </section>
+  </div>
+  <div class="toast-host" id="toastHost" aria-live="polite"></div>
+  <noscript><div class="no-js">交互主页需要启用 JavaScript。你也可以访问 <a href="https://github.com/AincFh">GitHub 个人主页</a> 查看项目。</div></noscript>
+</body>
+</html>

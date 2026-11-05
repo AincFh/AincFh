@@ -1,0 +1,217 @@
+/* AincFh OS v6 — Files, Notes, Activity. Private browser workspace, no remote API. */
+#app-files .window-content,#app-notes .window-content,#app-activity .window-content{
+  padding:0!important;overflow:hidden!important;overscroll-behavior:contain;
+}
+#app-files .window-content,#app-notes .window-content{background:var(--panel)}
+.fs-shell,.fs-notes,.fs-activity{
+  width:100%;height:100%;min-height:0;display:flex;flex-direction:column;color:var(--ink);
+  font-size:12px;position:relative;
+}
+.fs-shell button,.fs-notes button,.fs-activity button{
+  cursor:pointer;transition:border-color .17s,background .17s,transform .17s,color .17s;
+}
+.fs-shell button:focus-visible,.fs-notes button:focus-visible,.fs-activity button:focus-visible,
+.os-context-menu button:focus-visible{outline:2px solid var(--hot);outline-offset:-2px}
+.fs-shell svg,.fs-notes svg,.fs-activity svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.7}
+.fs-topline{padding:21px 23px 12px;display:flex;justify-content:space-between;align-items:flex-end;gap:16px;flex:none}
+.fs-topline h2{font-size:30px;line-height:1.04;margin:4px 0 0;font-weight:820;letter-spacing:-.055em}
+.fs-hot{color:var(--hot)}
+.fs-runtime{
+  font:700 9px/1.6 ui-monospace,Consolas,monospace;color:var(--muted);
+  letter-spacing:1.1px;text-align:right;
+}
+.fs-toolbar,.fs-notesbar{display:flex;align-items:center;flex-wrap:wrap;gap:7px;padding:9px 22px 14px;flex:none}
+.fs-tool{
+  display:inline-flex;align-items:center;justify-content:center;
+  border:1px solid var(--line);border-radius:5px;background:var(--soft);
+  font-size:10px;font-weight:750;letter-spacing:.06em;color:var(--text);min-height:31px;padding:0 11px;
+}
+.fs-tool:hover{border-color:var(--hot);color:var(--hot)}
+.fs-tool.primary,.fs-detail-actions .primary,.fs-dialog-actions .primary{
+  background:var(--hot);color:#18121b;border-color:var(--hot);font-weight:800
+}
+.fs-tool.primary:hover,.fs-detail-actions .primary:hover,.fs-dialog-actions .primary:hover{filter:brightness(1.09)}
+.fs-browser{flex:1;min-height:0;display:flex;border-top:1px solid var(--line);overflow:hidden}
+.fs-sidebar{flex:0 0 158px;width:158px;overflow:auto;border-right:1px solid var(--line);padding:13px 10px;background:rgba(90,74,101,.045)}
+.fs-side-caption,.fs-section-heading{
+  font:750 9px/1.3 ui-monospace,Consolas,monospace;color:var(--muted);
+  letter-spacing:1.25px;margin:4px 9px 10px;
+}
+.fs-sidebar .fs-side-caption:not(:first-child){margin-top:22px}
+.fs-sidebar button{
+  width:100%;display:flex;align-items:center;gap:9px;padding:10px 11px;
+  color:var(--sub);text-align:left;font-size:11px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-radius:6px;
+}
+.fs-sidebar button svg{flex:0 0 15px}
+.fs-sidebar button.active{background:rgba(255,159,67,.12);color:var(--hot);font-weight:770}
+.fs-sidebar button:hover{background:var(--soft);color:var(--ink)}
+.fs-sidebar button small{margin-left:auto;color:var(--muted)}
+.fs-center{flex:1;min-width:0;min-height:0;display:flex;flex-direction:column}
+.fs-location{display:flex;align-items:center;gap:6px;min-height:43px;padding:8px 14px 5px;border-bottom:1px solid var(--line2);white-space:nowrap;overflow-x:auto;scrollbar-width:none}
+.fs-location button{color:var(--sub);font-size:11px;padding:5px 8px;border-radius:4px}
+.fs-location button:last-of-type{color:var(--ink);font-weight:740}
+.fs-location button:hover{background:var(--soft);color:var(--hot)}
+.fs-location>span{color:var(--muted)}
+.fs-controls{display:flex;align-items:center;gap:7px;padding:10px 12px}
+.fs-controls label{flex:1;min-width:0;display:flex;align-items:center;gap:6px;padding:0 9px;height:32px;border:1px solid var(--line);border-radius:6px;background:var(--soft);color:var(--muted)}
+.fs-controls input{color:var(--ink);width:100%;min-width:0;outline:none;border:0;background:transparent;font-size:11px}
+.fs-controls input::placeholder{color:var(--muted)}
+.fs-controls button{border:1px solid var(--line);padding:9px 8px;font:700 9px ui-monospace,Consolas,monospace;color:var(--sub);border-radius:4px;white-space:nowrap}
+.fs-controls button:hover{border-color:var(--hot);color:var(--hot)}
+.fs-list{flex:1;min-height:0;overflow:auto;padding:0 11px 11px;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.fs-row{
+  width:100%;min-height:45px;display:grid;grid-template-columns:26px minmax(105px,1fr) 57px 52px;align-items:center;
+  gap:8px;border:1px solid transparent;border-bottom-color:var(--line2);
+  border-radius:4px;padding:0 8px;text-align:left;color:var(--text)
+}
+.fs-row:hover{background:var(--soft)}
+.fs-row.selected{background:rgba(255,159,67,.11);border-color:rgba(255,159,67,.45);color:var(--ink)}
+.fs-row-icon{color:var(--hot);display:grid;place-items:center}
+.fs-row-icon svg{width:18px;height:18px}
+.fs-row-name{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px;font-weight:700}
+.fs-row-type,.fs-row-date{font:700 9px ui-monospace,Consolas,monospace;color:var(--muted);text-align:right}
+.fs-status{min-height:32px;flex:none;padding:8px 14px;border-top:1px solid var(--line);font-size:10px;color:var(--muted);display:flex;align-items:center;justify-content:space-between;gap:6px}
+.fs-status button{color:var(--hot);font-size:10px;font-weight:740}
+.fs-status button:hover{text-decoration:underline}
+.fs-inspector{flex:0 0 203px;width:203px;min-width:0;padding:15px 16px;overflow:auto;border-left:1px solid var(--line);background:rgba(90,74,101,.035);scrollbar-width:thin}
+.fs-inspector .fs-side-caption{margin:0 0 24px}
+.fs-detail-icon{width:47px;height:47px;display:grid;place-items:center;color:var(--hot);background:rgba(255,159,67,.11);border:1px solid rgba(255,159,67,.25);border-radius:11px;margin-bottom:15px}
+.fs-detail-icon svg{width:26px;height:26px}
+.fs-inspector h3{font-size:15px;line-height:1.3;overflow-wrap:anywhere;margin:0 0 8px}
+.fs-item-type{font-size:9px;letter-spacing:.1em;color:var(--hot);font-weight:800}
+.fs-detail-meta{margin:21px 0;display:grid;gap:10px}
+.fs-detail-meta div{display:flex;align-items:center;justify-content:space-between;gap:8px;font-size:10px;border-bottom:1px solid var(--line2);padding-bottom:6px}
+.fs-detail-meta span{color:var(--muted)}.fs-detail-meta b{color:var(--text);font-weight:700}
+.fs-snippet{font-size:10px;line-height:1.7;color:var(--sub);white-space:pre-wrap;overflow-wrap:anywhere;max-height:130px;overflow:auto}
+.fs-detail-actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:18px}
+.fs-detail-actions button{background:var(--soft);border:1px solid var(--line);border-radius:4px;padding:8px 10px;color:var(--text);font-size:10px;font-weight:760}
+.fs-detail-actions button:hover{border-color:var(--hot)}
+.fs-empty,.fs-empty-detail{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;min-height:150px;padding:18px;text-align:center;color:var(--sub)}
+.fs-empty strong,.fs-empty-detail strong{font-size:12px;color:var(--text)}
+.fs-empty p,.fs-empty-detail p{margin:0;font-size:10px;line-height:1.65;max-width:170px}
+.fs-detail-hex{font-size:36px;color:var(--hot);line-height:1;opacity:.62}
+.fs-modal-layer{position:absolute;inset:0;background:rgba(12,12,20,.64);z-index:40;display:grid;place-items:center;padding:15px}
+.fs-dialog{background:var(--panel);color:var(--ink);padding:22px;max-width:350px;width:100%;border:1px solid var(--line);border-radius:11px;box-shadow:0 25px 55px rgba(0,0,0,.34)}
+.fs-kicker{font:750 9px ui-monospace,Consolas,monospace;letter-spacing:1.5px;color:var(--hot)}
+.fs-dialog h3{font-size:22px;margin:10px 0 4px}
+.fs-dialog p{font-size:11px;color:var(--sub);line-height:1.6}
+.fs-dialog label{display:block;font-size:11px;margin:12px 0 6px;font-weight:700}
+.fs-dialog input{width:100%;min-height:37px;border:1px solid var(--line);border-radius:5px;padding:8px 11px;color:var(--ink);background:var(--soft);outline:none}
+.fs-dialog input:focus{border-color:var(--hot)}
+.fs-dialog-actions{display:flex;gap:8px;justify-content:flex-end;margin-top:20px}
+.fs-dialog-actions button{font-size:11px;font-weight:750;border:1px solid var(--line);padding:9px 12px;border-radius:4px;color:var(--text)}
+.fs-notesbar{border-bottom:1px solid var(--line)}
+.fs-notesbar #fsSaveStatus{margin-left:auto;color:var(--muted);font-size:10px}
+.fs-notesbody{display:flex;flex:1;min-height:0}
+.fs-notelist{flex:0 0 225px;min-width:0;border-right:1px solid var(--line);background:rgba(90,74,101,.04);padding:13px 9px;overflow:auto;scrollbar-width:thin}
+.fs-notelist button{width:100%;padding:12px 13px;display:grid;gap:8px;border:1px solid transparent;border-radius:6px;text-align:left;color:var(--text)}
+.fs-notelist button:hover{background:var(--soft)}
+.fs-notelist button.active{background:rgba(255,159,67,.1);border-color:rgba(255,159,67,.29)}
+.fs-notelist strong{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;font-size:11px}
+.fs-notelist small{font-size:10px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.fs-editor{flex:1;min-width:0;display:flex;flex-direction:column;gap:10px;padding:23px 27px 17px}
+.fs-editor-caption{font:800 9px ui-monospace,Consolas,monospace;letter-spacing:1.3px;color:var(--hot)}
+.fs-editor input{width:100%;font-size:27px;letter-spacing:-.045em;font-weight:790;color:var(--ink);border:0;border-bottom:1px solid var(--line);padding:3px 0 16px;outline:none;background:transparent}
+.fs-editor input:focus{border-color:var(--hot)}
+.fs-editor-sub,.fs-editor-footer{display:flex;align-items:center;justify-content:space-between;gap:9px;font:700 9px ui-monospace,Consolas,monospace;letter-spacing:.8px;color:var(--muted)}
+.fs-editor textarea{flex:1;resize:none;min-height:70px;width:100%;padding:10px 0;border:0;outline:none;background:transparent;font:13px/1.9 ui-monospace,Consolas,'Microsoft YaHei',monospace;color:var(--text);scrollbar-width:thin;white-space:pre-wrap;overflow-wrap:anywhere}
+.fs-editor-footer{border-top:1px solid var(--line);padding-top:12px;letter-spacing:0}
+.fs-editor-footer button{color:var(--hot);border:1px solid var(--line);padding:6px 8px;border-radius:4px;font-size:10px}
+.fs-no-note{font-size:10px;color:var(--muted);padding:16px}
+.fs-sysmetrics{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px;padding:5px 20px 15px}
+.fs-sysmetrics>div{min-width:0;display:flex;flex-direction:column;gap:11px;padding:17px;background:var(--soft);border:1px solid var(--line);border-top:2px solid var(--hot);border-radius:5px}
+.fs-sysmetrics small{font:750 9px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.8px}
+.fs-sysmetrics strong{font-size:26px;letter-spacing:-.04em}
+.fs-activity-columns{display:grid;grid-template-columns:1fr 1fr;gap:0;border-top:1px solid var(--line);flex:1;min-height:0}
+.fs-activity-columns section{padding:16px 18px;overflow-y:auto;scrollbar-width:thin;min-width:0}
+.fs-activity-columns section+section{border-left:1px solid var(--line)}
+.fs-section-heading{margin:0 0 16px;display:flex;justify-content:space-between;align-items:center}
+.fs-section-heading button{color:var(--hot);font-size:10px;font-weight:760;letter-spacing:0}
+.fs-process{display:flex;align-items:center;gap:7px;padding:11px 0;border-bottom:1px solid var(--line2)}
+.fs-process div{display:grid;gap:5px;flex:1;min-width:0}
+.fs-process strong{font-size:11px;color:var(--text);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.fs-process small{font-size:9px;color:var(--muted)}
+.fs-process button{border:1px solid var(--line);border-radius:4px;padding:6px 8px;font-size:10px;color:var(--sub)}
+.fs-process button:hover{border-color:var(--hot);color:var(--hot)}
+.fs-event{display:flex;gap:10px;padding:11px 0;border-bottom:1px solid var(--line2)}
+.fs-event-pip{flex:0 0 5px;height:5px;border-radius:50%;background:var(--hot);margin-top:5px}
+.fs-event div{display:grid;gap:5px;min-width:0}
+.fs-event strong{font-size:10px;color:var(--text);line-height:1.5;overflow-wrap:anywhere;font-weight:650}
+.fs-event small{font-size:9px;color:var(--muted)}
+.fs-activity-foot{font-size:10px;color:var(--muted);line-height:1.7;margin-top:20px}
+.os-context-menu{position:fixed;z-index:500;min-width:204px;border:1px solid var(--line);background:var(--panel);box-shadow:var(--shadow);backdrop-filter:blur(30px);border-radius:9px;padding:7px}
+.os-context-label{font:750 9px ui-monospace,Consolas,monospace;letter-spacing:1.05px;padding:10px;color:var(--hot)}
+.os-context-menu button{width:100%;text-align:left;color:var(--text);padding:10px 12px;font-size:11px;border-radius:4px}
+.os-context-menu button:hover{background:var(--soft);color:var(--hot)}
+.os-context-divider{height:1px;background:var(--line);margin:5px 7px}
+.os-activity-trigger{position:relative}
+.os-activity-count{position:absolute;right:0;top:0;min-width:13px;height:13px;padding:0 2px;border-radius:10px;color:#1c1520;background:var(--hot);font:700 9px/13px ui-monospace,Consolas,monospace;text-align:center}
+@media(max-width:1050px){
+  .fs-inspector{flex-basis:165px;width:165px;padding:12px}
+  .fs-sidebar{flex-basis:130px;width:130px}
+  .fs-notelist{flex-basis:175px}
+  .fs-topline h2{font-size:25px}
+}
+@media(max-width:660px){
+  .fs-browser{flex-direction:column}
+  .fs-topline{padding:13px 14px 8px}
+  .fs-topline h2{font-size:22px}
+  .fs-runtime{font-size:7px;max-width:116px}
+  .fs-toolbar,.fs-notesbar{padding:7px 12px 10px}
+  .fs-tool{font-size:9px;min-height:29px;padding:0 8px}
+  .fs-sidebar{flex:none;width:100%;height:42px;display:flex;align-items:center;padding:4px 8px;gap:4px;overflow-x:auto;overflow-y:hidden;white-space:nowrap;border-right:0;border-bottom:1px solid var(--line)}
+  .fs-sidebar .fs-side-caption{display:none}
+  .fs-sidebar button{width:auto;flex:none;padding:7px 9px;font-size:10px}
+  .fs-sidebar button svg{width:13px;height:13px}
+  .fs-center{flex:1;min-height:140px}
+  .fs-location{min-height:32px}
+  .fs-controls{padding:7px 9px}
+  .fs-controls input{font-size:10px}
+  .fs-row{grid-template-columns:23px minmax(90px,1fr) 53px;min-height:41px}
+  .fs-row-date{display:none}
+  .fs-row-name{font-size:10px}
+  .fs-inspector{flex:0 0 auto;width:100%;height:169px;min-height:0;padding:10px 13px;overflow-y:auto;border-left:0;border-top:1px solid var(--line)}
+  .fs-inspector .fs-side-caption{margin:0 0 6px}
+  .fs-inspector:has(.fs-empty-detail){display:none}
+  .fs-detail-icon,.fs-detail-meta{display:none}
+  .fs-inspector h3{font-size:12px;margin:0 0 5px}
+  .fs-snippet{max-height:34px;line-height:1.5;overflow:hidden;margin:5px 0}
+  .fs-detail-actions{margin-top:7px}
+  .fs-detail-actions button{padding:6px 8px}
+  .fs-notelist{flex:0 0 110px;width:110px;overflow:auto}
+  .fs-notelist button{padding:8px 5px}
+  .fs-notelist strong{font-size:9px}
+  .fs-notelist small{font-size:8px}
+  .fs-editor{padding:13px 12px 10px;gap:9px}
+  .fs-editor input{font-size:20px;padding-bottom:10px}
+  .fs-editor textarea{font-size:11px;line-height:1.7}
+  .fs-editor-footer{display:flex;flex-wrap:wrap;font-size:8px}
+  .fs-sysmetrics{gap:5px;padding:0 10px 10px}
+  .fs-sysmetrics>div{padding:10px;gap:6px}
+  .fs-sysmetrics small{font-size:7px}
+  .fs-sysmetrics strong{font-size:19px}
+  .fs-activity-columns{grid-template-columns:1fr;overflow-y:auto}
+  .fs-activity-columns section{overflow:visible;padding:14px}
+  .fs-activity-columns section+section{border-left:0;border-top:1px solid var(--line)}
+}
+@media(max-width:840px){
+  .dock-app[data-dock="stack"],.dock-app[data-dock="about"],.dock-app[data-dock="contact"],.dock-app[data-dock="settings"]{display:none}
+  .dock{max-width:calc(100vw - 14px);gap:4px;padding:8px 10px}
+  .dock-app{width:43px;height:43px}
+  .dock-app svg{width:19px;height:19px}
+  .dock-divider{margin:0 3px}
+  .menubar .os-activity-trigger{display:flex}
+}
+@media(max-width:375px){
+  .dock{gap:3px;padding:6px}
+  .dock-app{width:38px;height:42px}
+  .dock-divider{margin:0 1px}
+  .fs-tool{letter-spacing:0}
+  .fs-toolbar{gap:4px}
+}
+
+/* PNG artwork items stored in the browser workspace */
+.fs-preview-image{display:block;max-width:100%;width:100%;height:auto;max-height:184px;object-fit:contain;background:#f8f3ef;border:1px solid var(--line);border-radius:5px;margin-top:13px}
+.fs-row:has(svg use[href="#i-image"]) .fs-row-icon{color:#a878e8}
+.fs-inspector:has(.fs-preview-image) .fs-detail-actions{margin-top:15px}
+@media(max-width:660px){.fs-preview-image{max-height:84px}}

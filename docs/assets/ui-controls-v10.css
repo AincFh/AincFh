@@ -1,0 +1,98 @@
+/* AincFh OS custom form controls & locale panel.
+   User-owned input content remains selectable; decorative UI stays non-selectable. */
+:root{--os-control-surface:var(--panel2);--os-control-outline:var(--line)}
+.os-native-source{
+  position:absolute!important;inset:0!important;width:100%!important;height:100%!important;
+  opacity:0!important;pointer-events:none!important;z-index:-1!important;
+}
+.os-control{position:relative;display:inline-flex;min-width:0;max-width:100%;vertical-align:middle}
+.os-select-control,.os-date-control{width:100%}
+.os-select-face,.os-date-face{
+ display:flex;align-items:center;justify-content:space-between;gap:9px;width:100%;min-height:36px;
+ border:1px solid var(--os-control-outline);border-radius:6px;background:var(--soft);color:var(--ink);
+ padding:7px 10px;font-size:11px;line-height:1.5;cursor:pointer;font-family:inherit;text-align:left;
+}
+.os-select-face:hover,.os-date-face:hover,.os-select-face:focus-visible,.os-date-face:focus-visible{
+ border-color:var(--hot);outline:0;box-shadow:0 0 0 2px rgba(255,159,67,.11)
+}
+.os-select-face svg,.os-date-face svg{flex:0 0 15px;width:15px;height:15px;fill:none;stroke:var(--hot);stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.os-select-face>span,.os-date-face>span{overflow:hidden;white-space:nowrap;text-overflow:ellipsis;min-width:0}
+.os-control-popup{
+ position:fixed;z-index:650;min-width:170px;max-height:min(360px,calc(100dvh - 110px));
+ overflow:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent;
+ padding:7px;background:var(--panel);border:1px solid rgba(255,159,67,.34);border-radius:10px;
+ backdrop-filter:blur(34px);-webkit-backdrop-filter:blur(34px);
+ box-shadow:0 16px 55px rgba(0,0,0,.4);color:var(--ink)
+}
+.os-control-popup[hidden]{display:none!important}
+.os-popup-small-label{font:750 9px ui-monospace,Consolas,monospace;color:var(--muted);padding:7px 9px 10px;letter-spacing:.055em}
+.os-control-popup button{cursor:pointer;font:600 11px/1.4 inherit;color:var(--text);background:transparent}
+.os-control-popup button[role="option"]{width:100%;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:10px 12px;text-align:left;border:1px solid transparent;border-radius:5px}
+.os-control-popup button[role="option"]:hover,.os-control-popup button[role="option"]:focus-visible{background:var(--soft);border-color:var(--line);color:var(--ink)}
+.os-control-popup button[role="option"][aria-selected="true"]{color:var(--hot);background:rgba(255,159,67,.105)}
+.os-control-popup button[role="option"]:disabled{opacity:.4;cursor:default}
+.os-control-popup button[role="option"] i{font-weight:840;color:var(--hot);font-style:normal}
+.os-calendar-head{display:flex;align-items:center;justify-content:space-between;gap:5px;margin-bottom:9px}
+.os-calendar-head strong{font:780 12px/1.5 inherit}
+.os-calendar-head button{width:32px;height:32px;border:1px solid var(--line);border-radius:6px;font-size:19px;color:var(--text)}
+.os-calendar-head button:hover{border-color:var(--hot);color:var(--hot)}
+.os-calendar-days{display:grid;grid-template-columns:repeat(7,1fr);gap:3px;min-width:245px}
+.os-calendar-days>span{height:31px;display:grid;place-items:center;font-size:10px;color:var(--muted)}
+.os-calendar-days .os-calendar-empty{opacity:0}
+.os-calendar-day{height:32px;width:32px;border-radius:6px;border:1px solid transparent;font-size:11px;color:var(--text)}
+.os-calendar-day:hover,.os-calendar-day:focus-visible{background:var(--soft);border-color:var(--hot)}
+.os-calendar-day.selected{color:#22151f;background:var(--hot);font-weight:850}
+.os-calendar-day.is-today:not(.selected){color:var(--hot);border-color:rgba(255,159,67,.4)}
+.os-calendar-foot{display:flex;align-items:center;justify-content:flex-end;gap:7px;margin-top:10px;padding-top:9px;border-top:1px solid var(--line2)}
+.os-calendar-foot button{padding:8px 10px;border:1px solid var(--line);border-radius:5px;font-size:10px;color:var(--text)}
+.os-calendar-foot button:hover{color:var(--hot);border-color:var(--hot)}
+/* The language selector is a fully themed system preference surface. */
+.sp-language-feature,.sp-language-grid{display:grid;grid-template-columns:1fr;gap:8px}
+.sp-language-grid{grid-template-columns:repeat(2,minmax(0,1fr))}
+.sp-language-feature button,.sp-language-grid button{
+ border:1px solid var(--line);background:var(--soft);display:flex;align-items:center;gap:11px;
+ border-radius:8px;text-align:left;padding:14px;color:var(--ink);min-width:0
+}
+.sp-language-feature button:hover,.sp-language-grid button:hover{border-color:var(--hot)}
+.sp-language-feature button[aria-pressed="true"],.sp-language-grid button[aria-pressed="true"]{border-color:var(--hot);background:rgba(255,159,67,.1)}
+.sp-language-feature button>span:nth-child(2),.sp-language-grid button>span:nth-child(2){display:flex;flex-direction:column;gap:6px;min-width:0;flex:1}
+.sp-language-feature strong,.sp-language-grid strong{font-size:12px}
+.sp-language-feature small,.sp-language-grid small{font-size:9px;color:var(--sub);line-height:1.5;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.sp-lang-icon,.sp-language-code{
+ width:40px;height:39px;flex:0 0 40px;background:rgba(255,159,67,.07);border:1px solid var(--line2);
+ display:grid;place-items:center;border-radius:8px;color:var(--hot);font-size:16px;font-weight:800
+}
+.sp-lang-check{font-size:14px;color:var(--hot);font-weight:800;min-width:17px}
+.sp-locale-info{display:grid;grid-template-columns:1fr;gap:5px;padding:7px 0;overflow-wrap:anywhere}
+.sp-locale-info:not(:last-child){border-bottom:1px solid var(--line2)}
+.sp-locale-info span{color:var(--sub);font-size:10px}
+.sp-locale-info strong{font-size:11px;color:var(--ink);font-weight:730}
+html[data-start-layout="list"] .os-start-grid{grid-template-columns:1fr;gap:5px}
+html[data-start-layout="list"] .os-start-app{flex-direction:row;min-height:55px;padding:9px 12px;align-items:center}
+html[data-start-layout="list"] .os-start-appicon{width:31px;height:31px}
+html[data-start-layout="list"] .os-start-apptext{gap:3px}
+html[data-start-layout="list"] .os-running-pip{top:50%;transform:translateY(-50%)}
+/* Replace browser-native scrollbars with neutral OS-owned scrollbar styling. */
+:where(.window-content,.fs-list,.sp-main,.su-task-list,.os-start-content,.os-control-popup,.os-window,.fs-notelist,.fs-sidebar,.paint-board-scroll){
+ scrollbar-width:thin;scrollbar-color:rgba(255,159,67,.36) transparent
+}
+:where(.window-content,.fs-list,.sp-main,.su-task-list,.os-start-content,.os-control-popup,.paint-board-scroll)::-webkit-scrollbar{width:7px;height:7px}
+:where(.window-content,.fs-list,.sp-main,.su-task-list,.os-start-content,.os-control-popup,.paint-board-scroll)::-webkit-scrollbar-thumb{background:rgba(255,159,67,.34);border:2px solid transparent;border-radius:8px;background-clip:padding-box}
+:where(.window-content,.fs-list,.sp-main,.su-task-list,.os-start-content,.os-control-popup,.paint-board-scroll)::-webkit-scrollbar-track{background:transparent}
+/* Inputs and buttons across apps share a coherent focus ring and visual language. */
+body :is(input,textarea,button,select):focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+body :is(input,textarea){accent-color:var(--hot)}
+body input[type="range"]{accent-color:var(--hot);cursor:pointer}
+body input[type="search"]::-webkit-search-cancel-button{-webkit-appearance:none}
+body input[type="date"]::-webkit-calendar-picker-indicator{display:none}
+body :is(input,textarea)::selection{background:rgba(255,159,67,.42);color:var(--ink)}
+body :is(input,textarea)::placeholder{color:var(--muted)}
+/* Only approved editors and read surfaces can be selected; system chrome stays locked. */
+html body *:not(input):not(textarea){-webkit-tap-highlight-color:transparent}
+@media(max-width:600px){
+ .sp-language-grid{grid-template-columns:1fr}
+ .sp-language-feature button,.sp-language-grid button{padding:11px}
+ .sp-language-code{width:35px;height:35px;flex-basis:35px}
+ .os-control-popup{max-width:calc(100vw - 16px)}
+}
+@media(prefers-reduced-motion:reduce){.os-control-popup button{transition:none!important}}

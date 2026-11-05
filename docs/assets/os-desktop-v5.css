@@ -1,0 +1,227 @@
+/* AincFh OS v5 — viewport-bound desktop + real window surfaces.
+   This stylesheet intentionally follows styles.css to supersede legacy page rules. */
+html,body{height:100%;min-height:0;max-height:100%;overflow:hidden!important;overscroll-behavior:none}
+body{height:100dvh;max-height:100dvh;user-select:text}
+.menubar{height:58px;min-height:58px;position:fixed;inset:0 0 auto;z-index:101}
+.desktop{
+  --desktop-pad:clamp(19px,4.2vw,75px);
+  position:absolute;top:58px;left:50%;transform:translateX(-50%);
+  width:100%;max-width:1660px;height:calc(100dvh - 58px);
+  min-height:0!important;max-height:calc(100dvh - 58px);margin:0;
+  padding:0 var(--desktop-pad)!important;overflow:hidden;
+  isolation:isolate;
+}
+.hero-stage{
+  min-height:0!important;height:min(72%,650px);padding-top:clamp(17px,3.3vh,43px)!important;
+  overflow:hidden;pointer-events:none;
+}
+.hero-content{padding-top:clamp(35px,7.5vh,86px)!important;max-width:690px}
+.hero-stage button,.hero-stage a{pointer-events:auto}
+.hero-content h1{font-size:clamp(74px,9vw,136px)!important;line-height:.91}
+.hero-description{margin-top:clamp(8px,1.6vh,19px)}
+.hero-ctas{margin-top:clamp(12px,2.4vh,27px)}
+.hero-footnote{margin-top:clamp(15px,4vh,39px)}
+.desktop-launchers{
+  position:absolute;left:var(--desktop-pad);right:var(--desktop-pad);
+  bottom:clamp(86px,11.6vh,129px);max-width:1070px;margin:0;
+  pointer-events:auto;
+}
+.launcher-grid{grid-template-columns:repeat(4,minmax(0,1fr));gap:11px}
+.launcher{height:clamp(86px,12vh,116px);min-height:0;padding:14px 17px}
+.launcher-heading{margin-bottom:9px}
+.desktop-hint{margin:12px 0 0}
+.window-layer{position:absolute!important;inset:0!important;pointer-events:none;z-index:12}
+.os-window{
+  min-width:0!important;min-height:0!important;max-width:100%;max-height:100%;
+  display:flex;flex-direction:column;overflow:hidden;
+  animation:os-window-enter .27s cubic-bezier(.2,.8,.2,1) both;
+  transition:border-color .2s,box-shadow .2s,opacity .2s;
+}
+.os-window.is-maximized{
+  inset:auto!important;left:12px!important;top:12px!important;
+  width:calc(100% - 24px)!important;
+  height:calc(100% - 105px)!important;
+  max-height:none!important;max-width:none!important;
+  border-radius:12px;box-shadow:0 25px 85px rgba(0,0,0,.48)
+}
+.os-window.is-maximized .winbar{cursor:grab}
+.os-window.is-minimized{display:none!important}
+.os-window.focused{box-shadow:0 24px 86px rgba(0,0,0,.4),0 0 0 1px rgba(255,159,67,.12)}
+.os-window .window-content{
+  display:block;flex:1 1 0;min-height:0;min-width:0;
+  overflow-y:auto!important;overflow-x:hidden;
+  overscroll-behavior:contain;scrollbar-gutter:stable;
+  -webkit-overflow-scrolling:touch;
+  user-select:text;-webkit-user-select:text;
+  scrollbar-color:rgba(255,159,67,.43) transparent;scrollbar-width:thin;
+}
+.os-window .window-content *:not(button){-webkit-user-select:text;user-select:text}
+.os-window .winbar,.os-window .win-controls,.os-window .win-edge{-webkit-user-select:none;user-select:none}
+.winbar{flex:0 0 51px;min-height:51px}
+.win-edge{position:absolute;display:block;z-index:6;touch-action:none;user-select:none}
+.win-edge-n{height:8px;left:16px;right:16px;top:0;cursor:n-resize}
+.win-edge-s{height:9px;left:16px;right:16px;bottom:0;cursor:s-resize}
+.win-edge-e{width:9px;right:0;top:16px;bottom:16px;cursor:e-resize}
+.win-edge-w{width:9px;left:0;top:16px;bottom:16px;cursor:w-resize}
+.win-edge-ne{width:18px;height:18px;right:0;top:0;cursor:ne-resize}
+.win-edge-nw{width:18px;height:18px;left:0;top:0;cursor:nw-resize}
+.win-edge-se{width:21px;height:21px;right:0;bottom:0;cursor:se-resize}
+.win-edge-sw{width:21px;height:21px;left:0;bottom:0;cursor:sw-resize}
+.os-window:hover:not(.is-maximized) .win-edge-se:after{
+  content:"";position:absolute;right:4px;bottom:4px;width:7px;height:7px;
+  border-right:2px solid var(--hot);border-bottom:2px solid var(--hot);opacity:.7
+}
+.os-window.is-maximized .win-edge{display:none}
+.dock{bottom:clamp(10px,2.3vh,22px);z-index:120}
+.palette-backdrop{overflow:hidden}
+.system-menu{z-index:130}
+@keyframes os-window-enter{from{opacity:.3;transform:translateY(12px) scale(.988)}to{opacity:1;transform:translateY(0) scale(1)}}
+/* A subdued, readable warm-light design, never a pure-white wash. */
+html[data-theme="light"]{
+  color-scheme:light;
+  --bg:#d5ccd2;--bg2:#cbc1cd;
+  --panel:rgba(232,224,230,.965);--panel2:rgba(220,209,220,.96);
+  --panel3:rgba(207,195,209,.94);
+  --ink:#2a2530;--text:#49424d;--sub:#615968;--muted:#716977;
+  --line:rgba(81,67,81,.22);--line2:rgba(81,67,81,.12);
+  --soft:rgba(93,73,101,.07);
+  --glow:rgba(213,112,73,.11);
+  --shadow:0 22px 76px rgba(63,47,67,.25);
+  --dock-surface:rgba(219,208,219,.97);
+}
+html[data-theme="light"] .world-gradient{
+  background:radial-gradient(ellipse 50% 76% at 79% 24%,rgba(156,108,155,.13),transparent 74%),
+  radial-gradient(ellipse 43% 62% at 46% 40%,rgba(201,127,94,.12),transparent 76%),
+  linear-gradient(145deg,#dbd3d8,#cfc6d0 72%,#d3c8d2)
+}
+html[data-theme="light"] .world-grid{opacity:.24}
+html[data-theme="light"] .world-orb{opacity:.045;mix-blend-mode:multiply}
+html[data-theme="light"] .world-grain{opacity:.1}
+html[data-theme="light"] .menubar{background:rgba(216,205,215,.97);border-bottom-color:rgba(89,73,89,.22)}
+html[data-theme="light"] .os-window{background:rgba(230,220,228,.98);border-color:rgba(129,95,119,.38);backdrop-filter:blur(30px)}
+html[data-theme="light"] .os-window:not(.focused){box-shadow:0 18px 48px rgba(57,47,63,.18)}
+html[data-theme="light"] .os-window.focused{box-shadow:0 25px 80px rgba(61,48,61,.28);border-color:rgba(214,119,67,.6)}
+html[data-theme="light"] .dock{box-shadow:0 9px 40px rgba(72,52,72,.21)}
+html[data-theme="light"] .dock-app{background:rgba(113,90,117,.055)}
+html[data-theme="light"] .action-quiet{background:rgba(244,237,240,.58)}
+html[data-theme="light"] .project-canvas{background:linear-gradient(130deg,#ede3e6,#e4d9e8)}
+html[data-theme="light"] .terminal-window .window-content{background:#201b2a;color:#eee7ef}
+/* Entrance choreographs existing UI; ambient orbit/grid motion continues. */
+.menubar{animation:os-bar-arrive .48s ease-out both}
+.hero-boot{animation:os-stage-arrive .64s .12s both}
+.hero-pretitle{animation:os-stage-arrive .58s .2s both}
+.hero-description{animation:os-stage-arrive .64s .3s both}
+.hero-ctas{animation:os-stage-arrive .64s .41s both}
+.desktop-launchers{animation:os-launchers-arrive .7s .5s both}
+.dock{animation:os-dock-arrive .7s .52s both}
+@keyframes os-bar-arrive{from{opacity:.2;transform:translateY(-10px)}to{opacity:1;transform:translateY(0)}}
+@keyframes os-stage-arrive{from{opacity:0;transform:translateY(13px)}to{opacity:1;transform:translateY(0)}}
+@keyframes os-launchers-arrive{from{opacity:.2;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+@keyframes os-dock-arrive{from{opacity:0;transform:translate(-50%,24px)}to{opacity:1;transform:translate(-50%,0)}}
+@media(max-height:760px) and (min-width:841px){
+  .hero-stage{padding-top:17px!important}
+  .hero-content{padding-top:23px!important}
+  .hero-content h1{font-size:clamp(69px,8.1vw,110px)!important;margin:11px 0}
+  .hero-description{font-size:12px;line-height:1.65}
+  .hero-ctas{margin-top:12px}
+  .hero-footnote{margin-top:12px}
+  .desktop-launchers{bottom:clamp(117px,17vh,162px)}
+  .launcher{height:80px}
+  .desktop-hint{display:none}
+}
+/* Tablet/phone: compact desktop, full-screen app sheets; no page scrolling. */
+@media(max-width:840px){
+  .menubar{height:55px;min-height:55px}
+  .desktop{top:55px;height:calc(100dvh - 55px);max-height:calc(100dvh - 55px);--desktop-pad:16px}
+  .hero-stage{height:69%;min-height:0!important;padding-top:13px!important;overflow:hidden}
+  .hero-content{padding-top:clamp(22px,5.2vh,45px)!important;max-width:100%}
+  .hero-content h1{font-size:clamp(70px,11vw,108px)!important}
+  .hero-footnote{display:none}
+  .desktop-launchers{bottom:clamp(113px,17vh,170px)}
+  .launcher-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+  .launcher{height:clamp(68px,9vh,92px);padding:10px 13px;gap:6px}
+  .launcher-heading{margin-bottom:6px}
+  .launcher-index{font-size:8px}
+  .launcher-title{font-size:18px}
+  .launcher-note{font-size:9px}
+  .os-window{
+    position:absolute!important;inset:9px 9px 81px!important;
+    top:9px!important;left:9px!important;
+    width:calc(100% - 18px)!important;height:calc(100% - 90px)!important;
+    max-height:none!important;border-radius:10px;
+  }
+  .os-window.is-maximized{inset:0 0 74px!important;top:0!important;left:0!important;width:100%!important;height:calc(100% - 74px)!important;border-radius:0}
+  .winbar{cursor:default;touch-action:auto}
+  .win-edge{display:none}
+  .window-layer{position:absolute!important;inset:0!important}
+  .dock{bottom:10px}
+}
+@media(max-width:560px){
+  .hero-stage{height:64%}
+  .hero-content{padding-top:clamp(19px,3.2vh,35px)!important}
+  .hero-content h1{font-size:clamp(63px,18vw,93px)!important;line-height:.88;margin:11px 0}
+  .hero-outline{margin-top:1px}
+  .hero-subtitle{font-size:clamp(18px,5vw,22px);min-height:34px}
+  .hero-description{font-size:11px;line-height:1.6;margin-top:8px}
+  .hero-ctas{margin-top:13px}
+  .desktop-launchers{bottom:76px}
+  .launcher{height:73px!important;min-height:0;padding:10px}
+  .launcher-grid{gap:7px}
+  .launcher-title{font-size:16px}
+  .launcher-note{font-size:8px}
+  .launcher-heading{margin-bottom:7px}
+  .dock{bottom:8px}
+  .os-window{inset:7px 7px 73px!important;top:7px!important;left:7px!important;width:calc(100% - 14px)!important;height:calc(100% - 80px)!important}
+  .os-window.is-maximized{inset:0 0 68px!important;top:0!important;left:0!important;width:100%!important;height:calc(100% - 68px)!important}
+}
+@media(max-width:370px){
+  .hero-description{display:none}
+  .hero-content h1{font-size:62px!important}
+  .launcher{height:64px!important}
+  .launcher-note{display:none}
+}
+/* Respect explicit reduced motion preferences and motion-off setting. */
+@media(prefers-reduced-motion:reduce){
+  .menubar,.desktop-launchers,.dock,.hero-boot,.hero-pretitle,.hero-description,.hero-ctas{animation:none!important}
+}
+
+/* A single, finite boot sequence. The desktop remains operable under the non-blocking overlay. */
+.os-boot{
+  position:fixed;inset:0;z-index:550;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:15px;pointer-events:none;
+  background:radial-gradient(circle at 50% 43%,#322437,#13131e 68%,#10111a);
+  color:#ece7ee;animation:os-boot-exit .65s 1.16s both;
+}
+.os-boot-mark{position:relative;width:79px;height:79px;display:grid;place-items:center;color:#ffa148;filter:drop-shadow(0 0 24px rgba(255,159,67,.24));animation:os-mark-wake .65s ease both}
+.os-boot-mark svg{position:absolute;inset:0;width:100%;height:100%;animation:os-mark-turn 1.4s ease-out both}
+.os-boot-mark strong{font-size:26px;letter-spacing:-.07em;color:#ffae64;font-weight:850}
+.os-boot-name{font-size:21px;font-weight:860;letter-spacing:.035em}
+.os-boot-name span{color:#ff9f43}
+.os-boot-caption{font:700 9px/1.4 ui-monospace,Consolas,monospace;letter-spacing:2px;color:#a6a0b2}
+.os-boot-track{height:2px;width:min(290px,60vw);background:rgba(255,255,255,.1);overflow:hidden;margin-top:7px}
+.os-boot-track i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff9f43,#9568e3);transform:scaleX(0);transform-origin:left;animation:os-boot-progress 1.08s cubic-bezier(.24,.65,.32,1) forwards}
+.os-boot-ready{font-size:8px;color:#ff9f43}
+@keyframes os-boot-progress{0%{transform:scaleX(.06)}100%{transform:scaleX(1)}}
+@keyframes os-mark-turn{0%{opacity:.45;transform:rotate(-28deg) scale(.83)}100%{opacity:1;transform:rotate(0deg) scale(1)}}
+@keyframes os-mark-wake{from{opacity:.2;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes os-boot-exit{0%{opacity:1;visibility:visible}98%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden}}
+html.motion-off .os-boot{display:none}
+@media(prefers-reduced-motion:reduce){.os-boot{display:none!important}}
+
+/* Maximized applications become intentionally composed layouts instead of stretched text columns. */
+@media(min-width:841px){
+  .os-window.is-maximized:not(.terminal-window) .window-content{
+    padding-left:max(28px,calc((100% - 1030px)/2));
+    padding-right:max(28px,calc((100% - 1030px)/2));
+    padding-top:clamp(22px,3.2vh,38px);
+  }
+  .os-window.is-maximized .project-chooser{justify-content:center;gap:8px}
+  .os-window.is-maximized .project-canvas.motion-preview{height:clamp(240px,36vh,325px)}
+  .os-window.is-maximized .motion-preview .preview-frame{top:43px;bottom:24px;left:34px;right:34px}
+  .os-window.is-maximized .preview-scene{left:24px;right:24px;top:48px}
+  .os-window.is-maximized .preview-scene strong{font-size:clamp(23px,2.5vw,34px)}
+  .os-window.is-maximized .preview-scene small{font-size:10px}
+  .os-window.is-maximized .preview-lines{top:20px}
+  .os-window.is-maximized .tech-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .os-window.is-maximized .about-ident{max-width:900px}
+}

@@ -1,0 +1,73 @@
+/* AincFh OS Paint — coherent single-window creative workstation */
+#app-paint .window-content{padding:0!important;overflow:hidden!important}
+.paint-app{height:100%;min-height:0;display:flex;flex-direction:column;color:var(--ink);font-size:11px;user-select:none}
+.paint-top{display:flex;align-items:flex-end;justify-content:space-between;padding:17px 19px 11px;gap:10px;flex:none}
+.paint-top h2{font-size:27px;font-weight:840;letter-spacing:-.065em;margin:5px 0 3px}
+.paint-top h2 span{color:var(--hot)}
+.paint-top p{color:var(--sub);font-size:10px;line-height:1.65;margin:0}
+.paint-save{font:700 9px ui-monospace,Consolas,monospace;color:var(--muted);letter-spacing:.4px;text-align:right;white-space:nowrap}
+.paint-bar{flex:none;display:flex;align-items:center;gap:9px;flex-wrap:wrap;padding:9px 18px;border-top:1px solid var(--line2);border-bottom:1px solid var(--line2);background:var(--soft);min-height:47px}
+.paint-bar button{font:750 10px ui-monospace,Consolas,monospace;color:var(--text);border:1px solid var(--line);border-radius:5px;background:var(--panel);padding:7px 10px;min-height:30px;cursor:pointer;transition:color .16s,border-color .16s,background .16s}
+.paint-bar button:hover,.paint-bar button:focus-visible{border-color:var(--hot);color:var(--hot)}
+.paint-bar button[aria-pressed="true"]{background:rgba(255,159,67,.13);color:var(--hot);border-color:var(--hot)}
+.paint-bar button:disabled{opacity:.35;cursor:default}
+.paint-bar button.primary{background:var(--hot);border-color:var(--hot);color:#221a23;font-weight:860}
+.paint-tools,.paint-colors{display:flex;align-items:center;gap:5px}
+.paint-colors{padding:3px 9px;border-left:1px solid var(--line)}
+.paint-colors button[data-paint-color]{position:relative;width:21px;height:21px;min-height:21px;padding:0;background:var(--swatch);border:2px solid rgba(255,255,255,.09);border-radius:50%}
+.paint-colors button[data-paint-color][aria-pressed="true"]::after{position:absolute;content:"";inset:-5px;border:1.5px solid var(--hot);border-radius:50%}
+.paint-size{display:flex;align-items:center;gap:6px;color:var(--muted);font:750 9px ui-monospace,Consolas,monospace;letter-spacing:.6px}
+.paint-size input{width:80px;accent-color:var(--hot);cursor:pointer}
+.paint-size output{color:var(--ink);min-width:28px}
+.paint-secondary{gap:6px;min-height:43px;padding-top:7px;padding-bottom:7px;background:var(--panel)}
+.paint-secondary button{padding:6px 9px;min-height:26px;font-size:9px}
+.paint-doc-name{min-width:85px;max-width:160px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;color:var(--ink);font-weight:760;margin-right:auto}
+.paint-stage{min-height:0;flex:1;background:radial-gradient(ellipse at 40% 15%,rgba(255,159,67,.05),transparent 60%),linear-gradient(135deg,#292735,#1c1d29);position:relative;overflow:hidden}
+.paint-board-scroll{height:100%;width:100%;display:flex;align-items:center;justify-content:flex-start;flex-direction:column;padding:15px 15px 28px;overflow:auto;scrollbar-width:thin;scrollbar-color:var(--line) transparent}
+.paint-board{position:relative;width:100%;max-width:1100px;flex:none;box-shadow:0 12px 50px rgba(0,0,0,.45);border:1px solid rgba(255,255,255,.15);background:#f8f3ef}
+.paint-board.with-grid{background-image:linear-gradient(rgba(65,40,77,.1) 1px,transparent 1px),linear-gradient(90deg,rgba(65,40,77,.1) 1px,transparent 1px);background-size:20px 20px}
+.paint-board canvas{display:block;width:100%;height:auto;touch-action:none;cursor:crosshair;background:transparent}
+.paint-footer{flex:0 0 29px;display:flex;align-items:center;justify-content:space-between;gap:9px;padding:5px 14px;color:var(--muted);border-top:1px solid var(--line);font:740 9px ui-monospace,Consolas,monospace;white-space:nowrap}
+.paint-footer #paintToolStatus{color:var(--hot)}
+#app-paint .winbar:has(.winbar-title){flex-shrink:0}
+@media(max-width:1110px){
+ .paint-top{padding:13px 14px 10px}
+ .paint-bar{padding:8px 11px;gap:6px}
+ .paint-tools{flex-wrap:wrap}
+ .paint-size input{width:58px}
+ .paint-board-scroll{padding:12px}
+ .paint-colors{padding:3px 6px}
+ .paint-secondary{flex-wrap:wrap}
+}
+@media(max-width:660px){
+ .paint-top h2{font-size:23px}
+ .paint-top p{font-size:9px}
+ .paint-save{font-size:8px}
+ .paint-bar{gap:5px;padding:7px 9px}
+ .paint-tools{order:0;width:100%;justify-content:space-between}
+ .paint-tools button{flex:1;min-width:0}
+ .paint-colors{border-left:0;order:1;width:100%;justify-content:space-between}
+ .paint-size{order:2}
+ .paint-secondary{max-height:94px;overflow-y:auto}
+ .paint-doc-name{font-size:9px;max-width:100px}
+ .paint-secondary button{min-height:26px}
+ .paint-board-scroll{padding:9px 8px 15px}
+ .paint-footer{font-size:7px;flex-wrap:wrap;min-height:25px;padding:5px 8px}
+ .paint-footer span:last-child{display:none}
+}
+@media(prefers-reduced-motion:reduce){
+ .paint-bar button{transition:none}
+}
+
+/* Phone Dock prioritizes essentials; the full registry remains available in App Center. */
+@media(max-width:840px){
+  .dock-app[data-dock="projects"],.dock-app[data-dock="terminal"],.dock-app[data-dock="activity"],
+  .dock-app[data-dock="calculator"],.dock-app[data-dock="clock"]{display:none!important}
+  .dock-app[data-dock="paint"]{display:flex}
+  .dock{max-width:calc(100vw - 16px);justify-content:center;overflow:hidden}
+  .paint-bar .paint-tools button{font-size:10px;letter-spacing:0}
+}
+@media(max-width:390px){
+  .dock-app[data-dock="tasks"]{display:none!important}
+  .dock-app[data-dock="paint"]{display:flex!important}
+}
