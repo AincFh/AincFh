@@ -209,3 +209,9 @@
   .fs-tool{letter-spacing:0}
   .fs-toolbar{gap:4px}
 }
+
+/* PNG artwork items stored in the browser workspace */
+.fs-preview-image{display:block;max-width:100%;width:100%;height:auto;max-height:184px;object-fit:contain;background:#f8f3ef;border:1px solid var(--line);border-radius:5px;margin-top:13px}
+.fs-row:has(svg use[href="#i-image"]) .fs-row-icon{color:#a878e8}
+.fs-inspector:has(.fs-preview-image) .fs-detail-actions{margin-top:15px}
+@media(max-width:660px){.fs-preview-image{max-height:84px}}
