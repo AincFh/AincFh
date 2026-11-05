@@ -121,11 +121,41 @@ function tick(){
  if(d)d.textContent=fmt(remaining());if(s)s.textContent=fmt(elapsed());if(t)t.textContent=dateTime();
 }
 setInterval(tick,1000);
+var catalogFilter='all',catalogQuery='',favorites=getLS('aincfh_app_favorites',[]),catalogRecent=getLS('aincfh_app_recent',[]);
+if(!Array.isArray(favorites))favorites=[];if(!Array.isArray(catalogRecent))catalogRecent=[];
+function appGroup(id){
+ if(['projects','stack','about','contact'].includes(id))return 'work';
+ if(['terminal','settings','activity','apps'].includes(id))return 'system';
+ return 'tools';
+}
+function filteredCatalog(){
+ var running=(bridge?.windows?.()||[]).map(x=>x.id);
+ return (bridge?.listApps()||[]).map(function(x){return {...x,group:appGroup(x.id),favorite:favorites.includes(x.id),running:running.includes(x.id)}})
+ .filter(function(x){
+  var group=catalogFilter==='all'||catalogFilter==='recent'&&catalogRecent.includes(x.id)||catalogFilter==='favorites'&&x.favorite||catalogFilter===x.group;
+  return group&&(!catalogQuery||(x.name+' '+x.label+' '+x.id).toLowerCase().includes(catalogQuery.toLowerCase()))
+ }).sort(function(a,b){
+  if(catalogFilter==='recent')return catalogRecent.indexOf(a.id)-catalogRecent.indexOf(b.id);
+  return Number(b.favorite)-Number(a.favorite)||a.name.localeCompare(b.name);
+ });
+}
+function renderCatalogCards(){
+ var list=filteredCatalog();
+ return list.length?list.map(function(x){
+  return '<article class="su-app-card"><button data-catalog-open="'+esc(x.id)+'" class="su-app-tile" title="Launch '+esc(x.name)+'">'+
+  '<span class="su-app-symbol"><svg aria-hidden="true"><use href="#i-'+esc(x.icon)+'"></use></svg></span>'+
+  '<strong>'+esc(x.name)+'</strong><small>'+esc(x.label)+'</small>'+
+  '<span class="su-app-open">'+(x.running?'● RUNNING':'OPEN →')+'</span></button>'+
+  '<button class="su-app-pin '+(x.favorite?'is-pinned':'')+'" data-catalog-pin="'+esc(x.id)+'" aria-pressed="'+x.favorite+'" aria-label="'+(x.favorite?'Unfavorite ':'Favorite ')+esc(x.name)+'">'+(x.favorite?'★':'☆')+'</button></article>';
+ }).join(''):'<div class="su-app-empty">No matching apps. Clear search or select All.</div>';
+}
 function renderCatalog(){
- var items=bridge?.listApps()||[];
- return '<div class="su-catalog"><div class="su-head"><span class="win-eyebrow">SYSTEM / APP REGISTRY</span><h2>App Center<span>.</span></h2><p>Installed web apps in this workspace. Every entry opens an actual interactive module; no remote software is installed.</p></div>'+
- '<div class="su-app-count">'+items.length+' REGISTERED APPLICATIONS · RUNNING IN BROWSER SANDBOX</div>'+
- '<div class="su-app-grid">'+items.map(function(x){return '<button data-catalog-open="'+esc(x.id)+'" class="su-app-tile"><span class="su-app-symbol"><svg aria-hidden="true"><use href="#i-'+esc(x.icon)+'"></use></svg></span><strong>'+esc(x.name)+'</strong><small>'+esc(x.label)+'</small><span class="su-app-open">OPEN →</span></button>'}).join('')+'</div></div>';
+ var list=filteredCatalog();
+ return '<div class="su-catalog"><div class="su-head"><span class="win-eyebrow">SYSTEM / APP REGISTRY</span><h2>App Center<span>.</span></h2><p>All installed web modules. Launch an app, find it by name or keep favorites. No remote application installation is performed.</p></div>'+
+ '<div class="su-app-toolbar"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="suAppSearch" value="'+esc(catalogQuery)+'" placeholder="Search installed applications…" autocomplete="off" spellcheck="false"/></label>'+
+ '<div class="su-app-filters">'+[['all','All'],['work','Work'],['tools','Tools'],['system','System'],['favorites','Favorites'],['recent','Recent']].map(function(x){return '<button data-catalog-filter="'+x[0]+'" aria-pressed="'+(catalogFilter===x[0])+'">'+x[1]+'</button>'}).join('')+'</div></div>'+
+ '<div id="suAppCount" class="su-app-count">'+list.length+' OF '+(bridge?.listApps()||[]).length+' REGISTERED APPS · BROWSER RUNTIME</div>'+
+ '<div id="suAppGrid" class="su-app-grid">'+renderCatalogCards()+'</div></div>';
 }
 function refresh(id){if(bridge)bridge.refresh(id)}
 function handler(e){
@@ -160,6 +190,12 @@ function handler(e){
    if(b.dataset.stopwatchAction==='reset'){clock.stopwatchRunning=false;clock.stopwatchElapsed=0}
    clockSave();refresh('clock');return;
  }
+ if(b.hasAttribute('data-catalog-filter')){catalogFilter=b.dataset.catalogFilter;refresh('apps');return}
+ if(b.hasAttribute('data-catalog-pin')){
+   var id=b.dataset.catalogPin;
+   favorites=favorites.includes(id)?favorites.filter(x=>x!==id):favorites.concat(id);
+   putLS('aincfh_app_favorites',favorites);refresh('apps');return;
+ }
  if(b.hasAttribute('data-catalog-open')){bridge?.open(b.dataset.catalogOpen);return}
 }
 document.addEventListener('click',handler);
@@ -177,9 +213,18 @@ document.addEventListener('keydown',function(e){
  var x=e.target;
  if(x?.id==='suCalcExpr'&&e.key==='Enter'){e.preventDefault();calc.expression=x.value;calcAction('equals')}
 });
-document.addEventListener('input',function(e){if(e.target.id==='suCalcExpr')calc.expression=e.target.value});
+document.addEventListener('input',function(e){
+ if(e.target.id==='suCalcExpr'){calc.expression=e.target.value;return}
+ if(e.target.id==='suAppSearch'){
+   catalogQuery=e.target.value;
+   var grid=document.getElementById('suAppGrid'),counter=document.getElementById('suAppCount');
+   if(grid)grid.innerHTML=renderCatalogCards();
+   if(counter)counter.textContent=filteredCatalog().length+' OF '+(bridge?.listApps()||[]).length+' REGISTERED APPS · BROWSER RUNTIME';
+ }
+});
 window.AincApps={
  attach:function(x){bridge=x},
+ recordOpen:function(id){catalogRecent=[id].concat(catalogRecent.filter(x=>x!==id)).slice(0,12);putLS('aincfh_app_recent',catalogRecent);},
  render:function(id){if(id==='calculator')return renderCalculator();if(id==='tasks')return renderTasks();if(id==='clock')return renderClock();if(id==='apps')return renderCatalog();return null},
  get summary(){return{tasks:tasks.length,openTasks:tasks.filter(x=>!x.done).length,calculations:calc.history.length}},
  evaluate:evaluate
