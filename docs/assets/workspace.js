@@ -226,20 +226,17 @@
     if(ui.folder!=='root'&&(!item(ui.folder)||!isVisible(item(ui.folder))))ui.folder='root';
     var data=getEntries(),selected=item(ui.selected);
     return '<div class="fs-shell">'+
-      '<div class="fs-topline"><div><span class="win-eyebrow">LOCAL WORKSPACE / FILES</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">BROWSER STORAGE · LOCAL ONLY</span></div>'+
+      '<div class="fs-topline"><div><span class="win-eyebrow">AINCFH / LOCAL WORKSPACE</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">LOCAL-FIRST · PRIVATE</span></div>'+
       '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain,image/png,image/jpeg,image/webp" hidden /></div>'+
-      '<div class="fs-browser"><aside class="fs-sidebar"><div class="fs-side-caption">LOCATIONS</div>'+
-        '<button data-fs-folder="root" class="'+(ui.folder==='root'&&!ui.trash?'active':'')+'">'+symbol('folder')+' Home</button>'+
-        directoryList().filter(function(x){return x.parent==='root'}).map(function(x){return '<button data-fs-folder="'+esc(x.id)+'" class="'+(ui.folder===x.id&&!ui.trash?'active':'')+'">'+symbol('folder')+' '+esc(x.name)+'</button>'}).join('')+
-        '<div class="fs-side-caption">SYSTEM</div><button data-fs-action="trash" class="'+(ui.trash?'active':'')+'">'+symbol('text')+' Trash <small>'+store.items.filter(function(x){return x.deleted}).length+'</small></button>'+
-      '</aside><section class="fs-center"><div class="fs-location">'+(ui.trash?'<strong>Trash</strong>':getPath(ui.folder).map(function(p){return '<button data-fs-folder="'+esc(p.id)+'">'+esc(p.name)+'</button>'}).join('<span>/</span>'))+'</div>'+
-        '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="Search this workspace" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="Switch sort">SORT: '+(ui.sort==='name'?'NAME':'RECENT')+'</button></div>'+
-        '<div class="fs-list" role="listbox" aria-label="Files">'+
+      '<div class="fs-browser'+(nav.hideSidebar?' fs-sidebar-hidden':'')+'" style="--fs-sidebar-width:'+nav.sidebarWidth+'px">'+renderSidebar()+
+      '<section class="fs-center">'+fsLocation()+
+        '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="'+esc(nt('search'))+'" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="'+esc(nt(ui.sort==='name'?'sortRecent':'sortName'))+'">'+esc(nt(ui.sort==='name'?'sortName':'sortRecent'))+'</button></div>'+
+        '<div class="fs-table-header" aria-hidden="true"><span>'+esc(nt('name'))+'</span><span>'+esc(nt('type'))+'</span><span>'+esc(nt('modified'))+'</span></div><div class="fs-list" role="listbox" aria-label="Files">'+
           (data.length?data.map(function(i){return '<button class="fs-row '+(ui.selected===i.id?'selected':'')+'" data-fs-select="'+esc(i.id)+'" aria-selected="'+(ui.selected===i.id)+'" title="Double-click to open">'+
             '<span class="fs-row-icon">'+symbol(i.type)+'</span><span class="fs-row-name">'+esc(i.name)+'</span><span class="fs-row-type">'+esc(i.type.toUpperCase())+'</span><span class="fs-row-date">'+esc(prettyDate(i.modified))+'</span></button>'}).join(''):
           '<div class="fs-empty"><strong>'+(ui.trash?'Trash is empty':'Nothing here yet.')+'</strong><p>'+(ui.trash?'Deleted items appear here.':'Create a document or folder to start working.')+'</p></div>')+
         '</div><div class="fs-status">'+data.length+' item(s) · '+store.items.filter(isVisible).length+' in workspace'+(ui.trash?'<button data-fs-action="empty">Empty Trash</button>':'')+'</div></section>'+
-        '<aside class="fs-inspector"><div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
+        '<aside class="fs-inspector"><div class="fs-side-caption">'+esc(nt('inspector'))+' / PREVIEW</div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
       '</div>'+modal()+'</div>';
   }
   // Escaped Markdown subset. HTML and script execution are never allowed.
