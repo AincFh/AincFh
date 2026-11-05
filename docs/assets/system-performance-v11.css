@@ -24,3 +24,14 @@ html[data-performance-profile="balanced"] .os-window{transition-duration:.10s}
  html .os-window,html .os-start-panel,html .dock{transition:none!important}
  html :is(.hero-holo,.hero-line,.hero-grid,.orbit,.orbital,.ambient-orbit,.hero-glow){animation:none!important}
 }
+
+.os-network-indicator{
+  display:inline-flex;align-items:center;gap:6px;font:740 9px ui-monospace,Consolas,monospace;
+  color:var(--hot);padding:5px 7px;border:1px solid rgba(255,159,67,.24);border-radius:5px;
+}
+.os-network-indicator[hidden]{display:none!important}
+.os-network-indicator:before{content:"";width:5px;height:5px;border-radius:50%;background:var(--hot)}
+@media(max-width:840px){
+ .dock-app[data-dock="taskmanager"]{display:none!important}
+ .os-network-indicator{display:none}
+}
