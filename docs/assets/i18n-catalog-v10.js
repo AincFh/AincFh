@@ -283,6 +283,31 @@ const Crows=[
 ];
 for(const x of Crows)C(...x);
 
+// System diagnostics and performance preferences (v11)
+[
+ ['Task Manager','任务管理器','工作管理員','タスクマネージャー'],
+ ['SYSTEM / RESOURCE MONITOR','系统 / 资源监控','系統 / 資源監控','システム / リソース監視'],
+ ['Performance & Efficiency','性能与效率','效能與效率','パフォーマンスと効率'],
+ ['Performance profile','性能模式','效能模式','パフォーマンスモード'],
+ ['High performance','高性能','高效能','高性能'],
+ ['Power saver','节能','省電','省電力'],
+ ['Open Task Manager','打开任务管理器','開啟工作管理員','タスクマネージャーを開く'],
+ ['根据浏览器设备与省流量偏好选择','Follow browser device and data-saving preferences','依瀏覽器裝置與省流量偏好選擇','デバイスと通信量節約設定に従う'],
+ ['兼顾动态效果与资源消耗','Balance visual effects and resource use','兼顧動態效果與資源消耗','視覚効果と負荷のバランス'],
+ ['保留完整的桌面视觉动画','Keep full desktop animations','保留完整桌面動畫','デスクトップのアニメーションを維持'],
+ ['减少动画、背景消耗与玻璃模糊效果','Reduce animations, background updates and blur','減少動畫、背景負載與模糊效果','アニメーション・背景更新・ぼかしを減らす'],
+ ['任务管理器','Task Manager','工作管理員','タスクマネージャー'],
+ ['打开任务管理器','Open Task Manager','開啟工作管理員','タスクマネージャーを開く'],
+ ['真实浏览器性能数据、节能模式与动画控制。性能选项只影响当前网页，不改变真实电脑硬件状态。','Real browser performance metrics and power-saving controls. These settings affect this webpage only.','真實瀏覽器效能指標與省電控制，只影響此網頁，不修改裝置硬體設定。','実際のブラウザーの性能指標と省電力設定です。この Web ページだけに適用されます。'],
+ ['查看真实的浏览器性能数据、运行中的 OS 应用和长任务，也可以关闭应用窗口。','Inspect browser metrics, running Web OS applications and long tasks, and close app windows.','檢視真實瀏覽器指標、正在執行的 Web OS 應用程式與長任務，並可關閉視窗。','ブラウザーの実測値・起動中のアプリ・長いタスクを確認し、ウィンドウを閉じます。'],
+ ['浏览器安全沙箱无法读取真实操作系统的 CPU、GPU 或其他进程的专用内存，不显示虚构值。','The browser sandbox cannot read real OS CPU/GPU usage or other processes\' memory; no fictitious values are shown.','瀏覽器沙箱無法讀取真正作業系統的 CPU、GPU 或其他程序的記憶體，不顯示虛構值。','ブラウザーは OS 全体の CPU/GPU 使用率や他のプロセスのメモリを取得できません。架空の数値は表示しません。']
+].forEach(v=>{
+ const [src,cn,tw,ja]=v;
+ if(/[\u4e00-\u9fff]/.test(src))Z(src,cn,tw,ja);
+ else C(src,cn,tw,ja);
+});
+
+
 const shellControlTranslations=[
 ['Dock style','Dock 样式','Dock 樣式','Dock のスタイル'],
 ['Floating Dock','悬浮 Dock','懸浮 Dock','フローティング Dock'],
