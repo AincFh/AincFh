@@ -61,8 +61,9 @@ def test():
             expect(page.locator('#app-paint')).to_be_visible()
             page.wait_for_timeout(200)
             assert png(page)==second, (width,height,"Opening PNG from Files lost image data")
+            before_count=page.evaluate("AincWorkspace.summary().files")
             page.locator('#app-paint [data-paint-action="save"]').click()
-            assert page.evaluate("AincWorkspace.list().split('\\n').filter(x=>x.includes('Untitled drawing.png')).length") == 1, "Repeated save duplicated artwork"
+            assert page.evaluate("AincWorkspace.summary().files")==before_count, "Repeated save duplicated artwork"
             page.evaluate("() => AincStorage.whenIdle()")
             page.screenshot(path=str(OUT / f"paint-{width}x{height}.png"),full_page=True)
             page.reload(wait_until="load")
