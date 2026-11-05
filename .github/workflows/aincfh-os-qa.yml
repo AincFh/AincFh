@@ -1,0 +1,47 @@
+name: AincFh OS — Browser QA
+
+on:
+  push:
+    branches:
+      - profile-refresh-2026-11
+    paths:
+      - 'docs/**'
+      - 'assets/launch-workspace.svg'
+      - 'tests/os-smoke.py'
+      - '.github/workflows/aincfh-os-qa.yml'
+  pull_request:
+    paths:
+      - 'docs/**'
+      - 'assets/launch-workspace.svg'
+      - 'tests/os-smoke.py'
+      - '.github/workflows/aincfh-os-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  browser-smoke:
+    name: Viewport + interaction regression
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Playwright
+        run: |
+          python -m pip install --disable-pip-version-check playwright==1.56.0
+          python -m playwright install --with-deps chromium
+      - name: Serve local OS
+        run: |
+          python -m http.server 8765 --bind 127.0.0.1 --directory docs > /tmp/aincfh-os-server.log 2>&1 &
+          echo $! > /tmp/aincfh-os-server.pid
+          sleep 2
+      - name: Run browser smoke tests
+        env:
+          OS_URL: http://127.0.0.1:8765/
+        run: python tests/os-smoke.py
