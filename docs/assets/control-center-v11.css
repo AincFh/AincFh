@@ -50,6 +50,7 @@
 .cc-trigger svg{width:18px;height:18px}
 .cc-trigger[aria-expanded=true]{color:var(--hot);background:rgba(255,159,67,.12)}
 html.os-performance-save .os-control-center{backdrop-filter:none;-webkit-backdrop-filter:none}
+.cc-status-notice{padding:8px 10px;margin:10px 0 0;font-size:10px;line-height:1.6;color:var(--hot);background:rgba(255,159,67,.09);border:1px solid rgba(255,159,67,.26);border-radius:6px}
 @media(max-width:600px){
  .os-control-center{top:48px;right:8px;max-height:calc(100dvh - 128px);width:calc(100vw - 16px)}
  .cc-header{padding:12px 14px}.cc-header h2{font-size:19px}
