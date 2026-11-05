@@ -4,7 +4,9 @@
 (function(){
 'use strict';
 const supported=('serviceWorker' in navigator)&&location.protocol!=='file:';
-let registration=null,error=null,started=false,readyPromise=null;
+let registration=null,error=null,started=false,readyPromise=null,installEvent=null,installed=matchMedia('(display-mode: standalone)').matches;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installEvent=e;window.dispatchEvent(new Event('aincfh:pwa-installable'))});
+window.addEventListener('appinstalled',()=>{installed=true;installEvent=null;window.dispatchEvent(new Event('aincfh:pwa-installed'))});
 const report=()=>{
  const root=document.documentElement;root.dataset.network=navigator.onLine?'online':'offline';
  const indicator=document.getElementById('osNetworkStatus');
@@ -30,15 +32,30 @@ function init(){
  }).catch(e=>{error=String(e);return null});
  return readyPromise;
 }
+async function install(){
+ if(installed)return {outcome:'already-installed'};
+ if(!installEvent)return {outcome:'not-supported'};
+ const event=installEvent;installEvent=null;
+ try{
+  await event.prompt();const choice=await event.userChoice;
+  if(choice?.outcome!=='accepted')return {outcome:'dismissed'};
+  return {outcome:'accepted'};
+ }catch(e){error=String(e);return {outcome:'error',error}}
+}
+async function checkUpdate(){
+ const r=registration||await init();if(!r)return {updated:false,error:error||'Service worker unavailable'};
+ try{await r.update();return {updated:true,waiting:Boolean(r.waiting)}}catch(e){error=String(e);return {updated:false,error}}
+}
 async function status(){
  const cache=typeof caches!=='undefined'?await caches.keys().catch(()=>[]):[];
  return{
   supported,registered:Boolean(registration),controller:Boolean(navigator.serviceWorker?.controller),
+  installed,canInstall:Boolean(installEvent),waiting:Boolean(registration?.waiting),
   online:navigator.onLine,cacheVersions:cache.filter(k=>k.startsWith('aincfh-os-shell-')),
   error
  };
 }
-window.AincPWA={init,status,whenReady:init,get registered(){return Boolean(registration)},get supported(){return supported}};
+window.AincPWA={init,status,install,checkUpdate,whenReady:init,get registered(){return Boolean(registration)},get supported(){return supported},get canInstall(){return Boolean(installEvent)}};
 if(document.readyState==='complete')init();
 else window.addEventListener('load',init,{once:true});
 report();
