@@ -2,7 +2,7 @@
    A web app workspace, NOT direct access to computer files or cloud accounts. */
 (function () {
   'use strict';
-  var KEY='aincfh_workspace_v1',MAX_BYTES=600000,MAX_FILES=240,bridge=null;
+  var KEY='aincfh_workspace_v1',MAX_BYTES=7500000,MAX_FILES=800,bridge=null,wasModified=false,storageError='';
   var esc=function(v){return String(v===undefined?'':v).replace(/[&<>"']/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
   var now=function(){return new Date().toISOString()};
   var uid=function(){return typeof crypto!=='undefined' && crypto.randomUUID?crypto.randomUUID():'f-'+Date.now()+'-'+Math.random().toString(36).slice(2,9)};
@@ -25,10 +25,23 @@
   }catch(e){store=defaults()}
   function save(next){
     if(next.items.length>MAX_FILES)throw Error('文件数量达到上限 '+MAX_FILES);
+    next.updatedAt=now();
     var raw=JSON.stringify(next);
-    if(raw.length>MAX_BYTES)throw Error('浏览器工作区已接近容量上限，请导出备份。');
-    try{localStorage.setItem(KEY,raw)}catch(e){throw Error('浏览器未允许保存：请检查隐私模式或剩余空间')}
-    store=next;return true;
+    if(raw.length>MAX_BYTES)throw Error('浏览器工作区容量上限 7.5 MB；请导出备份。');
+    // For small snapshots keep the original localStorage copy as a migration fallback.
+    // Larger snapshots are saved to IndexedDB, without silently truncating documents.
+    if(raw.length<=500000){try{localStorage.setItem(KEY,raw)}catch(e){storageError='localStorage fallback unavailable'}}
+    store=next;wasModified=true;
+    if(window.AincStorage){
+      window.AincStorage.write('workspace',next).then(()=>{storageError=''}).catch(e=>{
+        storageError='IndexedDB write failed: '+e.message;
+        console.warn('[AincFh OS]',storageError);
+        report('保存到浏览器数据库失败，请立即导出备份');
+      });
+    }else if(raw.length>500000){
+      throw Error('当前浏览器不支持大容量工作区存储；请导出备份');
+    }
+    return true;
   }
   function report(message){if(bridge&&bridge.toast)bridge.toast(message);else console.info('[AincFh OS]',message)}
   function activity(text,kind){
@@ -263,7 +276,7 @@
     touch:function(name){return createFromTerminal(name,'text')},
     history:function(){return store.events.slice(0,12).map(function(e){return e.when.slice(0,19).replace('T',' ')+' · '+e.text}).join('\n')},
 
-    storageStats:function(){return {documents:store.items.filter(function(x){return x.type==='text'&&isVisible(x)}).length,bytes:JSON.stringify(store).length,events:store.events.length}},
+    storageStats:function(){return {documents:store.items.filter(function(x){return x.type==='text'&&isVisible(x)}).length,bytes:JSON.stringify(store).length,events:store.events.length,mode:window.AincStorage?.status.mode||'Legacy',error:storageError}},
     exportBackup:function(){
       var payload={schema:'aincfh-workspace-v1',exported:now(),version:store.version,items:store.items,events:store.events};
       download(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}),'AincFh-OS-workspace-'+new Date().toISOString().slice(0,10)+'.json');
@@ -322,5 +335,18 @@
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){api.closeDesktopMenu();if(ui.modal){ui.modal=null;rerender('files')}}});
   window.AincWorkspace=api;
-  try{if(!localStorage.getItem(KEY))save(store)}catch(e){console.info('[AincFh OS] local storage unavailable')}
+  // Load the durable IndexedDB snapshot without overwriting edits made during startup.
+  api.ready=window.AincStorage?.read('workspace').then(function(saved){
+    if(wasModified)return false;
+    var valid=saved&&saved.version===1&&Array.isArray(saved.items)&&Array.isArray(saved.events);
+    if(valid&&(!store.updatedAt||String(saved.updatedAt||'')>=String(store.updatedAt||''))){
+      store=saved;refresh();rerender('notes');updateCount();
+      return true;
+    }
+    if(!valid||String(store.updatedAt||'')>String(saved.updatedAt||'')){
+      return window.AincStorage.write('workspace',store).catch(function(e){storageError=e.message;return false});
+    }
+    return true;
+  }).catch(function(e){storageError=e.message;return false})||Promise.resolve(false);
+  try{if(!localStorage.getItem(KEY))localStorage.setItem(KEY,JSON.stringify(store))}catch(e){}
 })();
