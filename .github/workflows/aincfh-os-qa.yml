@@ -15,6 +15,7 @@ on:
       - 'tests/os-performance-v11.py'
       - 'tests/os-control-center-v11.py'
       - 'tests/os-fusion-v12.py'
+      - 'tests/os-desktop-v13.py'
       - '.github/workflows/aincfh-os-qa.yml'
   pull_request:
     paths:
@@ -28,6 +29,7 @@ on:
       - 'tests/os-performance-v11.py'
       - 'tests/os-control-center-v11.py'
       - 'tests/os-fusion-v12.py'
+      - 'tests/os-desktop-v13.py'
       - '.github/workflows/aincfh-os-qa.yml'
   workflow_dispatch:
 
@@ -67,6 +69,7 @@ jobs:
           python tests/os-performance-v11.py
           python tests/os-control-center-v11.py
           python tests/os-fusion-v12.py
+          python tests/os-desktop-v13.py
 
       - name: Upload visual regression screenshots
         if: always()
