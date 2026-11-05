@@ -10,8 +10,8 @@
   <title>AincFh OS · Design / Code / Systems</title>
   <link rel="icon" href="./assets/favicon.svg" type="image/svg+xml" />
   <link rel="stylesheet" href="./assets/styles.css?v=motion-5" />
-  <link rel="stylesheet" href="./assets/os-desktop-v5.css?v=5.0.0" />
-  <script src="./assets/app.js?v=os-5.0.0" defer></script>
+  <link rel="stylesheet" href="./assets/os-desktop-v5.css?v=5.0.4" />
+  <script src="./assets/app.js?v=5.0.4" defer></script>
 </head>
 <body>
   <div class="os-boot" aria-hidden="true">
@@ -81,6 +81,11 @@
       <button role="menuitem" data-open="projects"><svg><use href="#i-folder"/></svg>打开项目工作台</button>
       <button role="menuitem" data-open="terminal"><svg><use href="#i-terminal"/></svg>打开终端</button>
       <button role="menuitem" data-open="settings"><svg><use href="#i-settings"/></svg>外观与动效</button>
+      <div class="menu-rule"></div>
+      <button role="menuitem" data-arrange="tile">平铺所有窗口</button>
+      <button role="menuitem" data-arrange="cascade">层叠排列窗口</button>
+      <button role="menuitem" data-snap="left">当前窗口靠左</button>
+      <button role="menuitem" data-snap="right">当前窗口靠右</button>
       <div class="menu-rule"></div>
       <button role="menuitem" id="menuReset">重置窗口布局</button>
     </div>
