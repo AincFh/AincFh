@@ -68,7 +68,11 @@ def run():
    page.locator('[data-dock="tasks"]').click()
    assert page.locator('#app-tasks .su-task-row').filter(has_text="Build the complete desktop").count()==1
    # Preferences alter the environment, including accessibility and settings panels.
-   page.locator('[data-dock="settings"]').click()
+   if width > 840:
+    page.locator('[data-dock="settings"]').click()
+   else:
+    page.locator('[data-dock="apps"]').click()
+    page.locator('#app-apps [data-catalog-open="settings"]').click()
    page.locator('#app-settings [data-sp-section="accessibility"]').click()
    assert page.locator('#app-settings [data-sp-set="textSize"]').count()==3
    page.locator('#app-settings [data-sp-toggle="motion"]').click()
