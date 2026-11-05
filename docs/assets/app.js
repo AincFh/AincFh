@@ -592,23 +592,31 @@
     windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
     prefs:()=>({...state}),set:setPreference,toast:toast,sync:syncDock
   });
+  document.addEventListener('visibilitychange',()=>document.documentElement.classList.toggle('os-background',document.hidden));
   // Ambient animations respond to pointer and accessibility preferences.
   let tracking=false;document.addEventListener('pointermove',e=>{
-    if(tracking||!state.motion)return;tracking=true;
+    if(tracking||!state.motion||document.hidden||document.documentElement.classList.contains('os-performance-save'))return;tracking=true;
     requestAnimationFrame(()=>{document.body.style.setProperty('--mx',e.clientX+'px');document.body.style.setProperty('--my',e.clientY+'px');
       if(!isMobile()){const halo=$('.hero-holo');if(halo){halo.style.setProperty('--holo-x',((e.clientX/innerWidth)-.5)*22+'px');halo.style.setProperty('--holo-y',((e.clientY/innerHeight)-.5)*18+'px');}}
       tracking=false;});
   },{passive:true});
   // Subtle, pointer-driven 3D interaction on launch modules.
   $$('.launcher').forEach(card=>{
-    card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!state.motion)return;const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
+    card.addEventListener('pointermove',e=>{if(e.pointerType!=='mouse'||!state.motion||document.hidden||document.documentElement.classList.contains('os-performance-save'))return;const r=card.getBoundingClientRect();const x=(e.clientX-r.left)/r.width,y=(e.clientY-r.top)/r.height;
       card.style.setProperty('--card-rx',((.5-y)*8)+'deg');card.style.setProperty('--card-ry',((x-.5)*9)+'deg');card.style.setProperty('--card-x',(x*100)+'%');card.style.setProperty('--card-y',(y*100)+'%');
     },{passive:true});
     card.addEventListener('pointerleave',()=>{card.style.removeProperty('--card-rx');card.style.removeProperty('--card-ry');card.style.removeProperty('--card-x');card.style.removeProperty('--card-y');});
   });
   const typeLines=['Design. Build. Ship.','Craft meets engineering.','Interfaces with identity.','Code that actually works.'];
   let lineIndex=0,charIndex=0,removing=false;const typeEl=$('#typeText');
-  function typeLoop(){if(!state.motion){typeEl.textContent=window.AincI18n?.t(typeLines[0])||typeLines[0];setTimeout(typeLoop,1800);return;}let line=window.AincI18n?.t(typeLines[lineIndex])||typeLines[lineIndex];
+  function typeLoop(){
+    if(document.hidden){setTimeout(typeLoop,4200);return;}
+    if(!state.motion||document.documentElement.classList.contains('os-performance-save')){
+      const caption=window.AincI18n?.t(typeLines[0])||typeLines[0];
+      if(typeEl.textContent!==caption)typeEl.textContent=caption;
+      setTimeout(typeLoop,2000);return;
+    }
+    let line=window.AincI18n?.t(typeLines[lineIndex])||typeLines[lineIndex];
     if(!removing){charIndex=Math.min(line.length,charIndex+1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===line.length){removing=true;setTimeout(typeLoop,2300);return;}}
     else{charIndex=Math.max(0,charIndex-1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===0){removing=false;lineIndex=(lineIndex+1)%typeLines.length;setTimeout(typeLoop,400);return;}}
     setTimeout(typeLoop,removing?38:78);
