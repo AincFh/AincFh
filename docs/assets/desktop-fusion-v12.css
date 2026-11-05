@@ -225,3 +225,53 @@ html[data-theme="light"] .fusion-overview{background:rgba(21,20,34,.78)}
 html .fusion-top-switcher,html .fusion-overview,html .fusion-studio .fusion-preset-card{
  user-select:none!important;-webkit-user-select:none!important
 }
+
+/* Snap Layouts: real window geometry behind every preview. */
+.win-control.layout{
+ width:22px;height:22px;border-radius:6px!important;background:var(--soft)!important;
+ border:1px solid var(--line)!important;color:var(--sub);margin-left:4px;align-self:center;
+ display:grid;place-items:center;opacity:.72
+}
+.win-control.layout svg{width:13px;height:13px;stroke-width:1.5;pointer-events:none}
+.win-control.layout:hover,.win-control.layout:focus-visible{opacity:1;color:var(--hot);border-color:var(--hot)!important}
+html[data-window-controls="right"] .win-control.layout{
+ order:0;min-height:34px;height:34px;align-self:center;
+ width:29px;border:0!important;margin-right:4px;border-radius:4px!important
+}
+html[data-window-controls="right"] .win-control.layout:before{display:none!important}
+html[data-window-controls="right"] .win-controls .win-control.layout{order:0}
+#fusionSnapPopup[hidden]{display:none!important}
+.fusion-snap-popup{
+ position:fixed;z-index:570;width:344px;max-width:calc(100vw - 20px);overflow:hidden;
+ border:1px solid var(--fusion-border,var(--line));border-radius:11px;
+ background:var(--panel);box-shadow:0 19px 65px rgba(0,0,0,.37);
+ backdrop-filter:blur(28px);-webkit-backdrop-filter:blur(28px);
+ padding:11px;user-select:none;-webkit-user-select:none
+}
+.fusion-snap-heading{color:var(--hot);font-size:10px;font-weight:800;letter-spacing:.04em;padding:3px 4px 12px}
+.fusion-snap-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.fusion-snap-grid button{
+ display:flex;flex-direction:column;gap:7px;align-items:center;min-width:0;padding:9px 4px;
+ border:1px solid var(--line2);border-radius:7px;background:var(--soft);color:var(--text);
+ font-size:9px;font-weight:700;min-height:72px
+}
+.fusion-snap-grid button:hover,.fusion-snap-grid button:focus-visible{
+ border-color:var(--hot);color:var(--hot);background:var(--fusion-tint)
+}
+.fusion-snap-grid button small{font-size:9px;line-height:1.3;font-weight:720;text-align:center}
+.fusion-snap-sample{
+ display:grid;grid-template-columns:repeat(2,1fr);grid-template-rows:repeat(2,1fr);
+ width:36px;height:27px;gap:2px;padding:2px;border:1px solid var(--sub);border-radius:4px
+}
+.fusion-snap-sample i{border-radius:1px;background:var(--line)}
+[data-snap-preview="left"] i:nth-child(1),[data-snap-preview="left"] i:nth-child(3),
+[data-snap-preview="right"] i:nth-child(2),[data-snap-preview="right"] i:nth-child(4),
+[data-snap-preview="top-left"] i:nth-child(1),[data-snap-preview="top-right"] i:nth-child(2),
+[data-snap-preview="bottom-left"] i:nth-child(3),[data-snap-preview="bottom-right"] i:nth-child(4),
+[data-snap-preview="center"] i,[data-snap-preview="maximize"] i{
+ background:var(--hot)
+}
+[data-snap-preview="center"] i{opacity:.43}
+[data-snap-preview="maximize"] i{opacity:1}
+@media(max-width:840px){.win-control.layout,.fusion-snap-popup{display:none!important}}
+@media(prefers-reduced-motion:reduce){.fusion-snap-popup{backdrop-filter:none;-webkit-backdrop-filter:none}}
