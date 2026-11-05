@@ -158,6 +158,10 @@
 #app-files .fs-row-type,#app-files .fs-row-date{font-size:9px}
 #app-files .fs-inspector{background:var(--panel2);width:190px;flex:0 0 190px;padding:15px 14px}
 #app-files .fs-inspector .fs-side-caption{margin:0 0 17px}
+#app-files .fs-inspector-heading{display:flex;align-items:flex-start;justify-content:space-between;gap:6px}
+#app-files .fs-inspector-close{display:none;background:transparent;border:1px solid var(--line);border-radius:6px;padding:2px 7px;color:var(--sub);font-size:18px}
+#app-files .fs-inspector-close:hover{color:var(--hot);border-color:var(--hot)}
+
 #app-files .fs-status{background:color-mix(in srgb,var(--panel2) 26%,var(--panel));padding:7px 14px;font-size:9.5px}
 #app-files .fs-toolbar .fs-tool,#app-files .fs-detail-actions button{appearance:none;-webkit-appearance:none}
 #app-files .fs-topline{padding:16px 21px 8px}
@@ -169,6 +173,13 @@
 /* Responsive by the actual window width (not the outer browser viewport). */
 @container files (max-width:780px){
  #app-files .fs-inspector{display:none}
+ #app-files .fs-browser.fs-inspector-open .fs-inspector{
+   display:block;position:absolute;right:0;top:0;bottom:0;z-index:18;
+   width:min(308px,86%);max-width:86%;flex-basis:auto;
+   border-left:1px solid var(--line);box-shadow:-22px 0 55px rgba(0,0,0,.35);
+   overflow-y:auto;background:var(--panel2)
+ }
+ #app-files .fs-browser.fs-inspector-open .fs-inspector-close{display:block}
  #app-files .fs-sidebar{flex-basis:min(var(--fs-sidebar-width,218px),37%);width:min(var(--fs-sidebar-width,218px),37%)}
  #app-files .fs-table-header{grid-template-columns:minmax(100px,1fr) 57px 70px}
 }
