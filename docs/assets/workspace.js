@@ -10,7 +10,7 @@
     var t=now(),folder=function(id,name){return{id:id,name:name,type:'folder',parent:'root',body:'',url:'',created:t,modified:t,deleted:false}};
     var file=function(id,parent,name,body){return{id:id,name:name,type:'text',parent:parent,body:body,url:'',created:t,modified:t,deleted:false}};
     return{version:1,items:[
-      folder('workspace','Workspace'),folder('notes','Notes'),folder('links','Links'),
+      folder('workspace','Workspace'),folder('notes','Notes'),folder('links','Links'),folder('desktop','Desktop'),
       file('welcome','workspace','Start Here.txt','Welcome to AincFh OS\n\nThis is an interactive browser workspace — not a real operating system.\n\nCreate files and folders in Files. Double-click a text document to edit it in Notes. Your changes stay in this browser unless you export them.\n\nShortcuts\nCtrl / Cmd + K — command center\nDouble-click title bar — maximize or restore\nRight-click the desktop — quick actions\n\nNo cloud sync or access to your computer files is implied.'),
       file('ideas','notes','Ideas.md','# Workspace notes\n\n- Build with intent.\n- Make interactions useful.\n- Test every real action.\n\nThis document is editable. Changes save automatically to local browser storage.'),
       file('guide','workspace','Project Index.md','# Selected projects\n\nA.T. Field — https://aincfh.dpdns.org\nSaint Laurent — https://yslfivem.com\nWindows desktop tools — private source\nFishing World 3D — experimental\n\nProject descriptions are examples of publicly shareable information, not a mirror of private repositories.')
@@ -32,6 +32,7 @@
     // Larger snapshots are saved to IndexedDB, without silently truncating documents.
     if(raw.length<=500000){try{localStorage.setItem(KEY,raw)}catch(e){storageError='localStorage fallback unavailable'}}
     store=next;wasModified=true;
+    window.dispatchEvent(new CustomEvent('aincfh:workspace-updated',{detail:{modified:next.updatedAt,items:next.items.length}}));
     if(window.AincStorage){
       window.AincStorage.write('workspace',next).then(()=>{storageError=''}).catch(e=>{
         storageError='IndexedDB write failed: '+e.message;
@@ -374,6 +375,49 @@
   }
   var api={
     attach:function(b){bridge=b;updateCount()},
+    // Desktop shell receives file metadata only; no file bodies are duplicated into
+    // browser window globals. It opens the original item via the Files app.
+    listItems:function(){return store.items.filter(isVisible).map(function(i){return{id:i.id,name:i.name,type:i.type,parent:i.parent,modified:i.modified}})},
+    listDesktopItems:function(){return store.items.filter(function(i){return i.parent==='desktop'&&isVisible(i)}).map(function(i){return{id:i.id,name:i.name,type:i.type,parent:i.parent,modified:i.modified}})},
+    openItemById:function(id){
+      if(typeof id!=='string')return false;
+      var i=item(id);if(!i||!isVisible(i))return false;
+      action('open',id);if(i.type==='folder')bridge&&bridge.open('files');
+      return true;
+    },
+    openTrash:function(){ui.trash=true;ui.search='';ui.selected=null;bridge&&bridge.open('files');rerender('files');return true},
+    createDesktopItem:function(type,name){
+      if(!['text','folder'].includes(type))return false;
+      name=String(name||'').trim();
+      if(!name||name.length>80||/[\\/]/.test(name)||name==='.'||name==='..')return false;
+      var t=now(),id=uid();
+      var ok=transact(function(next){
+        var parent=next.items.find(function(i){return i.id==='desktop'&&!i.deleted&&i.type==='folder'});
+        if(!parent){
+          if(next.items.some(function(i){return i.id==='desktop'}))throw Error('Desktop directory conflict');
+          next.items.push({id:'desktop',name:'Desktop',type:'folder',parent:'root',body:'',url:'',created:t,modified:t,deleted:false});
+        }
+        if(next.items.some(function(i){return i.parent==='desktop'&&!i.deleted&&i.name.toLowerCase()===name.toLowerCase()}))
+          throw Error('The desktop already contains an item with that name');
+        next.items.push({id:id,name:name,type:type,parent:'desktop',body:'',url:'',created:t,modified:t,deleted:false});
+      },'Created desktop '+type+' · '+name);
+      if(ok){refresh();return id}return false;
+    },
+    renameItemById:function(id,name){
+      if(typeof id!=='string'||id==='desktop')return false;
+      name=String(name||'').trim();var i=item(id);
+      if(!i||!isVisible(i)||!name||name.length>80||/[\\/]/.test(name)||name==='.'||name==='..')return false;
+      var ok=transact(function(next){
+        if(next.items.some(function(x){return x.id!==id&&x.parent===i.parent&&!x.deleted&&x.name.toLowerCase()===name.toLowerCase()}))throw Error('Name already exists');
+        var x=next.items.find(function(x){return x.id===id});x.name=name;x.modified=now();
+      },'Renamed '+i.name+' → '+name);
+      if(ok)refresh();return ok;
+    },
+    moveItemToTrash:function(id){
+      if(typeof id!=='string'||['desktop','workspace','notes','links'].includes(id))return false;
+      var i=item(id);if(!i||!isVisible(i))return false;
+      commitDelete(id,false);return true;
+    },
     saveImage:saveImage,
     render:function(id){if(id==='files')return renderFiles();if(id==='notes')return renderNotes();if(id==='activity')return renderActivity();return ''},
     afterOpen:function(id){if(id==='files'||id==='notes'||id==='activity')updateCount()},
@@ -457,6 +501,7 @@
     var valid=saved&&saved.version===1&&Array.isArray(saved.items)&&Array.isArray(saved.events);
     if(valid&&(!store.updatedAt||String(saved.updatedAt||'')>=String(store.updatedAt||''))){
       store=saved;refresh();rerender('notes');updateCount();
+      window.dispatchEvent(new CustomEvent('aincfh:workspace-updated',{detail:{modified:store.updatedAt,items:store.items.length}}));
       return true;
     }
     if(!valid||String(store.updatedAt||'')>String(saved.updatedAt||'')){
