@@ -146,7 +146,7 @@
       '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':i.type==='image'?Math.round(i.body.length*.75/1024)+' KB':'—')+'</b></div></div>'+
       (i.type==='image'?'<img class="fs-preview-image" src="'+esc(i.body)+'" alt="'+esc(i.name)+'">':i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
       '<div class="fs-detail-actions">'+(i.deleted?'<button data-fs-action="restore" data-fs-id="'+esc(i.id)+'">Restore</button><button data-fs-action="destroy" data-fs-id="'+esc(i.id)+'">Delete forever</button>':
-      '<button data-fs-action="pin-desktop" data-fs-id="'+esc(i.id)+'">Desktop shortcut</button><button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':i.type==='image'?'Paint':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(['text','image'].includes(i.type)?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
+      '<button data-fs-action="favorite" data-fs-id="'+esc(i.id)+'">'+esc(nt(isFavorite(i.id)?'unpin':'pin'))+'</button><button data-fs-action="pin-desktop" data-fs-id="'+esc(i.id)+'">Desktop shortcut</button><button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':i.type==='image'?'Paint':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(['text','image'].includes(i.type)?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
   }
   function modal(){
     if(!ui.modal)return '';
@@ -289,7 +289,7 @@
           (store.events.length?store.events.map(function(e){return '<div class="fs-event"><span class="fs-event-pip"></span><div><strong>'+esc(e.text)+'</strong><small>'+esc(new Date(e.when).toLocaleString('zh-CN'))+'</small></div></div>'}).join(''):'<div class="fs-empty">No recent activity.</div>')+
       '</section></div></div>';
   }
-  function rerender(which){var id=which||'files';var el=document.querySelector('#app-'+id+' .window-content');if(el)el.innerHTML=api.render(id)}
+  function rerender(which){var id=which||'files';var el=document.querySelector('#app-'+id+' .window-content');if(el){el.innerHTML=api.render(id);if(id==='files')fsRefreshStorage()}}
   function refresh(){rerender('files');rerender('activity')}
   function updateCount(){var badge=document.getElementById('osActivityCount');if(badge)badge.textContent=String(store.events.length)}
   function commitDelete(id,forever){
@@ -344,6 +344,7 @@
     var i=id?item(id):null;
     switch(a){
       case 'pin-desktop':if(i&&isVisible(i)){window.AincDesktopSurface?.pinFile?.(i.id)}break;
+      case 'favorite':if(i&&isVisible(i)){toggleFavorite(i.id)}break;
       case 'create-folder':case 'create-text':ui.modal={action:a};rerender('files');break;
       case 'cancel':ui.modal=null;rerender('files');break;
       case 'rename':case 'move':case 'delete':case 'destroy':if(i){ui.modal={action:a,id:id};rerender('files')}break;
@@ -360,8 +361,8 @@
           });ui.selected=copyId;
         },'Duplicated '+i.name))refresh();break}
       case 'download':if(i?.type==='image'){var l=document.createElement('a');l.href=i.body;l.download=i.name;document.body.append(l);l.click();l.remove();activity('Exported '+i.name)}else exportText(i);break;
-      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body,i.id);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
-      case 'trash':ui.trash=!ui.trash;ui.selected=null;ui.search='';rerender('files');break;
+      case 'open':if(!i)return;if(i.type==='folder'){navigateFolder(i.id)}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body,i.id);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
+      case 'trash':navigateView(ui.trash?'recent':'trash');break;
       case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
       case 'empty':ui.modal={action:'empty'};rerender('files');break;
       case 'sort':ui.sort=ui.sort==='name'?'date':'name';rerender('files');break;
@@ -381,7 +382,19 @@
   function handleClick(e){
     var b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-fs-action')){action(b.dataset.fsAction,b.dataset.fsId);return}
-    if(b.hasAttribute('data-fs-folder')){ui.folder=b.dataset.fsFolder;ui.trash=false;ui.search='';ui.selected=null;rerender('files');return}
+    if(b.hasAttribute('data-fs-folder')){navigateFolder(b.dataset.fsFolder);return}
+    if(b.hasAttribute('data-fs-nav-folder')){navigateFolder(b.dataset.fsNavFolder);return}
+    if(b.hasAttribute('data-fs-nav-view')){navigateView(b.dataset.fsNavView);return}
+    if(b.hasAttribute('data-fs-nav-item')){action('open',b.dataset.fsNavItem);return}
+    if(b.hasAttribute('data-fs-favorite')){toggleFavorite(b.dataset.fsFavorite);return}
+    if(b.hasAttribute('data-fs-tree-toggle')){
+      var id=b.dataset.fsTreeToggle;
+      nav.expanded=nav.expanded.includes(id)?nav.expanded.filter(function(x){return x!==id}):nav.expanded.concat(id);
+      saveNav();rerender('files');return;
+    }
+    if(b.hasAttribute('data-fs-history')){navigateHistory(Number(b.dataset.fsHistory));return}
+    if(b.hasAttribute('data-fs-nav-up')){var folder=item(ui.folder);navigateFolder(folder?.parent||'root');return}
+    if(b.hasAttribute('data-fs-sidebar-toggle')){nav.hideSidebar=!nav.hideSidebar;saveNav();rerender('files');return}
     if(b.hasAttribute('data-fs-select')){
       var selected=b.dataset.fsSelect;
       ui.selected=selected;
@@ -502,7 +515,7 @@
       action('open',id);if(i.type==='folder')bridge&&bridge.open('files');
       return true;
     },
-    openTrash:function(){ui.trash=true;ui.search='';ui.selected=null;bridge&&bridge.open('files');rerender('files');return true},
+    openTrash:function(){navigateView('trash');bridge&&bridge.open('files');return true},
     createDesktopItem:function(type,name){
       if(!['text','folder'].includes(type))return false;
       name=String(name||'').trim();
@@ -537,7 +550,7 @@
     },
     saveImage:saveImage,
     render:function(id){if(id==='files')return renderFiles();if(id==='notes')return renderNotes();if(id==='activity')return renderActivity();return ''},
-    afterOpen:function(id){if(id==='files'||id==='notes'||id==='activity')updateCount()},
+    afterOpen:function(id){if(id==='files'){updateCount();fsRefreshStorage()}else if(id==='notes'||id==='activity')updateCount()},
     summary:function(){return {files:store.items.filter(isVisible).length,notes:store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).length,events:store.events.length}},
     search:function(q){var s=q.toLowerCase().trim();if(!s)return[];return store.items.filter(isVisible).filter(function(i){return i.name.toLowerCase().includes(s)}).slice(0,6).map(function(i){return{id:i.id,title:i.name,sub:'LOCAL '+i.type.toUpperCase(),terms:'files notes document '+i.name,icon:icon(i.type),action:function(){if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes')}else{ui.folder=i.type==='folder'?i.id:i.parent;ui.selected=i.id;bridge&&bridge.open('files')}}}})},
     openByName:function(name){var i=store.items.find(function(x){return isVisible(x)&&x.name.toLowerCase()===String(name).toLowerCase()});if(!i)return false;action('open',i.id);return true},
