@@ -77,6 +77,22 @@ def main():
             page.locator('[data-dock="files"]').click()
             expect(page.locator('#app-files')).to_be_visible()
             assert page.locator('#app-files').evaluate("(el)=>getComputedStyle(el.querySelector('.win-controls')).order")=="3"
+            if not mobile:
+                page.locator('#app-files [data-win-action="layout"]').click()
+                expect(page.locator('#fusionSnapPopup')).to_be_visible()
+                assert page.locator('#fusionSnapPopup [data-fusion-snap]').count()==8
+                page.locator('#fusionSnapPopup [data-fusion-snap="top-left"]').click()
+                after=page.locator('#app-files').evaluate("""(el) => ({
+                    left:parseFloat(el.style.left),top:parseFloat(el.style.top),
+                    width:parseFloat(el.style.width),height:parseFloat(el.style.height)
+                })""")
+                assert after["left"]<45 and after["top"]<45,after
+                assert after["width"]<600 and after["height"]<460,after
+                page.locator('#app-files [data-win-action="layout"]').click()
+                page.locator('#fusionSnapPopup [data-fusion-snap="center"]').click()
+                center=page.locator('#app-files').evaluate("(el)=>parseFloat(el.style.left)")
+                assert center>after["left"]+40,(after,center)
+                expect(page.locator('#fusionSnapPopup')).to_be_hidden()
             no_overflow(page)
             page.reload(wait_until="load")
             assert page.evaluate("document.documentElement.dataset.desktopPreset")=="windows"
