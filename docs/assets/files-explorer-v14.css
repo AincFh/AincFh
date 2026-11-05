@@ -174,7 +174,7 @@
 @container files (max-width:780px){
  #app-files .fs-inspector{display:none}
  #app-files .fs-browser.fs-inspector-open .fs-inspector{
-   display:block;position:absolute;right:0;top:0;bottom:0;z-index:18;
+   display:block;position:absolute;right:0;top:47px;bottom:0;z-index:18;
    width:min(308px,86%);max-width:86%;flex-basis:auto;
    border-left:1px solid var(--line);box-shadow:-22px 0 55px rgba(0,0,0,.35);
    overflow-y:auto;background:var(--panel2)
