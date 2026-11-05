@@ -46,7 +46,15 @@
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
     theme: ['dark','light'].includes(read('theme','dark')) ? read('theme','dark') : 'dark',
-    accent: ['amber','violet','cyan'].includes(read('accent','amber')) ? read('accent','amber') : 'amber',
+    accent: ['amber','violet','cyan','blue','rose','green','custom'].includes(read('accent','amber')) ? read('accent','amber') : 'amber',
+    desktopPreset:['fusion','mac','windows','linux','custom'].includes(read('desktopPreset','fusion'))?read('desktopPreset','fusion'):'fusion',
+    wallpaperStyle:['hex','aurora','mesh','grid','plain'].includes(read('wallpaperStyle','hex'))?read('wallpaperStyle','hex'):'hex',
+    windowControls:['left','right'].includes(read('windowControls','left'))?read('windowControls','left'):'left',
+    windowRadius:['compact','balanced','rounded'].includes(read('windowRadius','balanced'))?read('windowRadius','balanced'):'balanced',
+    panelDensity:['compact','comfortable'].includes(read('panelDensity','comfortable'))?read('panelDensity','comfortable'):'comfortable',
+    menuBarStyle:['full','compact'].includes(read('menuBarStyle','full'))?read('menuBarStyle','full'):'full',
+    workspaceCount:Math.max(1,Math.min(4,Number(read('workspaceCount','3'))||3)),
+    customAccent:/^#[0-9a-fA-F]{6}$/.test(read('customAccent','#D88AFF'))?read('customAccent','#D88AFF'):'#D88AFF',
     motion: read('motion', matchMedia('(prefers-reduced-motion: reduce)').matches ? 'off' : 'on') === 'on',
     contrast: read('contrast','normal')==='high'?'high':'normal',
     textSize: ['compact','normal','large'].includes(read('textSize','normal'))?read('textSize','normal'):'normal',
@@ -92,6 +100,7 @@
     document.documentElement.classList.toggle('os-hide-badge',!state.activityBadge);
     document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
     window.AincShell?.applyDock();
+    window.AincDesktopFusion?.apply();
     $('meta[name="theme-color"]').content = state.theme === 'dark' ? '#10111a' : '#efebea';
     $$('[data-toggle-theme]').forEach(b => { b.innerHTML = ICON(state.theme === 'dark' ? 'sun' : 'moon'); b.setAttribute('aria-label', state.theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'); });
     if (windows.has('settings')) renderApp('settings');
@@ -103,8 +112,18 @@
     if(key==='theme'){setTheme(value);return}
     if(key==='accent'){setAccent(value);return}
     if(key==='motion'){setMotion(value);return}
+    if(key==='desktopPreset'){applyDesktopPreset(value);return}
+    if(key==='customAccent'){
+      if(typeof value!=='string'||!/^#[0-9a-fA-F]{6}$/.test(value))return;
+      value=value.toUpperCase();
+      state.accent='custom';write('accent','custom');
+    }
+    if(key==='workspaceCount')value=Math.max(1,Math.min(4,Number(value)||3));
     if(typeof state[key]==='boolean')value=!!value;
     state[key]=value;
+    if(['customAccent','wallpaperStyle','windowControls','windowRadius','panelDensity','menuBarStyle','dockMode','dockPosition','dockScale','dockMagnify','dockAutoHide','startLayout'].includes(key)){
+      state.desktopPreset='custom';write('desktopPreset','custom');
+    }
     if(key==='dockMode'&&value==='taskbar'){state.dockPosition='bottom';write('dockPosition','bottom');}
     if(key==='dockPosition'&&value!=='bottom'&&state.dockMode==='taskbar'){state.dockMode='floating';write('dockMode','floating');}
     write(key,typeof value==='boolean'?(value?'on':'off'):value);
@@ -114,14 +133,27 @@
     }
     applySettings();toast('设置已应用');
   }
+  function applyDesktopPreset(id){
+    const presets=window.AincDesktopFusion?.presets;
+    if(!presets||!Object.prototype.hasOwnProperty.call(presets,id))return;
+    const configuration=presets[id];
+    for(const [key,value] of Object.entries(configuration)){
+      if(!Object.prototype.hasOwnProperty.call(state,key))continue;
+      state[key]=value;
+      write(key,typeof value==='boolean'?(value?'on':'off'):value);
+    }
+    state.desktopPreset=id;write('desktopPreset',id);
+    applySettings();
+    toast((window.AincI18n?.locale==='zh-CN'?'桌面环境已切换：':'Desktop layout applied: ')+id);
+  }
   function resetPreferences(){
-    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','dockPosition','dockMode','dockScale','dockMagnify','dockAutoHide','startLayout','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower','performanceMode'];
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','dockPosition','dockMode','dockScale','dockMagnify','dockAutoHide','startLayout','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower','performanceMode','desktopPreset','wallpaperStyle','windowControls','windowRadius','panelDensity','menuBarStyle','workspaceCount','customAccent'];
     for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
-    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',dockPosition:'bottom',dockMode:'floating',dockScale:'normal',dockMagnify:true,dockAutoHide:false,startLayout:'grid',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false,performanceMode:'auto'});
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',dockPosition:'bottom',dockMode:'floating',dockScale:'normal',dockMagnify:true,dockAutoHide:false,startLayout:'grid',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false,performanceMode:'auto',desktopPreset:'fusion',wallpaperStyle:'hex',windowControls:'left',windowRadius:'balanced',panelDensity:'comfortable',menuBarStyle:'full',workspaceCount:3,customAccent:'#D88AFF'});
     applySettings();toast('设置已恢复默认');
   }
-  function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
-  function setAccent(a) { state.accent = a;write('accent',a);applySettings();toast('主题色已更新'); }
+  function setTheme(t) { state.theme = t;write('theme',t);state.desktopPreset='custom';write('desktopPreset','custom');applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
+  function setAccent(a) { state.accent = a;write('accent',a);state.desktopPreset='custom';write('desktopPreset','custom');applySettings();toast('主题色已更新'); }
   function setMotion(on) { state.motion = !!on;write('motion',on?'on':'off');applySettings();toast(on ? '动态效果已开启' : '动态效果已关闭'); }
   function toast(message) { if(state.quietMode)return;let e=document.createElement('div');e.className='toast';e.innerHTML=`<span class="toast-dot">◆</span>${escapeHTML(message)}`;$('#toastHost').append(e);setTimeout(()=>{e.remove()},3000); }
   function syncDock() {
@@ -194,6 +226,7 @@
     const w=windows.get(id); if(!w)return;
     if(w.minimized){w.minimized=false;w.node.classList.remove('is-minimized');}
     $$('.os-window.focused',layer).forEach(el=>el.classList.remove('focused'));
+    window.AincDesktopFusion?.ensureWindow(id);
     w.node.style.zIndex=++focusZ;w.node.classList.add('focused');
     if(id==='taskmanager')window.AincSystemMonitor?.onRender();else window.AincSystemMonitor?.onClose();
     syncDock();saveSession();
@@ -246,6 +279,7 @@
     node.innerHTML='<header class="winbar" data-drag="'+id+'" title="拖动移动 · 双击最大化 · 最大化时拖动可恢复"><div class="win-controls"><button class="win-control close" data-win-action="close" title="关闭" aria-label="关闭 '+m.name+'"></button><button class="win-control minimize" data-win-action="minimize" title="最小化" aria-label="最小化 '+m.name+'"></button><button class="win-control maximize" data-win-action="maximize" title="最大化或还原" aria-label="最大化 '+m.name+'"></button></div><div class="winbar-title">'+ICON(m.icon)+'<span>'+m.label+'</span></div><div class="winbar-end"><span class="win-id">AF/</span><span>'+String(windows.size+1).padStart(2,'0')+'</span></div></header><div class="window-content"></div>'+edges;
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
+    window.AincDesktopFusion?.registerWindow(id);
     node.classList.toggle('terminal-window',id==='terminal');
     window.AincSystemMonitor?.markOpen(id);
     renderApp(id);focusWindow(id);window.AincApps?.recordOpen(id);window.AincShell?.recordOpen(id);
@@ -253,7 +287,7 @@
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
   }
-  function closeWindow(id){const w=windows.get(id);if(!w)return;if(id==='taskmanager')window.AincSystemMonitor?.onClose();window.AincSystemMonitor?.markClose(id);w.node.remove();windows.delete(id);syncDock();saveSession();}
+  function closeWindow(id){const w=windows.get(id);if(!w)return;if(id==='taskmanager')window.AincSystemMonitor?.onClose();window.AincSystemMonitor?.markClose(id);w.node.remove();windows.delete(id);window.AincDesktopFusion?.forgetWindow(id);syncDock();saveSession();}
   function minimizeWindow(id){
     const w=windows.get(id);if(!w)return;
     w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
@@ -591,6 +625,12 @@
   if(window.AincControlCenter)window.AincControlCenter.attach({
     open:id=>openWindow(id),prefs:()=>({...state}),set:setPreference,
     windows:()=>[...windows.entries()].map(([id,w])=>({id,minimized:w.minimized,maximized:w.maximized}))
+  });
+  if(window.AincDesktopFusion)window.AincDesktopFusion.attach({
+    open:id=>openWindow(id),focus:id=>focusWindow(id),close:id=>closeWindow(id),
+    apps:()=>Object.entries(appInfo).map(([id,x])=>({id,...x})),
+    windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
+    prefs:()=>({...state}),set:setPreference,preset:applyDesktopPreset,toast
   });
   if(window.AincShell)window.AincShell.attach({
     open:(id)=>openWindow(id),focus:(id)=>focusWindow(id),
