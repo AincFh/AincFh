@@ -60,6 +60,41 @@ def test():
             assert not errors,(width,height,errors)
             print(f"PASS Control Center {width}x{height} {lang}: controls, settings persistence, taskmanager, overflow, no JS errors",flush=True)
             context.close()
+        # PWA correctness: real image assets, install metadata and deep-link launch.
+        context=browser.new_context(viewport={"width":1280,"height":800},locale="en-US",service_workers="allow")
+        page=context.new_page()
+        errors=[]
+        page.on("pageerror",lambda error:errors.append(str(error)))
+        page.goto(URL+"?app=taskmanager",wait_until="load")
+        expect(page.locator("#app-taskmanager")).to_be_visible()
+        manifest=page.evaluate("""async() => {
+          const link=document.querySelector('link[rel="manifest"]');
+          if(!link)return null;
+          const response=await fetch(link.href);
+          if(!response.ok)return null;
+          return response.json();
+        }""")
+        assert manifest and manifest["display"]=="standalone"
+        assert manifest["start_url"]=="./"
+        assert any(x["sizes"]=="192x192" for x in manifest["icons"])
+        assert any(x["sizes"]=="512x512" for x in manifest["icons"])
+        for size in (192,512):
+            decoded=page.evaluate("""async(size)=>{
+              const path='./assets/icon-'+size+'.png';
+              const r=await fetch(path);if(!r.ok)return {ok:false,status:r.status};
+              const b=new Uint8Array(await r.arrayBuffer());
+              const view=new DataView(b.buffer);
+              return {ok:b[0]===137&&b[1]===80&&b[2]===78&&b[3]===71,
+                width:view.getUint32(16),height:view.getUint32(20)};
+            }""",size)
+            assert decoded=={"ok":True,"width":size,"height":size},decoded
+        page.goto(URL+"?app=files",wait_until="load")
+        expect(page.locator("#app-files")).to_be_visible()
+        page.goto(URL+"?app=unknown-app",wait_until="load")
+        assert page.locator("#app-unknown-app").count()==0
+        assert not errors,errors
+        print("PASS installable PWA: 192/512 icons, manifest, registered deep links and unknown-route safety",flush=True)
+        context.close()
         browser.close()
 
 if __name__=="__main__":
