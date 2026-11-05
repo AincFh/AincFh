@@ -58,3 +58,16 @@
 @media(prefers-reduced-motion:reduce){
  .paint-bar button{transition:none}
 }
+
+/* Phone Dock prioritizes essentials; the full registry remains available in App Center. */
+@media(max-width:840px){
+  .dock-app[data-dock="projects"],.dock-app[data-dock="terminal"],.dock-app[data-dock="activity"],
+  .dock-app[data-dock="calculator"],.dock-app[data-dock="clock"]{display:none!important}
+  .dock-app[data-dock="paint"]{display:flex}
+  .dock{max-width:calc(100vw - 16px);justify-content:center;overflow:hidden}
+  .paint-bar .paint-tools button{font-size:10px;letter-spacing:0}
+}
+@media(max-width:390px){
+  .dock-app[data-dock="tasks"]{display:none!important}
+  .dock-app[data-dock="paint"]{display:flex!important}
+}
