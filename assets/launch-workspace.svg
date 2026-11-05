@@ -1,48 +1,55 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="900" height="360" viewBox="0 0 900 360" role="img" aria-label="AincFh OS interactive workspace: launch the full web desktop, project explorer, terminal and system settings">
-<defs>
-<style>
-:root{--bg:#fafafa;--pane:#f5f2f3;--win:#f9f5f6;--ink:#23202e;--sub:#675f70;--line:#b9aab3;--hex:rgba(255,159,67,.2)}
-@media(prefers-color-scheme:dark){:root{--bg:#1c1f2b;--pane:#222131;--win:#181924;--ink:#f4f1f4;--sub:#a9a5ba;--line:#4a4055;--hex:rgba(255,159,67,.17)}}
-.t{font-family:Inter,'Segoe UI',-apple-system,'Noto Sans SC',Arial,sans-serif}.m{font-family:Consolas,'SFMono-Regular',monospace}
-.spin{transform-origin:697px 187px;animation:rot 30s linear infinite}.spin2{transform-origin:697px 187px;animation:rot 22s linear infinite reverse}
-.trace{animation:trace 9s linear infinite}.blink{animation:blink 2.1s steps(1) infinite}.pulse{animation:pulse 3.2s ease-in-out infinite}.slide{animation:slide 8s ease-in-out infinite alternate}
-@keyframes rot{to{transform:rotate(360deg)}}@keyframes trace{to{stroke-dashoffset:-470}}@keyframes blink{50%{opacity:0}}@keyframes pulse{50%{opacity:.28}}@keyframes slide{to{transform:translateX(15px)}}
-@media(prefers-reduced-motion:reduce){.spin,.spin2,.trace,.blink,.pulse,.slide{animation:none}}
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 360" width="900" height="360" role="img" aria-label="Animated AincFh OS demo: project window switches among A.T. Field, Saint Laurent, Windows Tools, and Terminal with an animated pointer in a repeating twenty-second tour.">
+<defs><style>
+:root{--bg:#1c1f2b;--pane:#242232;--win:#171824;--ink:#f5f0f4;--sub:#b6aebe;--line:#55465a}
+@media(prefers-color-scheme:light){:root{--bg:#f7f4f4;--pane:#eee9ee;--win:#fbf8fa;--ink:#231c2a;--sub:#675e71;--line:#bdb0ba}}
+.t{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','Noto Sans SC',sans-serif}.mono{font-family:'SFMono-Regular',Consolas,monospace}
+.scene{opacity:0}.scene0{animation:scene0 20s linear infinite}.scene1{animation:scene1 20s linear infinite}.scene2{animation:scene2 20s linear infinite}.scene3{animation:scene3 20s linear infinite}
+@keyframes scene0{0%,22%{opacity:1}25%,100%{opacity:0}}
+@keyframes scene1{0%,24%{opacity:0}27%,47%{opacity:1}50%,100%{opacity:0}}
+@keyframes scene2{0%,49%{opacity:0}52%,72%{opacity:1}75%,100%{opacity:0}}
+@keyframes scene3{0%,74%{opacity:0}77%,97%{opacity:1}100%{opacity:0}}
+.cursor{animation:cursor 20s ease-in-out infinite;transform-origin:0 0}
+@keyframes cursor{0%,12%{transform:translate(0,0);opacity:0}17%,21%{transform:translate(0,0);opacity:1}28%,45%{transform:translate(124px,0);opacity:1}51%,69%{transform:translate(240px,0);opacity:1}77%,93%{transform:translate(180px,180px);opacity:1}97%,100%{opacity:0;transform:translate(0,0)}}
+.float{animation:float 5s ease-in-out infinite alternate}.glow{animation:glow 2.8s ease-in-out infinite}.scan{animation:scan 4.7s linear infinite}.trace{animation:trace 3s linear infinite}.line{animation:line 3s ease-in-out infinite alternate}.terminal-caret{animation:caret .7s steps(1) infinite}
+@keyframes float{to{transform:translateY(-5px)}}@keyframes glow{50%{opacity:.22}}@keyframes scan{0%{transform:translateX(-380px);opacity:0}15%,83%{opacity:.38}100%{transform:translateX(420px);opacity:0}}@keyframes trace{to{stroke-dashoffset:-80}}@keyframes line{to{transform:scaleX(.58)}}@keyframes caret{50%{opacity:0}}
+@media(prefers-reduced-motion:reduce){.scene,.cursor,.float,.glow,.scan,.trace,.line,.terminal-caret{animation:none!important}.scene0{opacity:1}.scene1,.scene2,.scene3,.cursor{opacity:0}}
 </style>
-<linearGradient id="brand" x1="0" x2="1" y1="0" y2="1"><stop stop-color="#ff9f43"/><stop offset=".53" stop-color="#ff795d"/><stop offset="1" stop-color="#a477ed"/></linearGradient>
-<radialGradient id="glow"><stop stop-color="#ff9f43" stop-opacity=".19"/><stop offset="1" stop-color="#ff9f43" stop-opacity="0"/></radialGradient>
-<linearGradient id="low" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#ff9f43" stop-opacity=".2"/><stop offset="1" stop-color="#9b77ef" stop-opacity=".05"/></linearGradient>
-<pattern id="grid" width="69" height="60" patternUnits="userSpaceOnUse"><path d="m17 0 17 10v20L17 40 0 30V10ZM52 30l17 10v20L52 70 35 60V40Z" fill="none" stroke="var(--hex)" stroke-width=".8"/></pattern>
-<clipPath id="clip"><rect width="900" height="360"/></clipPath>
-</defs>
-<g clip-path="url(#clip)">
-<rect width="900" height="360" fill="var(--bg)"/><rect width="900" height="360" fill="url(#grid)" opacity=".5"/><ellipse cx="710" cy="140" rx="300" ry="290" fill="url(#glow)"/><rect x="15" y="15" width="870" height="330" fill="var(--pane)" stroke="var(--line)" stroke-opacity=".6"/>
-<path d="M25 33V25H33m834 0h8v8M25 327v8h8m834 0h8v-8" stroke="#9b77ef" stroke-width="1.8" fill="none"/>
-<path d="M15 347H885" stroke="url(#brand)" stroke-width="4"/>
-<circle cx="55" cy="54" r="4" fill="#61dcaa" class="pulse"/><text x="67" y="58" class="m" font-size="10" fill="#ff9f43" letter-spacing="2.3">LIVE PREVIEW / CLICK TO ENTER</text>
-<text x="53" y="119" class="t" font-size="48" font-weight="800" fill="var(--ink)" letter-spacing="-2.5">AincFh<tspan fill="#ff9f43">_OS</tspan></text>
-<text x="55" y="158" class="t" font-size="16" font-weight="700" fill="var(--ink)">A complete interactive workspace.</text>
-<text x="55" y="189" class="t" font-size="12.5" fill="var(--sub)">项目窗口 / 动态桌面 / Command Center</text>
-<text x="55" y="209" class="t" font-size="12.5" fill="var(--sub)">Terminal / 主题切换 / 多窗口操作</text>
-<g class="slide"><rect x="54" y="236" width="227" height="52" rx="2" fill="url(#brand)"/><text x="76" y="268" class="t" font-size="13" font-weight="800" letter-spacing="1" fill="#151019">ENTER INTERACTIVE OS</text><path d="M248 263h16m-6-6 6 6-6 6" fill="none" stroke="#151019" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"/></g>
-<text x="55" y="324" class="m" font-size="9.5" fill="var(--sub)" letter-spacing="1.4">ANIMATED SVG PREVIEW · FULL EXPERIENCE OPENS IN BROWSER</text>
-<!-- Project window, drawn as original vector UI instead of a minified screenshot. -->
-<g transform="translate(455 42)">
-<rect width="402" height="264" rx="9" fill="var(--win)" stroke="#ff9f43" stroke-opacity=".6"/>
-<rect width="402" height="36" rx="9" fill="url(#low)"/><path d="M0 36h402" stroke="var(--line)" stroke-opacity=".5"/>
-<circle cx="18" cy="18" r="5" fill="#fa6866"/><circle cx="34" cy="18" r="5" fill="#f4c05d"/><circle cx="50" cy="18" r="5" fill="#4ece93"/>
-<path d="m175 13 6 4v7l-6 4-6-4v-7z" stroke="#ff9f43" fill="none" stroke-width="1"/><text x="187" y="21" class="m" font-size="10" fill="var(--ink)" font-weight="700">PROJECT EXPLORER</text><text x="371" y="21" class="m" font-size="9" fill="#ff9f43">AF/01</text>
-<text x="23" y="61" class="m" font-size="9" fill="#ff9f43" letter-spacing="1.7">SELECTED WORK / 01—04</text>
-<rect x="20" y="70" width="98" height="27" fill="#ff9f43"/><text x="30" y="87" class="m" font-size="9" fill="#1b1620">01 / A.T. FIELD</text>
-<rect x="124" y="70" width="118" height="27" fill="none" stroke="var(--line)"/><text x="134" y="87" class="m" font-size="9" fill="var(--sub)">02 / ST. LAURENT</text>
-<rect x="248" y="70" width="125" height="27" fill="none" stroke="var(--line)"/><text x="258" y="87" class="m" font-size="9" fill="var(--sub)">03 / WINDOWS</text>
-<text x="22" y="135" class="t" font-size="25" font-weight="800" fill="var(--ink)">Work that ships.</text>
-<text x="23" y="153" class="t" font-size="10.5" fill="var(--sub)">Interfaces · Systems · Engineering</text>
-<rect x="21" y="170" width="356" height="71" fill="url(#low)" stroke="var(--line)" stroke-opacity=".45"/>
-<g class="spin" transform="translate(-455 -42)" fill="none" stroke="#ff9f43" stroke-opacity=".32" stroke-width="1.3"><polygon points="697,121 756,155 756,223 697,257 638,223 638,155"/><polygon points="697,137 742,163 742,215 697,241 652,215 652,163"/></g>
-<path class="trace" d="M25 232V179H370" fill="none" stroke="#ff9f43" stroke-width="2" stroke-dasharray="6 470"/>
-<path d="M41 191h123" stroke="#ff9f43" stroke-width="6"/><path d="M41 209h170M41 223h110" stroke="var(--line)" stroke-width="4"/>
-<rect x="284" y="189" width="28" height="24" fill="#8b5cf6" fill-opacity=".35"/><rect x="318" y="189" width="28" height="24" fill="#8b5cf6" fill-opacity=".24"/>
+<linearGradient id="brand" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffae54"/><stop offset=".5" stop-color="#ff795d"/><stop offset="1" stop-color="#996eea"/></linearGradient>
+<linearGradient id="panegrad" x1="0" y1="0" x2="1"><stop stop-color="#ff9f43" stop-opacity=".18"/><stop offset="1" stop-color="#9566ec" stop-opacity=".1"/></linearGradient>
+<linearGradient id="linegrad"><stop stop-color="#ffae54"/><stop offset="1" stop-color="#966ff3"/></linearGradient>
+<clipPath id="view"><rect x="0" y="0" width="900" height="360"/></clipPath>
+<pattern id="honey" width="58" height="51" patternUnits="userSpaceOnUse"><path d="m15 0 15 9v17l-15 9L0 26V9Zm29 26 14 9v17l-14 9-14-9V35Z" stroke="#ff9f43" stroke-opacity=".11" fill="none"/></pattern>
+</defs><g clip-path="url(#view)">
+<rect x="0" y="0" width="900" height="360" fill="var(--bg)" stroke="none" /><rect x="0" y="0" width="900" height="360" fill="url(#honey)" stroke="none" />
+<rect x="15" y="15" width="870" height="330" fill="var(--pane)" stroke="var(--line)" />
+<path d="M26 35V26H35M865 26H874V35M26 326V335H35M865 335H874V326" stroke="#a57bf1" stroke-width="1.7" fill="none"/>
+<path d="M15 345H885" stroke="url(#brand)" stroke-width="4"/>
+<rect class="scan" x="70" y="15" width="145" height="330" fill="#ff9f43" opacity=".04"/>
+<circle class="glow" cx="54" cy="56" r="4" fill="#64e9ad"/>
+<text class="mono" x="68" y="60" font-size="10" fill="#ffae54" letter-spacing="1.6">INTERACTIVE OS / AUTOMATED TOUR</text>
+<text class="t" x="52" y="124" font-size="49" fill="var(--ink)" font-weight="850" letter-spacing="-2.2">AincFh</text>
+<text class="t" x="226" y="124" font-size="49" fill="#ff9f43" font-weight="850">_OS</text>
+<text class="t" x="54" y="158" font-size="15" fill="var(--ink)" font-weight="650">A living workspace, not a screenshot.</text>
+<text class="t" x="54" y="194" font-size="12" fill="var(--sub)" >项目切换、窗口交互、Dock 与终端，</text>
+<text class="t" x="54" y="214" font-size="12" fill="var(--sub)" >全部在真实网页系统中运行。</text>
+<rect x="53" y="238" width="267" height="54" fill="url(#brand)" stroke="none" rx="3"/>
+<text class="t" x="75" y="270" font-size="13" fill="#221722" font-weight="850" letter-spacing=".7">LAUNCH THE LIVE OS</text>
+<path d="M288 265h14m-6-6 6 6-6 6" stroke="#221722" stroke-width="2" fill="none"/>
+<text class="mono" x="54" y="324" font-size="9" fill="var(--sub)" >SVG LOOP / 4 SCENES · CLICK TO EXPERIENCE</text>
+<g class="float"><rect x="455" y="36" width="418" height="286" fill="var(--win)" stroke="#ff9f43" rx="8" stroke-opacity=".6"/>
+<rect x="455" y="36" width="418" height="35" fill="url(#panegrad)" stroke="none" rx="8"/>
+<path d="M455 71H873" stroke="var(--line)"/>
+<circle cx="472" cy="54" r="5" fill="#ff706d"/><circle cx="488" cy="54" r="5" fill="#f5c25f"/><circle cx="504" cy="54" r="5" fill="#4fdda0"/>
+<text class="mono" x="526" y="57" font-size="10" fill="var(--ink)" font-weight="700">AF / PROJECT EXPLORER</text><text class="mono" x="842" y="57" font-size="9" fill="#62dda8" >● LIVE</text>
+<text class="mono" x="480" y="100" font-size="9" fill="#ff9f43" letter-spacing="1.7">SELECTED WORK / AUTOPLAY</text>
+<text class="mono" x="805" y="101" font-size="9" fill="var(--sub)" >01 — 04</text>
+<rect x="480" y="126" width="77" height="29" fill="none" stroke="var(--line)" rx="3"/><text class="mono" x="490" y="144" font-size="9" fill="var(--sub)" >FIELD</text><g class="scene scene0"><rect x="480" y="126" width="77" height="29" fill="#ff9f43" stroke="#ff9f43" rx="3"/><text class="mono" x="488" y="144" font-size="9" fill="#241821" >FIELD</text></g><rect x="559" y="126" width="75" height="29" fill="none" stroke="var(--line)" rx="3"/><text class="mono" x="569" y="144" font-size="9" fill="var(--sub)" >SAINT</text><g class="scene scene1"><rect x="559" y="126" width="75" height="29" fill="#ff9f43" stroke="#ff9f43" rx="3"/><text class="mono" x="567" y="144" font-size="9" fill="#241821" >SAINT</text></g><rect x="636" y="126" width="78" height="29" fill="none" stroke="var(--line)" rx="3"/><text class="mono" x="646" y="144" font-size="9" fill="var(--sub)" >TOOLS</text><g class="scene scene2"><rect x="636" y="126" width="78" height="29" fill="#ff9f43" stroke="#ff9f43" rx="3"/><text class="mono" x="644" y="144" font-size="9" fill="#241821" >TOOLS</text></g><rect x="716" y="126" width="70" height="29" fill="none" stroke="var(--line)" rx="3"/><text class="mono" x="726" y="144" font-size="9" fill="var(--sub)" >SHELL</text><g class="scene scene3"><rect x="716" y="126" width="70" height="29" fill="#ff9f43" stroke="#ff9f43" rx="3"/><text class="mono" x="724" y="144" font-size="9" fill="#241821" >SHELL</text></g><g class="scene scene0"><text class="mono" x="480" y="178" font-size="9" fill="#ff9f43" letter-spacing="1.2">WEB / EDGE  ·  01</text><text class="t" x="480" y="214" font-size="27" fill="var(--ink)" font-weight="750">A.T. Field</text><text class="t" x="480" y="234" font-size="11" fill="var(--sub)" >Cloudflare · D1 · R2 · TypeScript</text>
+<rect x="478" y="247" width="368" height="51" fill="url(#panegrad)" stroke="var(--line)" rx="2"/><rect x="498" y="261" width="128" height="7" fill="#ff9f43" stroke="none" class="line"/><rect x="498" y="278" width="182" height="4" fill="#82738e" stroke="none" /><rect x="712" y="259" width="26" height="24" fill="#996fe0" stroke="none" /><rect x="743" y="259" width="26" height="24" fill="#735cb0" stroke="none" /><rect x="774" y="259" width="26" height="24" fill="#614f89" stroke="none" /><text class="mono" x="481" y="309" font-size="13" fill="#62dda8" >●</text><text class="mono" x="499" y="307" font-size="9" fill="var(--sub)" >SCENE 01 / 04  ·  EDGE PLATFORM</text></g><g class="scene scene1"><text class="mono" x="480" y="178" font-size="9" fill="#ff9f43" letter-spacing="1.2">ROLEPLAY SYSTEM  ·  02</text><text class="t" x="480" y="214" font-size="27" fill="var(--ink)" font-weight="750">Saint Laurent</text><text class="t" x="480" y="234" font-size="11" fill="var(--sub)" >Community services · Case workflows</text>
+<rect x="478" y="247" width="368" height="51" fill="url(#panegrad)" stroke="var(--line)" rx="2"/><text class="mono" x="500" y="267" font-size="10" fill="#ffb260" >CODEX</text><rect x="560" y="258" width="118" height="6" fill="#5fdcaa" stroke="none" /><rect x="560" y="271" width="166" height="4" fill="#928397" stroke="none" /><text class="mono" x="500" y="288" font-size="9" fill="var(--sub)" >ACCESS: AUTHORIZED / AUDITED</text><text class="mono" x="481" y="309" font-size="13" fill="#62dda8" >●</text><text class="mono" x="499" y="307" font-size="9" fill="var(--sub)" >SCENE 02 / 04  ·  ROLEPLAY SYSTEM</text></g><g class="scene scene2"><text class="mono" x="480" y="178" font-size="9" fill="#ff9f43" letter-spacing="1.2">NATIVE APPLICATIONS  ·  03</text><text class="t" x="480" y="214" font-size="27" fill="var(--ink)" font-weight="750">Windows Tools</text><text class="t" x="480" y="234" font-size="11" fill="var(--sub)" >C# / .NET · WinForms · WebView2</text>
+<rect x="478" y="247" width="368" height="51" fill="url(#panegrad)" stroke="var(--line)" rx="2"/><text class="mono" x="497" y="264" font-size="10" fill="#ffae54" >SYSTEM CHECK</text><rect x="602" y="257" width="152" height="8" fill="#473c51" stroke="none" /><rect x="602" y="257" width="133" height="8" fill="#5cd9a6" stroke="class="line"" /><text class="mono" x="496" y="285" font-size="9" fill="var(--sub)" >BRIDGE  ✓    AUTH  ✓    UI  ✓</text><text class="mono" x="481" y="309" font-size="13" fill="#62dda8" >●</text><text class="mono" x="499" y="307" font-size="9" fill="var(--sub)" >SCENE 03 / 04  ·  NATIVE TOOLS</text></g><g class="scene scene3"><text class="mono" x="480" y="178" font-size="9" fill="#ff9f43" letter-spacing="1.2">INTERACTIVE SHELL  ·  04</text><text class="t" x="480" y="214" font-size="27" fill="var(--ink)" font-weight="750">Terminal</text><text class="t" x="480" y="234" font-size="11" fill="var(--sub)" >Local commands / No remote execution</text>
+<rect x="478" y="247" width="368" height="51" fill="url(#panegrad)" stroke="var(--line)" rx="2"/><text class="mono" x="500" y="266" font-size="11" fill="#64e7ae" >aincfh@os:~$  projects</text><text class="mono" x="500" y="285" font-size="10" fill="var(--sub)" >4 projects loaded</text><rect class="terminal-caret" x="668" y="255" width="6" height="12" fill="#ffae54"/><text class="mono" x="481" y="309" font-size="13" fill="#62dda8" >●</text><text class="mono" x="499" y="307" font-size="9" fill="var(--sub)" >SCENE 04 / 04  ·  LOCAL CONSOLE</text></g></g>
+<g class="cursor" transform="translate(526 150)" fill="none">
+<path d="M0 0L0 22L6 17L11 28L15 26L10 15L18 13Z" fill="#faf7fb" stroke="#211827" stroke-width="1.6" stroke-linejoin="round"/>
+<circle cx="0" cy="0" r="16" stroke="#ff9f43" stroke-opacity=".35" stroke-width="1"><animate attributeName="r" values="10;19;10" dur="1.6s" repeatCount="indefinite"/></circle>
 </g>
-<g class="spin2" fill="none" stroke="#9b77ef" stroke-opacity=".13"><polygon points="697,35 826,110 826,264 697,338 568,264 568,110"/></g>
 </g></svg>
