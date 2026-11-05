@@ -88,7 +88,7 @@
       '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':i.type==='image'?Math.round(i.body.length*.75/1024)+' KB':'—')+'</b></div></div>'+
       (i.type==='image'?'<img class="fs-preview-image" src="'+esc(i.body)+'" alt="'+esc(i.name)+'">':i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
       '<div class="fs-detail-actions">'+(i.deleted?'<button data-fs-action="restore" data-fs-id="'+esc(i.id)+'">Restore</button><button data-fs-action="destroy" data-fs-id="'+esc(i.id)+'">Delete forever</button>':
-      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':i.type==='image'?'Paint':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(['text','image'].includes(i.type)?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
+      '<button data-fs-action="pin-desktop" data-fs-id="'+esc(i.id)+'">Desktop shortcut</button><button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':i.type==='image'?'Paint':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(['text','image'].includes(i.type)?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
   }
   function modal(){
     if(!ui.modal)return '';
@@ -227,6 +227,7 @@
   function action(a,id){
     var i=id?item(id):null;
     switch(a){
+      case 'pin-desktop':if(i&&isVisible(i)){window.AincDesktopSurface?.pinFile?.(i.id)}break;
       case 'create-folder':case 'create-text':ui.modal={action:a};rerender('files');break;
       case 'cancel':ui.modal=null;rerender('files');break;
       case 'rename':case 'move':case 'delete':case 'destroy':if(i){ui.modal={action:a,id:id};rerender('files')}break;
