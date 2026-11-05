@@ -123,7 +123,7 @@
       const n=w.node;
       return {id,minimized:w.minimized,maximized:w.maximized,
         z:Number(n.style.zIndex)||0,
-        position:{x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,
+        position:(w.minimized||w.maximized)?w.position:{x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,
           w:n.offsetWidth,h:n.offsetHeight}};
     });
     const focused=$('.os-window.focused',layer)?.id?.slice(4)||null;
@@ -146,7 +146,7 @@
       for(const e of entries){
         openWindow(e.id,{announce:false,focusInput:false});
         const w=windows.get(e.id),n=w.node,p=e.position;
-        if(p&&[p.x,p.y,p.w,p.h].every(Number.isFinite)){
+        if(state.rememberWindows&&p&&[p.x,p.y,p.w,p.h].every(Number.isFinite)){
           const maxW=Math.max(b.minWidth,b.width-b.inset*2),maxH=Math.max(b.minHeight,b.height-b.bottom-b.top);
           const width=clampValue(p.w,b.minWidth,maxW),height=clampValue(p.h,b.minHeight,maxH);
           n.style.width=width+'px';n.style.height=height+'px';
