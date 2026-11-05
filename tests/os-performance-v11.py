@@ -51,6 +51,7 @@ def main():
             else:
                 page.locator('[data-dock="files"]').click()
                 page.locator('[data-dock="taskmanager"]').click()
+            page.locator('#app-taskmanager [data-tm-action="refresh"]').click()
             expect(page.locator('#app-taskmanager [data-tm-pid="files"]')).to_be_visible()
             page.locator('#app-taskmanager [data-tm-action="end"][data-tm-id="files"]').click()
             expect(page.locator('#tmEndModal')).to_be_visible()
