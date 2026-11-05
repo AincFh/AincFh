@@ -87,17 +87,19 @@
       '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':'—')+'</b></div></div>'+
       (i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
       '<div class="fs-detail-actions">'+(i.deleted?'<button data-fs-action="restore" data-fs-id="'+esc(i.id)+'">Restore</button><button data-fs-action="destroy" data-fs-id="'+esc(i.id)+'">Delete forever</button>':
-      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
+      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(i.type==='text'?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
   }
   function modal(){
     if(!ui.modal)return '';
     var m=ui.modal,i=m.id?item(m.id):null;
-    var title=m.action==='create-folder'?'New folder':m.action==='create-text'?'New document':m.action==='rename'?'Rename item':m.action==='delete'?'Move to Trash':m.action==='destroy'?'Delete permanently':'Empty Trash';
+    var title=m.action==='create-folder'?'New folder':m.action==='create-text'?'New document':m.action==='rename'?'Rename item':m.action==='move'?'Move item':m.action==='delete'?'Move to Trash':m.action==='destroy'?'Delete permanently':'Empty Trash';
     var needsName=['create-folder','create-text','rename'].includes(m.action);
     return '<div class="fs-modal-layer" role="presentation"><form class="fs-dialog" id="fsDialog" aria-label="'+title+'">'+
       '<div class="fs-kicker">AINCFH / FILE OPERATION</div><h3>'+title+'</h3>'+
       '<p>'+(['destroy','empty'].includes(m.action)?'This action cannot be undone.':'Changes are saved in this browser only.')+'</p>'+
       (needsName?'<label for="fsName">Name</label><input maxlength="80" id="fsName" name="name" required autocomplete="off" value="'+esc(i?i.name:(m.action==='create-folder'?'New Folder':'Untitled.txt'))+'"/>':'')+
+      (m.action==='move'?'<label for="fsDestination">Destination</label><select id="fsDestination"><option value="root">Home /</option>'+
+        directoryList().filter(function(f){return !i||!(f.id===i.id||isChildOf(f.id,i.id))}).map(function(f){return '<option value="'+esc(f.id)+'" '+(i&&f.id===i.parent?'selected':'')+'>'+esc(f.name)+'/</option>'}).join('')+'</select>':'')+
       '<div class="fs-dialog-actions"><button type="button" data-fs-action="cancel">Cancel</button><button class="primary" type="submit">'+(needsName?'Save':'Confirm')+'</button></div></form></div>';
   }
   function renderFiles(){
@@ -172,7 +174,19 @@
         var t=now(),id=uid();s.items.push({id:id,type:type,parent:parent,name:name,body:'',url:'',created:t,modified:t,deleted:false});ui.selected=id;
         if(type==='text'){ui.notesId=id}
       },'Created '+name);
-    }else if(m.action==='rename'&&i)ok=transact(function(s){var x=s.items.find(function(i){return i.id===m.id});x.name=name;x.modified=now()},'Renamed to '+name);
+    }else if(m.action==='rename'&&i)ok=transact(function(s){
+      if(s.items.some(function(x){return x.id!==i.id&&!x.deleted&&x.parent===i.parent&&x.name.toLowerCase()===name.toLowerCase()}))throw Error('当前文件夹已经存在同名项目');
+      var x=s.items.find(function(x){return x.id===m.id});x.name=name;x.modified=now()
+    },'Renamed to '+name);
+    else if(m.action==='move'&&i){
+      var destination=(form.querySelector('#fsDestination')||{}).value;
+      ok=transact(function(s){
+        if(destination!=='root'&&!s.items.some(function(x){return x.id===destination&&x.type==='folder'&&!x.deleted}))throw Error('目标文件夹不存在');
+        if(destination===i.id||isChildOf(destination,i.id))throw Error('不能移动到自身或子文件夹');
+        if(s.items.some(function(x){return x.id!==i.id&&!x.deleted&&x.parent===destination&&x.name.toLowerCase()===i.name.toLowerCase()}))throw Error('目标中已经存在同名文件');
+        var x=s.items.find(function(x){return x.id===i.id});x.parent=destination;x.modified=now()
+      },'Moved '+i.name);
+    }
     else if(m.action==='delete'&&i){commitDelete(i.id,false)}
     else if(m.action==='destroy'&&i){commitDelete(i.id,true)}
     else if(m.action==='empty'){ok=transact(function(s){s.items=s.items.filter(function(i){return !i.deleted&&!isChildOfFrom(s.items,i.id)})},'Emptied Trash');ui.selected=null}
@@ -188,14 +202,27 @@
     switch(a){
       case 'create-folder':case 'create-text':ui.modal={action:a};rerender('files');break;
       case 'cancel':ui.modal=null;rerender('files');break;
-      case 'rename':case 'delete':case 'destroy':if(i){ui.modal={action:a,id:id};rerender('files')}break;
-      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
+      case 'rename':case 'move':case 'delete':case 'destroy':if(i){ui.modal={action:a,id:id};rerender('files')}break;
+      case 'duplicate':if(i){var copyId=uid();
+        if(transact(function(s){
+          var descendants=[i],queue=[i];
+          while(queue.length){var cur=queue.shift();s.items.filter(function(x){return x.parent===cur.id&&!x.deleted}).forEach(function(x){descendants.push(x);queue.push(x)})}
+          var nextName=i.name.replace(/(\.[^.]*)?$/,' copy$1'),suffix=2;
+          while(s.items.some(function(x){return x.parent===i.parent&&!x.deleted&&x.name===nextName})){nextName=i.name+' copy '+suffix++}
+          var ids=new Map([[i.id,copyId]]),t=now();
+          descendants.forEach(function(x,idx){if(!ids.has(x.id))ids.set(x.id,uid());
+            var duplicate={...x,id:ids.get(x.id),name:idx===0?nextName:x.name,parent:idx===0?x.parent:ids.get(x.parent),created:t,modified:t,deleted:false};
+            s.items.push(duplicate);
+          });ui.selected=copyId;
+        },'Duplicated '+i.name))refresh();break}
+      case 'download':exportText(i);break;
+      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
       case 'trash':ui.trash=!ui.trash;ui.selected=null;ui.search='';rerender('files');break;
       case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
       case 'empty':ui.modal={action:'empty'};rerender('files');break;
       case 'sort':ui.sort=ui.sort==='name'?'date':'name';rerender('files');break;
       case 'import':document.getElementById('fsImport')?.click();break;
-      case 'backup':download(new Blob([JSON.stringify({version:store.version,items:store.items},null,2)],{type:'application/json'}),'AincFh-OS-workspace-backup.json');break;
+      case 'backup':api.exportBackup();break;
       case 'new-note':{
         var id=uid(),t=now();
         if(transact(function(s){s.items.push({id:id,name:'Untitled '+new Date().toLocaleDateString('zh-CN')+'.md',type:'text',parent:'notes',body:'',url:'',created:t,modified:t,deleted:false})},'Created note')){
@@ -216,7 +243,11 @@
       if(ui.lastClick&&ui.lastClick.id===selected&&stamp-ui.lastClick.time<480){
         ui.lastClick=null;action('open',selected);return;
       }
-      ui.lastClick={id:selected,time:stamp};ui.selected=selected;rerender('files');return;
+      ui.lastClick={id:selected,time:stamp};ui.selected=selected;
+      document.querySelectorAll('#app-files [data-fs-select]').forEach(function(el){var active=el.dataset.fsSelect===selected;el.classList.toggle('selected',active);el.setAttribute('aria-selected',String(active))});
+      var inspector=document.querySelector('#app-files .fs-inspector');
+      if(inspector)inspector.innerHTML='<div class="fs-side-caption">INSPECTOR / PREVIEW</div>'+details(item(selected));
+      return;
     }
     if(b.hasAttribute('data-fs-note')){ui.notesId=b.dataset.fsNote;rerender('notes');return}
     if(b.hasAttribute('data-fs-focus')){bridge&&bridge.focus(b.dataset.fsFocus);rerender('activity');return}
