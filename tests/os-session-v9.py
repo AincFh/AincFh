@@ -10,7 +10,9 @@ def main():
         context=browser.new_context(viewport={"width":1440,"height":900},reduced_motion="reduce")
         page=context.new_page()
         errors=[]
+        diagnostics=[]
         page.on("pageerror",lambda error:errors.append(str(error)))
+        page.on("console",lambda msg: diagnostics.append((msg.type,msg.text)) if msg.type in ('warning','error') else None)
         page.goto(URL,wait_until="load")
         expect(page.locator('[data-dock="settings"]')).to_be_visible()
         page.locator('[data-dock="settings"]').click()
@@ -35,6 +37,8 @@ def main():
         assert len(before["items"])>=4
         assert before["focused"]=="tasks",before
         page.reload(wait_until="load")
+        probe=page.evaluate("""() => ({prefs:localStorage.getItem('aincfh_restoreSession'),saved:localStorage.getItem('aincfh_session_v1')?.slice(0,320),opened:[...document.querySelectorAll('.os-window')].map(x=>x.id)})""")
+        print("SESSION DEBUG AFTER RELOAD:",probe,diagnostics[-6:],flush=True)
         for name in ("settings","files","paint","tasks"):
             assert page.locator(f'#app-{name}').count()==1,(name,"missing after restore")
         assert page.locator('#app-files').evaluate("(e)=>e.classList.contains('is-minimized')")
