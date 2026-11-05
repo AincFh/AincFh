@@ -27,7 +27,6 @@ def test():
             expect(page.locator('#osControlCenter')).to_be_visible()
             assert page.locator('#osControlCenter [data-cc-profile]').count()==4
             assert page.locator('#osControlCenter [data-cc-toggle]').count()==5
-            assert "false"==page.locator('#osControlCenterButton').get_attribute("aria-expanded") if False else True
             assert page.locator('#osControlCenterButton').get_attribute("aria-expanded")=="true"
             assert page.locator('#osControlCenter').bounding_box()["width"]<=width
             # Quick settings change the actual system preferences.
