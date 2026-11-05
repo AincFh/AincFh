@@ -52,6 +52,12 @@
     glass: read('glass','on')!=='off',
     wallpaper: read('wallpaper','on')!=='off',
     dockSize: read('dockSize','regular')==='compact'?'compact':'regular',
+    dockPosition: ['bottom','left','right'].includes(read('dockPosition','bottom'))?read('dockPosition','bottom'):'bottom',
+    dockMode: ['floating','taskbar'].includes(read('dockMode','floating'))?read('dockMode','floating'):'floating',
+    dockScale: ['small','normal','large'].includes(read('dockScale','normal'))?read('dockScale','normal'):'normal',
+    dockMagnify: read('dockMagnify','on')!=='off',
+    dockAutoHide: read('dockAutoHide','off')==='on',
+    startLayout: read('startLayout','grid')==='list'?'list':'grid',
     clockMode: read('clockMode','24')==='12'?'12':'24',
     autoOpen: read('autoOpen','on')!=='off',
     rememberWindows: read('rememberWindows','on')!=='off',
@@ -79,9 +85,11 @@
     document.documentElement.classList.toggle('os-hide-hints',!state.keyHints);
     document.documentElement.classList.toggle('os-hide-badge',!state.activityBadge);
     document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
+    window.AincShell?.applyDock();
     $('meta[name="theme-color"]').content = state.theme === 'dark' ? '#10111a' : '#efebea';
     $$('[data-toggle-theme]').forEach(b => { b.innerHTML = ICON(state.theme === 'dark' ? 'sun' : 'moon'); b.setAttribute('aria-label', state.theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'); });
     if (windows.has('settings')) renderApp('settings');
+    window.AincI18n?.refresh();
     updateClock();
   }
   function setPreference(key,value){
@@ -99,9 +107,9 @@
     applySettings();toast('设置已应用');
   }
   function resetPreferences(){
-    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','dockPosition','dockMode','dockScale','dockMagnify','dockAutoHide','startLayout','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
     for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
-    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',dockPosition:'bottom',dockMode:'floating',dockScale:'normal',dockMagnify:true,dockAutoHide:false,startLayout:'grid',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
     applySettings();toast('设置已恢复默认');
   }
   function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
@@ -115,6 +123,7 @@
       button.classList.toggle('active',!!w&&!w.minimized&&w.node.classList.contains('focused'));
       button.setAttribute('aria-pressed',!!w&&!w.minimized?'true':'false');
     });
+    window.AincShell?.syncDock();
   }
   let restoringSession=false;
   function saveSession(){
@@ -228,7 +237,7 @@
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
     node.classList.toggle('terminal-window',id==='terminal');
-    renderApp(id);focusWindow(id);window.AincApps?.recordOpen(id);
+    renderApp(id);focusWindow(id);window.AincApps?.recordOpen(id);window.AincShell?.recordOpen(id);
     if(options.project)selectProject(options.project);
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
@@ -557,6 +566,14 @@
     arrange:arrangeWindows,
     refresh:()=>renderApp('settings'),
     toast:toast
+  });
+  if(window.AincShell)window.AincShell.attach({
+    open:(id)=>openWindow(id),focus:(id)=>focusWindow(id),
+    minimize:(id)=>minimizeWindow(id),close:(id)=>closeWindow(id),
+    showDesktop:showDesktop,arrange:arrangeWindows,
+    apps:()=>Object.entries(appInfo).map(([id,x])=>({id,...x})),
+    windows:()=>[...windows.entries()].map(([id,w])=>({id,name:appInfo[id]?.name,minimized:w.minimized,maximized:w.maximized,focused:w.node.classList.contains('focused')})),
+    prefs:()=>({...state}),set:setPreference,toast:toast,sync:syncDock
   });
   // Ambient animations respond to pointer and accessibility preferences.
   let tracking=false;document.addEventListener('pointermove',e=>{
