@@ -16,7 +16,7 @@ const LINES={
 };
 const tr=k=>(LINES[window.AincI18n?.locale||'en-US']||LINES['en-US'])[k]||k;
 const nameFor=(record,items)=>record.kind==='app'?tr(record.app):record.kind==='trash'?tr('trash'):items.find(x=>x.id===record.file)?.name||tr('file');
-let bridge=null,layer=null,menu=null,modal=null,selected=null,dragging=false,applying=false,refreshQueued=false,seenStart=false;
+let bridge=null,layer=null,menu=null,modal=null,selected=null,dragging=false,applying=false,refreshQueued=false,seenStart=false,lastSignature='';
 let data={version:1,records:[],grid:true,iconSize:'medium',show:true};
 try{
  const raw=JSON.parse(localStorage.getItem(KEY)||'null');
@@ -55,6 +55,11 @@ function render(){
   if(rec.id.startsWith('file:')&&!valid.has(rec.id.slice(5)))return false;
   return true;
  }).slice(0,ncols*nrows);
+ const names=new Map(items.map(x=>[x.id,x.name+':'+x.type]));
+ const signature=JSON.stringify([window.AincI18n?.locale||'en-US',data.show,data.iconSize,ncols,nrows,selected,
+  rendered.map(x=>[x.id,x.col,x.row,x.id.startsWith('file:')?names.get(x.id.slice(5)):null])]);
+ if(signature===lastSignature)return;
+ lastSignature=signature;
  const iconFor=(r,i)=>{
   const item=r.id.startsWith('file:')?items.find(x=>x.id===r.id.slice(5)):null;
   if(item?.type==='folder')return 'folder';
