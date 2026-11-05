@@ -88,3 +88,38 @@ html[data-theme="light"] .sp-actions button.sp-danger{color:#ab4447}
  .sp-metrics small{font-size:8px}.sp-metrics strong{font-size:15px}
 }
 @media(max-width:420px){.sp-options{grid-template-columns:1fr 1fr}.sp-options button{padding:10px 7px}.sp-toggle small{font-size:9px}.sp-main{padding:13px 10px 20px}}
+
+/* v8 Settings refinement: neutral sidebar, high-density control center, actual preferences. */
+.sp-sidebar button{background:transparent!important;color:var(--sub);border-color:transparent}
+.sp-sidebar button.active{background:rgba(255,159,67,.105)!important;color:var(--hot);border-color:rgba(255,159,67,.31)}
+.sp-sidebar button:hover:not(.active){background:var(--soft)!important;color:var(--ink)}
+.sp-layout .sp-sidebar{flex-basis:204px;width:204px;padding:23px 11px}
+.sp-layout .sp-main{padding:31px clamp(23px,4vw,44px) 38px}
+.sp-main>p.sp-sub{font-size:12px;max-width:690px;line-height:1.8}
+.sp-main h2{font-size:clamp(27px,3vw,36px)}
+.sp-field h4,.sp-subpanel h3{font-size:12px}
+.sp-options{grid-template-columns:repeat(auto-fit,minmax(134px,1fr));gap:9px}
+.sp-options button{padding:16px 14px;min-height:78px;gap:9px}
+.sp-options strong{font-size:12px}
+.sp-options small{font-size:10px}
+.sp-toggle{padding:17px 0}
+.sp-toggle strong{font-size:12px}
+.sp-toggle small{font-size:11px}
+.sp-shortcut-table{display:grid;gap:0;margin-top:17px;border-top:1px solid var(--line)}
+.sp-shortcut-table>div{display:grid;grid-template-columns:175px 1fr;align-items:center;gap:20px;padding:13px 7px;border-bottom:1px solid var(--line2)}
+.sp-shortcut-table kbd{font:750 11px ui-monospace,Consolas,monospace;border:1px solid var(--line);background:var(--soft);border-radius:4px;padding:7px 9px;color:var(--ink);text-align:center}
+.sp-shortcut-table span{font-size:11px;color:var(--sub)}
+.sp-quota{font:650 11px/1.6 ui-monospace,Consolas,monospace;color:var(--hot);padding:12px 14px;border-radius:4px;border:1px solid var(--line);background:var(--soft)}
+.os-hide-hints .desktop-hint{display:none!important}
+.os-hide-badge .os-activity-count{display:none!important}
+.os-low-power .world-beam,.os-low-power .world-orb,.os-low-power .world-grid,.os-low-power .pointer-light{animation:none!important;filter:none!important}
+.os-low-power :is(.os-window,.dock,.menubar){backdrop-filter:none!important}
+@media(max-width:700px){
+  .sp-layout .sp-sidebar{flex:0 0 56px;width:56px;padding:12px 5px}
+  .sp-layout .sp-main{padding:17px 13px 24px}
+  .sp-main h2{font-size:23px}
+  .sp-main>p.sp-sub{font-size:10px}
+  .sp-options{grid-template-columns:repeat(2,minmax(0,1fr));gap:6px}
+  .sp-options button{padding:10px 9px;min-height:68px}
+  .sp-shortcut-table>div{grid-template-columns:1fr;gap:6px}
+}
