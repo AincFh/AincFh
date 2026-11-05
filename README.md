@@ -19,7 +19,7 @@ Projects: https://github.com/AincFh/my-anime-blog · https://yslfivem.com · htt
 
 <p align="center">
   <a href="https://aincfh.github.io/AincFh/" title="Launch the full AincFh OS interactive workspace">
-    <img src="./assets/launch-workspace.svg" alt="AincFh OS Workspace — click to launch the interactive portfolio, projects, terminal and command palette" width="100%" />
+    <img src="./assets/launch-workspace.svg?v=039bae126" alt="AincFh OS Workspace — click to launch the interactive portfolio, projects, terminal and command palette" width="100%" />
   </a>
 </p>
 
