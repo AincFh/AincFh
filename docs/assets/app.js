@@ -144,6 +144,47 @@
   }
   function showDesktop(){for(let [id,w] of windows){w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');}syncDock();toast('已显示桌面 · 点击 Dock 恢复窗口');}
   function resetLayout(){for(const id of [...windows.keys()])closeWindow(id);['projects'].forEach(id=>{if(!isMobile())openWindow(id,{announce:false})});toast('窗口布局已重置');}
+  // Real window arrangement: layouts move and resize the existing live app windows.
+  function arrangeWindows(mode='tile'){
+    if(isMobile()){toast('手机端使用单窗口全屏模式');return;}
+    const list=[...windows.entries()].filter(([,w])=>!w.minimized);
+    if(!list.length){toast('打开应用窗口后可排列');return;}
+    const b=workBounds(),n=list.length;
+    const cols=mode==='cascade'?1:(b.width>=990?Math.min(3,Math.ceil(Math.sqrt(n))):1);
+    const rows=mode==='cascade'?1:Math.ceil(n/cols);
+    const gap=12,usableWidth=b.width-b.inset*2,usableHeight=b.height-b.top-b.bottom;
+    const cellWidth=Math.max(b.minWidth,Math.floor((usableWidth-gap*(cols-1))/cols));
+    const cellHeight=Math.max(b.minHeight,Math.floor((usableHeight-gap*(rows-1))/rows));
+    list.forEach(([id,w],i)=>{
+      w.maximized=false;w.node.classList.remove('is-maximized');
+      const width=mode==='cascade'?Math.min(appInfo[id].width,usableWidth):Math.min(cellWidth,usableWidth);
+      const height=mode==='cascade'?Math.min(appInfo[id].height,usableHeight):Math.min(cellHeight,usableHeight);
+      const x=mode==='cascade'?clampValue(b.inset+28*i,b.inset,b.width-width-b.inset):b.inset+(i%cols)*(cellWidth+gap);
+      const y=mode==='cascade'?clampValue(b.top+25*i,b.top,b.height-height-b.bottom):b.top+Math.floor(i/cols)*(cellHeight+gap);
+      w.node.style.left=x+'px';w.node.style.top=y+'px';w.node.style.width=width+'px';w.node.style.height=height+'px';
+      saveWindow(id);
+    });
+    focusWindow(list[list.length-1][0]);
+    toast(mode==='cascade'?'窗口已层叠排列':'窗口已平铺排列');
+  }
+  function snapWindow(direction){
+    if(isMobile())return;
+    const node=$('.os-window.focused',layer);if(!node){toast('请先选择一个窗口');return;}
+    const id=node.id.slice(4),w=windows.get(id),b=workBounds();
+    if(!w)return;
+    w.maximized=false;node.classList.remove('is-maximized');
+    const width=Math.max(b.minWidth,Math.floor((b.width-b.inset*3)/2));
+    const height=b.height-b.top-b.bottom;
+    const left=direction==='left'?b.inset:b.width-width-b.inset;
+    node.style.left=left+'px';node.style.top=b.top+'px';
+    node.style.width=width+'px';node.style.height=height+'px';
+    saveWindow(id);
+    toast(direction==='left'?'窗口已停靠左侧':'窗口已停靠右侧');
+  }
+  function cycleWindows(){
+    const list=[...windows.entries()].filter(([,w])=>!w.minimized).sort((a,b)=>(parseInt(a[1].node.style.zIndex)||0)-(parseInt(b[1].node.style.zIndex)||0));
+    if(list.length>1)focusWindow(list[0][0]);
+  }
   function handleDrag(event){
     const bar=event.target.closest('.winbar');
     if(!bar||event.target.closest('.win-control')||isMobile()||event.button!==0)return;
@@ -306,6 +347,8 @@
     if(control.matches('[data-set-theme]')){setTheme(control.dataset.setTheme);return;}
     if(control.matches('[data-set-accent]')){setAccent(control.dataset.setAccent);return;}
     if(control.matches('[data-set-motion]')){setMotion(!state.motion);return;}
+    if(control.matches('[data-arrange]')){arrangeWindows(control.dataset.arrange);closeMenu();return;}
+    if(control.matches('[data-snap]')){snapWindow(control.dataset.snap);closeMenu();return;}
     if(control.matches('[data-reset-layout]')){resetLayout();return;}
     if(control.matches('[data-copy-email]')){try{await navigator.clipboard.writeText('fhainc@hotmail.com');toast('邮箱地址已复制')}catch{toast('邮箱：fhainc@hotmail.com')}return;}
   });
@@ -340,6 +383,12 @@
     if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palette.hidden?openPalette():closePalette();}
     else if(e.key==='Escape'){if(!palette.hidden)closePalette();else closeMenu();}
     else if(e.altKey && /^[1-6]$/.test(e.key)&&!e.ctrlKey&&!e.metaKey){e.preventDefault();openWindow(Object.keys(appInfo)[Number(e.key)-1]);}
+  });
+  // Window shortcuts: Ctrl+Tab cycles, Ctrl+Shift+F maximizes, Ctrl+Alt+arrows snaps.
+  document.addEventListener('keydown',e=>{
+    if(e.ctrlKey&&e.key==='Tab'&&!e.metaKey){e.preventDefault();cycleWindows();}
+    else if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();const n=$('.os-window.focused',layer);if(n)toggleMax(n.id.slice(4));}
+    else if(e.ctrlKey&&e.altKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();snapWindow(e.key==='ArrowLeft'?'left':'right');}
   });
   // Ambient animations respond to pointer and accessibility preferences.
   let tracking=false;document.addEventListener('pointermove',e=>{
