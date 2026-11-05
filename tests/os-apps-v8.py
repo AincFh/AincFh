@@ -11,6 +11,13 @@ def open_app(page, app_id):
         page.locator('[data-dock="apps"]').click()
         page.locator(f'#app-apps [data-catalog-open="{app_id}"]').click()
 
+def open_files_folder(page, folder_id):
+    """Navigate using the actual Files UI; narrow viewports use a sidebar drawer."""
+    target=page.locator('#app-files [data-fs-folder="'+folder_id+'"]').first
+    if not target.is_visible():
+        page.locator('#app-files [data-fs-sidebar-toggle]').click()
+    target.click()
+
 def run():
  with sync_playwright() as p:
   browser=p.chromium.launch(headless=True)
@@ -46,7 +53,7 @@ def run():
    assert page.locator('#suCalcResult').inner_text()=="14"
    # File > create > Notes > edit > refresh > find content.
    page.locator('[data-dock="files"]').click()
-   page.locator('#app-files [data-fs-folder="workspace"]').click()
+   open_files_folder(page,"workspace")
    page.locator('#app-files [data-fs-action="create-text"]').click()
    page.locator('#fsName').fill("QA-workflow-v8.md")
    page.locator('#fsDialog button[type="submit"]').click()
@@ -66,12 +73,12 @@ def run():
    assert page.locator('#app-notes .fs-md-preview h2').inner_text()=="AincFh OS"
    # Move and duplicate the real document.
    page.locator('[data-dock="files"]').click()
-   page.locator('#app-files [data-fs-folder="workspace"]').click()
+   open_files_folder(page,"workspace")
    page.locator('#app-files [data-fs-select]').filter(has_text="QA-workflow-v8.md").click()
    page.locator('#app-files [data-fs-action="move"]').click()
    page.locator('#fsDestination').select_option('notes')
    page.locator('#fsDialog button[type="submit"]').click()
-   page.locator('#app-files [data-fs-folder="notes"]').click()
+   open_files_folder(page,"notes")
    page.locator('#app-files [data-fs-select]').filter(has_text="QA-workflow-v8.md").click()
    page.locator('#app-files [data-fs-action="duplicate"]').click()
    assert page.locator('#app-files [data-fs-select]').filter(has_text="QA-workflow-v8 copy.md").count()==1
