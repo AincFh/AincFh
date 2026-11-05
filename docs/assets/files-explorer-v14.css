@@ -174,6 +174,8 @@
 }
 @container files (max-width:580px){
  #app-files .fs-sidebar{position:absolute;left:0;top:0;bottom:0;z-index:15;width:min(270px,85%)!important;max-width:85%;box-shadow:22px 0 60px rgba(0,0,0,.4)}
+ #app-files .fs-browser:not(.fs-mobile-sidebar-open) .fs-sidebar{display:none}
+ #app-files .fs-browser.fs-mobile-sidebar-open .fs-sidebar{display:flex}
  #app-files .fs-sidebar-resizer{display:none!important}
  #app-files .fs-center{width:100%}
  #app-files .fs-table-header{grid-template-columns:minmax(80px,1fr) 57px;padding-left:52px}
