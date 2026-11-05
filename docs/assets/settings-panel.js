@@ -3,7 +3,7 @@
 'use strict';
 var bridge=null,section='language',armed='';
 var esc=function(x){return String(x).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
-var sections=[['language','Language & Region','globe'],['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
+var sections=[['language','Language & Region','globe'],['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['performance','Performance & Efficiency','monitor'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
 function choice(key,label,items){
  var p=bridge.prefs();return '<div class="sp-field"><h4>'+label+'</h4><div class="sp-options">'+items.map(function(o){return '<button data-sp-set="'+key+'" data-sp-value="'+o[0]+'" aria-pressed="'+(p[key]===o[0])+'"><strong>'+o[1]+'</strong><small>'+o[2]+'</small></button>'}).join('')+'</div></div>';
 }
@@ -45,8 +45,14 @@ function render(){
  toggle('motion','System animation','启动动画、背景运动和窗口过渡。支持系统减少动态效果偏好。')+
  '<div class="sp-info">Selection & Clipboard：非白名单区域不支持文本选择和网页内部复制／粘贴。Notes、文件输入框、终端及明确标记的阅读区域保留编辑与复制能力。</div>';
  break;
+ case 'performance':
+ body=heading('03','Performance & Efficiency','真实浏览器性能数据、节能模式与动画控制。性能选项只影响当前网页，不改变真实电脑硬件状态。')+
+ choice('performanceMode','Performance profile',[['auto','Automatic','根据浏览器设备与省流量偏好选择'],['balanced','Balanced','兼顾动态效果与资源消耗'],['smooth','High performance','保留完整的桌面视觉动画'],['save','Power saver','减少动画、背景消耗与玻璃模糊效果']])+
+ '<div class="sp-subpanel"><h3>Task Manager</h3><p>查看真实的浏览器性能数据、运行中的 OS 应用和长任务，也可以关闭应用窗口。</p><div class="sp-actions"><button data-sp-action="open-taskmanager">Open Task Manager</button></div></div>'+
+ '<div class="sp-info">浏览器安全沙箱无法读取真实操作系统的 CPU、GPU 或其他进程的专用内存，不显示虚构值。</div>';
+ break;
  case 'desktop':
- body=heading('03','Desktop & Windows','Dock、窗口停靠、布局恢复与桌面右键菜单。')+
+ body=heading('04','Desktop & Windows','Dock、窗口停靠、布局恢复与桌面右键菜单。')+
  choice('dockSize','Dock sizing',[['regular','Comfortable','大图标'],['compact','Compact','适合小屏']])+
  choice('dockMode','Dock style',[['floating','Floating Dock','macOS-style floating shelf'],['taskbar','Taskbar','Windows-style full-width taskbar']])+
  choice('dockPosition','Dock position',[['bottom','Bottom','Below the desktop'],['left','Left','Vertical Dock'],['right','Right','Vertical Dock']])+
@@ -94,7 +100,7 @@ function render(){
  break;
  default:
  body=heading('08','AincFh OS','Browser desktop environment / Design, engineering and creative systems.')+
- '<div class="sp-about"><div class="sp-brand"><strong>⬡</strong><span>AincFh <b>OS</b></span></div><p><strong>System:</strong> Web Desktop / static GitHub Pages</p><p><strong>Runtime:</strong> HTML · CSS · JavaScript (client-side only)</p><p><strong>Storage:</strong> local browser storage</p><p><strong>Security:</strong> browser sandbox · no native filesystem / driver / kernel rights</p><p><strong>Edition:</strong> Workspace v8</p></div>'+
+ '<div class="sp-about"><div class="sp-brand"><strong>⬡</strong><span>AincFh <b>OS</b></span></div><p><strong>System:</strong> Web Desktop / static GitHub Pages</p><p><strong>Runtime:</strong> HTML · CSS · JavaScript (client-side only)</p><p><strong>Storage:</strong> local browser storage</p><p><strong>Security:</strong> browser sandbox · no native filesystem / driver / kernel rights</p><p><strong>Edition:</strong> Workspace v11</p></div>'+
  '<div class="sp-info">The OS is a functional browser desktop environment, not Windows, macOS or a host operating-system replacement. Its local terminal cannot execute remote shell commands.</div>';
  }
  return '<div class="sp-layout"><aside class="sp-sidebar"><div class="sp-brand-small">AF / CONTROL PANEL</div>'+sections.map(function(x){return '<button data-sp-section="'+x[0]+'" class="'+(section===x[0]?'active':'')+'"><svg aria-hidden="true"><use href="#i-'+x[2]+'"></use></svg><span>'+x[1]+'</span></button>'}).join('')+'<div class="sp-side-foot">LOCAL CONFIGURATION<br>NO CLOUD SYNC</div></aside><section class="sp-main">'+body+'</section></div>';
@@ -114,6 +120,7 @@ function action(key){
  case 'reset-prefs':bridge.resetPrefs();break;
  case 'open-apps':bridge.open('apps');break;
  case 'open-activity':bridge.open('activity');break;
+ case 'open-taskmanager':bridge.open('taskmanager');break;
  case 'persist-storage':
    if(!navigator.storage?.persist){bridge.toast('当前浏览器不支持持久存储请求');break}
    navigator.storage.persist().then(function(ok){bridge.toast(ok?'浏览器已允许持久存储':'浏览器未授予持久存储；仍可以导出备份');refresh()}).catch(function(){bridge.toast('存储请求失败')});
