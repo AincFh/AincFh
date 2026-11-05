@@ -6,7 +6,7 @@
   const colors=['#26212c','#ff9f43','#aa7bf1','#45bca4','#75b7ed','#e76f8a','#f1c76c','#ffffff'];
   let bridge=null,canvas=null,ctx=null,tool='brush',color=colors[0],size=6,zoom=100;
   let drawing=false,modified=false,current=null,history=[],index=-1,version=0,loaded=false;
-  let origin=null,previous=null,showGrid=false,documentName='Untitled drawing';
+  let origin=null,previous=null,showGrid=false,documentName='Untitled drawing',linkedFileId=null;
   const $=(s,el=document)=>el.querySelector(s);
   function escape(v){return String(v).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
   function toast(t){bridge?.toast(t)}
@@ -111,7 +111,7 @@
         blank();
         const ratio=Math.min(WIDTH/img.width,HEIGHT/img.height),w=img.width*ratio,h=img.height*ratio;
         ctx.drawImage(img,(WIDTH-w)/2,(HEIGHT-h)/2,w,h);
-        documentName=file.name.replace(/\.[^.]+$/,'');push();toast('图片已导入画布');
+        documentName=file.name.replace(/\.[^.]+$/,'');linkedFileId=null;push();toast('图片已导入画布');
       };
       img.onerror=()=>toast('图片解析失败');
       img.src=reader.result;
@@ -128,8 +128,8 @@
     const img=capture();
     if(!window.AincWorkspace?.saveImage){toast('文件服务不可用，请先导出 PNG');return}
     const name=(documentName||'Untitled drawing').replace(/\.(png|jpg|webp)$/i,'')+'.png';
-    const done=window.AincWorkspace.saveImage(name,img);
-    if(done)toast('已保存到 Files / Workspace，可再次打开');
+    const done=window.AincWorkspace.saveImage(name,img,'workspace',linkedFileId);
+    if(done){linkedFileId=done;toast('绘图已同步到 Files，后续保存会更新同一文件')}
   }
   function reset(){
     blank();push();showState('Canvas cleared');
@@ -159,6 +159,7 @@
   function onRender(){
     const next=$('#app-paint #paintCanvas');if(!next)return;
     canvas=next;ctx=canvas.getContext('2d',{willReadFrequently:true});blank();
+    if(!history.length){history=[capture()];index=0}
     canvas.addEventListener('pointerdown',down);canvas.addEventListener('pointermove',move);
     canvas.addEventListener('pointerup',up);canvas.addEventListener('pointercancel',up);
     if(current)put(current);
@@ -197,9 +198,9 @@
   window.AincPaint={
     attach(b){bridge=b},
     render,onRender,
-    openImage(name,src){
+    openImage(name,src,id){
       documentName=String(name||'Drawing').replace(/\.png$/i,'');
-      current=src;modified=true;history=[src];index=0;
+      current=src;modified=true;history=[src];index=0;linkedFileId=id||null;
       bridge?.open('paint');
       setTimeout(()=>{put(src);const title=$('#paintDocTitle');if(title)title.textContent=documentName;updateButtons()},25);
     },
