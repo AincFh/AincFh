@@ -1,9 +1,9 @@
 /* AincFh OS System Preferences — functional preferences, not simulated toggles. */
 (function(){
 'use strict';
-var bridge=null,section='appearance',armed='';
+var bridge=null,section='language',armed='';
 var esc=function(x){return String(x).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
-var sections=[['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
+var sections=[['language','Language & Region','globe'],['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
 function choice(key,label,items){
  var p=bridge.prefs();return '<div class="sp-field"><h4>'+label+'</h4><div class="sp-options">'+items.map(function(o){return '<button data-sp-set="'+key+'" data-sp-value="'+o[0]+'" aria-pressed="'+(p[key]===o[0])+'"><strong>'+o[1]+'</strong><small>'+o[2]+'</small></button>'}).join('')+'</div></div>';
 }
@@ -15,6 +15,22 @@ function render(){
  var p=bridge?bridge.prefs():{},storage=window.AincWorkspace?.storageStats?.()||{documents:0,bytes:0,events:0};
  var body='';
  switch(section){
+ case 'language':{
+   var i18n=window.AincI18n,detected=i18n?.detect()||'en-US',current=i18n?.locale||'en-US',mode=i18n?.mode||'auto';
+   var translations={ 'zh-CN':'简体中文','zh-TW':'繁體中文','en-US':'English','ja-JP':'日本語'};
+   var names={'zh-CN':'Chinese (Simplified)','zh-TW':'Chinese (Traditional)','en-US':'English','ja-JP':'Japanese'};
+   body=heading('00',i18n?.ui('languageTitle')||'Language & Region',i18n?.ui('languageHelp')||'Match the browser language or choose one for this workspace.')+
+     '<div class="sp-field"><h4>Language mode</h4><div class="sp-language-feature">'+
+     '<button data-sp-language="auto" aria-pressed="'+(mode==='auto')+'"><span class="sp-lang-icon">◎</span><span><strong>Follow browser language</strong><small>'+esc(i18n?.formatNumber(4)||4)+' LOCALES · AUTO DETECT</small></span><span class="sp-lang-check">'+(mode==='auto'?'✓':'')+'</span></button>'+
+     '</div></div>'+
+     '<div class="sp-field"><h4>System language</h4><div class="sp-language-grid">'+
+     (i18n?.supported||[]).map(function(l){return '<button data-sp-language="'+l.id+'" aria-pressed="'+(mode===l.id)+'">'+
+       '<span class="sp-language-code">'+l.short+'</span><span><strong>'+esc(l.native)+'</strong><small>'+esc(names[l.id])+'</small></span><span class="sp-lang-check">'+(mode===l.id?'✓':'')+'</span></button>'}).join('')+'</div></div>'+
+     '<div class="sp-info"><div class="sp-locale-info"><span>Detected browser language</span><strong>'+esc(translations[detected])+' · '+esc((navigator.languages||[]).join(', ')||navigator.language||'—')+'</strong></div>'+
+     '<div class="sp-locale-info"><span>Current interface language</span><strong>'+esc(translations[current])+' · '+current+'</strong></div></div>'+
+     '<div class="sp-info">'+esc(i18n?.ui('languageDescription')||'Project names and your own documents are never translated automatically.')+'</div>';
+   break;
+ }
  case 'appearance':
  body=heading('01','Appearance','橙紫六边形视觉系统与桌面展示效果。所有选项立即应用，并保存到当前浏览器。')+
  choice('theme','Color theme',[['dark','Midnight','深色桌面'],['light','Pearl','低眩光亮色']])+
@@ -103,6 +119,7 @@ function action(key){
  }
 }
 document.addEventListener('click',function(e){
+ var langButton=e.target.closest('[data-sp-language]');if(langButton){if(window.AincI18n?.set(langButton.dataset.spLanguage)){bridge?.refresh();}return}
  var sectionButton=e.target.closest('[data-sp-section]');if(sectionButton){section=sectionButton.dataset.spSection;armed='';refresh();return}
  var set=e.target.closest('[data-sp-set]');if(set){bridge?.set(set.dataset.spSet,set.dataset.spValue);return}
  var toggle=e.target.closest('[data-sp-toggle]');if(toggle){bridge?.set(toggle.dataset.spToggle,!bridge.prefs()[toggle.dataset.spToggle]);return}
