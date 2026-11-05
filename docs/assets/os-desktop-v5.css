@@ -184,3 +184,26 @@ html[data-theme="light"] .terminal-window .window-content{background:#201b2a;col
 @media(prefers-reduced-motion:reduce){
   .menubar,.desktop-launchers,.dock,.hero-boot,.hero-pretitle,.hero-description,.hero-ctas{animation:none!important}
 }
+
+/* A single, finite boot sequence. The desktop remains operable under the non-blocking overlay. */
+.os-boot{
+  position:fixed;inset:0;z-index:550;display:flex;flex-direction:column;
+  justify-content:center;align-items:center;gap:15px;pointer-events:none;
+  background:radial-gradient(circle at 50% 43%,#322437,#13131e 68%,#10111a);
+  color:#ece7ee;animation:os-boot-exit .65s 1.16s both;
+}
+.os-boot-mark{position:relative;width:79px;height:79px;display:grid;place-items:center;color:#ffa148;filter:drop-shadow(0 0 24px rgba(255,159,67,.24));animation:os-mark-wake .65s ease both}
+.os-boot-mark svg{position:absolute;inset:0;width:100%;height:100%;animation:os-mark-turn 1.4s ease-out both}
+.os-boot-mark strong{font-size:26px;letter-spacing:-.07em;color:#ffae64;font-weight:850}
+.os-boot-name{font-size:21px;font-weight:860;letter-spacing:.035em}
+.os-boot-name span{color:#ff9f43}
+.os-boot-caption{font:700 9px/1.4 ui-monospace,Consolas,monospace;letter-spacing:2px;color:#a6a0b2}
+.os-boot-track{height:2px;width:min(290px,60vw);background:rgba(255,255,255,.1);overflow:hidden;margin-top:7px}
+.os-boot-track i{display:block;height:100%;width:100%;background:linear-gradient(90deg,#ff9f43,#9568e3);transform:scaleX(0);transform-origin:left;animation:os-boot-progress 1.08s cubic-bezier(.24,.65,.32,1) forwards}
+.os-boot-ready{font-size:8px;color:#ff9f43}
+@keyframes os-boot-progress{0%{transform:scaleX(.06)}100%{transform:scaleX(1)}}
+@keyframes os-mark-turn{0%{opacity:.45;transform:rotate(-28deg) scale(.83)}100%{opacity:1;transform:rotate(0deg) scale(1)}}
+@keyframes os-mark-wake{from{opacity:.2;transform:translateY(14px)}to{opacity:1;transform:translateY(0)}}
+@keyframes os-boot-exit{0%{opacity:1;visibility:visible}98%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden}}
+html.motion-off .os-boot{display:none}
+@media(prefers-reduced-motion:reduce){.os-boot{display:none!important}}
