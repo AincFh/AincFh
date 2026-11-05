@@ -207,3 +207,21 @@ html[data-theme="light"] .terminal-window .window-content{background:#201b2a;col
 @keyframes os-boot-exit{0%{opacity:1;visibility:visible}98%{opacity:0;visibility:visible}100%{opacity:0;visibility:hidden}}
 html.motion-off .os-boot{display:none}
 @media(prefers-reduced-motion:reduce){.os-boot{display:none!important}}
+
+/* Maximized applications become intentionally composed layouts instead of stretched text columns. */
+@media(min-width:841px){
+  .os-window.is-maximized:not(.terminal-window) .window-content{
+    padding-left:max(28px,calc((100% - 1030px)/2));
+    padding-right:max(28px,calc((100% - 1030px)/2));
+    padding-top:clamp(22px,3.2vh,38px);
+  }
+  .os-window.is-maximized .project-chooser{justify-content:center;gap:8px}
+  .os-window.is-maximized .project-canvas.motion-preview{height:clamp(240px,36vh,325px)}
+  .os-window.is-maximized .motion-preview .preview-frame{top:43px;bottom:24px;left:34px;right:34px}
+  .os-window.is-maximized .preview-scene{left:24px;right:24px;top:48px}
+  .os-window.is-maximized .preview-scene strong{font-size:clamp(23px,2.5vw,34px)}
+  .os-window.is-maximized .preview-scene small{font-size:10px}
+  .os-window.is-maximized .preview-lines{top:20px}
+  .os-window.is-maximized .tech-grid{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .os-window.is-maximized .about-ident{max-width:900px}
+}
