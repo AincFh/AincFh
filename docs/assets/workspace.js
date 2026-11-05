@@ -67,7 +67,7 @@
   function rootOf(i){return i.parent==='root'?'Home':(item(i.parent)||{}).name||'Workspace'}
   function icon(type){return type==='folder'?'folder':type==='link'?'link':type==='image'?'image':'code'}
   function symbol(type){return '<svg aria-hidden="true"><use href="#i-'+icon(type)+'"></use></svg>'}
-  var ui={folder:'root',selected:null,search:'',trash:false,view:'folder',sort:'name',modal:null,notesId:'ideas',history:['root'],historyIndex:0};
+  var ui={folder:'root',selected:null,search:'',trash:false,view:'folder',showInspector:false,sort:'name',modal:null,notesId:'ideas',history:['root'],historyIndex:0};
   var NAV_KEY='aincfh_files_navigation_v14';
   var NAV_LABELS={
     'zh-CN':{home:'主页',desktop:'桌面',workspace:'工作区',notes:'笔记',links:'链接',recent:'最近使用',favorites:'收藏位置',places:'快捷访问',folders:'目录',library:'资源库',system:'系统',trash:'回收站',storage:'浏览器存储',loading:'正在读取…',unavailable:'不可获取',back:'后退',forward:'前进',up:'上一级',expand:'展开目录',collapse:'折叠目录',pin:'添加到收藏',unpin:'取消收藏',emptyFavorite:'尚未添加收藏',sidebar:'文件导航',inspector:'文件详情',visible:'展开侧栏',hide:'收起侧栏',search:'搜索文件',items:'项目',starred:'收藏项目',name:'名称',modified:'修改时间',type:'类型',sortName:'名称排序',sortRecent:'最近修改',quick:'常用位置',all:'全部文件',refresh:'刷新',details:'详情'},
@@ -95,7 +95,7 @@
   }
   function navigateFolder(id,fromHistory){
     if(id!=='root'&&(!item(id)||item(id).type!=='folder'||!isVisible(item(id))))return false;
-    ui.folder=id;ui.view='folder';ui.trash=false;ui.search='';ui.selected=null;nav.mobileOpen=false;
+    ui.folder=id;ui.view='folder';ui.trash=false;ui.search='';ui.selected=null;ui.showInspector=false;nav.mobileOpen=false;
     if(!fromHistory){
       ui.history=ui.history.slice(0,ui.historyIndex+1);
       if(ui.history[ui.history.length-1]!==id){ui.history.push(id);if(ui.history.length>40)ui.history.shift()}
@@ -111,7 +111,7 @@
   }
   function navigateView(mode){
     if(!['recent','favorites','trash'].includes(mode))return;
-    ui.view=mode;ui.trash=mode==='trash';ui.selected=null;ui.search='';nav.mobileOpen=false;rerender('files');
+    ui.view=mode;ui.trash=mode==='trash';ui.selected=null;ui.search='';ui.showInspector=false;nav.mobileOpen=false;rerender('files');
   }
   function ensureDesktopFolder(){
     if(item('desktop')?.type==='folder'&&isVisible(item('desktop')))return true;
@@ -228,7 +228,7 @@
     return '<div class="fs-shell">'+
       '<div class="fs-topline"><div><span class="win-eyebrow">AINCFH / LOCAL WORKSPACE</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">LOCAL-FIRST · PRIVATE</span></div>'+
       '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain,image/png,image/jpeg,image/webp" hidden /></div>'+
-      '<div class="fs-browser'+(nav.hideSidebar?' fs-sidebar-hidden':'')+(nav.mobileOpen?' fs-mobile-sidebar-open':'')+'" style="--fs-sidebar-width:'+nav.sidebarWidth+'px">'+renderSidebar()+
+      '<div class="fs-browser'+(nav.hideSidebar?' fs-sidebar-hidden':'')+(nav.mobileOpen?' fs-mobile-sidebar-open':'')+(ui.showInspector?' fs-inspector-open':'')+'" style="--fs-sidebar-width:'+nav.sidebarWidth+'px">'+renderSidebar()+
       '<section class="fs-center">'+fsLocation()+
         '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="'+esc(nt('search'))+'" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="'+esc(nt(ui.sort==='name'?'sortRecent':'sortName'))+'">'+esc(nt(ui.sort==='name'?'sortName':'sortRecent'))+'</button></div>'+
         '<div class="fs-table-header" aria-hidden="true"><span>'+esc(nt('name'))+'</span><span>'+esc(nt('type'))+'</span><span>'+esc(nt('modified'))+'</span></div><div class="fs-list" role="listbox" aria-label="Files">'+
@@ -236,7 +236,7 @@
             '<span class="fs-row-icon">'+symbol(i.type)+'</span><span class="fs-row-name">'+esc(i.name)+'</span><span class="fs-row-type">'+esc(i.type.toUpperCase())+'</span><span class="fs-row-date">'+esc(prettyDate(i.modified))+'</span></button>'}).join(''):
           '<div class="fs-empty"><strong>'+(ui.trash?'Trash is empty':'Nothing here yet.')+'</strong><p>'+(ui.trash?'Deleted items appear here.':'Create a document or folder to start working.')+'</p></div>')+
         '</div><div class="fs-status">'+data.length+' item(s) · '+store.items.filter(isVisible).length+' in workspace'+(ui.trash?'<button data-fs-action="empty">Empty Trash</button>':'')+'</div></section>'+
-        '<aside class="fs-inspector"><div class="fs-side-caption">'+esc(nt('inspector'))+' / PREVIEW</div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
+        '<aside class="fs-inspector"><div class="fs-inspector-heading"><div class="fs-side-caption">'+esc(nt('inspector'))+' / PREVIEW</div><button class="fs-inspector-close" data-fs-toggle-inspector aria-label="'+esc(nt('hide'))+'">×</button></div>'+details(selected&&(ui.trash?selected.deleted:isVisible(selected))?selected:null)+'</aside>'+
       '</div>'+modal()+'</div>';
   }
   // Escaped Markdown subset. HTML and script execution are never allowed.
@@ -394,7 +394,9 @@
     }
     if(b.hasAttribute('data-fs-history')){navigateHistory(Number(b.dataset.fsHistory));return}
     if(b.hasAttribute('data-fs-nav-up')){var folder=item(ui.folder);navigateFolder(folder?.parent||'root');return}
+    if(b.hasAttribute('data-fs-toggle-inspector')){ui.showInspector=!ui.showInspector;rerender('files');return}
     if(b.hasAttribute('data-fs-sidebar-toggle')){
+      ui.showInspector=false;
       var content=document.querySelector('#app-files .window-content');
       if((content?.clientWidth||innerWidth)<=580)nav.mobileOpen=!nav.mobileOpen;
       else{nav.hideSidebar=!nav.hideSidebar;saveNav()}
@@ -403,6 +405,9 @@
     if(b.hasAttribute('data-fs-select')){
       var selected=b.dataset.fsSelect;
       ui.selected=selected;
+      var filesContent=document.querySelector('#app-files .window-content');
+      ui.showInspector=(filesContent?.clientWidth||innerWidth)<=780;
+      if(ui.showInspector)filesContent?.querySelector('.fs-browser')?.classList.add('fs-inspector-open');
       // Single click only selects; native dblclick opens. No timing heuristic.
       document.querySelectorAll('#app-files [data-fs-select]').forEach(function(el){var active=el.dataset.fsSelect===selected;el.classList.toggle('selected',active);el.setAttribute('aria-selected',String(active))});
       var inspector=document.querySelector('#app-files .fs-inspector');
