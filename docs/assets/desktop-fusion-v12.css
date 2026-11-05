@@ -194,3 +194,34 @@ html[data-panel-density="compact"] .fusion-top-switcher{top:7px}
 @media(max-width:720px){.fusion-preset-grid{gap:7px}.fusion-preset-stage{height:85px}.fusion-wallpaper-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fusion-overview{padding:12px}.fusion-overview-grid{grid-template-columns:repeat(2,minmax(0,1fr))}.fusion-overview-inner{max-height:calc(100dvh - 24px)}}
 @media(max-width:420px){.fusion-preset-grid{grid-template-columns:1fr}.fusion-preset-stage{height:76px}.fusion-wallpaper-grid{grid-template-columns:repeat(3,minmax(0,1fr))}.fusion-overview-grid{grid-template-columns:1fr}.fusion-space-sample{height:58px}.fusion-space-list{max-height:80px}.fusion-overview-inner{gap:9px}.fusion-overview-header h2{font-size:24px}.fusion-overview-header span{font-size:8px}}
 @media(prefers-reduced-motion:reduce){html .fusion-overview{backdrop-filter:none;-webkit-backdrop-filter:none}html .fusion-preset-card,html .fusion-choice-grid button{transition:none}}
+
+/* Unified color tokens: overrides legacy static orange decoration. All themed
+ * chrome now follows the chosen Accent, including user-defined validated HEX. */
+html{
+ --fusion-tint:color-mix(in srgb,var(--hot) 11%,transparent);
+ --fusion-tint-strong:color-mix(in srgb,var(--hot) 19%,transparent);
+ --fusion-border:color-mix(in srgb,var(--hot) 34%,transparent);
+}
+html :is(.sp-sidebar button.active,.sp-options button[aria-pressed="true"],.os-start-categories button[aria-pressed="true"],.os-start-power,
+.os-start-app:hover,.os-dock-peek .os-peek-icon,.os-context-title,.os-start-appicon,.os-start-button.is-open,
+.cc-toggle-grid button[aria-pressed="true"],.os-control-popup [aria-selected="true"]){
+ background:var(--fusion-tint)!important;
+ border-color:var(--fusion-border)!important;
+}
+html :is(.sp-sidebar button.active,.sp-options button[aria-pressed="true"],.os-start-categories button[aria-pressed="true"],
+.os-start-power,.os-start-app:hover,.os-context-title,.os-start-button.is-open,
+.cc-profiles button[aria-pressed="true"],.os-control-popup [aria-selected="true"]){color:var(--hot)!important}
+html :is(.fusion-preset-card.is-selected,.fusion-choice-grid button[aria-pressed="true"],.os-start-panel,.os-control-center){border-color:var(--fusion-border)}
+html .os-start-search:focus-within{box-shadow:0 0 0 3px var(--fusion-tint)}
+html :is(.os-start-appicon,.os-peek-icon,.tm-process-icon){background:var(--fusion-tint);border-color:var(--fusion-border)}
+html .os-window:before{background:linear-gradient(90deg,transparent,var(--hot),color-mix(in srgb,var(--hot) 45%,#9b77ef),transparent)}
+html .world-beam{background:linear-gradient(transparent,color-mix(in srgb,var(--hot) 17%,transparent),transparent)}
+html .dock .dock-app:hover{background:var(--fusion-tint)!important}
+html :is(.os-start-panel,.os-power-popup,.os-control-center,.dock,.system-menu,.palette){outline-color:var(--fusion-border)}
+html .fusion-studio :is(button,[role="button"]):focus-visible{outline:2px solid var(--hot);outline-offset:2px}
+html[data-theme="light"] .fusion-overview{background:rgba(21,20,34,.78)}
+/* Self-owned browser chrome: no static elements are text-selectable. Actual
+ * editors keep their existing allowlisted clipboard and caret behavior. */
+html .fusion-top-switcher,html .fusion-overview,html .fusion-studio .fusion-preset-card{
+ user-select:none!important;-webkit-user-select:none!important
+}
