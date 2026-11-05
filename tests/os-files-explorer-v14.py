@@ -25,7 +25,7 @@ def test():
             expect(page.locator('#app-files .fs-sidebar')).to_have_count(1)
             expect(page.locator('#app-files .fs-sidebar-brand')).to_be_attached()
             expect(page.locator('#app-files .fs-nav-group')).to_have_count(4)
-            expect(page.locator('#app-files [data-fs-folder="root"]')).to_be_attached()
+            expect(page.locator('#app-files .fs-sidebar [data-fs-folder="root"]')).to_be_attached()
             expect(page.locator('#app-files [data-fs-folder="desktop"]')).to_be_attached()
             expect(page.locator('#app-files [data-fs-nav-view="recent"]')).to_be_attached()
             expect(page.locator('#app-files .fs-tree-node')).to_have_count(4)
