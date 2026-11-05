@@ -28,7 +28,7 @@ def main():
         page.locator('[data-dock="files"]').click()
         page.locator('#app-files [data-win-action="minimize"]').click()
         assert page.locator('#app-files').evaluate("(e)=>e.classList.contains('is-minimized')")
-        page.locator('[data-dock="tasks"]').click()
+        # Minimizing Files automatically promotes the latest non-minimized window.
         assert page.locator('#app-tasks').evaluate("(e)=>e.classList.contains('focused')")
         before=page.evaluate("""() => JSON.parse(localStorage.getItem('aincfh_session_v1'))""")
         assert before["version"]==1
