@@ -332,7 +332,7 @@
     if(window.AincWorkspace&&['files','notes','activity'].includes(id)){
       content.innerHTML=window.AincWorkspace.render(id);
       window.AincWorkspace.afterOpen(id);
-    }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();}
+    }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();window.AincSettings.onRender?.(content);}
     else if(window.AincApps&&['calculator','tasks','clock','apps'].includes(id)){
       content.innerHTML=window.AincApps.render(id);
     }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
@@ -484,6 +484,7 @@
   });
   if(window.AincSettings)window.AincSettings.attach({
     prefs:()=>({...state}),
+    open:id=>openWindow(id),
     set:setPreference,
     resetPrefs:resetPreferences,
     resetLayout:resetLayout,
