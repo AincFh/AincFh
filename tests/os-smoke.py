@@ -41,16 +41,19 @@ def test():
                 page.locator('[data-open="stack"]').first.click()
                 page.locator('[data-open="about"]').first.click()
                 assert page.locator('.os-window').count() >= 3, label
-                page.locator('[data-arrange="tile"]').first.click()
+                page.locator('#systemMenuTrigger').click()
+                page.locator('[data-arrange="tile"]').click()
                 for win in page.locator('.os-window').all():
                     assert win.is_visible(), (label, "tiled window hidden")
-                page.locator('[data-arrange="cascade"]').first.click()
+                page.locator('#systemMenuTrigger').click()
+                page.locator('[data-arrange="cascade"]').click()
                 page.locator('#app-about [data-win-action="maximize"]').click()
                 assert page.locator('#app-about').evaluate("(n)=>n.classList.contains('is-maximized')")
                 page.locator('#app-about [data-win-action="maximize"]').click()
                 assert not page.locator('#app-about').evaluate("(n)=>n.classList.contains('is-maximized')")
                 page.locator('#app-about').click(position={"x":120,"y":110})
-                page.locator('[data-snap="right"]').first.click()
+                page.locator('#systemMenuTrigger').click()
+                page.locator('[data-snap="right"]').click()
                 assert page.locator('#app-about').bounding_box()["x"] > width/2-80
                 page.keyboard.press('Control+k')
                 assert page.locator('#paletteBackdrop').is_visible()
@@ -59,6 +62,7 @@ def test():
                 page.keyboard.press('Escape')
                 page.locator('[data-toggle-theme]').first.click()
                 assert page.locator('html').get_attribute('data-theme') in ('light','dark')
+                page.locator('[data-open="projects"]').first.click()
                 preview=page.locator('#app-projects .preview-scene-a')
                 assert preview.count() == 1
                 assert preview.evaluate("(n)=>getComputedStyle(n).animationName") != "none" or \
