@@ -76,7 +76,7 @@
     'ja-JP':{home:'ホーム',desktop:'デスクトップ',workspace:'ワークスペース',notes:'メモ',links:'リンク',recent:'最近使用した項目',favorites:'お気に入り',places:'クイックアクセス',folders:'フォルダー',library:'ライブラリ',system:'システム',trash:'ゴミ箱',storage:'ブラウザーストレージ',loading:'確認中…',unavailable:'取得できません',back:'戻る',forward:'進む',up:'上のフォルダー',expand:'フォルダーを展開',collapse:'フォルダーを閉じる',pin:'お気に入りに追加',unpin:'お気に入りから削除',emptyFavorite:'お気に入りはありません',sidebar:'ファイルナビゲーション',inspector:'詳細情報',visible:'サイドバーを表示',hide:'サイドバーを閉じる',search:'ファイルを検索',items:'件',starred:'お気に入り',name:'名前',modified:'更新日時',type:'種類',sortName:'名前で並べ替え',sortRecent:'更新順に並べ替え',quick:'クイックアクセス',all:'すべてのファイル',refresh:'更新',details:'詳細'}
   };
   function nt(k){return (NAV_LABELS[window.AincI18n?.locale||'en-US']||NAV_LABELS['en-US'])[k]||k}
-  var nav={favorites:['workspace','notes','links'],expanded:['workspace','notes','links','desktop'],sidebarWidth:218,hideSidebar:false};
+  var nav={favorites:['workspace','notes','links'],expanded:['workspace','notes','links','desktop'],sidebarWidth:218,hideSidebar:false,mobileOpen:false};
   try{
     var navStored=JSON.parse(localStorage.getItem(NAV_KEY)||'null');
     if(navStored&&typeof navStored==='object'){
@@ -95,7 +95,7 @@
   }
   function navigateFolder(id,fromHistory){
     if(id!=='root'&&(!item(id)||item(id).type!=='folder'||!isVisible(item(id))))return false;
-    ui.folder=id;ui.view='folder';ui.trash=false;ui.search='';ui.selected=null;
+    ui.folder=id;ui.view='folder';ui.trash=false;ui.search='';ui.selected=null;nav.mobileOpen=false;
     if(!fromHistory){
       ui.history=ui.history.slice(0,ui.historyIndex+1);
       if(ui.history[ui.history.length-1]!==id){ui.history.push(id);if(ui.history.length>40)ui.history.shift()}
@@ -111,7 +111,7 @@
   }
   function navigateView(mode){
     if(!['recent','favorites','trash'].includes(mode))return;
-    ui.view=mode;ui.trash=mode==='trash';ui.selected=null;ui.search='';rerender('files');
+    ui.view=mode;ui.trash=mode==='trash';ui.selected=null;ui.search='';nav.mobileOpen=false;rerender('files');
   }
   function ensureDesktopFolder(){
     if(item('desktop')?.type==='folder'&&isVisible(item('desktop')))return true;
@@ -228,7 +228,7 @@
     return '<div class="fs-shell">'+
       '<div class="fs-topline"><div><span class="win-eyebrow">AINCFH / LOCAL WORKSPACE</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">LOCAL-FIRST · PRIVATE</span></div>'+
       '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain,image/png,image/jpeg,image/webp" hidden /></div>'+
-      '<div class="fs-browser'+(nav.hideSidebar?' fs-sidebar-hidden':'')+'" style="--fs-sidebar-width:'+nav.sidebarWidth+'px">'+renderSidebar()+
+      '<div class="fs-browser'+(nav.hideSidebar?' fs-sidebar-hidden':'')+(nav.mobileOpen?' fs-mobile-sidebar-open':'')+'" style="--fs-sidebar-width:'+nav.sidebarWidth+'px">'+renderSidebar()+
       '<section class="fs-center">'+fsLocation()+
         '<div class="fs-controls"><label><svg aria-hidden="true"><use href="#i-search"></use></svg><input id="fsSearch" data-fs-search placeholder="'+esc(nt('search'))+'" value="'+esc(ui.search)+'" spellcheck="false"/></label><button data-fs-action="sort" title="'+esc(nt(ui.sort==='name'?'sortRecent':'sortName'))+'">'+esc(nt(ui.sort==='name'?'sortName':'sortRecent'))+'</button></div>'+
         '<div class="fs-table-header" aria-hidden="true"><span>'+esc(nt('name'))+'</span><span>'+esc(nt('type'))+'</span><span>'+esc(nt('modified'))+'</span></div><div class="fs-list" role="listbox" aria-label="Files">'+
@@ -394,7 +394,12 @@
     }
     if(b.hasAttribute('data-fs-history')){navigateHistory(Number(b.dataset.fsHistory));return}
     if(b.hasAttribute('data-fs-nav-up')){var folder=item(ui.folder);navigateFolder(folder?.parent||'root');return}
-    if(b.hasAttribute('data-fs-sidebar-toggle')){nav.hideSidebar=!nav.hideSidebar;saveNav();rerender('files');return}
+    if(b.hasAttribute('data-fs-sidebar-toggle')){
+      var content=document.querySelector('#app-files .window-content');
+      if((content?.clientWidth||innerWidth)<=580)nav.mobileOpen=!nav.mobileOpen;
+      else{nav.hideSidebar=!nav.hideSidebar;saveNav()}
+      rerender('files');return
+    }
     if(b.hasAttribute('data-fs-select')){
       var selected=b.dataset.fsSelect;
       ui.selected=selected;
