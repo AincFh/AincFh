@@ -134,6 +134,26 @@
     }
     applySettings();toast('设置已应用');
   }
+  function applyThemeConfiguration(config){
+    const keys=['theme','accent','customAccent','wallpaperStyle','wallpaper','glass','contrast','textSize','motion','desktopPreset','windowControls','windowRadius','panelDensity','menuBarStyle','dockMode','dockPosition','dockScale','dockMagnify','dockAutoHide','dockSize','startLayout'];
+    if(!config||typeof config!=='object'||Array.isArray(config)||keys.some(k=>!Object.prototype.hasOwnProperty.call(config,k)))return false;
+    for(const key of keys){
+      const val=config[key];
+      if(typeof val!==typeof state[key])return false;
+      if(key==='customAccent'&&!/^#[0-9a-fA-F]{6}$/.test(val))return false;
+    }
+    // Apply only the validated design fields, preserving privacy, notifications,
+    // files, desktop shortcut positions and user's session choices.
+    for(const key of keys){
+      let value=config[key];if(key==='customAccent')value=value.toUpperCase();
+      state[key]=value;
+      write(key,typeof value==='boolean'?(value?'on':'off'):value);
+    }
+    if(state.dockMode==='taskbar'&&state.dockPosition!=='bottom'){
+      state.dockPosition='bottom';write('dockPosition','bottom');
+    }
+    applySettings();return true;
+  }
   function applyDesktopPreset(id){
     const presets=window.AincDesktopFusion?.presets;
     if(!presets||!Object.prototype.hasOwnProperty.call(presets,id))return;
@@ -654,6 +674,9 @@
   if(window.AincControlCenter)window.AincControlCenter.attach({
     open:id=>openWindow(id),prefs:()=>({...state}),set:setPreference,
     windows:()=>[...windows.entries()].map(([id,w])=>({id,minimized:w.minimized,maximized:w.maximized}))
+  });
+  if(window.AincThemeLibrary)window.AincThemeLibrary.attach({
+    prefs:()=>({...state}),applyTheme:applyThemeConfiguration,toast,refresh:()=>renderApp('settings')
   });
   if(window.AincDesktopSurface)window.AincDesktopSurface.attach({
     open:id=>openWindow(id),files:window.AincWorkspace,toast,
