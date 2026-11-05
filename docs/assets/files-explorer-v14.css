@@ -203,3 +203,38 @@
 @media(prefers-reduced-motion:reduce){
  #app-files :is(.fs-sidebar button,.fs-row,.fs-storage-meter i,.fs-tree-expander svg){transition:none!important}
 }
+
+/* Files v14.4: accessible keyboard hints and an OS-themed file context menu. */
+#app-files .fs-keyboard-hint{
+ padding:6px 16px 9px;color:var(--muted);font:650 9px/1.5 ui-monospace,Consolas,monospace;
+ border-bottom:1px solid var(--line2);white-space:normal
+}
+#app-files .fs-row[role="option"]:focus-visible{
+ outline:2px solid var(--hot);outline-offset:-2px;
+ box-shadow:inset 3px 0 0 var(--hot)
+}
+.fs-context-menu{
+ position:fixed;z-index:3000;min-width:192px;max-width:min(275px,calc(100vw - 16px));
+ border-radius:12px;border:1px solid var(--line);padding:7px;
+ box-shadow:0 20px 60px rgba(0,0,0,.34),inset 0 1px 0 var(--line2);
+ background:var(--panel2);backdrop-filter:blur(30px) saturate(145%);color:var(--ink);
+ animation:menuin .14s ease-out both
+}
+.fs-context-heading{
+ overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+ margin:0 5px 6px;padding:8px 8px 11px;
+ border-bottom:1px solid var(--line2);color:var(--sub);
+ font:800 10px/1.5 ui-monospace,Consolas,monospace
+}
+.fs-context-menu button{
+ appearance:none;-webkit-appearance:none;display:block;width:100%;
+ text-align:left;background:transparent!important;color:var(--text);
+ min-height:33px;padding:8px 12px;border:1px solid transparent;border-radius:7px;
+ font:700 11px/1.4 inherit;transition:background .14s,color .14s
+}
+.fs-context-menu button:hover,.fs-context-menu button:focus-visible{
+ background:var(--soft)!important;color:var(--hot);border-color:var(--line);outline:0
+}
+.fs-context-menu button.danger{color:#e87979}
+.fs-context-menu button.danger:hover{background:rgba(232,121,121,.09)!important;color:#f7a6a6}
+@media(prefers-reduced-motion:reduce){.fs-context-menu{animation:none!important}}
