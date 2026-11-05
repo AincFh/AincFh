@@ -48,6 +48,12 @@ function render(){
  case 'desktop':
  body=heading('03','Desktop & Windows','Dock、窗口停靠、布局恢复与桌面右键菜单。')+
  choice('dockSize','Dock sizing',[['regular','Comfortable','大图标'],['compact','Compact','适合小屏']])+
+ choice('dockMode','Dock style',[['floating','Floating Dock','macOS-style floating shelf'],['taskbar','Taskbar','Windows-style full-width taskbar']])+
+ choice('dockPosition','Dock position',[['bottom','Bottom','Below the desktop'],['left','Left','Vertical Dock'],['right','Right','Vertical Dock']])+
+ choice('dockScale','Icon size',[['small','Small','More space'],['normal','Medium','Balanced layout'],['large','Large','Easier targets']])+
+ toggle('dockMagnify','Dock magnification','Hover magnifies nearby icons. Automatically disabled when reduced motion is active.')+
+ toggle('dockAutoHide','Automatically hide Dock','Move the pointer to the screen edge to reveal the Dock.')+
+ choice('startLayout','Start menu layout',[['grid','Grid','App cards'],['list','List','Compact app rows']])+
  choice('clockMode','Clock format',[['24','24-hour','09:41'],['12','12-hour','9:41 AM']])+
  toggle('autoOpen','Show startup workspace','下次载入桌面时自动打开你在 Apps & Startup 里选择的应用。')+
  toggle('rememberWindows','Remember window positions','重新打开窗口时恢复上次的位置和大小。')+
@@ -72,7 +78,7 @@ function render(){
  body=heading('06','Keyboard & Input','仅针对当前网页桌面的快捷键。文字选择和剪贴板仍采用限定区域白名单。')+
  toggle('shortcuts','System keyboard shortcuts','打开应用、切换窗口、停靠、最大化和命令搜索的组合键。')+
  toggle('keyHints','Show desktop hints','控制桌面下方的快捷键和操作提示。')+
- '<div class="sp-shortcut-table">'+[['Ctrl / ⌘ + K','Command Center'],['Ctrl + Tab','Cycle windows'],['Ctrl + Shift + F','Maximize focused window'],['Ctrl + Alt + ← / →','Snap left / right'],['Alt + 1 … 6','Open primary apps'],['Esc','Close palette / dialog']].map(function(x){return '<div><kbd>'+x[0]+'</kbd><span>'+x[1]+'</span></div>'}).join('')+'</div>'+
+ '<div class="sp-shortcut-table">'+[['Ctrl + Escape','Start menu'],['Ctrl + Alt + L','Lock screen'],['Ctrl / ⌘ + K','Command Center'],['Ctrl + Tab','Cycle windows'],['Ctrl + Shift + F','Maximize focused window'],['Ctrl + Alt + ← / →','Snap left / right'],['Alt + 1 … 6','Open primary apps'],['Esc','Close palette / dialog']].map(function(x){return '<div><kbd>'+x[0]+'</kbd><span>'+x[1]+'</span></div>'}).join('')+'</div>'+
  '<div class="sp-info">Clipboard whitelist: text inputs, Notes editor/preview, terminal output and explicitly marked reading areas. System UI does not permit ordinary selection.</div>';
  break;
  case 'privacy':
