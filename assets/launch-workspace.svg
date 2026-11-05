@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="178" viewBox="0 0 900 178" role="img" aria-label="Launch AincFh OS interactive workspace">
+<defs><style>
+:root{--bg:#FAFAFA;--fg:#161923;--muted:#5F6579;--stroke:rgba(255,159,67,.35);--panel:#F3F2F7}
+@media(prefers-color-scheme:dark){:root{--bg:#1C1F2B;--fg:#F5F5FA;--muted:#9DA7BA;--stroke:rgba(255,159,67,.3);--panel:#252638}}
+@media(prefers-reduced-motion:reduce){.scan,.pulse,.spin{animation:none!important}}
+.txt{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif}
+.scan{animation:scan 5s linear infinite;transform-origin:center}
+@keyframes scan{0%{transform:translateX(-560px);opacity:0}12%{opacity:.7}87%{opacity:.7}100%{transform:translateX(510px);opacity:0}}
+.pulse{animation:pulse 2.4s ease-in-out infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.spin{transform-origin:700px 89px;animation:turn 24s linear infinite}
+@keyframes turn{to{transform:rotate(360deg)}}
+</style>
+<linearGradient id="light" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#FF9F43"/><stop offset="1" stop-color="#FF6B6B"/></linearGradient>
+<linearGradient id="purple" x1="0" x2="1"><stop stop-color="#FF9F43"/><stop offset=".58" stop-color="#8B5CF6"/><stop offset="1" stop-color="#FF9F43"/></linearGradient>
+<clipPath id="cut"><rect width="900" height="178" rx="0"/></clipPath></defs>
+<g clip-path="url(#cut)"><rect width="900" height="178" fill="var(--bg)"/>
+<path d="M20 20H880V158H20Z" fill="var(--panel)" stroke="var(--stroke)" stroke-width="1"/>
+<path d="M30 30V23H38M862 23H870V31M30 148V156H38M862 156H870V148" stroke="#8B5CF6" stroke-width="2" fill="none"/>
+<g class="spin" fill="none" stroke="#FF9F43" stroke-opacity=".17" stroke-width="1"><polygon points="700,20 760,55 760,124 700,158 640,124 640,55"/><polygon points="700,35 747,62 747,116 700,143 653,116 653,62"/><polygon points="700,50 734,69 734,108 700,128 666,108 666,69"/></g>
+<path class="scan" d="M120 28L204 28L204 150L120 150Z" fill="#FF9F43" fill-opacity=".06"/>
+<rect x="52" y="39" width="7" height="7" rx="3.5" fill="#34D399" class="pulse"/><text x="69" y="47" class="txt" font-size="10.5" font-weight="700" fill="#FF9F43" letter-spacing="2.6">LIVE INTERFACE · PROJECT SPACE</text>
+<text x="51" y="99" class="txt" font-size="37" font-weight="750" letter-spacing="-.9" fill="var(--fg)">AincFh OS <tspan fill="#FF9F43">/</tspan> Workspace</text>
+<text x="52" y="123" class="txt" font-size="12.5" font-weight="500" fill="var(--muted)">Project windows    •    Dock navigation    •    Command palette    •    Terminal</text>
+<text x="52" y="146" class="txt" font-size="10.5" letter-spacing="1.65" fill="var(--muted)">CLICK THE IMAGE TO OPEN THE INTERACTIVE VERSION</text>
+<rect x="700" y="58" width="148" height="64" rx="12" fill="#FF9F43" fill-opacity=".11" stroke="url(#light)" stroke-width="1.3"/>
+<text x="774" y="84" class="txt" text-anchor="middle" font-size="11.5" fill="var(--fg)" font-weight="700" letter-spacing=".8">ENTER WORKSPACE</text>
+<path d="M760 102H791M783 95L791 102L783 109" stroke="#FF9F43" stroke-width="2.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+<path d="M20 174H880" stroke="url(#purple)" stroke-width="4"/><rect width="900" height="178" fill="none" stroke="#FF9F43" stroke-opacity=".14"/></g>
+</svg>
