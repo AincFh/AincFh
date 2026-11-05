@@ -64,7 +64,7 @@
   function isChildOf(id,ancestor){var cur=item(id),guard=0;while(cur&&guard++<80){if(cur.parent===ancestor)return true;cur=item(cur.parent)}return false}
   function directoryList(){return store.items.filter(function(i){return i.type==='folder'&&isVisible(i)})}
   function rootOf(i){return i.parent==='root'?'Home':(item(i.parent)||{}).name||'Workspace'}
-  function icon(type){return type==='folder'?'folder':type==='link'?'link':'code'}
+  function icon(type){return type==='folder'?'folder':type==='link'?'link':type==='image'?'image':'code'}
   function symbol(type){return '<svg aria-hidden="true"><use href="#i-'+icon(type)+'"></use></svg>'}
   var ui={folder:'root',selected:null,search:'',trash:false,sort:'name',modal:null,notesId:'ideas'};
   function labels(){return {root:'Home',workspace:'Workspace',notes:'Notes',links:'Links'};}
@@ -84,10 +84,10 @@
   }
   function details(i){if(!i)return '<div class="fs-empty-detail"><span class="fs-detail-hex">⬡</span><strong>Select an item</strong><p>选择文件查看信息；双击文本文件可以在 Notes 中编辑。</p></div>';
     return '<div class="fs-detail-icon">'+symbol(i.type)+'</div><h3>'+esc(i.name)+'</h3><div class="fs-item-type">'+esc(i.type.toUpperCase())+' / '+esc(rootOf(i))+'</div>'+
-      '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':'—')+'</b></div></div>'+
-      (i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
+      '<div class="fs-detail-meta"><div><span>Modified</span><b>'+esc(prettyDate(i.modified))+'</b></div><div><span>Size</span><b>'+esc(i.type==='text'?i.body.length+' chars':i.type==='image'?Math.round(i.body.length*.75/1024)+' KB':'—')+'</b></div></div>'+
+      (i.type==='image'?'<img class="fs-preview-image" src="'+esc(i.body)+'" alt="'+esc(i.name)+'">':i.type==='text'?'<p class="fs-snippet">'+esc(i.body.slice(0,260))+'</p>':i.type==='link'?'<p class="fs-snippet">'+esc(i.url)+'</p>':'<p class="fs-snippet">双击打开目录。文件夹可以重命名和移动。</p>')+
       '<div class="fs-detail-actions">'+(i.deleted?'<button data-fs-action="restore" data-fs-id="'+esc(i.id)+'">Restore</button><button data-fs-action="destroy" data-fs-id="'+esc(i.id)+'">Delete forever</button>':
-      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(i.type==='text'?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
+      '<button class="primary" data-fs-action="open" data-fs-id="'+esc(i.id)+'">'+(i.type==='text'?'Edit':i.type==='image'?'Paint':'Open')+'</button><button data-fs-action="rename" data-fs-id="'+esc(i.id)+'">Rename</button><button data-fs-action="move" data-fs-id="'+esc(i.id)+'">Move</button><button data-fs-action="duplicate" data-fs-id="'+esc(i.id)+'">Duplicate</button>'+(['text','image'].includes(i.type)?'<button data-fs-action="download" data-fs-id="'+esc(i.id)+'">Export</button>':'')+'<button data-fs-action="delete" data-fs-id="'+esc(i.id)+'">Trash</button>')+'</div>';
   }
   function modal(){
     if(!ui.modal)return '';
@@ -107,7 +107,7 @@
     var data=getEntries(),selected=item(ui.selected);
     return '<div class="fs-shell">'+
       '<div class="fs-topline"><div><span class="win-eyebrow">LOCAL WORKSPACE / FILES</span><h2>Files<span class="fs-hot">.</span></h2></div><span class="fs-runtime">BROWSER STORAGE · LOCAL ONLY</span></div>'+
-      '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain" hidden /></div>'+
+      '<div class="fs-toolbar"><button class="fs-tool primary" data-fs-action="create-folder">+ Folder</button><button class="fs-tool" data-fs-action="create-text">+ Document</button><button class="fs-tool" data-fs-action="import">Import</button><button class="fs-tool" data-fs-action="backup">Backup</button><input type="file" id="fsImport" accept=".txt,.md,.json,.csv,text/plain,image/png,image/jpeg,image/webp" hidden /></div>'+
       '<div class="fs-browser"><aside class="fs-sidebar"><div class="fs-side-caption">LOCATIONS</div>'+
         '<button data-fs-folder="root" class="'+(ui.folder==='root'&&!ui.trash?'active':'')+'">'+symbol('folder')+' Home</button>'+
         directoryList().filter(function(x){return x.parent==='root'}).map(function(x){return '<button data-fs-folder="'+esc(x.id)+'" class="'+(ui.folder===x.id&&!ui.trash?'active':'')+'">'+symbol('folder')+' '+esc(x.name)+'</button>'}).join('')+
@@ -241,8 +241,8 @@
             s.items.push(duplicate);
           });ui.selected=copyId;
         },'Duplicated '+i.name))refresh();break}
-      case 'download':exportText(i);break;
-      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
+      case 'download':if(i?.type==='image'){var l=document.createElement('a');l.href=i.body;l.download=i.name;document.body.append(l);l.click();l.remove();activity('Exported '+i.name)}else exportText(i);break;
+      case 'open':if(!i)return;if(i.type==='folder'){ui.folder=i.id;ui.trash=false;ui.search='';ui.selected=null;rerender('files')}else if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes');rerender('notes')}else if(i.type==='image'){if(window.AincPaint)window.AincPaint.openImage(i.name,i.body);else report('Paint application is unavailable')}else if(i.type==='link'){window.open(i.url,'_blank','noopener,noreferrer')}break;
       case 'trash':ui.trash=!ui.trash;ui.selected=null;ui.search='';rerender('files');break;
       case 'restore':if(i){transact(function(s){var x=s.items.find(function(x){return x.id===id});x.deleted=false;x.parent=item(x.parent)&&item(x.parent).deleted?'root':x.parent},'Restored '+i.name);ui.selected=null;refresh()}break;
       case 'empty':ui.modal={action:'empty'};rerender('files');break;
@@ -358,8 +358,9 @@
         for(var i of value.items){
           if(!i||typeof i.id!=='string'||i.id.length>120||seen.has(i.id))throw Error('文件 ID 无效或重复');
           seen.add(i.id);
-          if(!['text','folder','link'].includes(i.type)||typeof i.name!=='string'||i.name.length>80||!i.name||typeof i.parent!=='string'||typeof i.body!=='string'||i.body.length>100000||typeof i.deleted!=='boolean')throw Error('文件结构无效');
+          if(!['text','folder','link','image'].includes(i.type)||typeof i.name!=='string'||i.name.length>80||!i.name||typeof i.parent!=='string'||typeof i.body!=='string'||i.body.length>(i.type==='image'?6000000:100000)||typeof i.deleted!=='boolean')throw Error('文件结构无效');
           if(i.type==='link'&&!/^https?:\/\//.test(String(i.url||'')))throw Error('链接格式无效');
+          if(i.type==='image'&&!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(i.body))throw Error('图像必须是 PNG 数据');
         }
         for(var j of value.items){
           if(j.parent!=='root'&&!seen.has(j.parent))throw Error('目录引用不存在');
