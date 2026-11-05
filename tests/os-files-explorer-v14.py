@@ -83,6 +83,13 @@ def test():
                 page.locator('#app-files [data-fs-folder="desktop"]').click()
                 assert page.evaluate("AincWorkspace.getNavigation().folder")=="desktop"
                 expect(page.locator('#app-files .fs-sidebar')).to_be_hidden()
+                page.locator('#app-files [data-fs-sidebar-toggle]').click()
+                page.locator('#app-files [data-fs-folder="workspace"]').click()
+                page.locator('#app-files [data-fs-select="welcome"]').click()
+                expect(page.locator('#app-files .fs-inspector')).to_be_visible()
+                expect(page.locator('#app-files [data-fs-action="move"]')).to_be_visible()
+                page.locator('#app-files [data-fs-toggle-inspector]').click()
+                expect(page.locator('#app-files .fs-inspector')).to_be_hidden()
             page.screenshot(path=str(OUT/f"files-v14-{width}-{locale}.png"),full_page=True)
             v=page.evaluate("""()=>({sw:document.documentElement.scrollWidth,w:innerWidth,sh:document.documentElement.scrollHeight,h:innerHeight})""")
             assert v["sw"]<=v["w"]+1 and v["sh"]<=v["h"]+1,v
