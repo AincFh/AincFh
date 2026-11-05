@@ -25,20 +25,22 @@
   <link rel="stylesheet" href="./assets/system-monitor-v11.css?v=11.0" />
   <link rel="stylesheet" href="./assets/system-performance-v11.css?v=11.0" />
   <link rel="stylesheet" href="./assets/control-center-v11.css?v=11.3" />
+  <link rel="stylesheet" href="./assets/desktop-fusion-v12.css?v=12.0" />
   <script src="./assets/i18n-catalog-v10.js?v=10.0" defer></script>
   <script src="./assets/i18n-runtime-v10.js?v=11.0" defer></script>
   <script src="./assets/storage-v8.js?v=8.1" defer></script>
   <script src="./assets/workspace.js?v=9.3" defer></script>
-  <script src="./assets/settings-panel.js?v=11.0" defer></script>
+  <script src="./assets/settings-panel.js?v=12.0" defer></script>
   <script src="./assets/apps-v8.js?v=8.1" defer></script>
   <script src="./assets/paint-v9.js?v=9.3" defer></script>
   <script src="./assets/clipboard-guard.js?v=7.0" defer></script>
   <script src="./assets/system-shell-v10.js?v=10.0" defer></script>
   <script src="./assets/system-monitor-v11.js?v=11.0" defer></script>
   <script src="./assets/control-center-v11.js?v=11.3" defer></script>
+  <script src="./assets/desktop-fusion-v12.js?v=12.0" defer></script>
   <script src="./assets/pwa-v11.js?v=11.3" defer></script>
   <script src="./assets/ui-controls-v10.js?v=10.0" defer></script>
-  <script src="./assets/app.js?v=11.2" defer></script>
+  <script src="./assets/app.js?v=12.0" defer></script>
 </head>
 <body>
   <div class="os-boot" aria-hidden="true">
@@ -124,12 +126,14 @@
       <time class="menubar-time" id="menuClock" aria-label="本地时间">--:--</time>
     </div>
     <div id="systemMenu" class="system-menu" role="menu" hidden>
-      <strong>AincFh OS <span>v8 / WORKSPACE</span></strong>
+      <strong>AincFh OS <span>v12 / FUSION DESKTOP</span></strong>
       <button role="menuitem" data-open="projects"><svg><use href="#i-folder"/></svg>打开项目工作台</button>
       <button role="menuitem" data-open="files"><svg><use href="#i-folder"/></svg>打开文件管理器</button>
       <button role="menuitem" data-open="notes"><svg><use href="#i-note"/></svg>打开便笺编辑器</button>
       <button role="menuitem" data-open="activity"><svg><use href="#i-bell"/></svg>活动与窗口管理</button>
       <button role="menuitem" data-open="taskmanager"><svg><use href="#i-monitor"/></svg>任务管理器</button>
+      <button role="menuitem" data-open="settings"><svg><use href="#i-settings"/></svg>桌面环境与主题</button>
+      <button role="menuitem" data-fusion-overview><svg><use href="#i-apps"/></svg>工作区总览</button>
       <button role="menuitem" data-open="apps"><svg><use href="#i-apps"/></svg>应用中心</button>
       <button role="menuitem" data-open="tasks"><svg><use href="#i-checklist"/></svg>任务板</button>
       <button role="menuitem" data-open="paint"><svg><use href="#i-paint"/></svg>绘图工作台</button>
