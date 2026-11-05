@@ -593,13 +593,14 @@
   });
   const typeLines=['Design. Build. Ship.','Craft meets engineering.','Interfaces with identity.','Code that actually works.'];
   let lineIndex=0,charIndex=0,removing=false;const typeEl=$('#typeText');
-  function typeLoop(){if(!state.motion){typeEl.textContent=typeLines[0];setTimeout(typeLoop,1800);return;}let line=typeLines[lineIndex];
+  function typeLoop(){if(!state.motion){typeEl.textContent=window.AincI18n?.t(typeLines[0])||typeLines[0];setTimeout(typeLoop,1800);return;}let line=window.AincI18n?.t(typeLines[lineIndex])||typeLines[lineIndex];
     if(!removing){charIndex=Math.min(line.length,charIndex+1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===line.length){removing=true;setTimeout(typeLoop,2300);return;}}
     else{charIndex=Math.max(0,charIndex-1);typeEl.textContent=line.slice(0,charIndex);if(charIndex===0){removing=false;lineIndex=(lineIndex+1)%typeLines.length;setTimeout(typeLoop,400);return;}}
     setTimeout(typeLoop,removing?38:78);
   }
   function updateClock(){const t=new Date(),locale=window.AincI18n?.locale||navigator.language||'en-US';$('#menuClock').textContent=t.toLocaleTimeString(locale,{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
   applySettings();typeLoop();updateClock();setInterval(updateClock,30_000);
+  window.addEventListener('aincfh:languagechange',updateClock);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
   const resumed=restoreLastSession();
   if(!resumed&&!isMobile()&&state.autoOpen&&state.startupApp!=='none')openWindow(state.startupApp,{announce:false,focusInput:false});
