@@ -92,8 +92,11 @@ def main():
                   const after=document.getElementsByTagName('*').length;
                   return {times,before,after,open:!!document.querySelector('#app-about')};
                 }""")
-                assert not results["open"] and results["after"]<=results["before"]+120,results
-                assert max(results["times"])<2500,results
+                assert not results["open"] and results["after"]<=results["before"]+80,results
+                # Derived from measured Ubuntu CI baseline (median 1.15 ms, max 2.8 ms).
+                # Leave headroom for runner variance while catching major performance regressions.
+                assert median(results["times"])<80,results
+                assert max(results["times"])<350,results
                 print("MEASURED window create+close (ms) "+str([round(v,2) for v in results["times"]])+
                       " median="+str(round(median(results["times"]),2))+
                       " DOM before/after="+str(results["before"])+"/"+str(results["after"]),flush=True)
