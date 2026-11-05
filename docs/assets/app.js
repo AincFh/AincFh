@@ -67,55 +67,169 @@
     $$('.os-window.focused',layer).forEach(el=>el.classList.remove('focused'));
     w.node.style.zIndex=++focusZ;w.node.classList.add('focused');syncDock();
   }
-  function windowPosition(id) {
-    const m=appInfo[id];const number=openedCount++;
-    const maxLeft=Math.max(22,desktop.clientWidth-m.width-28);
-    const x = id==='projects' ? maxLeft : Math.max(22,Math.min(maxLeft, 200 + (number%4)*46));
-    const y = id==='projects' ? 148 : 92+(number%5)*35;
-    const saved=read('win_'+id,'');
-    if(saved){try{const p=JSON.parse(saved);if(Number.isFinite(p.x)&&Number.isFinite(p.y))return {x:Math.max(4,Math.min(maxLeft,p.x)),y:Math.max(4,Math.min(desktop.clientHeight-300,p.y)),w:Number.isFinite(p.w)?Math.min(desktop.clientWidth-30,Math.max(345,p.w)):undefined,h:Number.isFinite(p.h)?Math.min(850,Math.max(280,p.h)):undefined};}catch{}}
-    return {x,y};
+  // The physical viewport, not the document's scrollable height, owns window geometry.
+  function workBounds() {
+    const mobile=isMobile();
+    return {width:desktop.clientWidth,height:desktop.clientHeight,
+      inset:mobile?8:16,top:mobile?8:12,bottom:mobile?80:94,
+      minWidth:mobile?260:330,minHeight:mobile?220:260};
   }
-  function openWindow(id, options={}) {
+  function clampValue(v,min,max){return Math.max(min,Math.min(Math.max(min,max),v));}
+  function saveWindow(id){
+    const w=windows.get(id);if(!w||w.maximized||isMobile())return;
+    const n=w.node;
+    w.position={x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,w:n.offsetWidth,h:n.offsetHeight};
+    write('win_'+id,JSON.stringify(w.position));
+  }
+  function windowPosition(id) {
+    const b=workBounds(),m=appInfo[id],n=openedCount++;
+    const w=Math.min(m.width,b.width-b.inset*2);
+    const h=Math.min(m.height,b.height-b.bottom-b.top);
+    const maxX=Math.max(b.inset,b.width-w-b.inset);
+    const maxY=Math.max(b.top,b.height-h-b.bottom);
+    const defaultX=id==='projects'?maxX:clampValue(Math.round(b.width*.21)+(n%4)*35,b.inset,maxX);
+    const defaultY=clampValue(id==='projects'?42:48+(n%4)*27,b.top,maxY);
+    const saved=read('win_'+id,'');
+    if(saved&&!isMobile()){
+      try{
+        const p=JSON.parse(saved);
+        if([p.x,p.y,p.w,p.h].every(Number.isFinite)){
+          const sw=clampValue(p.w,Math.min(b.minWidth,b.width-b.inset*2),b.width-b.inset*2);
+          const sh=clampValue(p.h,Math.min(b.minHeight,b.height-b.bottom-b.top),b.height-b.bottom-b.top);
+          return {x:clampValue(p.x,b.inset,b.width-sw-b.inset),y:clampValue(p.y,b.top,b.height-sh-b.bottom),w:sw,h:sh};
+        }
+      }catch{}
+    }
+    return {x:defaultX,y:defaultY,w,h};
+  }
+  function openWindow(id,options={}) {
     if(!appInfo[id])return;
-    if(windows.has(id)) {focusWindow(id);if(options.project)selectProject(options.project);if(id==='terminal'&&options.focusInput!==false)focusTerminal();return;}
-    const m=appInfo[id],pos=windowPosition(id);const winW=pos.w||m.width,winH=pos.h||m.height;
-    const node=document.createElement('section');node.className='os-window';node.id='app-'+id;node.setAttribute('role','dialog');node.setAttribute('aria-label',m.name+' 窗口');node.style.cssText=`left:${pos.x}px;top:${pos.y}px;width:${winW}px;height:${winH}px`;
-    node.innerHTML=`<header class="winbar" data-drag="${id}" title="拖动移动窗口 · 双击最大化"><div class="win-controls"><button class="win-control close" data-win-action="close" title="关闭窗口" aria-label="关闭 ${m.name}"></button><button class="win-control minimize" data-win-action="minimize" title="最小化窗口" aria-label="最小化 ${m.name}"></button><button class="win-control maximize" data-win-action="maximize" title="放大或还原" aria-label="最大化 ${m.name}"></button></div><div class="winbar-title">${ICON(m.icon)}<span>${m.label}</span></div><div class="winbar-end"><span class="win-id">AF/</span><span>${String(windows.size+1).padStart(2,'0')}</span></div></header><div class="window-content"></div><div class="win-resize-handle" aria-label="拖动调整窗口大小" title="拖动调整大小">⌟</div>`;
+    if(windows.has(id)){focusWindow(id);if(options.project)selectProject(options.project);if(id==='terminal'&&options.focusInput!==false)focusTerminal();return;}
+    const m=appInfo[id],pos=windowPosition(id);
+    const node=document.createElement('section');
+    node.className='os-window';node.id='app-'+id;
+    node.setAttribute('role','dialog');node.setAttribute('aria-label',m.name+' 窗口');
+    node.style.cssText='left:'+pos.x+'px;top:'+pos.y+'px;width:'+pos.w+'px;height:'+pos.h+'px';
+    const edges=['n','e','s','w','ne','nw','se','sw'].map(edge=>'<span class="win-edge win-edge-'+edge+'" data-resize="'+edge+'" aria-hidden="true"></span>').join('');
+    node.innerHTML='<header class="winbar" data-drag="'+id+'" title="拖动移动 · 双击最大化 · 最大化时拖动可恢复"><div class="win-controls"><button class="win-control close" data-win-action="close" title="关闭" aria-label="关闭 '+m.name+'"></button><button class="win-control minimize" data-win-action="minimize" title="最小化" aria-label="最小化 '+m.name+'"></button><button class="win-control maximize" data-win-action="maximize" title="最大化或还原" aria-label="最大化 '+m.name+'"></button></div><div class="winbar-title">'+ICON(m.icon)+'<span>'+m.label+'</span></div><div class="winbar-end"><span class="win-id">AF/</span><span>'+String(windows.size+1).padStart(2,'0')+'</span></div></header><div class="window-content"></div>'+edges;
     node.addEventListener('pointerdown',()=>focusWindow(id));
     layer.append(node);windows.set(id,{node,minimized:false,maximized:false,position:pos});
-    node.classList.toggle('terminal-window',id==='terminal');renderApp(id);focusWindow(id);
+    node.classList.toggle('terminal-window',id==='terminal');
+    renderApp(id);focusWindow(id);
     if(options.project)selectProject(options.project);
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
   }
   function closeWindow(id){const w=windows.get(id);if(!w)return;w.node.remove();windows.delete(id);syncDock();}
-  function minimizeWindow(id){const w=windows.get(id);if(!w)return;w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
-    let remain=[...windows.values()].filter(x=>!x.minimized);if(remain.length)focusWindow([...windows.entries()].find(([,x])=>x===remain[remain.length-1])[0]);else syncDock();}
-  function toggleMax(id){let w=windows.get(id);if(!w)return;w.maximized=!w.maximized;w.node.classList.toggle('is-maximized',w.maximized);focusWindow(id);}
+  function minimizeWindow(id){
+    const w=windows.get(id);if(!w)return;
+    w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
+    const remain=[...windows.entries()].filter(([,x])=>!x.minimized);
+    if(remain.length)focusWindow(remain[remain.length-1][0]);else syncDock();
+  }
+  function toggleMax(id){
+    const w=windows.get(id);if(!w||isMobile())return;
+    if(!w.maximized)saveWindow(id);
+    w.maximized=!w.maximized;
+    w.node.classList.toggle('is-maximized',w.maximized);
+    if(!w.maximized){
+      const p=w.position,b=workBounds();
+      const width=clampValue(p.w||w.node.offsetWidth,b.minWidth,b.width-b.inset*2);
+      const height=clampValue(p.h||w.node.offsetHeight,b.minHeight,b.height-b.bottom-b.top);
+      w.node.style.width=width+'px';w.node.style.height=height+'px';
+      w.node.style.left=clampValue(p.x,b.inset,b.width-width-b.inset)+'px';
+      w.node.style.top=clampValue(p.y,b.top,b.height-height-b.bottom)+'px';
+    }
+    focusWindow(id);
+  }
   function showDesktop(){for(let [id,w] of windows){w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');}syncDock();toast('已显示桌面 · 点击 Dock 恢复窗口');}
   function resetLayout(){for(const id of [...windows.keys()])closeWindow(id);['projects'].forEach(id=>{if(!isMobile())openWindow(id,{announce:false})});toast('窗口布局已重置');}
   function handleDrag(event){
-    const bar=event.target.closest('.winbar');if(!bar||event.target.closest('.win-control')||isMobile()||event.button!==0)return;
-    const node=bar.closest('.os-window'),id=node.id.slice(4),w=windows.get(id);if(!w||w.maximized)return;
-    const starting={x:event.clientX,y:event.clientY,left:parseFloat(node.style.left),top:parseFloat(node.style.top)},rootRect=desktop.getBoundingClientRect();let moved=false;
+    const bar=event.target.closest('.winbar');
+    if(!bar||event.target.closest('.win-control')||isMobile()||event.button!==0)return;
+    const node=bar.closest('.os-window'),id=node.id.slice(4),w=windows.get(id);
+    if(!w)return;
+    const b=workBounds(),root=desktop.getBoundingClientRect();
+    let start={cx:event.clientX,cy:event.clientY,x:parseFloat(node.style.left)||0,y:parseFloat(node.style.top)||0};
+    let moved=false,restored=false;
     bar.setPointerCapture(event.pointerId);bar.classList.add('dragging');
-    function move(e){let dx=e.clientX-starting.x,dy=e.clientY-starting.y;if(Math.abs(dx)+Math.abs(dy)<3)return;moved=true;
-      let x=Math.max(-node.offsetWidth+90,Math.min(desktop.clientWidth-90,starting.left+dx));
-      let y=Math.max(4,Math.min(Math.max(10,desktop.clientHeight-130),starting.top+dy));
-      node.style.left=x+'px';node.style.top=y+'px';w.position={x,y};
+    function move(e){
+      if(e.pointerId!==event.pointerId)return;
+      let dx=e.clientX-start.cx,dy=e.clientY-start.cy;
+      if(!moved&&Math.abs(dx)+Math.abs(dy)<5)return;
+      if(w.maximized&&!restored){
+        const px=clampValue((event.clientX-root.left)/Math.max(1,root.width),.2,.8);
+        const naturalWidth=clampValue(w.position.w||appInfo[id].width,b.minWidth,b.width-b.inset*2);
+        const naturalHeight=clampValue(w.position.h||appInfo[id].height,b.minHeight,b.height-b.bottom-b.top);
+        w.maximized=false;w.node.classList.remove('is-maximized');
+        node.style.width=naturalWidth+'px';node.style.height=naturalHeight+'px';
+        start={cx:e.clientX,cy:e.clientY,x:clampValue(e.clientX-root.left-naturalWidth*px,b.inset,b.width-naturalWidth-b.inset),y:b.top};
+        restored=true;dx=0;dy=0;
+      }
+      moved=true;
+      const left=clampValue(start.x+dx,b.inset,b.width-node.offsetWidth-b.inset);
+      const top=clampValue(start.y+dy,b.top,b.height-node.offsetHeight-b.bottom);
+      node.style.left=left+'px';node.style.top=top+'px';
     }
-    function done(){bar.removeEventListener('pointermove',move);bar.removeEventListener('pointerup',done);bar.removeEventListener('pointercancel',done);bar.classList.remove('dragging');if(moved)write('win_'+id,JSON.stringify({...w.position,w:node.offsetWidth,h:node.offsetHeight}));}
+    function done(e){
+      if(e.pointerId!==event.pointerId)return;
+      bar.removeEventListener('pointermove',move);bar.removeEventListener('pointerup',done);
+      bar.removeEventListener('pointercancel',done);bar.classList.remove('dragging');
+      try{bar.releasePointerCapture(event.pointerId)}catch{}
+      if(moved)saveWindow(id);
+    }
     bar.addEventListener('pointermove',move);bar.addEventListener('pointerup',done);bar.addEventListener('pointercancel',done);
   }
   function handleResize(event){
-    const handle=event.target.closest('.win-resize-handle');if(!handle||isMobile()||event.button!==0)return;
-    event.stopPropagation();event.preventDefault();const node=handle.closest('.os-window'),id=node.id.slice(4),w=windows.get(id);if(!w||w.maximized)return;
-    let start={x:event.clientX,y:event.clientY,w:node.offsetWidth,h:node.offsetHeight};handle.setPointerCapture(event.pointerId);
-    function move(e){const width=Math.max(345,Math.min(desktop.clientWidth-parseFloat(node.style.left)-12,start.w+e.clientX-start.x));const height=Math.max(280,Math.min(desktop.clientHeight-parseFloat(node.style.top)-30,start.h+e.clientY-start.y));node.style.width=width+'px';node.style.height=height+'px';}
-    function done(){handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',done);handle.removeEventListener('pointercancel',done);write('win_'+id,JSON.stringify({...w.position,w:node.offsetWidth,h:node.offsetHeight}));}
+    const handle=event.target.closest('[data-resize]');
+    if(!handle||isMobile()||event.button!==0)return;
+    event.stopPropagation();event.preventDefault();
+    const node=handle.closest('.os-window'),id=node.id.slice(4),w=windows.get(id);
+    if(!w||w.maximized)return;
+    const direction=handle.dataset.resize,b=workBounds();
+    const start={cx:event.clientX,cy:event.clientY,x:parseFloat(node.style.left)||0,y:parseFloat(node.style.top)||0,
+      width:node.offsetWidth,height:node.offsetHeight};
+    handle.setPointerCapture(event.pointerId);
+    function move(e){
+      if(e.pointerId!==event.pointerId)return;
+      const dx=e.clientX-start.cx,dy=e.clientY-start.cy;
+      let x=start.x,y=start.y,width=start.width,height=start.height;
+      if(direction.includes('e'))width=clampValue(start.width+dx,b.minWidth,b.width-start.x-b.inset);
+      if(direction.includes('s'))height=clampValue(start.height+dy,b.minHeight,b.height-start.y-b.bottom);
+      if(direction.includes('w')){
+        x=clampValue(start.x+dx,b.inset,start.x+start.width-b.minWidth);
+        width=start.width-(x-start.x);
+      }
+      if(direction.includes('n')){
+        y=clampValue(start.y+dy,b.top,start.y+start.height-b.minHeight);
+        height=start.height-(y-start.y);
+      }
+      node.style.left=x+'px';node.style.top=y+'px';
+      node.style.width=width+'px';node.style.height=height+'px';
+    }
+    function done(e){
+      if(e.pointerId!==event.pointerId)return;
+      handle.removeEventListener('pointermove',move);handle.removeEventListener('pointerup',done);
+      handle.removeEventListener('pointercancel',done);
+      try{handle.releasePointerCapture(event.pointerId)}catch{}
+      saveWindow(id);
+    }
     handle.addEventListener('pointermove',move);handle.addEventListener('pointerup',done);handle.addEventListener('pointercancel',done);
   }
+  function adaptWindows(){
+    if(isMobile())return;
+    const b=workBounds();
+    for(const [id,w] of windows){
+      if(w.maximized)continue;
+      const n=w.node,width=clampValue(n.offsetWidth,b.minWidth,b.width-b.inset*2);
+      const height=clampValue(n.offsetHeight,b.minHeight,b.height-b.bottom-b.top);
+      n.style.width=width+'px';n.style.height=height+'px';
+      n.style.left=clampValue(parseFloat(n.style.left)||0,b.inset,b.width-width-b.inset)+'px';
+      n.style.top=clampValue(parseFloat(n.style.top)||0,b.top,b.height-height-b.bottom)+'px';
+      saveWindow(id);
+    }
+  }
+  window.addEventListener('resize',adaptWindows,{passive:true});
   function renderApp(id) {const w=windows.get(id);if(!w)return;const content=$('.window-content',w.node);
     const renderer={projects:renderProjects,stack:renderStack,about:renderAbout,terminal:renderTerminal,contact:renderContact,settings:renderSettings}[id];
     content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);
