@@ -26,6 +26,7 @@ customColor:'自定义颜色',customHelp:'输入六位 HEX 颜色值，例如 #D
 window:'窗口装饰与行为',controls:'窗口按钮',left:'左侧 · macOS',right:'右侧 · Windows / Linux',radius:'窗口圆角',compact:'方正',balanced:'平衡',rounded:'圆润',density:'界面密度',comfortable:'舒适',menu:'顶部菜单栏',full:'完整',minimal:'紧凑',
 workspaces:'虚拟桌面',spacesCount:'工作区数量',spaceInfo:'每个工作区拥有独立的窗口集合。Ctrl + Alt + 1–4 切换；Ctrl + Alt + M 打开总览。',
 overview:'工作区总览',current:'当前桌面',move:'移至下一个桌面',switch:'切换到桌面',openWindow:'打开窗口',empty:'暂无打开的窗口',label:'桌面',close:'关闭',taskView:'任务视图',
+snapTitle:'窗口布局',snapLeft:'左半屏',snapRight:'右半屏',snapTL:'左上角',snapTR:'右上角',snapBL:'左下角',snapBR:'右下角',snapCenter:'居中',snapMax:'最大化',
 windowLimit:'最多支持四个工作区',fileSafe:'所有应用数据仍由同一浏览器本地存储管理；虚拟桌面只隔离窗口显示，不创建真实系统账户。'
 },
 'zh-TW':{
@@ -37,6 +38,7 @@ customColor:'自訂色彩',customHelp:'輸入六位 HEX 色碼，例如 #D88AFF�
 window:'視窗裝飾與行為',controls:'視窗按鈕',left:'左側 · macOS',right:'右側 · Windows / Linux',radius:'視窗圓角',compact:'方正',balanced:'平衡',rounded:'圓潤',density:'介面密度',comfortable:'舒適',menu:'頂部選單列',full:'完整',minimal:'精簡',
 workspaces:'虛擬桌面',spacesCount:'工作區數量',spaceInfo:'各工作區擁有獨立視窗集合。Ctrl + Alt + 1–4 切換；Ctrl + Alt + M 開啟總覽。',
 overview:'工作區總覽',current:'目前桌面',move:'移至下一個桌面',switch:'切換到桌面',openWindow:'開啟視窗',empty:'沒有開啟的視窗',label:'桌面',close:'關閉',taskView:'工作檢視',
+snapTitle:'視窗配置',snapLeft:'左半邊',snapRight:'右半邊',snapTL:'左上角',snapTR:'右上角',snapBL:'左下角',snapBR:'右下角',snapCenter:'置中',snapMax:'最大化',
 windowLimit:'最多四個工作區',fileSafe:'所有應用程式資料仍由瀏覽器本機儲存管理；虛擬桌面只分隔視窗顯示，不建立真實系統帳戶。'
 },
 'en-US':{
@@ -48,6 +50,7 @@ customColor:'Custom color',customHelp:'Enter a six-digit HEX color, such as #D88
 window:'Window decorations & behavior',controls:'Window controls',left:'Left · macOS',right:'Right · Windows / Linux',radius:'Window corners',compact:'Squared',balanced:'Balanced',rounded:'Rounded',density:'Interface density',comfortable:'Comfortable',menu:'Top menu bar',full:'Full',minimal:'Compact',
 workspaces:'Virtual desktops',spacesCount:'Number of workspaces',spaceInfo:'Each space has its own window collection. Ctrl + Alt + 1–4 switches; Ctrl + Alt + M opens overview.',
 overview:'Workspace overview',current:'Current desktop',move:'Move to next desktop',switch:'Switch to desktop',openWindow:'Open window',empty:'No open windows',label:'Desktop',close:'Close',taskView:'Task View',
+snapTitle:'Snap layouts',snapLeft:'Left half',snapRight:'Right half',snapTL:'Top left',snapTR:'Top right',snapBL:'Bottom left',snapBR:'Bottom right',snapCenter:'Center',snapMax:'Maximize',
 windowLimit:'Up to four workspaces',fileSafe:'Your app data stays in the same browser storage. Workspaces separate window visibility, not system user accounts.'
 },
 'ja-JP':{
@@ -59,11 +62,12 @@ customColor:'カスタムカラー',customHelp:'#D88AFF のように 6 桁の HE
 window:'ウィンドウの外観と動作',controls:'ウィンドウボタン',left:'左 · macOS',right:'右 · Windows / Linux',radius:'ウィンドウの角',compact:'角張った',balanced:'標準',rounded:'丸い',density:'表示密度',comfortable:'ゆったり',menu:'上部メニューバー',full:'すべて表示',minimal:'コンパクト',
 workspaces:'仮想デスクトップ',spacesCount:'ワークスペース数',spaceInfo:'デスクトップごとにウィンドウが分離されます。Ctrl + Alt + 1〜4 で切替、Ctrl + Alt + M で一覧表示。',
 overview:'ワークスペース一覧',current:'現在のデスクトップ',move:'次のデスクトップへ移動',switch:'デスクトップへ移動',openWindow:'ウィンドウを開く',empty:'ウィンドウがありません',label:'デスクトップ',close:'閉じる',taskView:'タスクビュー',
+snapTitle:'スナップレイアウト',snapLeft:'左半分',snapRight:'右半分',snapTL:'左上',snapTR:'右上',snapBL:'左下',snapBR:'右下',snapCenter:'中央',snapMax:'最大化',
 windowLimit:'最大 4 つのワークスペース',fileSafe:'アプリのデータは同じブラウザーに保存されます。ワークスペースはウィンドウ表示を分ける機能です。'
 }
 };
 const t=k=>(MESSAGES[window.AincI18n?.locale||'en-US']||MESSAGES['en-US'])[k]||k;
-let bridge=null,active=1,assignments={},overviewOpen=false,topNode=null,overlay=null;
+let bridge=null,active=1,assignments={},overviewOpen=false,topNode=null,overlay=null,snapRoot=null,snapId=null;
 function storageGet(key,defaultValue){try{const s=localStorage.getItem(key);return s?JSON.parse(s):defaultValue}catch{return defaultValue}}
 function storageSet(key,value){try{localStorage.setItem(key,JSON.stringify(value))}catch(e){}}
 active=Math.max(1,Math.min(4,Number(storageGet('aincfh_fusion_active_v12',1))||1));
@@ -158,6 +162,23 @@ function option(key,label,values){
  const prefs=bridge?.prefs?.()||{};
  return '<div class="fusion-field"><div class="fusion-field-head"><strong>'+esc(t(label))+'</strong></div><div class="fusion-choice-grid">'+values.map(v=>'<button type="button" data-fusion-set="'+esc(key)+'" data-fusion-value="'+esc(v)+'" aria-pressed="'+(String(prefs[key])===v)+'">'+esc(t(v))+'</button>').join('')+'</div></div>';
 }
+function closeSnap(){snapId=null;if(snapRoot)snapRoot.hidden=true}
+function openSnap(id,button){
+ if(!bridge?.prefs?.().snap||innerWidth<=840||!safeId(id)||!getWindows().some(x=>x.id===id)||!button)return false;
+ if(snapId===id&&snapRoot&&!snapRoot.hidden){closeSnap();return true}
+ if(!snapRoot)return false;
+ snapId=id;
+ const positions=[['left','snapLeft'],['right','snapRight'],['top-left','snapTL'],['top-right','snapTR'],['bottom-left','snapBL'],['bottom-right','snapBR'],['center','snapCenter'],['maximize','snapMax']];
+ snapRoot.innerHTML='<div class="fusion-snap-heading">'+esc(t('snapTitle'))+'</div><div class="fusion-snap-grid">'+positions.map(([key,label])=>
+ '<button type="button" data-fusion-snap="'+key+'" aria-label="'+esc(t(label))+'"><span class="fusion-snap-sample" data-snap-preview="'+key+'"><i></i><i></i><i></i><i></i></span><small>'+esc(t(label))+'</small></button>'
+ ).join('')+'</div>';
+ snapRoot.hidden=false;
+ const r=button.getBoundingClientRect(),w=snapRoot.offsetWidth,h=snapRoot.offsetHeight;
+ const x=Math.min(innerWidth-w-8,Math.max(8,r.left-w+button.offsetWidth));
+ const y=r.bottom+h+8>innerHeight?r.top-h-7:r.bottom+7;
+ snapRoot.style.left=Math.max(8,x)+'px';snapRoot.style.top=Math.max(57,y)+'px';
+ return true;
+}
 function renderStudio(){
  const prefs=bridge?.prefs?.()||{},activePreset=prefs.desktopPreset||'fusion',currentAccent=prefs.customAccent||'#D88AFF';
  const presetCards=['fusion','mac','windows','linux'].map(id=>{
@@ -209,11 +230,18 @@ function attach(b){
  if(topNode)return;
  topNode=document.createElement('div');topNode.className='fusion-top-switcher';topNode.setAttribute('role','group');topNode.setAttribute('aria-label',t('workspaces'));
  const menubar=$('.menubar');if(menubar)menubar.append(topNode);
+ snapRoot=document.createElement('section');snapRoot.id='fusionSnapPopup';snapRoot.className='fusion-snap-popup';snapRoot.hidden=true;snapRoot.setAttribute('role','dialog');snapRoot.setAttribute('aria-label',t('snapTitle'));document.body.append(snapRoot);
  overlay=document.createElement('section');overlay.id='fusionOverview';overlay.className='fusion-overview';overlay.hidden=true;overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label',t('overview'));
  document.body.append(overlay);
  apply();
 }
 document.addEventListener('click',e=>{
+ const snap=e.target.closest?.('[data-fusion-snap]');
+ if(snap){
+  if(snapId)bridge?.snapTo?.(snapId,snap.dataset.fusionSnap);
+  closeSnap();return;
+ }
+ if(snapId&&!e.target.closest?.('#fusionSnapPopup,.win-control.layout'))closeSnap();
  const preset=e.target.closest?.('[data-fusion-preset]');if(preset){applyPreset(preset.dataset.fusionPreset);return}
  const set=e.target.closest?.('[data-fusion-set]');if(set){
   const key=set.dataset.fusionSet;
@@ -239,6 +267,7 @@ document.addEventListener('click',e=>{
  if(overviewOpen&&e.target===overlay)closeOverview();
 },false);
 document.addEventListener('keydown',e=>{
+ if(e.key==='Escape'&&snapId){closeSnap();return}
  if(e.key==='Escape'&&overviewOpen){closeOverview();return}
  const edit=e.target.closest?.('input,textarea,[contenteditable="true"]');
  if(edit||!bridge?.prefs?.().shortcuts)return;
@@ -247,12 +276,13 @@ document.addEventListener('keydown',e=>{
   else if(e.key.toLowerCase()==='m'){e.preventDefault();toggleOverview()}
  }
 },true);
+window.addEventListener('resize',closeSnap,{passive:true});
 window.addEventListener('aincfh:languagechange',()=>{
  redrawTop();if(overviewOpen)renderOverview();
 });
 window.AincDesktopFusion=Object.freeze({
  attach,apply,applyPreset,renderStudio,registerWindow,forgetWindow,ensureWindow,switchWorkspace,moveWindow,
- showOverview,closeOverview,get active(){return active},get count(){return count()},
+ showOverview,closeOverview,openSnap,closeSnap,get active(){return active},get count(){return count()},
  get assignments(){return {...assignments}},
  get presets(){return PRESETS}
 });
