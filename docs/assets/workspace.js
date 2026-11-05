@@ -312,7 +312,25 @@
   document.addEventListener('change',function(e){
     if(e.target.id==='fsImport'){
       var file=e.target.files&&e.target.files[0];if(!file)return;
-      if(file.size>120000){report('只能导入不超过 120 KB 的文本文件');return}
+      if(/^image\/(png|jpeg|webp)$/.test(file.type)){
+        if(file.size>6*1024*1024){report('图片超过 6 MB，无法导入');return}
+        var reader=new FileReader();
+        reader.onload=function(){
+          var img=new Image();
+          img.onload=function(){
+            var scale=Math.min(1,1400/img.width,1000/img.height);
+            var c=document.createElement('canvas');c.width=Math.max(1,Math.round(img.width*scale));c.height=Math.max(1,Math.round(img.height*scale));
+            c.getContext('2d').drawImage(img,0,0,c.width,c.height);
+            var data=c.toDataURL('image/png'),name=file.name.replace(/\.[^.]+$/,'')+'.png';
+            if(saveImage(name,data,ui.trash?'workspace':ui.folder))report('已将图片添加到 Files / '+name);
+          };
+          img.onerror=function(){report('图片解码失败')};
+          img.src=reader.result;
+        };
+        reader.onerror=function(){report('图片读取失败')};
+        reader.readAsDataURL(file);e.target.value='';return;
+      }
+      if(file.size>120000){report('文本文件上限 120 KB');return}
       file.text().then(function(body){
         var name=file.name.slice(0,80),parent=ui.trash?'root':ui.folder,t=now();
         if(transact(function(s){s.items.push({id:uid(),name:name,type:'text',parent:parent,body:body.slice(0,100000),url:'',created:t,modified:t,deleted:false})},'Imported '+name)){refresh();report('已导入 '+name)}
@@ -330,8 +348,25 @@
     },'Created '+name);
     if(ok)refresh();return ok;
   }
+  function saveImage(name,png,parent){
+    name=String(name||'Drawing.png').trim().replace(/[\\/]/g,'_').slice(0,80);
+    if(!name.toLowerCase().endsWith('.png'))name=name.slice(0,76)+'.png';
+    if(!/^data:image\/png;base64,[A-Za-z0-9+/]+=*$/.test(String(png||''))||png.length>6000000){report('PNG 文件无效或大于 4.5 MB');return false}
+    parent=parent||'workspace';
+    if(parent!=='root'&&(!item(parent)||item(parent).type!=='folder'||item(parent).deleted))parent='workspace';
+    var chosen=name,count=2,t=now(),folder=parent;
+    while(store.items.some(function(x){return !x.deleted&&x.parent===folder&&x.name.toLowerCase()===chosen.toLowerCase()})){
+      chosen=name.replace(/\.png$/i,'')+'-'+count+++'.png';
+    }
+    const id=uid(),ok=transact(function(next){
+      next.items.push({id,name:chosen,type:'image',parent:folder,body:png,url:'',created:t,modified:t,deleted:false});
+    },'Saved artwork · '+chosen);
+    if(ok){ui.selected=id;refresh()}
+    return ok;
+  }
   var api={
     attach:function(b){bridge=b;updateCount()},
+    saveImage:saveImage,
     render:function(id){if(id==='files')return renderFiles();if(id==='notes')return renderNotes();if(id==='activity')return renderActivity();return ''},
     afterOpen:function(id){if(id==='files'||id==='notes'||id==='activity')updateCount()},
     summary:function(){return {files:store.items.filter(isVisible).length,notes:store.items.filter(function(i){return i.type==='text'&&isVisible(i)}).length,events:store.events.length}},
