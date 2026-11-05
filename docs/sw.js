@@ -3,7 +3,7 @@
    and are never copied into this cache, nor sent to the server.
  */
 'use strict';
-const VERSION='aincfh-os-shell-13.1.0',PREFIX='aincfh-os-shell-';
+const VERSION='aincfh-os-shell-13.2.0',PREFIX='aincfh-os-shell-';
 const CORE=[
  './',
  './index.html',
@@ -29,15 +29,15 @@ const CORE=[
  './assets/i18n-runtime-v10.js?v=11.0',
  './assets/storage-v8.js?v=8.1',
  './assets/workspace.js?v=13.0',
- './assets/settings-panel.js?v=13.1',
+ './assets/settings-panel.js?v=13.2',
  './assets/apps-v8.js?v=8.1',
  './assets/paint-v9.js?v=9.3',
  './assets/clipboard-guard.js?v=7.0',
- './assets/system-shell-v10.js?v=10.0',
+ './assets/system-shell-v10.js?v=13.2',
  './assets/system-monitor-v11.js?v=11.0',
  './assets/control-center-v11.js?v=11.3',
  './assets/desktop-fusion-v12.js?v=12.1',
- './assets/desktop-surface-v13.js?v=13.0',
+ './assets/desktop-surface-v13.js?v=13.2',
  './assets/theme-library-v13.js?v=13.0',
  './assets/pwa-v11.js?v=11.3',
  './assets/ui-controls-v10.js?v=10.0',
