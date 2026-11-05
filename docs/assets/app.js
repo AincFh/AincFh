@@ -39,7 +39,8 @@
     calculator:{label:'CALCULATOR / LOCAL',name:'Calculator',icon:'calculator',width:650,height:650},
     tasks:{label:'TASK BOARD / LOCAL',name:'Tasks',icon:'checklist',width:750,height:625},
     clock:{label:'CLOCK / TIMER',name:'Clock',icon:'clock',width:680,height:590},
-    apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:960,height:675}
+    apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:960,height:675},
+    paint:{label:'CREATIVE STUDIO / CANVAS',name:'Paint',icon:'paint',width:1000,height:725}
   };
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
@@ -333,6 +334,7 @@
       content.innerHTML=window.AincWorkspace.render(id);
       window.AincWorkspace.afterOpen(id);
     }else if(id==='settings'&&window.AincSettings){content.innerHTML=window.AincSettings.render();window.AincSettings.onRender?.(content);}
+    else if(id==='paint'&&window.AincPaint){content.innerHTML=window.AincPaint.render();window.AincPaint.onRender(content);}
     else if(window.AincApps&&['calculator','tasks','clock','apps'].includes(id)){
       content.innerHTML=window.AincApps.render(id);
     }else {content.innerHTML=renderer();if(id==='terminal')hydrateTerminal(content);}
@@ -475,6 +477,7 @@
     })),
     toast: toast
   });
+  if(window.AincPaint)window.AincPaint.attach({open:id=>openWindow(id),toast:toast});
   if(window.AincApps)window.AincApps.attach({
     open:id=>openWindow(id),
     focus:id=>focusWindow(id),
