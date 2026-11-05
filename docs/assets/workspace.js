@@ -198,7 +198,13 @@
     var b=e.target.closest('button');if(!b)return;
     if(b.hasAttribute('data-fs-action')){action(b.dataset.fsAction,b.dataset.fsId);return}
     if(b.hasAttribute('data-fs-folder')){ui.folder=b.dataset.fsFolder;ui.trash=false;ui.search='';ui.selected=null;rerender('files');return}
-    if(b.hasAttribute('data-fs-select')){ui.selected=b.dataset.fsSelect;rerender('files');return}
+    if(b.hasAttribute('data-fs-select')){
+      var selected=b.dataset.fsSelect,stamp=Date.now();
+      if(ui.lastClick&&ui.lastClick.id===selected&&stamp-ui.lastClick.time<480){
+        ui.lastClick=null;action('open',selected);return;
+      }
+      ui.lastClick={id:selected,time:stamp};ui.selected=selected;rerender('files');return;
+    }
     if(b.hasAttribute('data-fs-note')){ui.notesId=b.dataset.fsNote;rerender('notes');return}
     if(b.hasAttribute('data-fs-focus')){bridge&&bridge.focus(b.dataset.fsFocus);rerender('activity');return}
     if(b.hasAttribute('data-fs-close')){bridge&&bridge.close(b.dataset.fsClose);rerender('activity');return}
@@ -234,6 +240,16 @@
       e.target.value='';
     }
   });
+  function createFromTerminal(name,type){
+    name=String(name||'').trim();
+    if(!name||name.length>80||/[\\/]/.test(name)){report('Invalid filename');return false}
+    var t=now(),id=uid(),parent='workspace';
+    var ok=transact(function(next){
+      if(next.items.some(function(x){return x.parent===parent&&!x.deleted&&x.name.toLowerCase()===name.toLowerCase()}))throw Error('Name already exists');
+      next.items.push({id:id,name:name,type:type,parent:parent,body:'',url:'',created:t,modified:t,deleted:false});
+    },'Created '+name);
+    if(ok)refresh();return ok;
+  }
   var api={
     attach:function(b){bridge=b;updateCount()},
     render:function(id){if(id==='files')return renderFiles();if(id==='notes')return renderNotes();if(id==='activity')return renderActivity();return ''},
@@ -242,6 +258,10 @@
     search:function(q){var s=q.toLowerCase().trim();if(!s)return[];return store.items.filter(isVisible).filter(function(i){return i.name.toLowerCase().includes(s)}).slice(0,6).map(function(i){return{id:i.id,title:i.name,sub:'LOCAL '+i.type.toUpperCase(),terms:'files notes document '+i.name,icon:icon(i.type),action:function(){if(i.type==='text'){ui.notesId=i.id;bridge&&bridge.open('notes')}else{ui.folder=i.type==='folder'?i.id:i.parent;ui.selected=i.id;bridge&&bridge.open('files')}}}})},
     openByName:function(name){var i=store.items.find(function(x){return isVisible(x)&&x.name.toLowerCase()===String(name).toLowerCase()});if(!i)return false;action('open',i.id);return true},
     list:function(){return store.items.filter(isVisible).map(function(i){return (i.type==='folder'?'DIR ':i.type==='link'?'LINK':'FILE')+' '+i.name}).join('\n')},
+    readFile:function(name){var i=store.items.find(function(x){return x.type==='text'&&isVisible(x)&&x.name.toLowerCase()===String(name).toLowerCase()});return i?i.body:null},
+    mkdir:function(name){return createFromTerminal(name,'folder')},
+    touch:function(name){return createFromTerminal(name,'text')},
+    history:function(){return store.events.slice(0,12).map(function(e){return e.when.slice(0,19).replace('T',' ')+' · '+e.text}).join('\n')},
     notify:activity,
     desktopMenu:function(x,y){
       var old=document.getElementById('osContextMenu');if(old)old.remove();
@@ -265,5 +285,5 @@
   });
   document.addEventListener('keydown',function(e){if(e.key==='Escape'){api.closeDesktopMenu();if(ui.modal){ui.modal=null;rerender('files')}}});
   window.AincWorkspace=api;
-  if(!localStorage.getItem(KEY)){try{save(store)}catch(e){}}
+  try{if(!localStorage.getItem(KEY))save(store)}catch(e){console.info('[AincFh OS] local storage unavailable')}
 })();
