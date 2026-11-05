@@ -3,7 +3,7 @@
 'use strict';
 var bridge=null,section='language',armed='';
 var esc=function(x){return String(x).replace(/[&<>"']/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]})};
-var sections=[['language','Language & Region','globe'],['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['performance','Performance & Efficiency','monitor'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
+var sections=[['language','Language & Region','globe'],['fusion','Desktop Environment','monitor'],['appearance','Appearance','sun'],['accessibility','Display & Access','user'],['performance','Performance & Efficiency','monitor'],['desktop','Desktop & Windows','grid'],['apps','Apps & Startup','apps'],['notifications','Notifications','bell'],['shortcuts','Keyboard & Input','code'],['privacy','Privacy & Storage','folder'],['about','About AincFh OS','hex']];
 function choice(key,label,items){
  var p=bridge.prefs();return '<div class="sp-field"><h4>'+label+'</h4><div class="sp-options">'+items.map(function(o){return '<button data-sp-set="'+key+'" data-sp-value="'+o[0]+'" aria-pressed="'+(p[key]===o[0])+'"><strong>'+o[1]+'</strong><small>'+o[2]+'</small></button>'}).join('')+'</div></div>';
 }
@@ -31,12 +31,16 @@ function render(){
      '<div class="sp-info">'+esc(i18n?.ui('languageDescription')||'Project names and your own documents are never translated automatically.')+'</div>';
    break;
  }
+ case 'fusion':
+ body=window.AincDesktopFusion?.renderStudio?.()||'<p>Desktop theme studio unavailable.</p>';
+ break;
  case 'appearance':
  body=heading('01','Appearance','橙紫六边形视觉系统与桌面展示效果。所有选项立即应用，并保存到当前浏览器。')+
  choice('theme','Color theme',[['dark','Midnight','深色桌面'],['light','Pearl','低眩光亮色']])+
- choice('accent','Accent signal',[['amber','Amber','品牌橙'],['violet','Violet','品牌紫'],['cyan','Cyan','低饱和青']])+
+ choice('accent','Accent signal',[['amber','Amber','品牌橙'],['violet','Violet','品牌紫'],['cyan','Cyan','低饱和青'],['blue','Blue','沉静蓝'],['rose','Rose','玫瑰粉'],['green','Green','薄荷绿'],['custom','Custom','自定义颜色']])+
  toggle('glass','Translucent surfaces','窗口与 Dock 使用玻璃材质；关闭后使用不透明背景。')+
- toggle('wallpaper','Ambient wallpaper','控制六边形图案、背景轨道和全局视觉背景。');
+ toggle('wallpaper','Ambient wallpaper','控制六边形图案、背景轨道和全局视觉背景。')+
+ '<div class="sp-actions"><button data-sp-section="fusion">Desktop Environment Studio</button></div>';
  break;
  case 'accessibility':
  body=heading('02','Display & Accessibility','对比度、字号与动态效果影响整个浏览器桌面，不改变真实设备显示设置。')+
