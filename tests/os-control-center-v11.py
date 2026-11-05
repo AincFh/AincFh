@@ -1,5 +1,6 @@
 """AincFh OS Control Center v11 — real settings and storage/network state tests."""
 import os
+import re
 from pathlib import Path
 from playwright.sync_api import sync_playwright, expect
 
@@ -12,6 +13,16 @@ def check_no_scroll(page):
     assert d["sw"]<=d["w"]+1 and d["sh"]<=d["h"]+1,d
 
 def test():
+    # Every versioned application script and stylesheet must be precached, so
+    # offline mode can restore a complete OS instead of a broken partial UI.
+    root=Path(__file__).resolve().parents[1] / "docs"
+    html=(root/"index.html").read_text()
+    sw=(root/"sw.js").read_text()
+    refs=set(re.findall(r'(?:src|href)="(\./assets/[^"]+)"',html))
+    refs.add(re.search(r'rel="manifest" href="([^"]+)"',html).group(1))
+    for ref in refs:
+        assert "'"+ref+"'" in sw, "Offline asset missing from SW core: "+ref
+    assert "icon-192.png" in sw and "icon-512.png" in sw
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True)
         for width,height,lang in ((1440,900,"zh-CN"),(390,844,"en-US"),(768,1024,"ja-JP")):
@@ -53,7 +64,8 @@ def test():
             page.wait_for_timeout(250)
             status=page.evaluate("AincControlCenter.status")
             assert status["networkOnline"] is True
-            page.locator('#osControlCenter [data-cc-refresh]').click()
+            page.locator('#osControlCenter [data-cc-update]').click()
+            expect(page.locator('#osControlCenter .cc-status-notice')).to_be_visible(timeout=15000)
             page.locator('#osControlCenter [data-cc-close]').click()
             expect(page.locator('#osControlCenter')).to_be_hidden()
             check_no_scroll(page)
