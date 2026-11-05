@@ -32,14 +32,14 @@
     about:{label:'PROFILE / DOSSIER',name:'About',icon:'user',width:500,height:565},
     terminal:{label:'LOCAL INTERACTIVE SHELL',name:'Terminal',icon:'terminal',width:630,height:455},
     contact:{label:'CONTACT / LINKS',name:'Contact',icon:'mail',width:495,height:485},
-    settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:470,height:555},
+    settings:{label:'SYSTEM PREFERENCES',name:'Preferences',icon:'settings',width:865,height:660},
     files:{label:'FILE EXPLORER / LOCAL',name:'Files',icon:'folder',width:830,height:620},
-    notes:{label:'NOTES / LOCAL EDITOR',name:'Notes',icon:'code',width:800,height:600},
+    notes:{label:'NOTES / LOCAL EDITOR',name:'Notes',icon:'code',width:900,height:650},
     activity:{label:'ACTIVITY / SESSION',name:'Activity',icon:'grid',width:720,height:570},
     calculator:{label:'CALCULATOR / LOCAL',name:'Calculator',icon:'calculator',width:650,height:650},
     tasks:{label:'TASK BOARD / LOCAL',name:'Tasks',icon:'checklist',width:750,height:625},
     clock:{label:'CLOCK / TIMER',name:'Clock',icon:'clock',width:680,height:590},
-    apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:745,height:625}
+    apps:{label:'APPLICATION CENTER / REGISTRY',name:'App Center',icon:'apps',width:960,height:675}
   };
   let windows = new Map(), focusZ = 20, openedCount = 0, selectedProject = read('project','field'), selectedTech = 'TypeScript', selectedFilter = 'all', previewPaused = read('preview_paused','false') === 'true';
   const state = {
@@ -55,18 +55,27 @@
     autoOpen: read('autoOpen','on')!=='off',
     rememberWindows: read('rememberWindows','on')!=='off',
     snap: read('snap','on')!=='off',
-    contextMenu: read('contextMenu','on')!=='off'
+    contextMenu: read('contextMenu','on')!=='off',
+    startupApp: ['projects','files','apps','tasks','notes','none'].includes(read('startupApp','projects'))?read('startupApp','projects'):'projects',
+    shortcuts: read('shortcuts','on')!=='off',
+    keyHints: read('keyHints','on')!=='off',
+    quietMode: read('quietMode','off')==='on',
+    activityBadge: read('activityBadge','on')!=='off',
+    lowPower: read('lowPower','off')==='on'
   };
   const desktop = $('#desktop'), layer = $('#windowLayer');
   function applySettings() {
     document.documentElement.dataset.theme = state.theme;
     document.documentElement.dataset.accent = state.accent;
-    document.documentElement.classList.toggle('motion-off',!state.motion);
+    document.documentElement.classList.toggle('motion-off',!state.motion||state.lowPower);
     document.documentElement.dataset.contrast=state.contrast;
     document.documentElement.dataset.textSize=state.textSize;
     document.documentElement.dataset.dockSize=state.dockSize;
     document.documentElement.dataset.contextMenu=state.contextMenu?'on':'off';
-    document.documentElement.classList.toggle('os-opaque',!state.glass);
+    document.documentElement.classList.toggle('os-opaque',!state.glass||state.lowPower);
+    document.documentElement.classList.toggle('os-low-power',state.lowPower);
+    document.documentElement.classList.toggle('os-hide-hints',!state.keyHints);
+    document.documentElement.classList.toggle('os-hide-badge',!state.activityBadge);
     document.documentElement.classList.toggle('os-no-wallpaper',!state.wallpaper);
     $('meta[name="theme-color"]').content = state.theme === 'dark' ? '#10111a' : '#efebea';
     $$('[data-toggle-theme]').forEach(b => { b.innerHTML = ICON(state.theme === 'dark' ? 'sun' : 'moon'); b.setAttribute('aria-label', state.theme === 'dark' ? '切换为浅色主题' : '切换为深色主题'); });
@@ -85,15 +94,15 @@
     applySettings();toast('设置已应用');
   }
   function resetPreferences(){
-    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','snap','contextMenu'];
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
     for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
-    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,snap:true,contextMenu:true});
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
     applySettings();toast('设置已恢复默认');
   }
   function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
   function setAccent(a) { state.accent = a;write('accent',a);applySettings();toast('主题色已更新'); }
   function setMotion(on) { state.motion = !!on;write('motion',on?'on':'off');applySettings();toast(on ? '动态效果已开启' : '动态效果已关闭'); }
-  function toast(message) { let e=document.createElement('div');e.className='toast';e.innerHTML=`<span class="toast-dot">◆</span>${escapeHTML(message)}`;$('#toastHost').append(e);setTimeout(()=>{e.remove()},3000); }
+  function toast(message) { if(state.quietMode)return;let e=document.createElement('div');e.className='toast';e.innerHTML=`<span class="toast-dot">◆</span>${escapeHTML(message)}`;$('#toastHost').append(e);setTimeout(()=>{e.remove()},3000); }
   function syncDock() {
     $$('[data-dock]').forEach(button=>{
       const w=windows.get(button.dataset.dock);
@@ -445,15 +454,15 @@
   palette.addEventListener('click',e=>{if(e.target===palette)closePalette();});
   paletteInput.addEventListener('keydown',e=>{if(e.key==='ArrowDown'){e.preventDefault();selectResult(Math.min(filtered.length-1,activeResult+1));}else if(e.key==='ArrowUp'){e.preventDefault();selectResult(Math.max(0,activeResult-1));}else if(e.key==='Enter'){e.preventDefault();executeResult(activeResult);}});
   document.addEventListener('keydown',e=>{
-    if((e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palette.hidden?openPalette():closePalette();}
+    if(state.shortcuts&&(e.ctrlKey||e.metaKey)&&e.key.toLowerCase()==='k'){e.preventDefault();palette.hidden?openPalette():closePalette();}
     else if(e.key==='Escape'){if(!palette.hidden)closePalette();else closeMenu();}
-    else if(e.altKey && /^[1-6]$/.test(e.key)&&!e.ctrlKey&&!e.metaKey){e.preventDefault();openWindow(Object.keys(appInfo)[Number(e.key)-1]);}
+    else if(state.shortcuts&&e.altKey && /^[1-6]$/.test(e.key)&&!e.ctrlKey&&!e.metaKey){e.preventDefault();openWindow(Object.keys(appInfo)[Number(e.key)-1]);}
   });
   // Window shortcuts: Ctrl+Tab cycles, Ctrl+Shift+F maximizes, Ctrl+Alt+arrows snaps.
   document.addEventListener('keydown',e=>{
-    if(e.ctrlKey&&e.key==='Tab'&&!e.metaKey){e.preventDefault();cycleWindows();}
-    else if(e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();const n=$('.os-window.focused',layer);if(n)toggleMax(n.id.slice(4));}
-    else if(e.ctrlKey&&e.altKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();snapWindow(e.key==='ArrowLeft'?'left':'right');}
+    if(state.shortcuts&&e.ctrlKey&&e.key==='Tab'&&!e.metaKey){e.preventDefault();cycleWindows();}
+    else if(state.shortcuts&&e.ctrlKey&&e.shiftKey&&e.key.toLowerCase()==='f'){e.preventDefault();const n=$('.os-window.focused',layer);if(n)toggleMax(n.id.slice(4));}
+    else if(state.shortcuts&&e.ctrlKey&&e.altKey&&(e.key==='ArrowLeft'||e.key==='ArrowRight')){e.preventDefault();snapWindow(e.key==='ArrowLeft'?'left':'right');}
   });
   // Bridge exposes only window operations; persistent documents stay in AincWorkspace.
   if(window.AincWorkspace)window.AincWorkspace.attach({
@@ -506,5 +515,5 @@
   function updateClock(){const t=new Date();$('#menuClock').textContent=t.toLocaleTimeString(state.clockMode==='12'?'en-US':'en-GB',{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
   applySettings();typeLoop();updateClock();setInterval(updateClock,30_000);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
-  if(!isMobile()&&state.autoOpen)openWindow('projects',{announce:false,focusInput:false});
+  if(!isMobile()&&state.autoOpen&&state.startupApp!=='none')openWindow(state.startupApp,{announce:false,focusInput:false});
 })();
