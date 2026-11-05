@@ -55,6 +55,7 @@
     clockMode: read('clockMode','24')==='12'?'12':'24',
     autoOpen: read('autoOpen','on')!=='off',
     rememberWindows: read('rememberWindows','on')!=='off',
+    restoreSession: read('restoreSession','off')==='on',
     snap: read('snap','on')!=='off',
     contextMenu: read('contextMenu','on')!=='off',
     startupApp: ['projects','files','apps','tasks','notes','none'].includes(read('startupApp','projects'))?read('startupApp','projects'):'projects',
@@ -92,12 +93,15 @@
     state[key]=value;
     write(key,typeof value==='boolean'?(value?'on':'off'):value);
     if(key==='rememberWindows'&&!value){for(const id of Object.keys(appInfo)){try{localStorage.removeItem('aincfh_win_'+id)}catch{}}}
+    if(key==='restoreSession'){
+      if(value)saveSession();else try{localStorage.removeItem('aincfh_session_v1')}catch{}
+    }
     applySettings();toast('设置已应用');
   }
   function resetPreferences(){
-    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
+    const keys=['theme','accent','motion','contrast','textSize','glass','wallpaper','dockSize','clockMode','autoOpen','rememberWindows','restoreSession','snap','contextMenu','startupApp','shortcuts','keyHints','quietMode','activityBadge','lowPower'];
     for(const k of keys){try{localStorage.removeItem('aincfh_'+k)}catch{}}
-    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
+    Object.assign(state,{theme:'dark',accent:'amber',motion:!matchMedia('(prefers-reduced-motion: reduce)').matches,contrast:'normal',textSize:'normal',glass:true,wallpaper:true,dockSize:'regular',clockMode:'24',autoOpen:true,rememberWindows:true,restoreSession:false,snap:true,contextMenu:true,startupApp:'projects',shortcuts:true,keyHints:true,quietMode:false,activityBadge:true,lowPower:false});
     applySettings();toast('设置已恢复默认');
   }
   function setTheme(t) { state.theme = t;write('theme',t);applySettings();toast(t === 'dark' ? '已切换至夜间模式' : '已切换至日间模式'); }
@@ -112,11 +116,61 @@
       button.setAttribute('aria-pressed',!!w&&!w.minimized?'true':'false');
     });
   }
+  let restoringSession=false;
+  function saveSession(){
+    if(!state.restoreSession||isMobile()||restoringSession)return;
+    const items=[...windows.entries()].map(([id,w])=>{
+      const n=w.node;
+      return {id,minimized:w.minimized,maximized:w.maximized,
+        z:Number(n.style.zIndex)||0,
+        position:{x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,
+          w:n.offsetWidth,h:n.offsetHeight}};
+    });
+    const focused=$('.os-window.focused',layer)?.id?.slice(4)||null;
+    write('session_v1',JSON.stringify({version:1,items,focused}));
+  }
+  function restoreLastSession(){
+    if(!state.restoreSession||isMobile())return false;
+    const raw=read('session_v1','');
+    if(!raw)return false;
+    let data;
+    try{data=JSON.parse(raw)}catch{return false}
+    if(data?.version!==1||!Array.isArray(data.items)||data.items.length>40)return false;
+    restoringSession=true;
+    try{
+      const b=workBounds(),seen=new Set();
+      const entries=data.items.filter(v=>{
+        if(!v||typeof v.id!=='string'||!appInfo[v.id]||seen.has(v.id))return false;
+        seen.add(v.id);return true;
+      }).sort((a,b)=>(Number(a.z)||0)-(Number(b.z)||0));
+      for(const e of entries){
+        openWindow(e.id,{announce:false,focusInput:false});
+        const w=windows.get(e.id),n=w.node,p=e.position;
+        if(p&&[p.x,p.y,p.w,p.h].every(Number.isFinite)){
+          const maxW=Math.max(b.minWidth,b.width-b.inset*2),maxH=Math.max(b.minHeight,b.height-b.bottom-b.top);
+          const width=clampValue(p.w,b.minWidth,maxW),height=clampValue(p.h,b.minHeight,maxH);
+          n.style.width=width+'px';n.style.height=height+'px';
+          n.style.left=clampValue(p.x,b.inset,b.width-width-b.inset)+'px';
+          n.style.top=clampValue(p.y,b.top,b.height-height-b.bottom)+'px';
+          w.position={x:parseFloat(n.style.left),y:parseFloat(n.style.top),w:width,h:height};
+        }
+        w.maximized=!!e.maximized;n.classList.toggle('is-maximized',w.maximized);
+        w.minimized=!!e.minimized;n.classList.toggle('is-minimized',w.minimized);
+        if(w.minimized)n.classList.remove('focused');
+      }
+      const preferred=entries.find(x=>x.id===data.focused&&!x.minimized);
+      const lastVisible=[...entries].reverse().find(x=>!x.minimized);
+      $('.os-window.focused',layer).forEach(n=>n.classList.remove('focused'));
+      if(preferred||lastVisible)focusWindow((preferred||lastVisible).id);
+      syncDock();
+      return true;
+    }finally{restoringSession=false}
+  }
   function focusWindow(id) {
     const w=windows.get(id); if(!w)return;
     if(w.minimized){w.minimized=false;w.node.classList.remove('is-minimized');}
     $$('.os-window.focused',layer).forEach(el=>el.classList.remove('focused'));
-    w.node.style.zIndex=++focusZ;w.node.classList.add('focused');syncDock();
+    w.node.style.zIndex=++focusZ;w.node.classList.add('focused');syncDock();saveSession();
   }
   // The physical viewport, not the document's scrollable height, owns window geometry.
   function workBounds() {
@@ -131,6 +185,7 @@
     const n=w.node;
     w.position={x:parseFloat(n.style.left)||0,y:parseFloat(n.style.top)||0,w:n.offsetWidth,h:n.offsetHeight};
     write('win_'+id,JSON.stringify(w.position));
+    saveSession();
   }
   function windowPosition(id) {
     const b=workBounds(),m=appInfo[id],n=openedCount++;
@@ -171,12 +226,12 @@
     if(id==='terminal'&&options.focusInput!==false)focusTerminal();
     if(options.announce!==false)toast('已打开 '+m.name);
   }
-  function closeWindow(id){const w=windows.get(id);if(!w)return;w.node.remove();windows.delete(id);syncDock();}
+  function closeWindow(id){const w=windows.get(id);if(!w)return;w.node.remove();windows.delete(id);syncDock();saveSession();}
   function minimizeWindow(id){
     const w=windows.get(id);if(!w)return;
     w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');
     const remain=[...windows.entries()].filter(([,x])=>!x.minimized);
-    if(remain.length)focusWindow(remain[remain.length-1][0]);else syncDock();
+    if(remain.length)focusWindow(remain[remain.length-1][0]);else syncDock();saveSession();
   }
   function toggleMax(id){
     const w=windows.get(id);if(!w||isMobile())return;
@@ -193,7 +248,7 @@
     }
     focusWindow(id);
   }
-  function showDesktop(){for(let [id,w] of windows){w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');}syncDock();toast('已显示桌面 · 点击 Dock 恢复窗口');}
+  function showDesktop(){for(let [id,w] of windows){w.minimized=true;w.node.classList.remove('focused');w.node.classList.add('is-minimized');}syncDock();saveSession();toast('已显示桌面 · 点击 Dock 恢复窗口');}
   function resetLayout(){for(const id of [...windows.keys()])closeWindow(id);['projects'].forEach(id=>{if(!isMobile())openWindow(id,{announce:false})});toast('窗口布局已重置');}
   // Real window arrangement: layouts move and resize the existing live app windows.
   function arrangeWindows(mode='tile'){
@@ -520,5 +575,7 @@
   function updateClock(){const t=new Date();$('#menuClock').textContent=t.toLocaleTimeString(state.clockMode==='12'?'en-US':'en-GB',{hour:'2-digit',minute:'2-digit',hour12:state.clockMode==='12'});}
   applySettings();typeLoop();updateClock();setInterval(updateClock,30_000);
   // On wide screens we surface a functional project window; on mobile, launchers are the home screen.
-  if(!isMobile()&&state.autoOpen&&state.startupApp!=='none')openWindow(state.startupApp,{announce:false,focusInput:false});
+  const resumed=restoreLastSession();
+  if(!resumed&&!isMobile()&&state.autoOpen&&state.startupApp!=='none')openWindow(state.startupApp,{announce:false,focusInput:false});
+  window.addEventListener('pagehide',saveSession,{passive:true});
 })();
