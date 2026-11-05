@@ -86,6 +86,18 @@ function arrange(){
  data.records.forEach((r,i)=>{r.col=Math.floor(i/rr)%cc;r.row=i%rr});
  save();render();
 }
+function renderSettings(){
+ const on=data.show;
+ return '<section class="fusion-section desktop-options" aria-label="'+esc(tr('shortcuts'))+'">'+
+ '<header><h3>'+esc(tr('shortcuts'))+'</h3><small>Desktop / Files</small></header>'+
+ '<div class="fusion-choice-grid">'+
+ '<button type="button" data-desktop-option="show" data-desktop-value="on" aria-pressed="'+on+'">'+esc(tr('shortcuts'))+' · '+esc(on?'ON':'OFF')+'</button>'+
+ '<button type="button" data-desktop-option="arrange">'+esc(tr('sort'))+'</button>'+
+ '</div><div class="fusion-field"><div class="fusion-field-head"><strong>'+esc(tr('size'))+'</strong></div>'+
+ '<div class="fusion-choice-grid">'+['small','medium','large'].map(n=>'<button type="button" data-desktop-option="iconSize" data-desktop-value="'+n+'" aria-pressed="'+(data.iconSize===n)+'">'+esc(tr(n))+'</button>').join('')+'</div></div>'+
+ '<p class="fusion-disclaimer">'+esc(tr('desktop'))+' · Files / Notes / Trash — local browser storage only. Double-click opens; drag to arrange; right-click for commands.</p>'+
+ '</section>';
+}
 function setOption(key,value){
  if(key==='grid')data.grid=Boolean(value);
  if(key==='show')data.show=Boolean(value);
@@ -162,6 +174,15 @@ function onForm(e){
 }
 function bind(){
  document.addEventListener('click',e=>{
+  const pref=e.target.closest?.('[data-desktop-option]');
+  if(pref){
+   const k=pref.dataset.desktopOption;
+   if(k==='arrange')arrange();
+   else if(k==='show')setOption('show',pref.dataset.desktopValue!=='off'?!data.show:false);
+   else if(k==='iconSize')setOption('iconSize',pref.dataset.desktopValue);
+   bridge?.showDesktopSettings?.();
+   return;
+  }
   if(e.target.closest?.('[data-desktop-dialog-cancel]')){cancelModal();return}
   const menuButton=e.target.closest?.('[data-desktop-menu]');
   if(menuButton){handleMenuAction(menuButton.dataset.desktopMenu,menu?.dataset.item||null);return}
@@ -238,6 +259,6 @@ function init(){
  if(bridge?.files?.ready)bridge.files.ready.then(schedule);
 }
 function attach(b){bridge=b;init();schedule()}
-window.AincDesktopSurface={attach,render:schedule,arrange,pinFile,pinApp,remove,setOption,
+window.AincDesktopSurface={attach,render:schedule,renderSettings,arrange,pinFile,pinApp,remove,setOption,
  get state(){return JSON.parse(JSON.stringify(data))},get count(){return data.records.length}};
 })();
