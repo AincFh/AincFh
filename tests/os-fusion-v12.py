@@ -87,7 +87,7 @@ def main():
                     width:parseFloat(el.style.width),height:parseFloat(el.style.height)
                 })""")
                 assert after["left"]<45 and after["top"]<45,after
-                assert after["width"]<600 and after["height"]<460,after
+                assert 0<after["width"]<width*.55 and 0<after["height"]<height*.55,after
                 page.locator('#app-files [data-win-action="layout"]').click()
                 page.locator('#fusionSnapPopup [data-fusion-snap="center"]').click()
                 center=page.locator('#app-files').evaluate("(el)=>parseFloat(el.style.left)")
