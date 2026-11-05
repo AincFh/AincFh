@@ -70,7 +70,7 @@ function render(){
  toggle('restoreSession','Resume last desktop session','重新载入时恢复已打开的应用、层级和窗口状态。仅桌面设备生效。')+
  toggle('snap','Window snapping','拖拽到左右屏幕边缘时自动停靠到半屏。')+
  toggle('contextMenu','Desktop context menu','右键点击桌面打开快速操作。')+
- '<div class="sp-actions"><button data-sp-action="tile">Tile windows</button><button data-sp-action="cascade">Cascade windows</button><button data-sp-action="reset-layout">Reset layout</button></div>';
+ '<div class="sp-actions"><button data-sp-action="tile">Tile windows</button><button data-sp-action="cascade">Cascade windows</button><button data-sp-action="reset-layout">Reset layout</button><button data-sp-action="reset-dock">Reset Dock favorites</button></div>';
  break;
  case 'apps':
  body=heading('04','Apps & Startup','系统级应用注册表与开机程序；所有应用在当前网页沙箱内运行。')+
@@ -118,6 +118,7 @@ function action(key){
  case 'tile':bridge.arrange('tile');break;
  case 'cascade':bridge.arrange('cascade');break;
  case 'reset-layout':bridge.resetLayout();break;
+ case 'reset-dock':window.AincShell?.resetDock?.();bridge.toast('Dock favorites restored');break;
  case 'export-workspace':ws?.exportBackup?.();break;
  case 'import-workspace':document.getElementById('spImportFile')?.click();break;
  case 'export-prefs':download(new Blob([JSON.stringify(bridge.prefs(),null,2)],{type:'application/json'}),'AincFh-OS-preferences.json');break;
