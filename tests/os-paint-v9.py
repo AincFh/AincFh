@@ -23,6 +23,12 @@ def draw(page):
     page.mouse.move(right,y,steps=12)
     page.mouse.up()
 
+def open_files_folder(page, folder_id):
+    target=page.locator('#app-files [data-fs-folder="'+folder_id+'"]').first
+    if not target.is_visible():
+        page.locator('#app-files [data-fs-sidebar-toggle]').click()
+    target.click()
+
 def test():
     with sync_playwright() as p:
         browser=p.chromium.launch(headless=True)
@@ -54,7 +60,7 @@ def test():
             page.evaluate("() => AincStorage.whenIdle()")
             assert "Untitled drawing.png" in page.evaluate("AincWorkspace.list()")
             page.locator('[data-dock="files"]').click()
-            page.locator('#app-files [data-fs-folder="workspace"]').click()
+            open_files_folder(page,"workspace")
             page.locator('#app-files [data-fs-select]').filter(has_text="Untitled drawing.png").click()
             expect(page.locator('#app-files .fs-preview-image')).to_be_visible()
             page.locator('#app-files [data-fs-action="open"]').click()
@@ -69,7 +75,7 @@ def test():
             page.reload(wait_until="load")
             page.evaluate("() => AincWorkspace.ready")
             page.locator('[data-dock="files"]').click()
-            page.locator('#app-files [data-fs-folder="workspace"]').click()
+            open_files_folder(page,"workspace")
             page.locator('#app-files [data-fs-select]').filter(has_text="Untitled drawing.png").click()
             expect(page.locator('#app-files .fs-preview-image')).to_be_visible()
             page.locator('#app-files [data-fs-action="open"]').click()
