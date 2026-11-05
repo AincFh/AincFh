@@ -15,13 +15,19 @@
   <link rel="stylesheet" href="./assets/system-v7.css?v=8.1" />
   <link rel="stylesheet" href="./assets/apps-v8.css?v=8.1" />
   <link rel="stylesheet" href="./assets/paint-v9.css?v=9.3" />
+  <link rel="stylesheet" href="./assets/system-shell-v10.css?v=10.0" />
+  <link rel="stylesheet" href="./assets/ui-controls-v10.css?v=10.0" />
+  <script src="./assets/i18n-catalog-v10.js?v=10.0" defer></script>
+  <script src="./assets/i18n-runtime-v10.js?v=10.0" defer></script>
   <script src="./assets/storage-v8.js?v=8.1" defer></script>
   <script src="./assets/workspace.js?v=9.3" defer></script>
   <script src="./assets/settings-panel.js?v=9.3" defer></script>
   <script src="./assets/apps-v8.js?v=8.1" defer></script>
   <script src="./assets/paint-v9.js?v=9.3" defer></script>
   <script src="./assets/clipboard-guard.js?v=7.0" defer></script>
-  <script src="./assets/app.js?v=9.3" defer></script>
+  <script src="./assets/system-shell-v10.js?v=10.0" defer></script>
+  <script src="./assets/ui-controls-v10.js?v=10.0" defer></script>
+  <script src="./assets/app.js?v=10.0" defer></script>
 </head>
 <body>
   <div class="os-boot" aria-hidden="true">
@@ -59,6 +65,13 @@
       <symbol id="i-image" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8" cy="9" r="2"/><path d="m3 17 6-5 4 3 3-3 5 5"/></symbol>
       <symbol id="i-note" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M8 8h8M8 12h8M8 16h5"/></symbol>
       <symbol id="i-bell" viewBox="0 0 24 24"><path d="M18 8a6 6 0 0 0-12 0c0 7-3 7-3 9h18c0-2-3-2-3-9ZM10 21h4"/></symbol>
+      <symbol id="i-globe" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c-5 5-5 13 0 18M12 3c5 5 5 13 0 18"/></symbol>
+      <symbol id="i-power" viewBox="0 0 24 24"><path d="M12 2v10M7.1 5.8a8.5 8.5 0 1 0 9.8 0"/></symbol>
+      <symbol id="i-rotate" viewBox="0 0 24 24"><path d="M20 8V3h-5M20 3A9 9 0 1 0 21 14"/></symbol>
+      <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="11" rx="2"/><path d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+      <symbol id="i-minus" viewBox="0 0 24 24"><path d="M4 12h16"/></symbol>
+      <symbol id="i-close" viewBox="0 0 24 24"><path d="M5 5l14 14M19 5 5 19"/></symbol>
+      <symbol id="i-pin" viewBox="0 0 24 24"><path d="m8 3 9 9-2 2-2-2-5 5-2 4-2-2 4-2 5-5-2-2z"/></symbol>
     </defs>
   </svg>
 
@@ -116,6 +129,11 @@
       <button role="menuitem" data-snap="right">当前窗口靠右</button>
       <div class="menu-rule"></div>
       <button role="menuitem" id="menuReset">重置窗口布局</button>
+      <div class="menu-rule"></div>
+      <button role="menuitem" data-shell-power="lock"><svg><use href="#i-lock"/></svg>锁定桌面</button>
+      <button role="menuitem" data-shell-power="sleep"><svg><use href="#i-moon"/></svg>睡眠</button>
+      <button role="menuitem" data-shell-power="restart"><svg><use href="#i-rotate"/></svg>重新启动</button>
+      <button role="menuitem" data-shell-power="shutdown"><svg><use href="#i-power"/></svg>关机</button>
     </div>
   </header>
 
