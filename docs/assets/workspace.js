@@ -161,6 +161,67 @@
         directoryList().filter(function(f){return !i||!(f.id===i.id||isChildOf(f.id,i.id))}).map(function(f){return '<option value="'+esc(f.id)+'" '+(i&&f.id===i.parent?'selected':'')+'>'+esc(f.name)+'/</option>'}).join('')+'</select>':'')+
       '<div class="fs-dialog-actions"><button type="button" data-fs-action="cancel">Cancel</button><button class="primary" type="submit">'+(needsName?'Save':'Confirm')+'</button></div></form></div>';
   }
+  function fsIcon(name){return '<svg aria-hidden="true"><use href="#i-fs-'+name+'"></use></svg>'}
+  function fileCount(id){return store.items.filter(function(i){return i.parent===id&&isVisible(i)}).length}
+  function treeItems(parent,depth,visited){
+    if(depth>=7)return '';
+    return directoryList().filter(function(i){return i.parent===parent&&!visited.has(i.id)}).sort(function(a,b){return a.name.localeCompare(b.name)}).map(function(f){
+      var child=directoryList().some(function(x){return x.parent===f.id}),expanded=nav.expanded.includes(f.id);
+      var active=ui.view==='folder'&&ui.folder===f.id;
+      var nextVisited=new Set(visited);nextVisited.add(f.id);
+      return '<div class="fs-tree-node" style="--tree-depth:'+depth+'"><div class="fs-tree-line'+(active?' is-active':'')+'">'+
+        (child?'<button type="button" class="fs-tree-expander'+(expanded?' expanded':'')+'" data-fs-tree-toggle="'+esc(f.id)+'" aria-expanded="'+expanded+'" title="'+esc(nt(expanded?'collapse':'expand'))+'">'+fsIcon('chevron')+'</button>':'<span class="fs-tree-placeholder"></span>')+
+        '<button type="button" class="fs-tree-open" data-fs-nav-folder="'+esc(f.id)+'" aria-current="'+(active?'page':'false')+'" title="'+esc(f.name)+'">'+fsIcon('folder')+'<span>'+esc(navLabel(f.id))+'</span><small>'+fileCount(f.id)+'</small></button>'+
+        '<button type="button" class="fs-tree-star'+(isFavorite(f.id)?' is-starred':'')+'" data-fs-favorite="'+esc(f.id)+'" title="'+esc(nt(isFavorite(f.id)?'unpin':'pin'))+'">'+fsIcon('star')+'</button></div>'+
+        (child&&expanded?'<div class="fs-tree-children">'+treeItems(f.id,depth+1,nextVisited)+'</div>':'')+'</div>';
+    }).join('');
+  }
+  var storageInfo={used:null,quota:null,checked:0};
+  function fsBytes(n){if(!Number.isFinite(n)||n<0)return nt('unavailable');return n<1024?Math.round(n)+' B':n<1048576?(n/1024).toFixed(1)+' KiB':n<1073741824?(n/1048576).toFixed(1)+' MiB':(n/1073741824).toFixed(2)+' GiB'}
+  function fsStorage(){
+    var available=Number.isFinite(storageInfo.used)&&Number.isFinite(storageInfo.quota)&&storageInfo.quota>0;
+    var pct=available?Math.min(100,100*storageInfo.used/storageInfo.quota):0;
+    return '<div class="fs-storage"><div class="fs-storage-title">'+fsIcon('drive')+'<span>'+esc(nt('storage'))+'</span></div><div class="fs-storage-meter" role="meter" aria-label="'+esc(nt('storage'))+'" aria-valuemin="0" aria-valuemax="100" aria-valuenow="'+Math.round(pct)+'"><i style="width:'+pct.toFixed(2)+'%"></i></div><div class="fs-storage-detail">'+(available?fsBytes(storageInfo.used)+' / '+fsBytes(storageInfo.quota):esc(nt('loading')))+'</div></div>';
+  }
+  function fsRefreshStorage(){
+    if(!navigator.storage?.estimate||Date.now()-storageInfo.checked<12000)return;
+    storageInfo.checked=Date.now();
+    navigator.storage.estimate().then(function(x){
+      storageInfo.used=Number.isFinite(x.usage)?x.usage:null;storageInfo.quota=Number.isFinite(x.quota)?x.quota:null;
+      var node=document.querySelector('#app-files .fs-storage');if(node)node.outerHTML=fsStorage();
+    }).catch(function(){var node=document.querySelector('#app-files .fs-storage');if(node)node.querySelector('.fs-storage-detail').textContent=nt('unavailable')});
+  }
+  function renderSidebar(){
+    var activeFolder=function(id){return ui.view==='folder'&&!ui.trash&&ui.folder===id};
+    var quick=function(id,label,icon){return '<button type="button" class="fs-nav-entry'+(activeFolder(id)?' is-active':'')+'" data-fs-folder="'+esc(id)+'" aria-current="'+(activeFolder(id)?'page':'false')+'">'+fsIcon(icon)+'<span class="fs-nav-name">'+esc(nt(label))+'</span></button>'};
+    var trashCount=store.items.filter(function(i){return i.deleted}).length;
+    var pins=nav.favorites.map(item).filter(function(i){return i&&isVisible(i)}).slice(0,30);
+    return '<aside class="fs-sidebar" aria-label="'+esc(nt('sidebar'))+'"><div class="fs-sidebar-brand"><div class="fs-brand-symbol">AF</div><div><b>AincFh <em>Files</em></b><small>LOCAL / WORKSPACE</small></div></div><div class="fs-sidebar-scroller">'+
+      '<div class="fs-nav-group"><div class="fs-nav-heading">'+esc(nt('places'))+'</div>'+
+        quick('root','home','home')+quick('desktop','desktop','desktop')+
+        '<button class="fs-nav-entry'+(ui.view==='recent'?' is-active':'')+'" data-fs-nav-view="recent">'+fsIcon('recent')+'<span class="fs-nav-name">'+esc(nt('recent'))+'</span></button></div>'+
+      '<div class="fs-nav-group"><div class="fs-nav-heading">'+esc(nt('favorites'))+'<span>'+pins.length+'</span></div>'+
+        (pins.length?pins.map(function(i){
+          var active=activeFolder(i.id);
+          return '<div class="fs-fav-row"><button class="fs-nav-entry'+(active?' is-active':'')+'" '+(i.type==='folder'?'data-fs-nav-folder':'data-fs-nav-item')+'="'+esc(i.id)+'">'+fsIcon(i.type==='folder'?'folder':'star')+'<span class="fs-nav-name">'+esc(navLabel(i.id))+'</span></button>'+
+             '<button class="fs-fav-remove" data-fs-favorite="'+esc(i.id)+'" aria-label="'+esc(nt('unpin'))+'" title="'+esc(nt('unpin'))+'">×</button></div>';
+        }).join(''):'<p class="fs-nav-empty">'+esc(nt('emptyFavorite'))+'</p>')+
+        '<button class="fs-nav-link'+(ui.view==='favorites'?' is-active':'')+'" data-fs-nav-view="favorites">'+fsIcon('star')+esc(nt('starred'))+'</button></div>'+
+      '<div class="fs-nav-group"><div class="fs-nav-heading">'+esc(nt('folders'))+'<span>'+directoryList().length+'</span></div><div class="fs-tree" role="tree">'+treeItems('root',0,new Set())+'</div></div>'+
+      '<div class="fs-nav-group"><div class="fs-nav-heading">'+esc(nt('system'))+'</div><button class="fs-nav-entry'+(ui.trash?' is-active':'')+'" data-fs-action="trash">'+fsIcon('trash')+'<span class="fs-nav-name">'+esc(nt('trash'))+'</span><span class="fs-nav-badge">'+trashCount+'</span></button></div>'+
+     '</div>'+fsStorage()+'</aside><div class="fs-sidebar-resizer" data-fs-sidebar-resize aria-label="'+esc(nt('sidebar'))+'"></div>';
+  }
+  function fsLocation(){
+    var special=ui.trash?nt('trash'):ui.view==='recent'?nt('recent'):ui.view==='favorites'?nt('favorites'):null;
+    var crumb=special?'<strong>'+esc(special)+'</strong>':getPath(ui.folder).map(function(i){return '<button data-fs-folder="'+esc(i.id)+'">'+esc(navLabel(i.id))+'</button>'}).join('<span class="fs-path-divider">/</span>');
+    return '<div class="fs-location"><div class="fs-history">'+
+      '<button data-fs-history="-1" aria-label="'+esc(nt('back'))+'" title="'+esc(nt('back'))+'" '+(ui.historyIndex===0?'disabled':'')+'>'+fsIcon('back')+'</button>'+
+      '<button data-fs-history="1" aria-label="'+esc(nt('forward'))+'" title="'+esc(nt('forward'))+'" '+(ui.historyIndex>=ui.history.length-1?'disabled':'')+'>'+fsIcon('forward')+'</button>'+
+      '<button data-fs-nav-up aria-label="'+esc(nt('up'))+'" title="'+esc(nt('up'))+'" '+(ui.folder==='root'||ui.view!=='folder'?'disabled':'')+'>'+fsIcon('up')+'</button>'+
+      '<button data-fs-sidebar-toggle aria-label="'+esc(nt(nav.hideSidebar?'visible':'hide'))+'">'+fsIcon('sidebar')+'</button></div>'+
+      '<div class="fs-crumbs">'+crumb+'</div></div>';
+  }
+
   function renderFiles(){
     if(ui.folder!=='root'&&(!item(ui.folder)||!isVisible(item(ui.folder))))ui.folder='root';
     var data=getEntries(),selected=item(ui.selected);
