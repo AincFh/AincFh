@@ -3,10 +3,13 @@
    and are never copied into this cache, nor sent to the server.
  */
 'use strict';
-const VERSION='aincfh-os-shell-11.1.0',PREFIX='aincfh-os-shell-';
+const VERSION='aincfh-os-shell-11.2.0',PREFIX='aincfh-os-shell-';
 const CORE=[
  './',
  './index.html',
+ './manifest.webmanifest?v=11.2',
+ './assets/icon-192.png',
+ './assets/icon-512.png',
  './assets/favicon.svg',
  './assets/styles.css?v=motion-5',
  './assets/os-desktop-v5.css?v=5.0.6',
@@ -32,7 +35,7 @@ const CORE=[
  './assets/control-center-v11.js?v=11.1',
  './assets/pwa-v11.js?v=11.0',
  './assets/ui-controls-v10.js?v=10.0',
- './assets/app.js?v=11.1'
+ './assets/app.js?v=11.2'
 ];
 self.addEventListener('install',event=>{
  event.waitUntil((async()=>{
