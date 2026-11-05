@@ -203,7 +203,7 @@
       '<div class="fs-nav-group"><div class="fs-nav-heading">'+esc(nt('favorites'))+'<span>'+pins.length+'</span></div>'+
         (pins.length?pins.map(function(i){
           var active=activeFolder(i.id);
-          return '<div class="fs-fav-row"><button class="fs-nav-entry'+(active?' is-active':'')+'" '+(i.type==='folder'?'data-fs-nav-folder':'data-fs-nav-item')+'="'+esc(i.id)+'">'+fsIcon(i.type==='folder'?'folder':'star')+'<span class="fs-nav-name">'+esc(navLabel(i.id))+'</span></button>'+
+          return '<div class="fs-fav-row"><button class="fs-nav-entry'+(active?' is-active':'')+'" '+(i.type==='folder'?'data-fs-folder':'data-fs-nav-item')+'="'+esc(i.id)+'">'+fsIcon(i.type==='folder'?'folder':'star')+'<span class="fs-nav-name">'+esc(navLabel(i.id))+'</span></button>'+
              '<button class="fs-fav-remove" data-fs-favorite="'+esc(i.id)+'" aria-label="'+esc(nt('unpin'))+'" title="'+esc(nt('unpin'))+'">×</button></div>';
         }).join(''):'<p class="fs-nav-empty">'+esc(nt('emptyFavorite'))+'</p>')+
         '<button class="fs-nav-link'+(ui.view==='favorites'?' is-active':'')+'" data-fs-nav-view="favorites">'+fsIcon('star')+esc(nt('starred'))+'</button></div>'+
