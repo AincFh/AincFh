@@ -8,12 +8,14 @@ but the actual AincFh browser OS source lives at /docs/.
 -->
 
 <p align="center">
-  <img src="./assets/editorial-hero.svg?v=20261106-editorial24" alt="AincFh Studio. Software, with intention. A minimalist product studio introduction." width="100%" />
+  <a href="https://github.com/AincFh?tab=repositories" title="Browse AincFh repositories">
+    <img src="./assets/editorial-hero.svg?v=20261106-editorial24b" alt="AincFh Studio. Software, with intention. Browse the project repositories." width="100%" />
+  </a>
 </p>
 
 <p align="center">
   <a href="https://github.com/AincFh/AincFh/tree/main/docs" title="Explore AincFh OS source code">
-    <img src="./assets/editorial-workspace.svg?v=20261106-editorial24" alt="An OS project explorer with four animated illustrative views: A.T. Field, Saint Laurent, Windows tools and developer workflows." width="100%" />
+    <img src="./assets/editorial-workspace.svg?v=20261106-editorial24b" alt="An OS project explorer with four animated illustrative views: A.T. Field, Saint Laurent, Windows tools and developer workflows." width="100%" />
   </a>
 </p>
 
