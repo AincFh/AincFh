@@ -1,137 +1,30 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 660" width="900" height="660" role="img" aria-label="AincFh — software, visual design and engineering">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 540" width="900" height="540" role="img" aria-label="AincFh OS profile window: software engineering for web platforms, Windows desktop apps and AI-supported workflows">
 <defs>
-<style>
-:root{--bg:#fafafa;--ink:#111111;--sub:#64748b;--dim:#94a3b8;--hexl:rgba(255,159,67,.26);--brk:#8b5cf6;--line:rgba(0,0,0,.08)}
-@media (prefers-color-scheme:dark){:root{--bg:#1c1f2b;--ink:#f1f5f9;--sub:#94a3b8;--dim:#7c8ba3;--hexl:rgba(255,159,67,.17);--brk:#a78bfa;--line:rgba(255,255,255,.10)}}
-.bg{fill:var(--bg)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}.dim{fill:var(--dim)}
-.hx{stroke:var(--hexl);fill:none;stroke-width:1}
-.brk{stroke:var(--brk);fill:none;stroke-width:2}
-.ln{stroke:var(--line);stroke-width:1}
-.dsp{font-family:'Orbitron','Rajdhani','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-.txt{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif}
-.chipA{fill:none;stroke:#FF9F43;stroke-width:1.2;stroke-linejoin:round}
-.chipB{fill:none;stroke:#8B5CF6;stroke-width:1.2;stroke-linejoin:round}
-</style>
-<linearGradient id="at" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF9F43"/><stop offset="100%" stop-color="#FF6B6B"/></linearGradient>
-<radialGradient id="o1"><stop offset="0%" stop-color="#FF9F43" stop-opacity=".34"/><stop offset="100%" stop-color="#FF9F43" stop-opacity="0"/></radialGradient>
-<radialGradient id="o2"><stop offset="0%" stop-color="#FF6B6B" stop-opacity=".28"/><stop offset="100%" stop-color="#FF6B6B" stop-opacity="0"/></radialGradient>
-<radialGradient id="o3"><stop offset="0%" stop-color="#8B5CF6" stop-opacity=".24"/><stop offset="100%" stop-color="#8B5CF6" stop-opacity="0"/></radialGradient>
-<radialGradient id="mg" cx="92%" cy="40%" r="60%"><stop offset="0%" stop-color="#fff" stop-opacity="1"/><stop offset="50%" stop-color="#fff" stop-opacity=".45"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
-<mask id="lm"><rect width="900" height="660" fill="url(#mg)"/></mask>
-<pattern id="hexp" width="60" height="105" patternUnits="userSpaceOnUse">
-<path class="hx" d="M30,0 L60,17.5 L60,52.5 L30,70 L0,52.5 L0,17.5 Z"/>
-<path class="hx" d="M60,52.5 L90,70 L90,105 L60,122.5 L30,105 L30,70 Z"/>
-<path class="hx" d="M0,52.5 L30,70 L30,105 L0,122.5 L-30,105 L-30,70 Z"/>
-<path class="hx" d="M60,-52.5 L90,-35 L90,0 L60,17.5 L30,0 L30,-35 Z"/>
-<path class="hx" d="M0,-52.5 L30,-35 L30,0 L0,17.5 L-30,0 L-30,-35 Z"/>
-</pattern>
-<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect y="2" width="4" height="2" fill="#000" opacity=".2"/></pattern>
-<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101522"/><stop offset=".55" stop-color="#182135"/><stop offset="1" stop-color="#111727"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#ffad53"/><stop offset=".5" stop-color="#fd816b"/><stop offset="1" stop-color="#a481f4"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#253047"/><stop offset="1" stop-color="#192336"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#995be6" stop-opacity=".24"/><stop offset="1" stop-color="#995be6" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#f29447" stop-opacity=".14"/><stop offset="1" stop-color="#f29447" stop-opacity="0"/></radialGradient>
+<pattern id="hex" width="86" height="74" patternUnits="userSpaceOnUse"><path d="M21 1 42 13v25L21 50 0 38V13ZM64 38 85 50v24L64 86 43 74V50Z" fill="none" stroke="#ffa455" stroke-opacity=".09" stroke-width="1"/></pattern>
 </defs>
+<g font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif">
+<rect x="0" y="0" width="900" height="540" rx="0" fill="url(#bg)" stroke="none" stroke-width="1"/><rect x="0" y="0" width="900" height="540" rx="0" fill="url(#hex)" stroke="none" stroke-width="1"/>
+<ellipse cx="800" cy="45" rx="345" ry="240" fill="url(#light)"/>
+<ellipse cx="85" cy="480" rx="250" ry="200" fill="url(#warm)"/>
+<rect x="18" y="18" width="864" height="504" rx="12" fill="none" stroke="#3a4059" stroke-width="1"/>
+<path d="M38 35h24M38 35v23 M838 505h24v-23" fill="none" stroke="#b78afb" stroke-width="2"/>
+<path d="M18 520H882" stroke="url(#accent)" stroke-width="3"/>
 
-<rect class="bg" width="900" height="660"/>
+<rect x="44" y="48" width="814" height="39" rx="12" fill="url(#glass)" stroke="#41516b" stroke-width="1"/><rect x="58" y="61" width="9" height="9" rx="5" fill="#ff736f" stroke="none" stroke-width="1"/><rect x="74" y="61" width="9" height="9" rx="5" fill="#f3bf63" stroke="none" stroke-width="1"/><rect x="90" y="61" width="9" height="9" rx="5" fill="#52d79f" stroke="none" stroke-width="1"/>
+<text x="392" y="74" fill="#c6cce0" font-size="10" font-weight="700" letter-spacing="1.7">PROFILE / ABOUT</text>
+<rect x="44" y="87" width="814" height="408" rx="0" fill="none" stroke="#40506b" stroke-width="1"/><rect x="44" y="87" width="177" height="408" rx="0" fill="#121c2f" stroke="none" stroke-width="1"/><text x="69" y="119" fill="#eaf0fb" font-size="17" font-weight="800" >AincFh  /  OS</text><text x="69" y="143" fill="#a8b9d3" font-size="10" font-weight="700" letter-spacing="1.6">WORKSPACE</text><rect x="55" y="173" width="155" height="40" rx="8" fill="#263652" stroke="#4e5774" stroke-width="1"/><text x="70" y="199" fill="#ffb267" font-size="10" font-weight="800" >01</text><text x="97" y="199" fill="#f2f2fa" font-size="13" font-weight="720" >Overview</text><text x="70" y="246" fill="#7186a7" font-size="10" font-weight="800" >02</text><text x="97" y="246" fill="#abbad2" font-size="13" font-weight="570" >Engineering</text><text x="70" y="293" fill="#7186a7" font-size="10" font-weight="800" >03</text><text x="97" y="293" fill="#abbad2" font-size="13" font-weight="570" >Products</text><text x="70" y="340" fill="#7186a7" font-size="10" font-weight="800" >04</text><text x="97" y="340" fill="#abbad2" font-size="13" font-weight="570" >Process</text><path d="M65 394H197" stroke="#37435d" stroke-width="1"/><text x="69" y="418" fill="#8b9bb7" font-size="9" font-weight="750" letter-spacing="1.2">SYSTEM STATUS</text><rect x="70" y="435" width="7" height="7" rx="4" fill="#5ee3a9" stroke="none" stroke-width="1"/><text x="84" y="442" fill="#b9dacc" font-size="9" font-weight="700" >BUILDING IN PUBLIC</text><text x="69" y="472" fill="#7287a7" font-size="10" font-weight="500" >2026  /  PORTFOLIO</text>
+<text x="245" y="135" fill="#ffb16e" font-size="10" font-weight="800" letter-spacing="1.8">ABOUT  /  AINCFH</text>
+<text x="244" y="183" fill="#f7f5fb" font-size="30" font-weight="800" letter-spacing="-.8">Build the whole experience.</text>
+<text x="245" y="206" fill="#afbed4" font-size="13" font-weight="560" >From interface design to data and release quality.</text>
+<rect x="245" y="231" width="192" height="192" rx="12" fill="#1b273b" stroke="#40516c" stroke-width="1"/><rect x="260" y="246" width="38" height="38" rx="10" fill="#293852" stroke="#506485" stroke-width="1"/><text x="268" y="271" fill="#ffb16b" font-size="17" font-weight="790" >&lt;/&gt;</text><text x="260" y="309" fill="#f5f6fb" font-size="17" font-weight="780" >Web platforms</text><text x="260" y="336" fill="#b6c4d8" font-size="11" font-weight="520" >Responsive product UI,</text><text x="260" y="352" fill="#b6c4d8" font-size="11" font-weight="520" >APIs and edge services.</text><path d="M260 371H422" stroke="#37435d" stroke-width="1"/><text x="260" y="389" fill="#ffb17b" font-size="10" font-weight="650" >React  ·  TypeScript</text><text x="260" y="408" fill="#9eb0ca" font-size="10" font-weight="570" >Cloudflare  ·  D1</text><rect x="450" y="231" width="192" height="192" rx="12" fill="#1b273b" stroke="#40516c" stroke-width="1"/><rect x="465" y="246" width="38" height="38" rx="10" fill="#293852" stroke="#506485" stroke-width="1"/><text x="473" y="271" fill="#ffb16b" font-size="17" font-weight="790" >▤</text><text x="465" y="309" fill="#f5f6fb" font-size="17" font-weight="780" >Desktop apps</text><text x="465" y="336" fill="#b6c4d8" font-size="11" font-weight="520" >Windows utilities with</text><text x="465" y="352" fill="#b6c4d8" font-size="11" font-weight="520" >native-focused workflows.</text><path d="M465 371H627" stroke="#37435d" stroke-width="1"/><text x="465" y="389" fill="#ffb17b" font-size="10" font-weight="650" >C#  ·  .NET</text><text x="465" y="408" fill="#9eb0ca" font-size="10" font-weight="570" >WinForms  ·  WebView2</text><rect x="655" y="231" width="192" height="192" rx="12" fill="#1b273b" stroke="#40516c" stroke-width="1"/><rect x="670" y="246" width="38" height="38" rx="10" fill="#293852" stroke="#506485" stroke-width="1"/><text x="678" y="271" fill="#ffb16b" font-size="17" font-weight="790" >✳</text><text x="670" y="309" fill="#f5f6fb" font-size="17" font-weight="780" >AI systems</text><text x="670" y="336" fill="#b6c4d8" font-size="11" font-weight="520" >Practical integrations,</text><text x="670" y="352" fill="#b6c4d8" font-size="11" font-weight="520" >tools and automation.</text><path d="M670 371H832" stroke="#37435d" stroke-width="1"/><text x="670" y="389" fill="#ffb17b" font-size="10" font-weight="650" >Verification first</text><text x="670" y="408" fill="#9eb0ca" font-size="10" font-weight="570" >Human-reviewed output</text>
+<path d="M245 452H834" stroke="#37435d" stroke-width="1"/>
+<text x="245" y="476" fill="#ffb367" font-size="10" font-weight="800" letter-spacing="1.3">PRODUCT THINKING</text>
+<text x="393" y="476" fill="#c8d4e6" font-size="10" font-weight="740" letter-spacing="1">ENGINEERING DISCIPLINE</text>
+<text x="615" y="476" fill="#c8d4e6" font-size="10" font-weight="740" letter-spacing="1">REAL-WORLD DELIVERY</text>
 
-<ellipse cx="120" cy="90" rx="320" ry="240" fill="url(#o1)" opacity=".7">
-<animate attributeName="rx" values="320;352;320" dur="8s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values=".7;.9;.7" dur="8s" repeatCount="indefinite"/>
-</ellipse>
-<ellipse cx="830" cy="620" rx="300" ry="230" fill="url(#o2)" opacity=".6">
-<animate attributeName="rx" values="300;318;300" dur="10s" begin="2s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values=".6;.8;.6" dur="10s" begin="2s" repeatCount="indefinite"/>
-</ellipse>
-<ellipse cx="760" cy="60" rx="280" ry="200" fill="url(#o3)" opacity=".5">
-<animate attributeName="rx" values="280;322;280" dur="12s" begin="4s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values=".5;.7;.5" dur="12s" begin="4s" repeatCount="indefinite"/>
-</ellipse>
-
-<rect width="900" height="660" fill="url(#hexp)" mask="url(#lm)"/>
-
-<path d="M720,300 L800,162 L960,162 L1040,300 L960,438 L800,438 Z" fill="none" stroke="url(#at)" stroke-width="1.5" stroke-linejoin="round" opacity=".16">
-<animate attributeName="opacity" values=".16;.30;.16" dur="12s" repeatCount="indefinite"/>
-</path>
-
-<g opacity="0">
-<animate attributeName="opacity" from="0" to="1" dur=".9s" begin=".1s" fill="freeze"/>
-<animateTransform attributeName="transform" type="translate" from="0 16" to="0 0" dur="1.1s" begin=".1s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
-
-<text class="txt dim" x="60" y="50" font-size="10.5" font-weight="700" letter-spacing="3">A.T. FIELD  //  PROFILE</text>
-
-<text class="dsp ink" x="60" y="100" font-size="42" font-weight="700" letter-spacing="1">AincFh</text>
-<text class="txt sub" x="60" y="126" font-size="14" font-weight="500">前端 / 全栈开发 · 从艺术设计转工程</text>
-<text class="txt dim" x="60" y="148" font-size="11" font-weight="600" letter-spacing="2.2">PRODUCT / DESIGN  ·  ENGINEERING</text>
-
-<circle cx="680" cy="90" r="4" fill="#34d399"><animate attributeName="opacity" values="1;.3;1" dur="3s" repeatCount="indefinite"/></circle>
-<text class="txt" x="840" y="94" font-size="11" font-weight="700" letter-spacing="2" text-anchor="end" fill="#34d399">PROJECTS IN MOTION</text>
-<circle cx="716" cy="120" r="4" fill="#FF9F43"/>
-<text class="txt sub" x="840" y="124" font-size="11" font-weight="600" letter-spacing="2" text-anchor="end">OPEN SOURCE + PRIVATE</text>
-<circle cx="744" cy="148" r="4" fill="#8B5CF6"/>
-<text class="txt dim" x="840" y="152" font-size="11" font-weight="600" letter-spacing="2" text-anchor="end">WEB  /  DESKTOP  /  AI</text>
-
-<line class="ln" x1="60" y1="176" x2="840" y2="176"/>
-
-<text class="txt ink" x="60" y="210" font-size="14">Building full-stack software with a focus on thoughtful product design,</text>
-<text class="txt ink" x="60" y="232" font-size="14">robust architecture, and reliable day-to-day experiences. From interface</text>
-<text class="txt ink" x="60" y="254" font-size="14">to database, testing and deployment.</text>
-<text class="txt sub" x="60" y="282" font-size="13">从产品界面到数据库、工作流程和实际部署，把想法做成可用的软件。</text>
-<text class="txt sub" x="60" y="304" font-size="13">注重视觉统一、权限边界、质量验证与维护体验。</text>
-
-<line class="ln" x1="60" y1="330" x2="840" y2="330"/>
-</g>
-
-<g opacity="0">
-<animate attributeName="opacity" from="0" to="1" dur=".8s" begin=".45s" fill="freeze"/>
-<animateTransform attributeName="transform" type="translate" from="0 18" to="0 0" dur="1s" begin=".45s" calcMode="spline" keySplines=".2 .8 .2 1" fill="freeze"/>
-
-<text class="txt dim" x="60" y="364" font-size="10.5" font-weight="700" letter-spacing="3">STACK</text>
-<text class="txt dim" x="840" y="364" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">WHAT I ACTUALLY SHIP WITH</text>
-
-<g class="chipA">
-<path d="M60,420 L87.5,373 L142.5,373 L170,420 L142.5,467 L87.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="0s" repeatCount="indefinite"/></path>
-<path d="M190,420 L217.5,373 L272.5,373 L300,420 L272.5,467 L217.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin=".4s" repeatCount="indefinite"/></path>
-<path d="M320,420 L347.5,373 L402.5,373 L430,420 L402.5,467 L347.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin=".8s" repeatCount="indefinite"/></path>
-<path d="M450,420 L477.5,373 L532.5,373 L560,420 L532.5,467 L477.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="1.2s" repeatCount="indefinite"/></path>
-<path d="M580,420 L607.5,373 L662.5,373 L690,420 L662.5,467 L607.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="1.6s" repeatCount="indefinite"/></path>
-<path d="M710,420 L737.5,373 L792.5,373 L820,420 L792.5,467 L737.5,467 Z" opacity=".5"><animate attributeName="opacity" values=".5;.85;.5" dur="6s" begin="2s" repeatCount="indefinite"/></path>
-</g>
-<g class="txt ink" font-size="11.5" font-weight="600" text-anchor="middle" opacity=".92">
-<text x="115" y="424">React</text>
-<text x="245" y="424">TypeScript</text>
-<text x="375" y="424">Tailwind v4</text>
-<text x="505" y="424">Framer Motion</text>
-<text x="635" y="424">Vite</text>
-<text x="765" y="424">React Router</text>
-</g>
-
-<g class="chipB">
-<path d="M125,524 L152.5,477 L207.5,477 L235,524 L207.5,571 L152.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin=".2s" repeatCount="indefinite"/></path>
-<path d="M255,524 L282.5,477 L337.5,477 L365,524 L337.5,571 L282.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin=".6s" repeatCount="indefinite"/></path>
-<path d="M385,524 L412.5,477 L467.5,477 L495,524 L467.5,571 L412.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1s" repeatCount="indefinite"/></path>
-<path d="M515,524 L542.5,477 L597.5,477 L625,524 L597.5,571 L542.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1.4s" repeatCount="indefinite"/></path>
-<path d="M645,524 L672.5,477 L727.5,477 L755,524 L727.5,571 L672.5,571 Z" opacity=".45"><animate attributeName="opacity" values=".45;.8;.45" dur="6s" begin="1.8s" repeatCount="indefinite"/></path>
-</g>
-<g class="txt ink" font-size="11.5" font-weight="600" text-anchor="middle" opacity=".92">
-<text x="180" y="528">Workers</text>
-<text x="310" y="528">D1</text>
-<text x="440" y="528">R2 · KV</text>
-<text x="570" y="528">Wrangler</text>
-<text x="700" y="528">Node.js</text>
-</g>
-
-<line class="ln" x1="60" y1="606" x2="840" y2="606"/>
-<circle cx="64" cy="626" r="3.5" fill="#FF9F43"/>
-<text class="txt dim" x="76" y="630" font-size="10.5" font-weight="600" letter-spacing="2">INTERFACE</text>
-<circle cx="186" cy="626" r="3.5" fill="#8B5CF6"/>
-<text class="txt dim" x="198" y="630" font-size="10.5" font-weight="600" letter-spacing="2">EDGE</text>
-<text class="txt dim" x="840" y="630" font-size="10.5" font-weight="600" letter-spacing="2.4" text-anchor="end">BLUE LOCK  ·  SOLO LEVELING</text>
-</g>
-
-<g class="brk">
-<path d="M16,30 L16,16 L30,16"/>
-<path d="M870,16 L884,16 L884,30"/>
-<path d="M16,630 L16,644 L30,644"/>
-<path d="M870,644 L884,644 L884,630"/>
-</g>
-
-<rect width="900" height="660" fill="url(#scan)" opacity=".1"/>
-<rect width="900" height="660" filter="url(#noise)" opacity=".03"/>
-</svg>
+</g></svg>
