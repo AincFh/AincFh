@@ -1,8 +1,8 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 420" width="900" height="420" role="img" aria-label="AincFh profile overview with three clean animated cards for web, desktop and AI workflows"><defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101727"/><stop offset=".55" stop-color="#192238"/><stop offset="1" stop-color="#111a2c"/></linearGradient>
-<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#ffb66b"/><stop offset=".5" stop-color="#df8b99"/><stop offset="1" stop-color="#aa95f0"/></linearGradient>
-<radialGradient id="aura"><stop stop-color="#8f79d7" stop-opacity=".20"/><stop offset="1" stop-color="#8f79d7" stop-opacity="0"/></radialGradient>
-<radialGradient id="warm"><stop stop-color="#f29a5c" stop-opacity=".12"/><stop offset="1" stop-color="#f29a5c" stop-opacity="0"/></radialGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2C3B4F"/><stop offset=".56" stop-color="#35465C"/><stop offset="1" stop-color="#2B394C"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#A9C8F1"/><stop offset=".52" stop-color="#CDBCF0"/><stop offset="1" stop-color="#F2C5AB"/></linearGradient>
+<radialGradient id="aura"><stop stop-color="#91A8D9" stop-opacity=".15"/><stop offset="1" stop-color="#91A8D9" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#F2C5AB" stop-opacity=".12"/><stop offset="1" stop-color="#F2C5AB" stop-opacity="0"/></radialGradient>
 </defs><style><![CDATA[
 .breathe{animation:breathe 11s ease-in-out infinite alternate;transform-origin:center}
 @keyframes breathe{from{opacity:.53}to{opacity:1}}
@@ -20,35 +20,35 @@
 <rect x="0" y="0" width="900" height="420" rx="0" fill="url(#bg)" stroke="none"/>
 <ellipse class="breathe" cx="780" cy="42" rx="280" ry="230" fill="url(#aura)"/>
 <ellipse class="breathe" cx="80" cy="395" rx="195" ry="145" fill="url(#warm)"/>
-<path d="M38 27h26 M38 27v22 M835 393h26v-22" fill="none" stroke="#776f9a" stroke-width="1.6" opacity=".65"/>
 
-<text x="49" y="57" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#FFBD78" letter-spacing="1.6">ABOUT / AINCFH</text>
+
+<text x="49" y="57" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#F2C5AB" letter-spacing="1.6">ABOUT / AINCFH</text>
 <text x="49" y="117" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="37" font-weight="810" fill="#F6F5FB" letter-spacing="-1.1">Build the whole experience.</text>
-<text x="49" y="149" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="540" fill="#B6C4DB">Design, engineering and practical delivery — together.</text>
-<circle cx="830" cy="53" r="5" fill="#63D8AC" class="soft-pulse"/>
-<text x="845" y="58" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="750" fill="#9DDEC4">ACTIVE</text>
+<text x="49" y="149" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="540" fill="#C8D5E5">Design, engineering and practical delivery — together.</text>
+<circle cx="830" cy="53" r="5" fill="#9CDECC" class="soft-pulse"/>
+<text x="845" y="58" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="750" fill="#C7F0E4">ACTIVE</text>
 <g class="float" style="animation-delay:-0s">
-<rect x="48" y="190" width="244" height="193" rx="16" fill="#1E2C43" stroke="#42516D"/>
-<rect x="68" y="211" width="43" height="43" rx="12" fill="#2C3B55" stroke="#4E5D7A"/>
-<text x="90" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#FFB779" text-anchor="middle">⌘</text>
-<text x="68" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F1F3FB">Web platforms</text>
-<text x="68" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">Interfaces and services</text>
-<text x="68" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">built around real use.</text>
-<text x="68" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#FFB779">React  ·  TypeScript</text>
+<rect x="48" y="190" width="244" height="193" rx="16" fill="#3B4D64" stroke="#6A7D96"/>
+<rect x="68" y="211" width="43" height="43" rx="12" fill="#445971" stroke="#71839D"/>
+<text x="90" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#F2C5AB" text-anchor="middle">⌘</text>
+<text x="68" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F5F7FC">Web platforms</text>
+<text x="68" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">Interfaces and services</text>
+<text x="68" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">built around real use.</text>
+<text x="68" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#F2C5AB">React  ·  TypeScript</text>
 </g><g class="float" style="animation-delay:-2.1s">
-<rect x="328" y="190" width="244" height="193" rx="16" fill="#1E2C43" stroke="#42516D"/>
-<rect x="348" y="211" width="43" height="43" rx="12" fill="#2C3B55" stroke="#4E5D7A"/>
-<text x="370" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#BFA7FF" text-anchor="middle">▣</text>
-<text x="348" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F1F3FB">Desktop software</text>
-<text x="348" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">Purposeful Windows</text>
-<text x="348" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">tools and workflows.</text>
-<text x="348" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#BFA7FF">C#  ·  .NET</text>
+<rect x="328" y="190" width="244" height="193" rx="16" fill="#3B4D64" stroke="#6A7D96"/>
+<rect x="348" y="211" width="43" height="43" rx="12" fill="#445971" stroke="#71839D"/>
+<text x="370" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#CDBCF0" text-anchor="middle">▣</text>
+<text x="348" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F5F7FC">Desktop software</text>
+<text x="348" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">Purposeful Windows</text>
+<text x="348" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">tools and workflows.</text>
+<text x="348" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#CDBCF0">C#  ·  .NET</text>
 </g><g class="float" style="animation-delay:-4.2s">
-<rect x="608" y="190" width="244" height="193" rx="16" fill="#1E2C43" stroke="#42516D"/>
-<rect x="628" y="211" width="43" height="43" rx="12" fill="#2C3B55" stroke="#4E5D7A"/>
-<text x="650" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#7BE5C7" text-anchor="middle">✦</text>
-<text x="628" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F1F3FB">AI workflows</text>
-<text x="628" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">Practical automation</text>
-<text x="628" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#B6C5DB">with verified output.</text>
-<text x="628" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#7BE5C7">Tools  ·  Integration</text>
+<rect x="608" y="190" width="244" height="193" rx="16" fill="#3B4D64" stroke="#6A7D96"/>
+<rect x="628" y="211" width="43" height="43" rx="12" fill="#445971" stroke="#71839D"/>
+<text x="650" y="241" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="725" fill="#9CDECC" text-anchor="middle">✦</text>
+<text x="628" y="291" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="770" fill="#F5F7FC">AI workflows</text>
+<text x="628" y="317" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">Practical automation</text>
+<text x="628" y="336" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="540" fill="#C8D5E5">with verified output.</text>
+<text x="628" y="367" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="665" fill="#9CDECC">Tools  ·  Integration</text>
 </g></svg>
