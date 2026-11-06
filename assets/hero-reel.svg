@@ -143,7 +143,69 @@ html{color-scheme:dark}
 <circle cx="920" cy="435" r="5" fill="#6be2bd" /><text x="937" y="441" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="790" fill="#8aebc8" >ACCESS CONTROLLED</text>
 <text x="503" y="514" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="760" fill="#9eb2ce" >IN-GAME ORGANIZATIONS · NOT REAL GOVERNMENT INSTITUTIONS</text>
 </g>
-<!-- SCENES_INSERT -->
+<g class="scene scene3" opacity="0" clip-path="url(#sceneclip)">
+<rect x="483" y="226" width="660" height="328" rx="10" fill="#152035" stroke="none" />
+<rect x="496" y="240" width="629" height="281" rx="12" fill="#1e2d45" stroke="#53637d" />
+<rect x="496" y="240" width="629" height="36" rx="11" fill="#293750" stroke="none" />
+<circle cx="513" cy="257" r="5" fill="#6de0b8" /><text x="528" y="263" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="785" fill="#ebedf8" >WINDOWS / TOOLBOX</text>
+<text x="1092" y="263" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="770" fill="#79e6c0" text-anchor="end">● READY</text>
+<rect x="509" y="289" width="164" height="218" rx="9" fill="#152137" stroke="none" />
+<text x="524" y="317" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="785" fill="#98b0d0" >APPLICATIONS</text>
+<text x="526" y="355" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="735" fill="#ffbc79" >Overview</text>
+<text x="526" y="394" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="595" fill="#bac5df" >Diagnostics</text>
+<text x="526" y="433" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="595" fill="#bac5df" >Audio tools</text>
+<text x="526" y="474" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="14" font-weight="595" fill="#bac5df" >Settings</text>
+<rect x="687" y="289" width="200" height="101" rx="11" fill="#273954" stroke="#506580" />
+<text x="705" y="317" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="760" fill="#a8bbd6" >SYSTEM HEALTH</text>
+<text x="704" y="350" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="25" font-weight="820" fill="#78e9c7" >OPTIMAL</text>
+<rect x="706" y="370" width="162" height="6" rx="3" fill="#40506b" stroke="none" /><rect x="706" y="370" width="143" height="6" rx="3" fill="#67deba" stroke="none" class="scan"/>
+<rect x="898" y="289" width="213" height="101" rx="11" fill="#273954" stroke="#506580" />
+<text x="916" y="317" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="750" fill="#a8bbd6" >WORKSPACE</text>
+<text x="914" y="350" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="24" font-weight="810" fill="#ffba7b" >CONNECTED</text>
+<rect x="916" y="370" width="175" height="6" rx="3" fill="#40506b" stroke="none" /><rect x="916" y="370" width="131" height="6" rx="3" fill="#ffb17a" stroke="none" />
+<rect x="687" y="404" width="424" height="100" rx="11" fill="#22334e" stroke="#526381" />
+<text x="705" y="433" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="760" fill="#afc0dc" >RUNTIME / PERFORMANCE</text>
+<path d="M708 477L749 464L790 471L823 445L861 455L900 436L939 445L981 424L1027 435L1067 417L1096 430" stroke="#70e2c1" stroke-width="3" fill="none"/>
+<text x="505" y="540" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="765" fill="#8de6ca" >C# / .NET  ·  WEBVIEW2  ·  LOCAL UTILITIES</text>
+</g>
+<g class="scene scene4" opacity="0" clip-path="url(#sceneclip)">
+<rect x="483" y="226" width="661" height="330" rx="10" fill="#162034" stroke="none" />
+<text x="504" y="267" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="790" fill="#ffb97a" letter-spacing="1.5">ENGINEERING / DELIVERY</text>
+<text x="504" y="314" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="36" font-weight="820" fill="#f4f3fa" >Build with intent.</text>
+<text x="505" y="342" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="575" fill="#afc0da" >Product direction, technical judgment and verified releases.</text>
+<path d="M530 404H1095" stroke="#42516e" stroke-width="4" fill="none"/>
+<path d="M530 404H1080" stroke="url(#brand)" stroke-width="3" fill="none"/>
+<circle cx="541" cy="404" r="20" fill="#ffaf68" /><text x="541" y="410" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="840" fill="#27253b" text-anchor="middle">01</text><text x="521" y="443" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="780" fill="#e8edf9" >PLAN</text><circle cx="685" cy="404" r="20" fill="#e9938c" /><text x="685" y="410" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="840" fill="#27253b" text-anchor="middle">02</text><text x="665" y="443" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="780" fill="#e8edf9" >DESIGN</text><circle cx="829" cy="404" r="20" fill="#c19df4" /><text x="829" y="410" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="840" fill="#27253b" text-anchor="middle">03</text><text x="809" y="443" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="780" fill="#e8edf9" >CODE</text><circle cx="973" cy="404" r="20" fill="#8fa9f2" /><text x="973" y="410" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="840" fill="#27253b" text-anchor="middle">04</text><text x="953" y="443" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="780" fill="#e8edf9" >TEST</text><circle cx="1117" cy="404" r="20" fill="#75e2bc" /><text x="1117" y="410" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="840" fill="#27253b" text-anchor="middle">05</text><text x="1097" y="443" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="780" fill="#e8edf9" >SHIP</text>
+<rect x="501" y="471" width="194" height="64" rx="10" fill="#283851" stroke="#52617b" />
+<rect x="716" y="471" width="194" height="64" rx="10" fill="#283851" stroke="#52617b" />
+<rect x="926" y="471" width="194" height="64" rx="10" fill="#283851" stroke="#52617b" />
+<text x="518" y="495" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="770" fill="#ffbd7c" >PRODUCT DESIGN</text>
+<text x="518" y="518" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="735" fill="#f1f3fb" >Visual clarity</text>
+<text x="733" y="495" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="770" fill="#c9b1ff" >ENGINEERING</text>
+<text x="733" y="518" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="735" fill="#f1f3fb" >Correct behavior</text>
+<text x="943" y="495" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="770" fill="#89ebc9" >QUALITY</text>
+<text x="943" y="518" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="16" font-weight="735" fill="#f1f3fb" >Test before ship</text>
+</g>
+<g class="scene scene5" opacity="0" clip-path="url(#sceneclip)">
+<rect x="483" y="226" width="661" height="329" rx="10" fill="#192238" stroke="none" />
+<ellipse cx="1101" cy="259" rx="171" ry="156" fill="url(#glowA)" class="float"/>
+<text x="504" y="266" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="790" fill="#ffb576" letter-spacing="1.4">AINCFH / GET IN TOUCH</text>
+<text x="502" y="321" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="820" fill="#f7f3fb" >Let's create</text>
+<text x="503" y="364" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="42" font-weight="815" fill="#ffb36e" >what's next.</text>
+<text x="504" y="393" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="595" fill="#b9c8dc" >One workspace. Many kinds of work.</text>
+<rect x="780" y="258" width="337" height="230" rx="13" fill="#25344f" stroke="#60617c" />
+<text x="798" y="290" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="785" fill="#cdbbfc" letter-spacing="1.4">CONNECT</text>
+<path d="M797 306H1099" stroke="#41516c" stroke-width="1" fill="none"/>
+<text x="798" y="337" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="750" fill="#ffbb7b" >GITHUB</text><text x="798" y="361" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="710" fill="#f3f1fb" >github.com/AincFh</text>
+<path d="M797 375H1099" stroke="#41516c" stroke-width="1" fill="none"/>
+<text x="798" y="400" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="750" fill="#bfaffd" >WEB</text><text x="798" y="424" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="15" font-weight="710" fill="#f3f1fb" >aincfh.dpdns.org</text>
+<path d="M797 438H1099" stroke="#41516c" stroke-width="1" fill="none"/>
+<text x="798" y="460" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="750" fill="#8de8c8" >EMAIL</text><text x="875" y="460" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="670" fill="#f3f1fb" >fhainc@hotmail.com</text>
+<rect x="503" y="426" width="247" height="62" rx="11" fill="#29344e" stroke="#565a75" />
+<text x="519" y="451" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="12" font-weight="790" fill="#ffb876" >OPEN SOURCE &amp; PROJECTS</text>
+<text x="519" y="473" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="13" font-weight="575" fill="#bbcae0" >Explore the real work.</text>
+<text x="502" y="529" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="750" fill="#a5aacb" letter-spacing="1.25">DESTRUCTION IS THE JOY OF REBIRTH</text>
+</g>
 <path d="M483 566H1147" stroke="#404e69"/>
 <text x="487" y="587" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="11" font-weight="760" fill="#b3bfd6" letter-spacing=".7">AUTOPLAY / 6 VISUAL CHAPTERS</text>
 <text x="1138" y="587" font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI',Arial,sans-serif" font-size="10" font-weight="735" fill="#c0b0db" text-anchor="end">36 SEC · LOOP ↻</text>
