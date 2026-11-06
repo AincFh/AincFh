@@ -20,18 +20,18 @@ but the actual AincFh browser OS source lives at /docs/.
 </p>
 
 <p align="center">
-  <img src="./assets/editorial-projects.svg?v=20261106-editorial24" alt="Selected work: A.T. Field web platform, Saint Laurent fictional FiveM community services, and Windows desktop utilities." width="100%" />
+  <img src="./assets/editorial-projects.svg?v=20261106-editorial24b" alt="Selected work: A.T. Field web platform, Saint Laurent fictional FiveM community services, and Windows desktop utilities." width="100%" />
 </p>
 
 <p align="center">
   <a href="https://github.com/AincFh" title="Explore the work on GitHub">
-    <img src="./assets/editorial-approach.svg?v=20261106-editorial24" alt="The approach: visual coherence, reliable behavior and tested delivery." width="100%" />
+    <img src="./assets/editorial-approach.svg?v=20261106-editorial24b" alt="The approach: visual coherence, reliable behavior and tested delivery." width="100%" />
   </a>
 </p>
 
 <p align="center">
   <a href="mailto:fhainc@hotmail.com" title="Email AincFh">
-    <img src="./assets/editorial-contact.svg?v=20261106-editorial24" alt="Personal motto: 破灭的宿命亦是重生的喜悦. Contact details for AincFh." width="100%" />
+    <img src="./assets/editorial-contact.svg?v=20261106-editorial24b" alt="Personal motto: 破灭的宿命亦是重生的喜悦. Contact details for AincFh." width="100%" />
   </a>
 </p>
 
