@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="900" height="330" viewBox="0 0 900 330" role="img" aria-label="AincFh personal software studio: bold editorial identity and a single animated product icon."><defs><style><![CDATA[
+:root{--bg:#f1f4f9;--surface:#ffffff;--subtle:#e8edf5;--ink:#1d293b;--muted:#61728a;--line:#d7dfec;--brand:#2877d5;--brandText:#ffffff;--pale:#dbe8fa;--softBlue:#b9d2f6;--softLilac:#d5cced;--softMint:#b9e6d8;--uiShadow:#b4c5d9;--warm:#f6e9e1}
+@media(prefers-color-scheme:dark){:root{--bg:#1d2736;--surface:#283547;--subtle:#334357;--ink:#f1f5fc;--muted:#b0c1d6;--line:#4a5b70;--brand:#97beff;--brandText:#1e3048;--pale:#3c5475;--softBlue:#55769d;--softLilac:#6e638b;--softMint:#4e7c71;--uiShadow:#0e1620;--warm:#5b5060}}
+svg{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif}
+.bg{fill:var(--bg)}.surface{fill:var(--surface)}.subtle{fill:var(--subtle)}.ink{fill:var(--ink)}.muted{fill:var(--muted)}.brand-ink{fill:var(--brand)}.brand-bg{fill:var(--brand)}.pale{fill:var(--pale)}.blue{fill:var(--softBlue)}.lilac{fill:var(--softLilac)}.mint{fill:var(--softMint)}.warm{fill:var(--warm)}.pill{fill:var(--subtle)}
+.stroke{stroke:var(--line)}.line{fill:var(--line)}.brand-stroke{stroke:var(--brand)}.brand-on{fill:var(--brandText)}
+.soft-shadow{filter:url(#shadow)}
+.chap,.tab-active{animation-duration:24s;animation-timing-function:linear;animation-iteration-count:infinite}
+.chap0,.tab0{animation-name:show0}.chap1,.tab1{animation-name:show1}.chap2,.tab2{animation-name:show2}.chap3,.tab3{animation-name:show3}
+@keyframes show0{0%,22.5%{opacity:1}24.7%,98%{opacity:0}100%{opacity:1}}
+@keyframes show1{0%,24.8%{opacity:0}26.7%,47.5%{opacity:1}49.7%,100%{opacity:0}}
+@keyframes show2{0%,49.8%{opacity:0}51.7%,72.5%{opacity:1}74.7%,100%{opacity:0}}
+@keyframes show3{0%,74.8%{opacity:0}76.7%,97.5%{opacity:1}99.8%,100%{opacity:0}}
+.progress{animation:progress 24s linear infinite;transform-box:fill-box;transform-origin:left center}
+@keyframes progress{0%{transform:scaleX(.03)}100%{transform:scaleX(1)}}
+.float{animation:float 11s ease-in-out infinite alternate}@keyframes float{to{transform:translateY(-5px)}}
+.glow{animation:glow 9s ease-in-out infinite alternate}@keyframes glow{to{opacity:.5}}
+.slide{animation:slide 12s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
+@keyframes slide{to{transform:scaleX(.6)}}
+@media(prefers-reduced-motion:reduce){.chap,.tab-active,.progress,.float,.glow,.slide{animation:none!important;transform:none!important}.chap0,.tab0{opacity:1!important}.chap1,.chap2,.chap3,.tab1,.tab2,.tab3{opacity:0!important}}
+]]></style><filter id="shadow" x="-25%" y="-25%" width="150%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="14" flood-color="#162d48" flood-opacity=".13"/></filter><clipPath id="content"><rect x="57" y="217" width="786" height="266" rx="12"/></clipPath></defs><rect x="0" y="0" width="900" height="330" rx="20" class="bg" />
+<text x="54" y="45" class="brand-ink" font-size="13" font-weight="750" >A I N C F H  /  S T U D I O</text>
+<text x="51" y="137" class="ink" font-size="82" font-weight="820" letter-spacing="-4">AincFh.</text>
+<text x="55" y="190" class="ink" font-size="30" font-weight="670" letter-spacing="-1.1">Software, with intention.</text>
+<text x="56" y="224" class="muted" font-size="16" font-weight="480" >Useful products. Thoughtful details. Real engineering.</text>
+<rect x="55" y="258" width="209" height="37" rx="12" class="brand-bg" /><text x="80" y="283" class="brand-on" font-size="15" font-weight="710" >Browse repositories  ↗</text>
+<text x="278" y="282" class="muted" font-size="14" font-weight="560" >Web   ·   Desktop   ·   AI</text>
+<g class="float"><rect x="591" y="55" width="247" height="224" rx="26" class="surface" filter="url(#shadow)"/><rect x="614" y="80" width="202" height="154" rx="19" class="subtle" /><rect x="669" y="113" width="91" height="91" rx="23" class="brand-bg" /><text x="715" y="181" class="brand-on" font-size="72" font-weight="720" text-anchor="middle">A</text>
+<circle cx="779" cy="109" r="5" class="brand-bg" /><rect x="616" y="244" width="96" height="8" rx="4" class="line" /><rect x="719" y="244" width="63" height="8" rx="4" class="line" /></g>
+<path d="M55 311H846" class="stroke" stroke-width="1" fill="none" />
+</svg>
