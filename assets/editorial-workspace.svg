@@ -76,5 +76,5 @@ svg{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','Pi
 <text x="530" y="407" class="brand-ink" font-size="15" font-weight="650" >✓ checks passed</text>
 </g>
 <text x="58" y="526" class="muted" font-size="12" font-weight="670" letter-spacing=".65">AUTOPLAY  /  24 SECOND TOUR</text>
-<rect x="626" y="520" width="219" height="4" rx="2" class="line" /><rect x="626" y="520" width="219" height="4" rx="2" class="brand-bg" class="progress"/>
+<rect x="626" y="520" width="219" height="4" rx="2" class="line" /><rect x="626" y="520" width="219" height="4" rx="2" class="brand-bg progress"/>
 </svg>
