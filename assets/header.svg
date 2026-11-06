@@ -31,7 +31,7 @@
 ]]></style>
 </defs>
 <g font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif">
-<rect x="0" y="0" width="900" height="265" rx="0" fill="url(#bg)" stroke="none" stroke-width="1"/><rect x="0" y="0" width="900" height="265" rx="0" fill="url(#hex)" stroke="none" stroke-width="1"/>
+<rect x="0" y="0" width="900" height="265" rx="0" fill="url(#bg)" stroke="none" stroke-width="1"/>
 <ellipse cx="800" cy="45" rx="345" ry="240" fill="url(#light)"/>
 <ellipse cx="85" cy="205" rx="250" ry="200" fill="url(#warm)"/>
 <g aria-hidden="true"><ellipse class="af-halo" cx="730" cy="82" rx="155" ry="95" fill="#9b82ed" opacity=".11"/><ellipse class="af-halo" cx="110" cy="186" rx="115" ry="110" fill="#fa965a" opacity=".10"/></g>
