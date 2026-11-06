@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 FILES = ("header", "profile-panel", "launch-workspace", "work", "ethos", "footer")
 SVG = "{http://www.w3.org/2000/svg}"
-VERSION = "20261106-universal22"
+VERSION = "20261106-calm23"
 
 
 def run():
@@ -56,6 +56,23 @@ def run():
         for accent in ("#A9C8F1", "#CDBCF0", "#9CDECC", "#F2C5AB"):
             assert contrast(accent, background) >= 4.5, (accent, background)
     print("PASS universal palette: AA+ contrast for copy and accents on neutral slate surfaces")
+    # Protect the intended visual hierarchy from future decorative regression.
+    density_budget = {
+        "header": (10, 25), "profile-panel": (19, 22),
+        "work": (25, 38), "ethos": (12, 18), "footer": (12, 15),
+    }
+    for name, (max_labels, max_shapes) in density_budget.items():
+        root = ET.fromstring((ROOT / "assets" / f"{name}.svg").read_text(encoding="utf-8"))
+        labels = sum(1 for node in root.iter() if node.tag == SVG + "text")
+        shapes = sum(1 for node in root.iter()
+                     if node.tag in {SVG + "rect", SVG + "circle", SVG + "path", SVG + "ellipse"})
+        assert labels <= max_labels, f"{name}: too many text fragments ({labels})"
+        assert shapes <= max_shapes, f"{name}: repeated decorative geometry ({shapes})"
+    assert "matrix(1.17 0 0 1.05 -194 -4)" in (
+        ROOT / "assets/launch-workspace.svg").read_text(encoding="utf-8"), (
+        "Keep the project demo enlarged, not a small window")
+    print("PASS calm composition: restrained label and shape budgets; enlarged project preview")
+
     header = (ROOT / "assets/header.svg").read_text(encoding="utf-8")
     assert 'fill="url(#hex)"' not in header, "Header decorative pattern should be removed"
     panel = (ROOT / "assets/profile-panel.svg").read_text(encoding="utf-8")
