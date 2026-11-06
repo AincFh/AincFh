@@ -87,6 +87,43 @@
 <path d="M137 1215H884" stroke="#e0e8f2" stroke-width="1" fill="none"/>
 <text x="139" y="1246" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="750" fill="#98aabf" letter-spacing="1.5">WEB PRODUCT  /  VISUAL CONCEPT</text>
 <text x="909" y="1246" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="610" fill="#8c9fb5" text-anchor="end">Built for everyday use</text>
+
+<text x="108" y="1352" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="805" fill="#6385b3" letter-spacing="2.3">02 / COMMUNITY SYSTEMS</text>
+<text x="101" y="1405" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="43" font-weight="795" fill="#28425f" letter-spacing="-1.5">Organized around real workflows.</text>
+<text x="106" y="1441" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="19" font-weight="550" fill="#8497aa" >Thoughtful public and permission-controlled experiences.</text>
+<g filter="url(#shadow)"><rect x="102" y="1478" width="820" height="634" rx="23" fill="#ffffff" stroke="#dce6f1"/></g>
+<rect x="103" y="1479" width="818" height="57" rx="22" fill="#f8fafc" stroke="none"/>
+<rect x="103" y="1521" width="818" height="15" rx="0" fill="#f8fafc" stroke="none"/>
+<circle cx="131" cy="1507" r="7" fill="#ff615b"/><circle cx="157" cy="1507" r="7" fill="#ffbc49"/><circle cx="183" cy="1507" r="7" fill="#36c96b"/>
+<text x="513" y="1515" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="710" fill="#667d95" text-anchor="middle">Saint Laurent · Community Portal</text>
+<path d="M103 1536H921" stroke="#e4ebf4" stroke-width="1" fill="none"/>
+<rect x="123" y="1559" width="776" height="100" rx="17" fill="url(#lilac)" stroke="#e7e6f2"/>
+<text x="151" y="1607" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="32" font-weight="785" fill="#344d6e" >Saint Laurent</text>
+<text x="152" y="1637" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="575" fill="#69819f" >Fictional roleplay community services</text>
+<rect x="141" y="1680" width="741" height="54" rx="12" fill="#f5f8fc" stroke="#e1e8f2"/>
+<text x="161" y="1715" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="27" font-weight="625" fill="#6e9ad7" >⌕</text>
+<g class="queryA"><text x="201" y="1715" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="540" fill="#8598ae" >Search the codex, rules and public services</text></g>
+<g class="queryB" opacity="0"><text x="201" y="1715" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="540" fill="#8598ae" >Find applications and authorized workflows</text></g>
+<rect x="141" y="1753" width="464" height="124" rx="13" fill="#ffffff" stroke="#e2e9f2"/>
+<text x="162" y="1789" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="790" fill="#598abf" letter-spacing=".9">PUBLIC CODEX</text>
+<text x="162" y="1822" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="21" font-weight="745" fill="#3d597b" >Structured legal references</text>
+<text x="163" y="1853" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="555" fill="#8297ad" >Searchable statutes, guidance and rules</text>
+<rect x="141" y="1892" width="464" height="123" rx="13" fill="#ffffff" stroke="#e2e9f2"/>
+<text x="162" y="1928" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="790" fill="#4c9aaf" letter-spacing=".9">COMMUNITY SERVICES</text>
+<text x="162" y="1961" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="21" font-weight="745" fill="#3d597b" >Applications and requests</text>
+<text x="163" y="1992" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="555" fill="#8297ad" >Status tracking and accessible information</text>
+<rect x="621" y="1753" width="261" height="263" rx="13" fill="#f0f5fc" stroke="#e0e9f4"/>
+<text x="641" y="1791" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="790" fill="#7190b2" >JUSTICE WORKBENCH</text>
+<rect x="641" y="1808" width="221" height="119" rx="12" fill="#ffffff" stroke="#e1e8f1"/>
+<text x="660" y="1841" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="760" fill="#435b79" >Authorized access</text>
+<text x="660" y="1871" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="555" fill="#8498af" >Role-controlled tools</text>
+<circle cx="666" cy="1900" r="6" fill="#4bbf98" class="pulse"/><text x="681" y="1907" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="785" fill="#539f85" >CHECKED</text>
+<text x="641" y="1958" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="680" fill="#687f9a" >Case assistance</text>
+<text x="641" y="1989" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="555" fill="#8498af" >Protected workspace</text>
+<path d="M138 2048H885" stroke="#e2eaf4" stroke-width="1" fill="none"/>
+<text x="140" y="2084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="775" fill="#8b9eb6" letter-spacing="1.1">FICTIONAL FIVE M / ROLEPLAY SETTING</text>
+<text x="884" y="2084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="590" fill="#98a7b9" text-anchor="end">Not a real government institution</text>
 <!-- STORY_CONTENT -->
+
 
 </svg>
