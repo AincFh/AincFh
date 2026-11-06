@@ -9,7 +9,7 @@ on:
       - profile-restore-modular-v20-2026-11
     paths:
       - 'docs/**'
-      - 'assets/launch-workspace.svg'
+      - 'assets/*.svg'
       - 'tests/os-smoke.py'
       - 'tests/os-apps-v8.py'
       - 'tests/os-paint-v9.py'
@@ -25,7 +25,7 @@ on:
   pull_request:
     paths:
       - 'docs/**'
-      - 'assets/launch-workspace.svg'
+      - 'assets/*.svg'
       - 'tests/os-smoke.py'
       - 'tests/os-apps-v8.py'
       - 'tests/os-paint-v9.py'
