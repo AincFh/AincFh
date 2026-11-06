@@ -20,6 +20,9 @@ on:
       - 'tests/os-desktop-v13.py'
       - 'tests/os-files-explorer-v14.py'
       - 'tests/profile-motion-browser.py'
+      - 'tests/profile-one-take-browser.py'
+      - 'assets/hero-reel.svg'
+      - 'README.md'
       - '.github/workflows/aincfh-os-qa.yml'
   pull_request:
     paths:
@@ -36,6 +39,9 @@ on:
       - 'tests/os-desktop-v13.py'
       - 'tests/os-files-explorer-v14.py'
       - 'tests/profile-motion-browser.py'
+      - 'tests/profile-one-take-browser.py'
+      - 'assets/hero-reel.svg'
+      - 'README.md'
       - '.github/workflows/aincfh-os-qa.yml'
   workflow_dispatch:
 
@@ -67,6 +73,7 @@ jobs:
         env:
           OS_URL: http://127.0.0.1:8765/
         run: |
+          python tests/profile-one-take-browser.py
           python tests/profile-motion-browser.py
           python tests/os-smoke.py
           python tests/os-apps-v8.py
