@@ -33,7 +33,7 @@ svg{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','Pi
 <text x="78" y="304" class="ink" font-size="42" font-weight="775" letter-spacing="-1.6">A.T. Field</text>
 <text x="81" y="333" class="muted" font-size="15" font-weight="550" >Content, community and an independent web platform.</text>
 <rect x="81" y="357" width="154" height="29" rx="15" class="pill" /><text x="93" y="376" class="muted" font-size="12" font-weight="650" >React · TypeScript</text><rect x="246" y="357" width="115" height="29" rx="15" class="pill" /><text x="258" y="376" class="muted" font-size="12" font-weight="650" >Cloudflare</text>
-<rect x="81" y="414" width="302" height="37" rx="11" class="brand-bg" /><text x="100" y="439" class="brand-on" font-size="13" font-weight="735" >OPEN PRODUCT</text>
+<rect x="81" y="414" width="302" height="37" rx="11" class="pale" /><text x="100" y="439" class="brand-ink" font-size="13" font-weight="735" >WEB PLATFORM</text>
 <rect x="495" y="244" width="301" height="201" rx="15" class="subtle" /><text x="516" y="276" class="brand-ink" font-size="15" font-weight="760" >A.T. FIELD</text><text x="516" y="309" class="ink" font-size="24" font-weight="750" >Explore what matters.</text>
 <rect x="517" y="326" width="243" height="14" rx="5" class="line" /><rect x="517" y="347" width="179" height="12" rx="5" class="line" />
 <rect x="517" y="375" width="111" height="47" rx="10" class="pale" /><rect x="640" y="375" width="120" height="47" rx="10" class="surface" />
