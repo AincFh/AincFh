@@ -64,6 +64,33 @@ def run():
                 f"scene {i}: other project panels overlap: {frame}"
             )
         print("PASS 20s synchronized reel: four unique non-overlapping chapters")
+        # GitHub README embeds each SVG through <img>, not an inline SVG document.
+        # Verify the main reel really changes its pixels as an embedded image.
+        preview = OUT / "profile-embedded-preview.html"
+        preview.write_text(
+            '<!doctype html><meta charset="utf-8"><style>body{background:#101623}'
+            'img{width:900px;height:360px;display:block}</style>'
+            '<img src="../assets/launch-workspace.svg" alt="AincFh OS demo">',
+            encoding="utf-8",
+        )
+        page.goto(preview.as_uri())
+        picture = page.locator("img")
+        assert picture.evaluate("(img) => img.complete && img.naturalWidth > 0"), (
+            "README-embedded SVG cannot be loaded"
+        )
+        first = picture.screenshot()
+        page.wait_for_timeout(1400)
+        second = picture.screenshot()
+        assert first != second, "Embedded <img> does not animate like a GIF"
+        page.screenshot(path=str(OUT / "profile-motion-embedded-image.png"))
+        page.emulate_media(reduced_motion="reduce")
+        page.reload()
+        static_first = picture.screenshot()
+        page.wait_for_timeout(300)
+        static_second = picture.screenshot()
+        assert static_first == static_second, "Reduced-motion image keeps repainting"
+        print("PASS GitHub README <img> image animates; reduced-motion frame is stable")
+
         browser.close()
 
 
