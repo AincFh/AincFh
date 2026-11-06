@@ -6,7 +6,7 @@ import xml.etree.ElementTree as ET
 ROOT = Path(__file__).resolve().parents[1]
 FILES = ("header", "profile-panel", "launch-workspace", "work", "ethos", "footer")
 SVG = "{http://www.w3.org/2000/svg}"
-VERSION = "20261106-modular21"
+VERSION = "20261106-universal22"
 
 
 def run():
@@ -28,9 +28,34 @@ def run():
         assert not re.search(r'(?:fill|stroke)="var\(', source), name
         assert not re.search(r'(?:fill|stroke)="class=', source), name
         assert "prefers-reduced-motion:reduce" in source, name
+        assert "prefers-color-scheme" not in source, f"{name}: palette must not invert with browser appearance"
+        assert "#2C3B4F" in source and "#35465C" in source and "#2B394C" in source, (
+            f"{name}: universal neutral-slate surface tokens missing"
+        )
+        assert "#A9C8F1" in source and "#CDBCF0" in source, (
+            f"{name}: shared blue/lilac accents missing"
+        )
         assert "@keyframes" in source and "animation:" in source, name
         assert len(source.encode("utf-8")) <= 24000, name
         print(f"PASS {name}: valid self-contained SVG, animated and reduced-motion-safe")
+    def srgb_channel(channel):
+        value = int(channel, 16) / 255
+        return value / 12.92 if value <= 0.04045 else ((value + 0.055) / 1.055) ** 2.4
+
+    def luminance(color):
+        return sum(weight * srgb_channel(color[i:i + 2]) for weight, i in
+                   ((0.2126, 1), (0.7152, 3), (0.0722, 5)))
+
+    def contrast(a, b):
+        values = sorted((luminance(a), luminance(b)))
+        return (values[1] + 0.05) / (values[0] + 0.05)
+
+    for background in ("#2C3B4F", "#35465C", "#3B4D64"):
+        assert contrast("#F5F7FC", background) >= 7.0
+        assert contrast("#C8D5E5", background) >= 5.5
+        for accent in ("#A9C8F1", "#CDBCF0", "#9CDECC", "#F2C5AB"):
+            assert contrast(accent, background) >= 4.5, (accent, background)
+    print("PASS universal palette: AA+ contrast for copy and accents on neutral slate surfaces")
     header = (ROOT / "assets/header.svg").read_text(encoding="utf-8")
     assert 'fill="url(#hex)"' not in header, "Header decorative pattern should be removed"
     panel = (ROOT / "assets/profile-panel.svg").read_text(encoding="utf-8")
