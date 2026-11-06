@@ -1,43 +1,22 @@
 <!--
-AincFh — personal engineering and design profile.
-All six SVG modules use lightweight, continuously looping CSS motion. Every animation has a readable static fallback and respects prefers-reduced-motion.
-Visual-first presentation built with repository-local animated SVG assets.
-Interaction inside GitHub README is limited to links, details and supported image animations.
-The complete interactive site is stored at docs/index.html and published separately when GitHub Pages succeeds.
-GitHub Markdown sanitizes JavaScript, so this README does not claim to embed a functional web desktop.
-Projects: https://github.com/AincFh/my-anime-blog · https://yslfivem.com · https://github.com/AincFh
+AincFh — continuous single-stage GitHub profile.
+The entire visible showcase is ONE SVG with ONE fixed AincFh OS shell and a
+single 36-second master timeline. All content transitions inside that shell.
+README image playback is automatic SVG/CSS motion, not HTML/JS interaction.
+Actual browser OS source: docs/. Pages availability depends on GitHub Pages setup.
+Old SVG assets are retained in the repository as archived visual studies but no
+longer rendered as independent README sections.
 -->
 
 <p align="center">
-  <a href="https://aincfh.github.io/AincFh/" title="Open the interactive AincFh OS workspace">
-    <img src="./assets/header.svg?v=20261106-motion15" alt="AincFh — A.T. Field — animated orange and violet identity" width="100%" />
-  </a>
+  <img src="./assets/hero-reel.svg?v=20261106-onetake16" alt="AincFh OS — one continuous animated desktop presentation with seamless transitions between overview, A.T. Field, Saint Laurent, Windows Tools, engineering principles and contact information" width="100%" />
 </p>
 
 <p align="center">
-  <img src="./assets/profile-panel.svg?v=20261106-motion15" alt="AincFh profile — full-stack products, engineering experience and technology stack" width="100%" />
-</p>
-
-<p align="center">
-  <a href="https://aincfh.github.io/AincFh/" title="Launch the full AincFh OS interactive workspace">
-    <img src="./assets/launch-workspace.svg?v=20261106-motion15" alt="AincFh OS animated project preview — opens the interactive browser workspace with projects, terminal and desktop applications" width="100%" />
-  </a>
-</p>
-
-<p align="center">
-  <a href="https://aincfh.dpdns.org" title="View A.T. Field">
-    <img src="./assets/work.svg?v=20261106-motion15" alt="Selected work — A.T. Field and Saint Laurent systems, with architecture and engineering practices" width="100%" />
-  </a>
-</p>
-
-<p align="center">
-  <img src="./assets/ethos.svg?v=20261106-motion15" alt="How I work — design clarity, pragmatic engineering and real product delivery" width="100%" />
-</p>
-
-<p align="center">
-  <a href="mailto:fhainc@hotmail.com" title="Contact AincFh">
-    <img src="./assets/footer.svg?v=20261106-motion15" alt="AincFh — contact information and personal motto" width="100%" />
-  </a>
+  <a href="https://github.com/AincFh/AincFh/tree/main/docs">AincFh OS source</a> ·
+  <a href="https://aincfh.dpdns.org">A.T. Field</a> ·
+  <a href="https://github.com/AincFh">GitHub</a> ·
+  <a href="mailto:fhainc@hotmail.com">Email</a>
 </p>
 
 <details>
