@@ -57,7 +57,7 @@ text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 <path d="M61 458L219 458" fill="none" stroke="#384761" stroke-width="1"/>
 <text x="63" y="481" fill="#ffad69" font-size="10" font-weight="780" letter-spacing="1.2">WORKFLOW</text>
 <text x="63" y="502" fill="#9baecb" font-size="10" font-weight="560" >Plan → Build → Validate</text>
-<rect x="63" y="521" width="126" height="5" rx="3" fill="#344461" stroke="none" stroke-width="1" /><rect x="63" y="521" width="93" height="5" rx="3" fill="url(#brand)" stroke="class="tiny-meter"" stroke-width="1" />
+<rect x="63" y="521" width="126" height="5" rx="3" fill="#344461" stroke="none" stroke-width="1" /><rect x="63" y="521" width="93" height="5" rx="3" fill="url(#brand)" stroke="none" class="tiny-meter" stroke-width="1" />
 <text x="63" y="540" fill="#7e95b6" font-size="9" font-weight="500" >One system. Multiple disciplines.</text>
 <text x="277" y="137" fill="#a4b9d4" font-size="11" font-weight="780" letter-spacing="1.45">AF / CURRENT VIEW</text>
 <text x="923" y="137" fill="#ffb774" font-size="10" font-weight="720" text-anchor="end">AUTO / PLAY</text>
@@ -65,14 +65,14 @@ text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 <text x="273" y="538" fill="#92a8c4" font-size="10" font-weight="730" letter-spacing=".8">CONTINUOUS WORKSPACE TOUR</text>
 <text x="933" y="538" fill="#aebbdb" font-size="10" font-weight="730" text-anchor="end">01 — 06</text>
 <rect x="273" y="548" width="661" height="3" rx="2" fill="#3a4863" stroke="none" stroke-width="1" />
-<rect x="273" y="548" width="661" height="3" rx="2" fill="url(#brand)" stroke="class="playhead"" stroke-width="1" />
+<rect x="273" y="548" width="661" height="3" rx="2" fill="url(#brand)" stroke="none" class="playhead" stroke-width="1" />
 <rect x="357" y="573" width="286" height="33" rx="15" fill="#1b2740" stroke="#465371" stroke-width="1" />
 <text x="380" y="595" fill="#ffbb7b" font-size="14" font-weight="720" >⌘</text><text x="418" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >WEB</text>
 <path d="M471 581L471 598" fill="none" stroke="#4b536d" stroke-width="1"/>
 <text x="489" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >APPS</text>
 <path d="M554 581L554 598" fill="none" stroke="#4b536d" stroke-width="1"/>
 <text x="567" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >AI</text>
-<rect x="585" y="585" width="43" height="3" rx="2" fill="url(#brand)" stroke="class="dock-light"" stroke-width="1" />
+<rect x="585" y="585" width="43" height="3" rx="2" fill="url(#brand)" stroke="none" class="dock-light" stroke-width="1" />
 
 <g class="chapter chapter-0" opacity="1" aria-label="Chapter 1" clip-path="url(#mainclip)">
 <text x="281" y="184" fill="#ffb56b" font-size="11" font-weight="780" letter-spacing="2">WELCOME TO THE WORKSPACE</text>
