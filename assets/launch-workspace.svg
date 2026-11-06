@@ -50,6 +50,6 @@
 <rect x="478" y="247" width="368" height="51" fill="url(#panegrad)" stroke="#455067" rx="2"/><text class="mono" x="500" y="266" font-size="11" fill="#64e7ae" >aincfh@os:~$  projects</text><text class="mono" x="500" y="285" font-size="10" fill="#b5c1d2" >4 projects loaded</text><rect class="terminal-caret" x="668" y="255" width="6" height="12" fill="#ffae54"/><text class="mono" x="481" y="309" font-size="13" fill="#62dda8" >●</text><text class="mono" x="499" y="307" font-size="9" fill="#b5c1d2" >SCENE 04 / 04  ·  LOCAL CONSOLE</text></g></g>
 <g class="cursor" transform="translate(526 150)" fill="none">
 <path d="M0 0L0 22L6 17L11 28L15 26L10 15L18 13Z" fill="#faf7fb" stroke="#211827" stroke-width="1.6" stroke-linejoin="round"/>
-<circle cx="0" cy="0" r="16" stroke="#ff9f43" stroke-opacity=".35" stroke-width="1"><animate attributeName="r" values="10;19;10" dur="1.6s" repeatCount="indefinite"/></circle>
+<circle cx="0" cy="0" r="16" stroke="#ff9f43" stroke-opacity=".35" stroke-width="1"></circle>
 </g>
 </g></svg>
