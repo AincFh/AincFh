@@ -6,9 +6,10 @@ on:
       - main
       - profile-refresh-2026-11
       - profile-motion-v15-2026-11
+      - profile-restore-modular-v20-2026-11
     paths:
       - 'docs/**'
-      - 'assets/launch-workspace.svg'
+      - 'assets/*.svg'
       - 'tests/os-smoke.py'
       - 'tests/os-apps-v8.py'
       - 'tests/os-paint-v9.py'
@@ -20,14 +21,11 @@ on:
       - 'tests/os-desktop-v13.py'
       - 'tests/os-files-explorer-v14.py'
       - 'tests/profile-motion-browser.py'
-      - 'tests/profile-one-take-browser.py'
-      - 'assets/hero-reel.svg'
-      - 'README.md'
       - '.github/workflows/aincfh-os-qa.yml'
   pull_request:
     paths:
       - 'docs/**'
-      - 'assets/launch-workspace.svg'
+      - 'assets/*.svg'
       - 'tests/os-smoke.py'
       - 'tests/os-apps-v8.py'
       - 'tests/os-paint-v9.py'
@@ -39,9 +37,6 @@ on:
       - 'tests/os-desktop-v13.py'
       - 'tests/os-files-explorer-v14.py'
       - 'tests/profile-motion-browser.py'
-      - 'tests/profile-one-take-browser.py'
-      - 'assets/hero-reel.svg'
-      - 'README.md'
       - '.github/workflows/aincfh-os-qa.yml'
   workflow_dispatch:
 
@@ -73,7 +68,6 @@ jobs:
         env:
           OS_URL: http://127.0.0.1:8765/
         run: |
-          python tests/profile-one-take-browser.py
           python tests/profile-motion-browser.py
           python tests/os-smoke.py
           python tests/os-apps-v8.py

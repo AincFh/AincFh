@@ -1,22 +1,41 @@
 <!--
-AincFh — continuous single-stage GitHub profile.
-The entire visible showcase is ONE SVG with ONE fixed AincFh OS shell and a
-single 36-second master timeline. All content transitions inside that shell.
-README image playback is automatic SVG/CSS motion, not HTML/JS interaction.
-Actual browser OS source: docs/. Pages availability depends on GitHub Pages setup.
-Old SVG assets are retained in the repository as archived visual studies but no
-longer rendered as independent README sections.
+AincFh — personal engineering and design profile.
+Six independent, full-width modules are intentional. Shared palette, clear visual hierarchy, focused animation, readable reduced-motion fallback.
+Visual-first presentation built with repository-local animated SVG assets.
+Interaction inside GitHub README is limited to links, details and supported image animations.
+The complete interactive site is stored at docs/index.html and published separately when GitHub Pages succeeds.
+GitHub Markdown sanitizes JavaScript, so this README does not claim to embed a functional web desktop.
+Projects: https://github.com/AincFh/my-anime-blog · https://yslfivem.com · https://github.com/AincFh
 -->
 
 <p align="center">
-  <img src="./assets/hero-reel.svg?v=20261106-onetake16" alt="AincFh OS — one continuous animated desktop presentation with seamless transitions between overview, A.T. Field, Saint Laurent, Windows Tools, engineering principles and contact information" width="100%" />
+  <a href="https://github.com/AincFh/AincFh/tree/main/docs" title="Explore the AincFh OS source">
+    <img src="./assets/header.svg?v=20261106-modular21" alt="AincFh OS animated identity with a desktop preview" width="100%" />
+  </a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/AincFh/AincFh/tree/main/docs">AincFh OS source</a> ·
-  <a href="https://aincfh.dpdns.org">A.T. Field</a> ·
-  <a href="https://github.com/AincFh">GitHub</a> ·
-  <a href="mailto:fhainc@hotmail.com">Email</a>
+  <img src="./assets/profile-panel.svg?v=20261106-modular21" alt="Three design, desktop engineering and AI workflow disciplines in a minimal animated layout" width="100%" />
+</p>
+
+<p align="center">
+  <a href="https://github.com/AincFh/AincFh/tree/main/docs" title="Explore the browser OS source until GitHub Pages is enabled">
+    <img src="./assets/launch-workspace.svg?v=20261106-modular21" alt="AincFh OS animated project preview — opens the interactive browser workspace with projects, terminal and desktop applications" width="100%" />
+  </a>
+</p>
+
+<p align="center">
+  <img src="./assets/work.svg?v=20261106-modular21" alt="Three distinct projects with concise descriptions and animated app previews" width="100%" />
+</p>
+
+<p align="center">
+  <img src="./assets/ethos.svg?v=20261106-modular21" alt="How I work — design clarity, pragmatic engineering and real product delivery" width="100%" />
+</p>
+
+<p align="center">
+  <a href="mailto:fhainc@hotmail.com" title="Contact AincFh">
+    <img src="./assets/footer.svg?v=20261106-modular21" alt="AincFh — contact information and personal motto" width="100%" />
+  </a>
 </p>
 
 <details>
