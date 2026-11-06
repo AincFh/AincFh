@@ -33,10 +33,18 @@ def run():
                         .map(n => Number(getComputedStyle(n).opacity)),
                     tabs: [...document.querySelectorAll('g.tab-active')]
                         .map(n => Number(getComputedStyle(n).opacity)),
+                    selectedLabels: [...document.querySelectorAll('g.tab-active')]
+                        .map(n => n.querySelector('text')?.textContent?.trim()),
+                    sceneText: [...document.querySelectorAll('g.chap')]
+                        .map(n => n.textContent || ''),
                 };
             }""", seconds)
             assert metrics["scenes"][idx] >= .98, (idx, metrics)
             assert metrics["tabs"][idx] >= .98, (idx, metrics)
+            expected_labels = ("FIELD", "SAINT LAURENT", "ATLAS", "QINGJI")
+            expected_text = ("A.T. Field", "Saint Laurent", "ATLAS Studio", "QingJi")
+            assert metrics["selectedLabels"] == list(expected_labels), metrics
+            assert expected_text[idx] in metrics["sceneText"][idx], metrics
             assert all(v <= .02 for j, v in enumerate(metrics["scenes"]) if j != idx)
             assert all(v <= .02 for j, v in enumerate(metrics["tabs"]) if j != idx)
             page.screenshot(path=str(OUT / f"editorial-tour-scene-{idx+1}.png"))
