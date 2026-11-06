@@ -1,0 +1,32 @@
+name: GitHub profile SVG integrity
+
+on:
+  push:
+    branches: [main, profile-svg-polish-2026-11-06]
+    paths:
+      - 'assets/*.svg'
+      - 'README.md'
+      - 'tests/profile-svg-smoke.py'
+      - '.github/workflows/profile-svg-qa.yml'
+  pull_request:
+    paths:
+      - 'assets/*.svg'
+      - 'README.md'
+      - 'tests/profile-svg-smoke.py'
+      - '.github/workflows/profile-svg-qa.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  svg-integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 4
+    steps:
+      - uses: actions/checkout@v5
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.12'
+      - name: Check all profile assets and static animation fallbacks
+        run: python tests/profile-svg-smoke.py
