@@ -3,7 +3,7 @@
 <style><![CDATA[
 :root{color-scheme:dark}
 text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC',Arial,sans-serif}
-.chapter{animation-duration:36s;animation-timing-function:linear;animation-iteration-count:infinite}
+.chapter,.nav-active{animation-duration:36s;animation-timing-function:linear;animation-iteration-count:infinite}
 .chapter-0{animation-name:scene0}.chapter-1{animation-name:scene1}.chapter-2{animation-name:scene2}.chapter-3{animation-name:scene3}.chapter-4{animation-name:scene4}.chapter-5{animation-name:scene5}
 @keyframes scene0{0%,15.4%{opacity:1;transform:translateY(0)}17.4%,98.6%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes scene1{0%,15.4%{opacity:0;transform:translateY(6px)}17.4%,32.1%{opacity:1;transform:translateY(0)}34.1%,100%{opacity:0;transform:translateY(-6px)}}
@@ -22,7 +22,7 @@ text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 .dock-light{animation:dock 4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
 @keyframes dock{to{transform:scaleX(.5);opacity:.6}}
 .pointer{animation:pointer 36s ease-in-out infinite;transform-box:fill-box;transform-origin:0 0}
-@keyframes pointer{0%,12%{opacity:0;transform:translate(0,0)}16%,25%{opacity:1;transform:translate(0,0)}32%,40%{opacity:1;transform:translate(0,48px)}48%,55%{opacity:1;transform:translate(0,96px)}64%,74%{opacity:1;transform:translate(0,144px)}82%,91%{opacity:1;transform:translate(0,192px)}96%,100%{opacity:0;transform:translate(0,0)}}
+@keyframes pointer{0%,12%{opacity:0;transform:translate(211px,181px)}16%,25%{opacity:1;transform:translate(211px,181px)}32%,40%{opacity:1;transform:translate(211px,229px)}48%,55%{opacity:1;transform:translate(211px,277px)}64%,74%{opacity:1;transform:translate(211px,325px)}82%,91%{opacity:1;transform:translate(211px,373px)}96%,100%{opacity:0;transform:translate(211px,181px)}}
 @media(prefers-reduced-motion:reduce){.chapter,.nav-active,.playhead,.ambient-a,.ambient-b,.alive,.tiny-meter,.dock-light,.pointer{animation:none!important;transform:none!important}.chapter-0,.nav-active.chapter-0{opacity:1!important}.chapter-1,.chapter-2,.chapter-3,.chapter-4,.chapter-5{opacity:0!important}.pointer{opacity:0!important}}
 ]]></style>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1523"/><stop offset=".57" stop-color="#172139"/><stop offset="1" stop-color="#111a2b"/></linearGradient>
