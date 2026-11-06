@@ -21,9 +21,41 @@ text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 @keyframes meter{to{transform:scaleX(.68)}}
 .dock-light{animation:dock 4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
 @keyframes dock{to{transform:scaleX(.5);opacity:.6}}
-.pointer{animation:pointer 36s ease-in-out infinite;transform-box:fill-box;transform-origin:0 0}
-@keyframes pointer{0%,12%{opacity:0;transform:translate(211px,181px)}16%,25%{opacity:1;transform:translate(211px,181px)}32%,40%{opacity:1;transform:translate(211px,229px)}48%,55%{opacity:1;transform:translate(211px,277px)}64%,74%{opacity:1;transform:translate(211px,325px)}82%,91%{opacity:1;transform:translate(211px,373px)}96%,100%{opacity:0;transform:translate(211px,181px)}}
-@media(prefers-reduced-motion:reduce){.chapter,.nav-active,.playhead,.ambient-a,.ambient-b,.alive,.tiny-meter,.dock-light,.pointer{animation:none!important;transform:none!important}.chapter-0,.nav-active.chapter-0{opacity:1!important}.chapter-1,.chapter-2,.chapter-3,.chapter-4,.chapter-5{opacity:0!important}.pointer{opacity:0!important}}
+.pointer{animation:pointer 36s ease-in-out infinite;transform-origin:0 0}
+.pointer-click{animation:pointer-click 36s linear infinite;transform-box:fill-box;transform-origin:center;pointer-events:none}
+@keyframes pointer{
+0%,3%{opacity:0;transform:translate(186px,172px)}
+5%,15.4%{opacity:1;transform:translate(186px,172px)}
+17.4%,32.1%{opacity:1;transform:translate(186px,220px)}
+34.1%,48.8%{opacity:1;transform:translate(186px,268px)}
+50.8%,65.5%{opacity:1;transform:translate(186px,316px)}
+67.5%,82.1%{opacity:1;transform:translate(186px,364px)}
+84.1%,97.5%{opacity:1;transform:translate(186px,412px)}
+99%,100%{opacity:0;transform:translate(186px,412px)}
+}
+@keyframes pointer-click{
+0%{opacity:0;transform:scale(.5)}
+4.90%{opacity:0;transform:scale(0.5)}
+5.50%{opacity:0.9;transform:scale(0.7)}
+6.65%{opacity:0;transform:scale(1.5)}
+17.20%{opacity:0;transform:scale(0.5)}
+17.80%{opacity:0.9;transform:scale(0.7)}
+18.95%{opacity:0;transform:scale(1.5)}
+33.90%{opacity:0;transform:scale(0.5)}
+34.50%{opacity:0.9;transform:scale(0.7)}
+35.65%{opacity:0;transform:scale(1.5)}
+50.60%{opacity:0;transform:scale(0.5)}
+51.20%{opacity:0.9;transform:scale(0.7)}
+52.35%{opacity:0;transform:scale(1.5)}
+67.30%{opacity:0;transform:scale(0.5)}
+67.90%{opacity:0.9;transform:scale(0.7)}
+69.05%{opacity:0;transform:scale(1.5)}
+83.90%{opacity:0;transform:scale(0.5)}
+84.50%{opacity:0.9;transform:scale(0.7)}
+85.65%{opacity:0;transform:scale(1.5)}
+100%{opacity:0;transform:scale(.5)}
+}
+@media(prefers-reduced-motion:reduce){.chapter,.nav-active,.playhead,.ambient-a,.ambient-b,.alive,.tiny-meter,.dock-light,.pointer,.pointer-click{animation:none!important;transform:none!important}.chapter-0,.nav-active.chapter-0{opacity:1!important}.chapter-1,.chapter-2,.chapter-3,.chapter-4,.chapter-5{opacity:0!important}.pointer,.pointer-click{opacity:0!important}}
 ]]></style>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1523"/><stop offset=".57" stop-color="#172139"/><stop offset="1" stop-color="#111a2b"/></linearGradient>
 <linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#28344d"/><stop offset="1" stop-color="#1a243b"/></linearGradient>
@@ -195,5 +227,5 @@ text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC'
 <text x="282" y="466" fill="#f5e8f4" font-size="16" font-weight="670" >破灭的宿命亦是重生的喜悦</text>
 <text x="622" y="468" fill="#a1b2cf" font-size="11" font-weight="540" >Destruction is the joy of rebirth.</text>
 </g>
-<g class="pointer" opacity="0" aria-hidden="true" transform="translate(211 181)"><path d="M0 0v20l5-5 6 13 5-2-6-13 8-2Z" fill="#f5f5fa" stroke="#161a26" stroke-width="1.4"/><circle cx="1" cy="1" r="11" fill="none" stroke="#ffbd74" stroke-width="1.3" opacity=".68"/></g>
+<g class="pointer" opacity="0" aria-hidden="true"><path d="M0 0v20l5-5 6 13 5-2-6-13 8-2Z" fill="#f5f5fa" stroke="#161a26" stroke-width="1.4"/><circle class="pointer-click" cx="1" cy="1" r="13" fill="none" stroke="#ffc883" stroke-width="2" opacity="0"/></g>
 </svg>
