@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ("editorial-hero", "editorial-workspace", "editorial-projects",
          "editorial-approach", "editorial-contact")
 SVG = "{http://www.w3.org/2000/svg}"
-VERSION = "20261106-editorial24"
+VERSION = "20261106-editorial24b"
 
 
 def run():
