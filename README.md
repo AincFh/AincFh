@@ -9,7 +9,7 @@ Projects: https://github.com/AincFh/my-anime-blog · https://yslfivem.com · htt
 -->
 
 <p align="center">
-  <a href="https://aincfh.dpdns.org" title="Explore A.T. Field">
+  <a href="https://aincfh.github.io/AincFh/" title="Open the interactive AincFh OS workspace">
     <img src="./assets/header.svg?v=20261106-polish" alt="AincFh — A.T. Field — animated orange and violet identity" width="100%" />
   </a>
 </p>
