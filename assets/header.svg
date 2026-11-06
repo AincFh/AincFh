@@ -1,10 +1,10 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 265" width="900" height="265" role="img" aria-label="AincFh OS developer profile — product builder creating web platforms, desktop tools and AI workflows">
 <defs>
-<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101522"/><stop offset=".55" stop-color="#182135"/><stop offset="1" stop-color="#111727"/></linearGradient>
-<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#ffad53"/><stop offset=".5" stop-color="#fd816b"/><stop offset="1" stop-color="#a481f4"/></linearGradient>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101927"/><stop offset=".56" stop-color="#1A273B"/><stop offset="1" stop-color="#111C2E"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#95B9EC"/><stop offset=".52" stop-color="#B8A9E6"/><stop offset="1" stop-color="#F0B58F"/></linearGradient>
 <linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#253047"/><stop offset="1" stop-color="#192336"/></linearGradient>
-<radialGradient id="light"><stop stop-color="#995be6" stop-opacity=".24"/><stop offset="1" stop-color="#995be6" stop-opacity="0"/></radialGradient>
-<radialGradient id="warm"><stop stop-color="#f29447" stop-opacity=".14"/><stop offset="1" stop-color="#f29447" stop-opacity="0"/></radialGradient>
+<radialGradient id="light"><stop stop-color="#91A8D9" stop-opacity=".24"/><stop offset="1" stop-color="#91A8D9" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#EBB495" stop-opacity=".14"/><stop offset="1" stop-color="#EBB495" stop-opacity="0"/></radialGradient>
 <pattern id="hex" width="86" height="74" patternUnits="userSpaceOnUse"><path d="M21 1 42 13v25L21 50 0 38V13ZM64 38 85 50v24L64 86 43 74V50Z" fill="none" stroke="#ffa455" stroke-opacity=".09" stroke-width="1"/></pattern>
 <style><![CDATA[
 /* Motion system 15.0: readable at every frame; pure CSS in embedded SVG. */
@@ -34,18 +34,18 @@
 <rect x="0" y="0" width="900" height="265" rx="0" fill="url(#bg)" stroke="none" stroke-width="1"/>
 <ellipse cx="800" cy="45" rx="345" ry="240" fill="url(#light)"/>
 <ellipse cx="85" cy="205" rx="250" ry="200" fill="url(#warm)"/>
-<g aria-hidden="true"><ellipse class="af-halo" cx="730" cy="82" rx="155" ry="95" fill="#9b82ed" opacity=".11"/><ellipse class="af-halo" cx="110" cy="186" rx="115" ry="110" fill="#fa965a" opacity=".10"/></g>
+<g aria-hidden="true"><ellipse class="af-halo" cx="730" cy="82" rx="155" ry="95" fill="#91A8D9" opacity=".11"/><ellipse class="af-halo" cx="110" cy="186" rx="115" ry="110" fill="#EBB495" opacity=".10"/></g>
 
 <rect x="18" y="18" width="864" height="229" rx="12" fill="none" stroke="#3a4059" stroke-width="1"/>
-<path d="M38 35h24M38 35v23 M838 230h24v-23" fill="none" stroke="#b78afb" stroke-width="2"/>
+<path d="M38 35h24M38 35v23 M838 230h24v-23" fill="none" stroke="#B9ACE9" stroke-width="2"/>
 <path class="af-blink" d="M18 245H882" stroke="url(#accent)" stroke-width="3"/>
 
-<text x="50" y="60" fill="#ffb365" font-size="11" font-weight="750" letter-spacing="2.4">AF /  PERSONAL WORKSPACE</text>
-<rect x="735" y="43" width="112" height="27" rx="13" fill="#1c3040" stroke="#335466" stroke-width="1"/><rect class="af-led" x="748" y="54" width="7" height="7" rx="4" fill="#59dfaa" stroke="none" stroke-width="1"/><text x="765" y="61" fill="#aee5d1" font-size="10" font-weight="700" >ACTIVE  ·  2026</text>
+<text x="50" y="60" fill="#F0BB92" font-size="11" font-weight="750" letter-spacing="2.4">AINCFH  /  PRODUCT STUDIO</text>
+<rect x="735" y="43" width="112" height="27" rx="13" fill="#1c3040" stroke="#335466" stroke-width="1"/><rect class="af-led" x="748" y="54" width="7" height="7" rx="4" fill="#59dfaa" stroke="none" stroke-width="1"/><text x="765" y="61" fill="#aee5d1" font-size="10" font-weight="700" >AVAILABLE</text>
 <path d="M90 103 128 125v44l-38 22-38-22v-44Z" stroke="url(#accent)" stroke-width="3" fill="#1e293f"/>
-<path d="m75 153 15-25 15 25-15-8z" fill="#ffab60"/>
+<path d="m75 153 15-25 15 25-15-8z" fill="#F0BB92"/>
 <text class="af-title" x="158" y="154" fill="#f7f5fa" font-size="60" font-weight="820" letter-spacing="-2">AincFh</text>
-<text x="378" y="154" fill="#ffa25b" font-size="59" font-weight="820" letter-spacing="-3">OS.</text>
+<text x="378" y="154" fill="#B7A7EB" font-size="59" font-weight="820" letter-spacing="-3">OS.</text>
 <text x="158" y="186" fill="#e2e8f4" font-size="19" font-weight="640" >Design. Build. Ship.</text>
 <text x="158" y="211" fill="#a8b7ce" font-size="12" font-weight="540" >Web platforms  ·  Desktop tools  ·  AI workflows</text>
 <g class="af-float"><rect x="589" y="90" width="260" height="148" rx="12" fill="#0e1729" stroke="#455370" stroke-width="1"/>
@@ -53,7 +53,7 @@
 <rect x="603" y="103" width="8" height="8" rx="5" fill="#fe7776" stroke="none" stroke-width="1"/><rect x="620" y="103" width="8" height="8" rx="5" fill="#eec15a" stroke="none" stroke-width="1"/><rect x="637" y="103" width="8" height="8" rx="5" fill="#59d8a2" stroke="none" stroke-width="1"/>
 <text x="670" y="112" fill="#d8dfed" font-size="10" font-weight="650" >AincFh / Preview</text>
 <rect x="605" y="137" width="88" height="83" rx="8" fill="#1a253c" stroke="#384866" stroke-width="1"/>
-<text x="619" y="157" fill="#ffac63" font-size="9" font-weight="800" letter-spacing="1">PROJECTS</text>
+<text x="619" y="157" fill="#F0BB92" font-size="9" font-weight="800" letter-spacing="1">PROJECTS</text>
 <rect class="af-underline" x="620" y="173" width="52" height="5" rx="3" fill="#a675d3" stroke="none" stroke-width="1"/><rect x="620" y="188" width="40" height="5" rx="3" fill="#445877" stroke="none" stroke-width="1"/><rect x="620" y="202" width="60" height="5" rx="3" fill="#445877" stroke="none" stroke-width="1"/>
 <rect x="706" y="138" width="126" height="39" rx="7" fill="#242d45" stroke="#44536d" stroke-width="1"/>
 <text x="718" y="155" fill="#f5e7f5" font-size="10" font-weight="700" >A.T. FIELD</text>
