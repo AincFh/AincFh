@@ -46,6 +46,9 @@ def run():
     assert "cursor" not in source.lower(), "Cursor simulation was deliberately eliminated"
     assert "24s" in source, "The four scenes must use one shared 24-second timeline"
     assert "Fictional roleplay" in source and "Private project source" in source
+    assert source.count(">ATLAS</text>") == 2, "ATLAS active/static tabs must agree"
+    assert source.count(">QINGJI</text>") == 2, "QingJi active/static tabs must agree"
+    assert ">WINDOWS</text>" not in source and ">SHELL</text>" not in source
     print("PASS editorial project explorer: four synchronized chapters, no fake pointer")
     projects = (ROOT / "assets/editorial-projects.svg").read_text(encoding="utf-8")
     for expected in ("A.T. Field", "Saint Laurent", "ATLAS Developer Studio",
