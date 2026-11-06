@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="3200" viewBox="0 0 1000 3200" role="img" aria-label="AincFh — a single continuous Apple-inspired portfolio. Large readable product windows for A.T. Field, Saint Laurent fictional FiveM services, Windows desktop tools, software engineering and contact.">
+<defs><style><![CDATA[:root{color-scheme:light}
+.float{animation:float 7s ease-in-out infinite alternate}@keyframes float{to{transform:translateY(-9px)}}
+.pulse{animation:pulse 3s ease-in-out infinite}@keyframes pulse{50%{opacity:.35}}
+.scan{animation:scan 5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}@keyframes scan{to{transform:scaleX(.57)}}
+.cardA{animation:cardA 10s ease-in-out infinite}.cardB{animation:cardB 10s ease-in-out infinite}
+@keyframes cardA{0%,43%{opacity:1}50%,93%{opacity:0}100%{opacity:1}}
+@keyframes cardB{0%,43%{opacity:0}50%,93%{opacity:1}100%{opacity:0}}
+.queryA{animation:cardA 12s ease-in-out infinite}.queryB{animation:cardB 12s ease-in-out infinite}
+.wave-line{stroke-dasharray:28 10;animation:traverse 5s linear infinite}@keyframes traverse{to{stroke-dashoffset:-130}}
+.progress{animation:progress 12s linear infinite;transform-box:fill-box;transform-origin:left center}@keyframes progress{from{transform:scaleX(.03)}to{transform:scaleX(1)}}
+@media(prefers-reduced-motion:reduce){.float,.pulse,.scan,.cardA,.cardB,.queryA,.queryB,.wave-line,.progress{animation:none!important;transform:none!important}.cardB,.queryB{opacity:0!important}.cardA,.queryA{opacity:1!important}}
+]]></style>
+<linearGradient id="wall" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#edf4fd"/><stop offset=".39" stop-color="#f8f5fe"/><stop offset=".72" stop-color="#edf6fd"/><stop offset="1" stop-color="#f3f5fb"/></linearGradient>
+<linearGradient id="sky" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#d2e4ff"/><stop offset=".53" stop-color="#e0e0ff"/><stop offset="1" stop-color="#ffebe3"/></linearGradient>
+<linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#48a6ff"/><stop offset="1" stop-color="#4e74e5"/></linearGradient>
+<linearGradient id="lilac" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#b8d0fa"/><stop offset=".5" stop-color="#d6ccfa"/><stop offset="1" stop-color="#f0cddd"/></linearGradient>
+<linearGradient id="glow" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#2f83eb"/><stop offset=".58" stop-color="#9992dd"/><stop offset="1" stop-color="#a9c9ed"/></linearGradient>
+<radialGradient id="aura"><stop stop-color="#b0cdf5" stop-opacity=".38"/><stop offset="1" stop-color="#b0cdf5" stop-opacity="0"/></radialGradient>
+<filter id="shadow" x="-25%" y="-25%" width="150%" height="165%"><feDropShadow dx="0" dy="17" stdDeviation="20" flood-color="#4b668c" flood-opacity=".16"/></filter>
+<filter id="lift" x="-25%" y="-25%" width="150%" height="165%"><feDropShadow dx="0" dy="9" stdDeviation="12" flood-color="#506985" flood-opacity=".13"/></filter>
+</defs>
+
+<rect x="0" y="0" width="1000" height="3200" rx="0" fill="url(#wall)" stroke="none"/>
+<path d="M-110 433C290 134 570 509 1150 190" stroke="#bbcaee" stroke-width="135" fill="none" opacity=".12"/>
+<path d="M-160 1150C281 903 620 1240 1120 913" stroke="#d8c9e9" stroke-width="151" fill="none" opacity=".15"/>
+<path d="M-160 1865C280 1510 610 1940 1160 1678" stroke="#c3dbf0" stroke-width="152" fill="none" opacity=".13"/>
+<path d="M-150 2674C290 2445 610 2738 1160 2440" stroke="#d9ccec" stroke-width="167" fill="none" opacity=".12"/>
+<ellipse cx="820" cy="148" rx="380" ry="265" fill="url(#aura)" class="float"/>
+<rect x="0" y="0" width="1000" height="61" rx="0" fill="#ffffff" stroke="none"/>
+<text x="77" y="40" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="760" fill="#293b53" >AincFh</text><text x="183" y="39" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="620" fill="#61778d" >Studio</text>
+<text x="292" y="39" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="560" fill="#61778d" >Projects</text><text x="403" y="39" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="560" fill="#61778d" >Engineering</text>
+<circle cx="790" cy="31" r="5" fill="#43bb96" class="pulse"/><text x="808" y="39" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="660" fill="#6a8099" >Portfolio</text>
+<text x="936" y="39" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="610" fill="#8394a8" text-anchor="end">2026</text>
+<path d="M61 474V3122" stroke="#bfd1e5" stroke-width="2" fill="none" stroke-dasharray="2 18"/>
+<circle cx="61" cy="586" r="21" fill="#ffffff"/><text x="61" y="591" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#5985b9" text-anchor="middle">01</text><circle cx="61" cy="1437" r="21" fill="#ffffff"/><text x="61" y="1442" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#5985b9" text-anchor="middle">02</text><circle cx="61" cy="2193" r="21" fill="#ffffff"/><text x="61" y="2198" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#5985b9" text-anchor="middle">03</text><circle cx="61" cy="2942" r="21" fill="#ffffff"/><text x="61" y="2947" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#5985b9" text-anchor="middle">04</text>
+
+<text x="107" y="143" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="775" fill="#698ab8" letter-spacing="2.8">INDEPENDENT PRODUCT STUDIO</text>
+<text x="100" y="249" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="73" font-weight="805" fill="#23374f" letter-spacing="-4">Made to feel</text>
+<text x="103" y="327" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="73" font-weight="805" fill="#357bc8" letter-spacing="-3.8">effortless.</text>
+<text x="108" y="386" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="21" font-weight="570" fill="#637c96" >Digital products. Considered details. Real engineering.</text>
+<text x="108" y="427" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="18" font-weight="535" fill="#8b9eb4" >Web platforms, Windows tools and practical AI workflows.</text>
+<rect x="108" y="468" width="267" height="53" rx="17" fill="url(#blue)" stroke="none"/>
+<text x="136" y="502" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="19" font-weight="745" fill="#ffffff" >Explore selected work</text>
+<text x="402" y="505" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="31" font-weight="690" fill="#518cdc" >↓</text>
+<g class="float" filter="url(#lift)">
+<rect x="589" y="131" width="348" height="305" rx="24" fill="#ffffff" stroke="#e0e8f3"/>
+<rect x="590" y="132" width="346" height="53" rx="23" fill="#f6f8fc" stroke="none"/>
+<circle cx="616" cy="159" r="6" fill="#ff625a"/><circle cx="639" cy="159" r="6" fill="#ffbd4a"/><circle cx="662" cy="159" r="6" fill="#36ca6a"/>
+<text x="740" y="165" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="655" fill="#8294aa" >Workspace</text>
+<rect x="610" y="197" width="304" height="214" rx="18" fill="url(#sky)" stroke="none"/>
+<text x="632" y="226" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="790" fill="#6f8caf" letter-spacing="1.25">PROJECT EXPLORER</text>
+<rect x="630" y="241" width="265" height="55" rx="12" fill="#ffffff" stroke="#e3ebf5"/>
+<text x="648" y="276" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="745" fill="#3b608b" >A.T. Field</text>
+<rect x="630" y="306" width="265" height="55" rx="12" fill="#ffffff" stroke="#e3ebf5"/>
+<text x="648" y="341" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="20" font-weight="745" fill="#3b608b" >Saint Laurent</text>
+<circle cx="874" cy="335" r="6" fill="#5ac8a5" class="pulse"/>
+<text x="632" y="396" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="650" fill="#8699b0" >Design  ·  Build  ·  Verify</text>
+</g>
+<text x="106" y="578" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="800" fill="#6689b7" letter-spacing="2.5">SELECTED EXPERIENCES</text>
+<path d="M106 597H925" stroke="#d5e1ef" stroke-width="1.2" fill="none" />
+<!-- STORY_CONTENT -->
+</svg>
