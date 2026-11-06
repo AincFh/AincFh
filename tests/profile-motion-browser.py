@@ -1,67 +1,78 @@
-"""Visual regression for the six independent GitHub profile SVG panels."""
+"""Check the new editorial profile GIF-like SVG reel in Chromium."""
 from pathlib import Path
 from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
-ASSETS = ROOT / "assets"
+ASSET = ROOT / "assets" / "editorial-workspace.svg"
 OUT = ROOT / "test-results"
 OUT.mkdir(exist_ok=True)
-NAMES = ("header", "profile-panel", "launch-workspace", "work", "ethos", "footer")
 
 
 def run():
     with sync_playwright() as p:
         browser = p.chromium.launch(headless=True)
-        page = browser.new_page(viewport={"width": 960, "height": 760}, device_scale_factor=1)
+        page = browser.new_page(viewport={"width": 1100, "height": 780},
+                                device_scale_factor=1)
+        page.emulate_media(reduced_motion="no-preference")
+        page.goto(ASSET.as_uri())
+        assert page.locator("svg").count() == 1
+        assert page.locator("g.chap").count() == 4
+        assert page.locator("g.tab-active").count() == 4
 
-        for name in NAMES:
-            page.emulate_media(reduced_motion="no-preference")
-            page.goto((ASSETS / (name + ".svg")).as_uri())
-            metrics = page.evaluate("""() => {
-                const root = document.documentElement;
-                const elements = [...document.querySelectorAll('*')];
+        # 24-second reel has four independent 6-second chapters. Seek all
+        # animations to exactly the same position and verify tab/scene pair.
+        for idx, seconds in enumerate((3, 9, 15, 21)):
+            metrics = page.evaluate("""seconds => {
+                for (const node of document.querySelectorAll('g.chap,g.tab-active,.progress')) {
+                    for (const anim of node.getAnimations()) {
+                        anim.pause(); anim.currentTime = seconds * 1000;
+                    }
+                }
                 return {
-                    isSvg: root.namespaceURI === 'http://www.w3.org/2000/svg',
-                    viewBox: root.getAttribute('viewBox'),
-                    title: root.getAttribute('aria-label'),
-                    texts: document.querySelectorAll('text').length,
-                    animated: elements.some(e => getComputedStyle(e).animationName !== 'none')
+                    scenes: [...document.querySelectorAll('g.chap')]
+                        .map(n => Number(getComputedStyle(n).opacity)),
+                    tabs: [...document.querySelectorAll('g.tab-active')]
+                        .map(n => Number(getComputedStyle(n).opacity)),
                 };
-            }""")
-            assert metrics["isSvg"], f"{name}: SVG failed to render: {metrics}"
-            assert metrics["viewBox"].startswith("0 0 900 "), metrics
-            assert metrics["texts"] >= 6, (name, metrics)
-            assert metrics["animated"], f"{name}: CSS motion is not running"
-            page.screenshot(path=str(OUT / f"profile-visual-{name}.png"), full_page=False)
-            page.emulate_media(reduced_motion="reduce")
-            frozen = page.evaluate("""() => {
-                const animated = [...document.querySelectorAll(
-                   '.af-halo,.af-scan-line,.scene,.cursor,.breathe,.float,.scan,.shine,.soft-pulse,.af-tour-progress')];
-                return animated.every(e => getComputedStyle(e).animationName === 'none');
-            }""")
-            assert frozen, f"{name}: reduced-motion animation persisted"
-            if name == "launch-workspace":
-                state = page.evaluate("""() => [0,1,2,3].map(i =>
-                    Number(getComputedStyle(document.querySelector('.scene'+i)).opacity))""")
-                assert state == [1, 0, 0, 0], state
-            print(f"PASS {name}: SVG visual, live animation, readable static reduced-motion view")
+            }""", seconds)
+            assert metrics["scenes"][idx] >= .98, (idx, metrics)
+            assert metrics["tabs"][idx] >= .98, (idx, metrics)
+            assert all(v <= .02 for j, v in enumerate(metrics["scenes"]) if j != idx)
+            assert all(v <= .02 for j, v in enumerate(metrics["tabs"]) if j != idx)
+            page.screenshot(path=str(OUT / f"editorial-tour-scene-{idx+1}.png"))
+            print(f"PASS animated tour chapter {idx+1}: tabs and content synced")
 
-        embed = OUT / "profile-embedded-check.html"
-        embed.write_text(
-            '<!doctype html><meta charset="utf-8"><style>'
-            'body{margin:0;background:#fff}img{display:block;width:100%;max-width:900px}'
-            '</style><img src="../assets/launch-workspace.svg" alt="AincFh animated OS">',
+        page.emulate_media(reduced_motion="reduce")
+        page.reload()
+        reduced = page.evaluate("""() => ({
+            chapters: [...document.querySelectorAll('g.chap')]
+                .map(n => Number(getComputedStyle(n).opacity)),
+            animations: [...document.querySelectorAll('.chap,.tab-active,.progress,.float')]
+                .every(n => getComputedStyle(n).animationName === 'none')
+        })""")
+        assert reduced["chapters"] == [1, 0, 0, 0], reduced
+        assert reduced["animations"], reduced
+        print("PASS reduced motion: static readable first frame")
+
+        html = OUT / "editorial-motion-embed.html"
+        html.write_text(
+            '<!doctype html><meta charset="utf-8">'
+            '<img src="../assets/editorial-workspace.svg" width="900" '
+            'alt="AincFh animated project tour">',
             encoding="utf-8",
         )
         page.emulate_media(reduced_motion="no-preference")
-        page.goto(embed.as_uri())
-        img = page.locator("img")
-        assert img.evaluate("(img) => img.complete && img.naturalWidth > 0")
-        frame_a = img.screenshot()
-        page.wait_for_timeout(1500)
-        frame_b = img.screenshot()
-        assert frame_a != frame_b, "The GitHub README SVG should animate inside an img"
-        print("PASS GitHub README image embedding: GIF-like autoplay preserved")
+        page.goto(html.as_uri())
+        pic = page.locator("img")
+        page.wait_for_function(
+            "() => document.images[0].complete && document.images[0].naturalWidth > 0",
+            timeout=10000
+        )
+        frame_a = pic.screenshot()
+        page.wait_for_timeout(1450)
+        frame_b = pic.screenshot()
+        assert frame_a != frame_b, "GitHub README SVG image must animate autonomously"
+        print("PASS GitHub README img: continuously animating native SVG, no JS needed")
         browser.close()
 
 
