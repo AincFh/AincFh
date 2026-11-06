@@ -1,0 +1,199 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="620" viewBox="0 0 1000 620" role="img" aria-label="AincFh OS: one continuous 36-second animated workspace showing the builder, A.T. Field, Saint Laurent fictional roleplay services, Windows tools, engineering principles, and contact information.">
+<defs>
+<style><![CDATA[
+:root{color-scheme:dark}
+text{font-family:Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Noto Sans SC',Arial,sans-serif}
+.chapter{animation-duration:36s;animation-timing-function:linear;animation-iteration-count:infinite}
+.chapter-0{animation-name:scene0}.chapter-1{animation-name:scene1}.chapter-2{animation-name:scene2}.chapter-3{animation-name:scene3}.chapter-4{animation-name:scene4}.chapter-5{animation-name:scene5}
+@keyframes scene0{0%,15.4%{opacity:1;transform:translateY(0)}17.4%,98.6%{opacity:0;transform:translateY(-6px)}100%{opacity:1;transform:translateY(0)}}
+@keyframes scene1{0%,15.4%{opacity:0;transform:translateY(6px)}17.4%,32.1%{opacity:1;transform:translateY(0)}34.1%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scene2{0%,32.1%{opacity:0;transform:translateY(6px)}34.1%,48.8%{opacity:1;transform:translateY(0)}50.8%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scene3{0%,48.8%{opacity:0;transform:translateY(6px)}50.8%,65.5%{opacity:1;transform:translateY(0)}67.5%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scene4{0%,65.5%{opacity:0;transform:translateY(6px)}67.5%,82.1%{opacity:1;transform:translateY(0)}84.1%,100%{opacity:0;transform:translateY(-6px)}}
+@keyframes scene5{0%,82.1%{opacity:0;transform:translateY(6px)}84.1%,98.6%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-6px)}}
+.playhead{animation:progress 36s linear infinite;transform-box:fill-box;transform-origin:left center}
+@keyframes progress{0%{transform:scaleX(0)}100%{transform:scaleX(1)}}
+.ambient-a{animation:ambientA 12s ease-in-out infinite alternate}.ambient-b{animation:ambientB 16s ease-in-out infinite alternate}
+@keyframes ambientA{to{transform:translate(-24px,20px);opacity:.56}}@keyframes ambientB{to{transform:translate(20px,-12px);opacity:.64}}
+.alive{animation:alive 3s ease-in-out infinite}
+@keyframes alive{50%{opacity:.25}}
+.tiny-meter{animation:meter 5s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
+@keyframes meter{to{transform:scaleX(.68)}}
+.dock-light{animation:dock 4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes dock{to{transform:scaleX(.5);opacity:.6}}
+.pointer{animation:pointer 36s ease-in-out infinite;transform-box:fill-box;transform-origin:0 0}
+@keyframes pointer{0%,12%{opacity:0;transform:translate(0,0)}16%,25%{opacity:1;transform:translate(0,0)}32%,40%{opacity:1;transform:translate(0,48px)}48%,55%{opacity:1;transform:translate(0,96px)}64%,74%{opacity:1;transform:translate(0,144px)}82%,91%{opacity:1;transform:translate(0,192px)}96%,100%{opacity:0;transform:translate(0,0)}}
+@media(prefers-reduced-motion:reduce){.chapter,.nav-active,.playhead,.ambient-a,.ambient-b,.alive,.tiny-meter,.dock-light,.pointer{animation:none!important;transform:none!important}.chapter-0,.nav-active.chapter-0{opacity:1!important}.chapter-1,.chapter-2,.chapter-3,.chapter-4,.chapter-5{opacity:0!important}.pointer{opacity:0!important}}
+]]></style>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#0e1523"/><stop offset=".57" stop-color="#172139"/><stop offset="1" stop-color="#111a2b"/></linearGradient>
+<linearGradient id="bar" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#28344d"/><stop offset="1" stop-color="#1a243b"/></linearGradient>
+<linearGradient id="brand" x1="0" y1="0" x2="1" y2=".6"><stop stop-color="#ffb55c"/><stop offset=".55" stop-color="#ff7c71"/><stop offset="1" stop-color="#a582ee"/></linearGradient>
+<radialGradient id="auraA"><stop stop-color="#956de0" stop-opacity=".22"/><stop offset="1" stop-color="#956de0" stop-opacity="0"/></radialGradient>
+<radialGradient id="auraB"><stop stop-color="#ffb06b" stop-opacity=".15"/><stop offset="1" stop-color="#ffb06b" stop-opacity="0"/></radialGradient>
+<pattern id="grid" width="65" height="65" patternUnits="userSpaceOnUse"><path d="M0 64H65M64 0V65" stroke="#a18abd" stroke-opacity=".065" fill="none"/></pattern>
+<clipPath id="mainclip"><rect x="265" y="141" width="657" height="363" rx="2"/></clipPath>
+</defs>
+
+<rect x="0" y="0" width="1000" height="620" rx="0" fill="url(#bg)" stroke="none" stroke-width="1" />
+<rect x="0" y="0" width="1000" height="620" rx="0" fill="url(#grid)" stroke="none" stroke-width="1" />
+<ellipse class="ambient-a" cx="875" cy="45" rx="245" ry="195" fill="url(#auraA)"/>
+<ellipse class="ambient-b" cx="110" cy="620" rx="245" ry="180" fill="url(#auraB)"/>
+<rect x="18" y="17" width="964" height="585" rx="16" fill="none" stroke="#394761" stroke-width="1" />
+<path d="M18 598L982 598" fill="none" stroke="url(#brand)" stroke-width="3"/>
+<text x="40" y="45" fill="#f4f5fc" font-size="22" font-weight="820" letter-spacing="-.7">AincFh</text>
+<text x="120" y="45" fill="#ffb36c" font-size="14" font-weight="780" letter-spacing="1.8">/  OS STUDIO</text>
+<rect x="321" y="24" width="88" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="332" y="42" fill="#b8bbf9" font-size="11" font-weight="700" >DESIGN</text><rect x="418" y="24" width="119" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="429" y="42" fill="#f0d1d5" font-size="11" font-weight="700" >ENGINEERING</text><rect x="546" y="24" width="96" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="557" y="42" fill="#c7d4ed" font-size="11" font-weight="700" >SYSTEMS</text>
+<circle class="alive" cx="817" cy="38" r="4" fill="#56e1a7"/><text x="831" y="43" fill="#b8cde1" font-size="11" font-weight="750" letter-spacing=".45">SHOWCASE · 36 SEC LOOP</text>
+<rect x="35" y="72" width="930" height="488" rx="15" fill="#111c2f" stroke="#455472" stroke-width="1.2" />
+<rect x="35" y="72" width="930" height="40" rx="14" fill="url(#bar)" stroke="none" stroke-width="1" />
+<rect x="48" y="85" width="9" height="9" rx="5" fill="#f97576" stroke="none" stroke-width="1" /><rect x="65" y="85" width="9" height="9" rx="5" fill="#f2c15c" stroke="none" stroke-width="1" /><rect x="82" y="85" width="9" height="9" rx="5" fill="#52d99f" stroke="none" stroke-width="1" />
+<text x="119" y="99" fill="#b6c6db" font-size="12" font-weight="630" >af://workspace  /  project-explorer</text>
+<circle class="alive" cx="911" cy="91" r="4" fill="#56e1a7"/><text x="923" y="95" fill="#87ecc0" font-size="10" font-weight="780" >LIVE</text>
+<path d="M35 112L965 112" fill="none" stroke="#3f4e68" stroke-width="1"/>
+<rect x="35" y="112" width="210" height="448" rx="0" fill="#121d30" stroke="none" stroke-width="1" />
+<path d="M245 112L245 560" fill="none" stroke="#3f4e68" stroke-width="1"/>
+<text x="62" y="140" fill="#738cae" font-size="10" font-weight="810" letter-spacing="2">WORKSPACE</text>
+<g class="nav-active chapter-0" opacity="1"><rect x="51" y="153" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="153" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><g class="nav-active chapter-1" opacity="0"><rect x="51" y="201" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="201" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><g class="nav-active chapter-2" opacity="0"><rect x="51" y="249" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="249" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><g class="nav-active chapter-3" opacity="0"><rect x="51" y="297" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="297" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><g class="nav-active chapter-4" opacity="0"><rect x="51" y="345" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="345" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><g class="nav-active chapter-5" opacity="0"><rect x="51" y="393" width="174" height="37" rx="9" fill="#33415e" stroke="#685e93" stroke-width="1" /><rect x="51" y="393" width="3" height="37" rx="2" fill="url(#brand)" stroke="none" stroke-width="1" /></g><text x="70" y="177" fill="#a888d8" font-size="10" font-weight="700" >01</text><text x="103" y="177" fill="#d6ddec" font-size="13" font-weight="730" >Overview</text><text x="70" y="225" fill="#a888d8" font-size="10" font-weight="700" >02</text><text x="103" y="225" fill="#d6ddec" font-size="13" font-weight="550" >A.T. Field</text><text x="70" y="273" fill="#a888d8" font-size="10" font-weight="700" >03</text><text x="103" y="273" fill="#d6ddec" font-size="13" font-weight="550" >Saint Laurent</text><text x="70" y="321" fill="#a888d8" font-size="10" font-weight="700" >04</text><text x="103" y="321" fill="#d6ddec" font-size="13" font-weight="550" >Windows Tools</text><text x="70" y="369" fill="#a888d8" font-size="10" font-weight="700" >05</text><text x="103" y="369" fill="#d6ddec" font-size="13" font-weight="550" >Engineering</text><text x="70" y="417" fill="#a888d8" font-size="10" font-weight="700" >06</text><text x="103" y="417" fill="#d6ddec" font-size="13" font-weight="550" >Connect</text>
+<path d="M61 458L219 458" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="63" y="481" fill="#ffad69" font-size="10" font-weight="780" letter-spacing="1.2">WORKFLOW</text>
+<text x="63" y="502" fill="#9baecb" font-size="10" font-weight="560" >Plan → Build → Validate</text>
+<rect x="63" y="521" width="126" height="5" rx="3" fill="#344461" stroke="none" stroke-width="1" /><rect x="63" y="521" width="93" height="5" rx="3" fill="url(#brand)" stroke="class="tiny-meter"" stroke-width="1" />
+<text x="63" y="540" fill="#7e95b6" font-size="9" font-weight="500" >One system. Multiple disciplines.</text>
+<text x="277" y="137" fill="#a4b9d4" font-size="11" font-weight="780" letter-spacing="1.45">AF / CURRENT VIEW</text>
+<text x="923" y="137" fill="#ffb774" font-size="10" font-weight="720" text-anchor="end">AUTO / PLAY</text>
+<path d="M270 513L934 513" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="273" y="538" fill="#92a8c4" font-size="10" font-weight="730" letter-spacing=".8">CONTINUOUS WORKSPACE TOUR</text>
+<text x="933" y="538" fill="#aebbdb" font-size="10" font-weight="730" text-anchor="end">01 — 06</text>
+<rect x="273" y="548" width="661" height="3" rx="2" fill="#3a4863" stroke="none" stroke-width="1" />
+<rect x="273" y="548" width="661" height="3" rx="2" fill="url(#brand)" stroke="class="playhead"" stroke-width="1" />
+<rect x="357" y="573" width="286" height="33" rx="15" fill="#1b2740" stroke="#465371" stroke-width="1" />
+<text x="380" y="595" fill="#ffbb7b" font-size="14" font-weight="720" >⌘</text><text x="418" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >WEB</text>
+<path d="M471 581L471 598" fill="none" stroke="#4b536d" stroke-width="1"/>
+<text x="489" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >APPS</text>
+<path d="M554 581L554 598" fill="none" stroke="#4b536d" stroke-width="1"/>
+<text x="567" y="594" fill="#c9d4ec" font-size="11" font-weight="760" >AI</text>
+<rect x="585" y="585" width="43" height="3" rx="2" fill="url(#brand)" stroke="class="dock-light"" stroke-width="1" />
+
+<g class="chapter chapter-0" opacity="1" aria-label="Chapter 1" clip-path="url(#mainclip)">
+<text x="281" y="184" fill="#ffb56b" font-size="11" font-weight="780" letter-spacing="2">WELCOME TO THE WORKSPACE</text>
+<text x="280" y="238" fill="#f4f4fb" font-size="57" font-weight="835" letter-spacing="-2.2">AincFh</text>
+<text x="488" y="238" fill="#ffad62" font-size="57" font-weight="835" letter-spacing="-2">OS</text>
+<text x="282" y="267" fill="#d8e3f1" font-size="17" font-weight="620" >Design the interface. Build the system.</text>
+<text x="282" y="292" fill="#aebed5" font-size="12" font-weight="540" >A continuous portfolio of products, engineering and creative tools.</text>
+<rect x="282" y="319" width="118" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="293" y="337" fill="#ffbd78" font-size="11" font-weight="700" >WEB / EDGE</text><rect x="410" y="319" width="111" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="421" y="337" fill="#b4a3fe" font-size="11" font-weight="700" >WINDOWS</text><rect x="531" y="319" width="139" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="542" y="337" fill="#6ee6bb" font-size="11" font-weight="700" >AI WORKFLOWS</text>
+<rect x="283" y="373" width="380" height="112" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="283" y="373" width="3" height="112" rx="2" fill="#ffac60" stroke="none" stroke-width="1" />
+<text x="301" y="403" fill="#ffb76d" font-size="11" font-weight="760" letter-spacing=".75">INDEPENDENT PRODUCT BUILDER</text>
+<text x="301" y="432" fill="#f0f2fc" font-size="15" font-weight="670" >From idea → architecture → working release</text>
+<text x="301" y="456" fill="#a9bad4" font-size="11" font-weight="500" >Real products, testable workflows, deliberate design.</text>
+<rect x="698" y="186" width="207" height="299" rx="14" fill="#1b2941" stroke="#435573" stroke-width="1" />
+<text x="718" y="214" fill="#bcd0e8" font-size="11" font-weight="780" letter-spacing="1">SYSTEM SNAPSHOT</text>
+<rect x="718" y="237" width="167" height="105" rx="10" fill="#142035" stroke="#4b5873" stroke-width="1" />
+<path d="M733 306L867 264" fill="none" stroke="#9276dc" stroke-width="3"/><path d="M733 305L774 284" fill="none" stroke="#ffb36a" stroke-width="3"/>
+<circle class="alive" cx="743" cy="321" r="4" fill="#56e1a7"/><text x="756" y="325" fill="#a5eacb" font-size="9" font-weight="750" >SERVICES READY</text>
+<text x="718" y="380" fill="#ffba77" font-size="11" font-weight="750" >WEB</text><rect x="776" y="372" width="110" height="7" rx="4" fill="#304058" stroke="none" stroke-width="1" /><rect x="776" y="372" width="83" height="7" rx="4" fill="#ffab61" stroke="none" stroke-width="1" />
+<text x="718" y="403" fill="#bcaaff" font-size="11" font-weight="750" >DESKTOP</text><rect x="776" y="395" width="110" height="7" rx="4" fill="#304058" stroke="none" stroke-width="1" /><rect x="776" y="395" width="91" height="7" rx="4" fill="#b09af8" stroke="none" stroke-width="1" />
+<text x="718" y="426" fill="#81e6c4" font-size="11" font-weight="750" >TOOLS</text><rect x="776" y="418" width="110" height="7" rx="4" fill="#304058" stroke="none" stroke-width="1" /><rect x="776" y="418" width="72" height="7" rx="4" fill="#61ddba" stroke="none" stroke-width="1" />
+<text x="717" y="468" fill="#809dbb" font-size="9" font-weight="740" >DESIGN  /  BUILD  /  SHIP</text>
+</g><g class="chapter chapter-1" opacity="0" aria-label="Chapter 2" clip-path="url(#mainclip)">
+<text x="281" y="180" fill="#ffb774" font-size="11" font-weight="780" letter-spacing="1.7">PROJECT 01 / WEB PLATFORM</text>
+<text x="281" y="226" fill="#f4f4fb" font-size="41" font-weight="790" >A.T. Field</text>
+<text x="281" y="251" fill="#bfcee1" font-size="14" font-weight="575" >A web product built across the full stack.</text>
+<rect x="281" y="270" width="120" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="292" y="288" fill="#ffbd78" font-size="11" font-weight="700" >REACT + TS</text><rect x="411" y="270" width="131" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="422" y="288" fill="#b8a9fd" font-size="11" font-weight="700" >CLOUDFLARE</text><rect x="552" y="270" width="90" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="563" y="288" fill="#81e7c5" font-size="11" font-weight="700" >D1 / R2</text>
+<rect x="283" y="322" width="352" height="166" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="283" y="322" width="3" height="166" rx="2" fill="#ffad64" stroke="none" stroke-width="1" />
+<text x="302" y="348" fill="#ffbb74" font-size="10" font-weight="760" letter-spacing="1.1">PRODUCT SURFACE</text>
+<text x="302" y="374" fill="#f1f3fb" font-size="15" font-weight="700" >Content, accounts and administration</text>
+<text x="302" y="399" fill="#adbed8" font-size="12" font-weight="520" >Responsive interfaces and edge services</text>
+<path d="M302 422L615 422" fill="none" stroke="#384761" stroke-width="1"/><text x="302" y="448" fill="#89e2bd" font-size="10" font-weight="700" >PUBLIC PROJECT</text>
+<text x="302" y="469" fill="#e9e5f5" font-size="13" font-weight="690" >aincfh.dpdns.org</text>
+<rect x="668" y="176" width="239" height="313" rx="12" fill="#1a2941" stroke="#455875" stroke-width="1" />
+<rect x="679" y="189" width="217" height="25" rx="7" fill="#293852" stroke="none" stroke-width="1" />
+<text x="690" y="205" fill="#c0d2e8" font-size="10" font-weight="500" >https://aincfh.dpdns.org</text>
+<rect x="679" y="229" width="217" height="97" rx="8" fill="#243b59" stroke="none" stroke-width="1" />
+<text x="699" y="253" fill="#ffba70" font-size="10" font-weight="790" letter-spacing="2">A.T. FIELD</text>
+<text x="699" y="282" fill="#f1f3fb" font-size="19" font-weight="720" >Build something real.</text>
+<rect x="698" y="299" width="100" height="7" rx="4" fill="#ffaf63" stroke="none" stroke-width="1" /><rect x="804" y="299" width="63" height="7" rx="4" fill="#705b9d" stroke="none" stroke-width="1" />
+<rect x="679" y="340" width="105" height="118" rx="8" fill="#263652" stroke="none" stroke-width="1" /><rect x="791" y="340" width="105" height="118" rx="8" fill="#263652" stroke="none" stroke-width="1" />
+<text x="694" y="363" fill="#adc1dc" font-size="10" font-weight="720" >ARTICLES</text><rect x="694" y="382" width="74" height="7" rx="4" fill="#8d78d8" stroke="none" stroke-width="1" /><rect x="694" y="399" width="63" height="5" rx="4" fill="#687693" stroke="none" stroke-width="1" /><rect x="694" y="412" width="78" height="5" rx="4" fill="#687693" stroke="none" stroke-width="1" />
+<text x="805" y="363" fill="#adc1dc" font-size="10" font-weight="720" >SERVICES</text><rect x="805" y="382" width="74" height="7" rx="4" fill="#60d6ab" stroke="none" stroke-width="1" /><rect x="805" y="399" width="63" height="5" rx="4" fill="#687693" stroke="none" stroke-width="1" /><rect x="805" y="412" width="78" height="5" rx="4" fill="#687693" stroke="none" stroke-width="1" />
+</g><g class="chapter chapter-2" opacity="0" aria-label="Chapter 3" clip-path="url(#mainclip)">
+<text x="281" y="180" fill="#b7a0ff" font-size="11" font-weight="780" letter-spacing="1.6">PROJECT 02 / COMMUNITY PLATFORM</text>
+<text x="281" y="226" fill="#f4f4fb" font-size="40" font-weight="800" >Saint Laurent</text>
+<text x="281" y="253" fill="#c8d2e5" font-size="13" font-weight="580" >Services for a fictional FiveM roleplay community.</text>
+<rect x="281" y="270" width="120" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="292" y="288" fill="#b7a4fc" font-size="11" font-weight="700" >PUBLIC RULES</text><rect x="410" y="270" width="153" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="421" y="288" fill="#8ee7bf" font-size="11" font-weight="700" >ACCESS CONTROL</text>
+<rect x="282" y="324" width="357" height="165" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="282" y="324" width="3" height="165" rx="2" fill="#b28df6" stroke="none" stroke-width="1" />
+<text x="302" y="351" fill="#c5a5ff" font-size="10" font-weight="780" letter-spacing="1.1">SERVICE WORKFLOWS</text>
+<text x="302" y="380" fill="#ecedf9" font-size="14" font-weight="685" >Searchable codex and case assistance</text>
+<text x="302" y="405" fill="#b8c5df" font-size="11" font-weight="500" >Role-aware views for authorized operations</text>
+<path d="M302 431L614 431" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="302" y="456" fill="#a5b4d0" font-size="10" font-weight="650" >FICTIONAL WORLD · NO REAL GOVERNMENT ROLE</text>
+<rect x="662" y="177" width="246" height="309" rx="13" fill="#1c2942" stroke="#4e5083" stroke-width="1" />
+<text x="684" y="206" fill="#cdb6ff" font-size="11" font-weight="770" letter-spacing="1">CODEX / LOOKUP</text>
+<rect x="678" y="229" width="214" height="34" rx="8" fill="#283653" stroke="#536080" stroke-width="1" />
+<text x="695" y="251" fill="#aebfd8" font-size="11" font-weight="500" >Search statutes, rules, roles…</text>
+<rect x="678" y="277" width="214" height="73" rx="8" fill="#253b54" stroke="none" stroke-width="1" />
+<text x="693" y="299" fill="#82e6bd" font-size="10" font-weight="770" >PUBLIC REFERENCE</text>
+<text x="693" y="321" fill="#d6e0f0" font-size="11" font-weight="500" >Structured, searchable information</text>
+<rect x="678" y="361" width="214" height="75" rx="8" fill="#253450" stroke="none" stroke-width="1" />
+<text x="694" y="385" fill="#c5b0fe" font-size="10" font-weight="770" >AUTHORIZED WORKBENCH</text>
+<text x="694" y="406" fill="#d6e0f0" font-size="11" font-weight="500" >Case and workflow assistance</text>
+<circle class="alive" cx="684" cy="456" r="4" fill="#56e1a7"/><text x="697" y="461" fill="#9ab8cf" font-size="10" font-weight="680" >Fictional roleplay setting</text>
+</g><g class="chapter chapter-3" opacity="0" aria-label="Chapter 4" clip-path="url(#mainclip)">
+<text x="281" y="180" fill="#7de7cb" font-size="11" font-weight="770" letter-spacing="1.6">PROJECT 03 / WINDOWS SOFTWARE</text>
+<text x="281" y="226" fill="#f4f5fc" font-size="40" font-weight="800" >Windows Tools</text>
+<text x="281" y="252" fill="#bfcce1" font-size="14" font-weight="570" >Desktop utilities and local workflow tools.</text>
+<rect x="281" y="270" width="116" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="292" y="288" fill="#76e3c7" font-size="11" font-weight="700" >C# / .NET</text><rect x="408" y="270" width="110" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="419" y="288" fill="#b5aaff" font-size="11" font-weight="700" >WEBVIEW2</text><rect x="529" y="270" width="127" height="27" rx="8" fill="#28364f" stroke="#455774" stroke-width="1" /><text x="540" y="288" fill="#ffbc79" font-size="11" font-weight="700" >DIAGNOSTICS</text>
+<rect x="283" y="322" width="347" height="165" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="283" y="322" width="3" height="165" rx="2" fill="#63dfbd" stroke="none" stroke-width="1" />
+<text x="301" y="348" fill="#7eebc9" font-size="11" font-weight="775" letter-spacing="1.15">DESKTOP ENGINEERING</text>
+<text x="301" y="378" fill="#f2f4fc" font-size="18" font-weight="740" >Build → Verify → Release</text>
+<text x="302" y="402" fill="#b6c5db" font-size="11" font-weight="500" >Predictable states, safe local operations</text>
+<path d="M302 423L611 423" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="301" y="450" fill="#d5e2f5" font-size="11" font-weight="635" >Windows-native workflows</text>
+<text x="301" y="470" fill="#82e3bb" font-size="10" font-weight="685" >Quality gates before shipping</text>
+<rect x="659" y="177" width="250" height="311" rx="12" fill="#1b2941" stroke="#476176" stroke-width="1" />
+<rect x="670" y="192" width="228" height="34" rx="8" fill="#293850" stroke="none" stroke-width="1" />
+<text x="687" y="214" fill="#dce6f5" font-size="12" font-weight="760" >TOOLBOX / SYSTEM</text>
+<circle class="alive" cx="867" cy="208" r="4" fill="#56e1a7"/>
+<text x="681" y="258" fill="#91e6ce" font-size="11" font-weight="745" letter-spacing="1.1">LOCAL OPERATIONS</text>
+<rect x="680" y="273" width="207" height="44" rx="8" fill="#243b51" stroke="none" stroke-width="1" />
+<text x="696" y="299" fill="#e2ecf8" font-size="12" font-weight="635" >Application diagnostics</text><text x="866" y="299" fill="#77e6bf" font-size="15" font-weight="800" >✓</text>
+<rect x="680" y="327" width="207" height="44" rx="8" fill="#243b51" stroke="none" stroke-width="1" />
+<text x="696" y="353" fill="#e2ecf8" font-size="12" font-weight="635" >Build and validation</text><text x="866" y="353" fill="#77e6bf" font-size="15" font-weight="800" >✓</text>
+<rect x="680" y="381" width="207" height="44" rx="8" fill="#243b51" stroke="none" stroke-width="1" />
+<text x="696" y="407" fill="#e2ecf8" font-size="12" font-weight="635" >Workspace settings</text><text x="866" y="407" fill="#77e6bf" font-size="15" font-weight="800" >✓</text>
+<text x="685" y="462" fill="#8fa3bf" font-size="10" font-weight="700" >PRIVATE PROJECTS  /  LOCAL USE</text>
+</g><g class="chapter chapter-4" opacity="0" aria-label="Chapter 5" clip-path="url(#mainclip)">
+<text x="281" y="180" fill="#ffb574" font-size="11" font-weight="780" letter-spacing="1.7">PROCESS / ENGINEERING</text>
+<text x="281" y="226" fill="#f4f4fc" font-size="41" font-weight="800" >Build with intent.</text>
+<text x="281" y="253" fill="#bfcee4" font-size="13" font-weight="500" >One product vision, from visual details to reliability.</text>
+<rect x="281" y="284" width="198" height="154" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="281" y="284" width="3" height="154" rx="2" fill="#ffae66" stroke="none" stroke-width="1" />
+<text x="300" y="316" fill="#ffbc76" font-size="12" font-weight="785" >01 / DESIGN</text>
+<text x="300" y="347" fill="#f2f4fa" font-size="17" font-weight="745" >Visual clarity</text>
+<text x="300" y="377" fill="#c0cce0" font-size="12" font-weight="500" >One coherent system</text>
+<text x="300" y="395" fill="#c0cce0" font-size="12" font-weight="500" >across every screen.</text>
+<rect x="492" y="284" width="198" height="154" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="492" y="284" width="3" height="154" rx="2" fill="#b8a0ff" stroke="none" stroke-width="1" />
+<text x="511" y="316" fill="#c2abff" font-size="12" font-weight="785" >02 / ENGINEER</text>
+<text x="511" y="347" fill="#f2f4fa" font-size="17" font-weight="745" >Correct behavior</text>
+<text x="511" y="377" fill="#c0cce0" font-size="12" font-weight="500" >Permissions and state</text>
+<text x="511" y="395" fill="#c0cce0" font-size="12" font-weight="500" >are deliberate.</text>
+<rect x="703" y="284" width="199" height="154" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="703" y="284" width="3" height="154" rx="2" fill="#60dcb7" stroke="none" stroke-width="1" />
+<text x="722" y="316" fill="#80f0c8" font-size="12" font-weight="785" >03 / VALIDATE</text>
+<text x="722" y="347" fill="#f2f4fa" font-size="17" font-weight="745" >Verify delivery</text>
+<text x="722" y="377" fill="#c0cce0" font-size="12" font-weight="500" >Test the workflow</text>
+<text x="722" y="395" fill="#c0cce0" font-size="12" font-weight="500" >before it ships.</text>
+<path d="M284 463L903 463" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="285" y="484" fill="#c1c8e1" font-size="11" font-weight="770" letter-spacing=".65">AI-AUGMENTED  ·  HUMAN-REVIEWED  ·  PRODUCT-FOCUSED</text>
+</g><g class="chapter chapter-5" opacity="0" aria-label="Chapter 6" clip-path="url(#mainclip)">
+<text x="282" y="180" fill="#ffb674" font-size="11" font-weight="770" letter-spacing="1.7">CONTACT / NEXT CONNECTION</text>
+<text x="280" y="229" fill="#f3f5fa" font-size="37" font-weight="800" >Let's build what lasts.</text>
+<text x="282" y="257" fill="#b6c7dc" font-size="13" font-weight="500" >One workspace. Many kinds of work. Consistent ownership.</text>
+<rect x="281" y="281" width="622" height="147" rx="13" fill="#1c2a43" stroke="#3b4c6c" stroke-width="1" /><rect x="281" y="281" width="3" height="147" rx="2" fill="#ffb466" stroke="none" stroke-width="1" />
+<text x="303" y="314" fill="#ffbb79" font-size="11" font-weight="770" letter-spacing=".8">GITHUB</text><text x="414" y="314" fill="#f4f4fb" font-size="14" font-weight="650" >github.com/AincFh</text>
+<path d="M302 329L885 329" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="303" y="351" fill="#c1aaff" font-size="11" font-weight="760" >WEB</text><text x="414" y="351" fill="#f4f4fb" font-size="14" font-weight="650" >aincfh.dpdns.org</text>
+<path d="M302 364L885 364" fill="none" stroke="#384761" stroke-width="1"/>
+<text x="303" y="388" fill="#76e7c6" font-size="11" font-weight="760" >EMAIL</text><text x="414" y="388" fill="#f4f4fb" font-size="14" font-weight="650" >fhainc@hotmail.com</text>
+<text x="282" y="466" fill="#f5e8f4" font-size="16" font-weight="670" >破灭的宿命亦是重生的喜悦</text>
+<text x="622" y="468" fill="#a1b2cf" font-size="11" font-weight="540" >Destruction is the joy of rebirth.</text>
+</g>
+<g class="pointer" opacity="0" aria-hidden="true" transform="translate(211 181)"><path d="M0 0v20l5-5 6 13 5-2-6-13 8-2Z" fill="#f5f5fa" stroke="#161a26" stroke-width="1.4"/><circle cx="1" cy="1" r="11" fill="none" stroke="#ffbd74" stroke-width="1.3" opacity=".68"/></g>
+</svg>
