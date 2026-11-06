@@ -123,7 +123,49 @@
 <path d="M138 2048H885" stroke="#e2eaf4" stroke-width="1" fill="none"/>
 <text x="140" y="2084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="775" fill="#8b9eb6" letter-spacing="1.1">FICTIONAL FIVE M / ROLEPLAY SETTING</text>
 <text x="884" y="2084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="590" fill="#98a7b9" text-anchor="end">Not a real government institution</text>
-<!-- STORY_CONTENT -->
+
+<text x="106" y="2171" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="805" fill="#6288b8" letter-spacing="2.3">03 / DESKTOP ENGINEERING</text>
+<text x="101" y="2225" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="36" font-weight="790" fill="#2b4361" letter-spacing="-1.25">Powerful underneath. Quiet on the surface.</text>
+<g filter="url(#shadow)"><rect x="102" y="2262" width="820" height="535" rx="23" fill="#ffffff" stroke="#dce6f2"/></g>
+<rect x="103" y="2263" width="818" height="57" rx="22" fill="#f7f9fc" stroke="none"/>
+<rect x="103" y="2304" width="818" height="16" rx="0" fill="#f7f9fc" stroke="none"/>
+<circle cx="131" cy="2291" r="7" fill="#ff625a"/><circle cx="157" cy="2291" r="7" fill="#ffbd4b"/><circle cx="183" cy="2291" r="7" fill="#35ca69"/>
+<text x="510" y="2299" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="710" fill="#657b95" text-anchor="middle">Windows Tools · System Overview</text>
+<circle cx="880" cy="2291" r="5" fill="#50bd9a" class="pulse"/>
+<path d="M103 2319H921" stroke="#e4ebf4" stroke-width="1" fill="none" />
+<rect x="122" y="2338" width="235" height="380" rx="14" fill="#f3f6fa" stroke="#e7edf5"/>
+<text x="145" y="2376" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="765" fill="#8fa0b3" letter-spacing=".9">APPLICATIONS</text>
+<rect x="137" y="2397" width="203" height="55" rx="12" fill="#e2eeff" stroke="#d5e6ff"/>
+<text x="155" y="2431" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="24" font-weight="670" fill="#3884df" >▦</text><text x="194" y="2432" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="19" font-weight="755" fill="#386ca9" >Overview</text>
+<text x="155" y="2500" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="650" fill="#95a6bc" >◉</text><text x="194" y="2501" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="18" font-weight="580" fill="#74869e" >Diagnostics</text>
+<text x="155" y="2567" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="650" fill="#95a6bc" >♫</text><text x="194" y="2568" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="18" font-weight="580" fill="#74869e" >Audio tools</text>
+<text x="155" y="2634" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="22" font-weight="650" fill="#95a6bc" >⚙</text><text x="194" y="2635" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="18" font-weight="580" fill="#74869e" >Settings</text>
+<rect x="373" y="2338" width="245" height="157" rx="14" fill="#f7f9fc" stroke="#e1e8f2"/>
+<text x="394" y="2373" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#8699b1" >SYSTEM HEALTH</text>
+<text x="390" y="2440" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="54" font-weight="805" fill="#35ad8d" >98%</text>
+<rect x="496" y="2419" width="97" height="12" rx="6" fill="#e3ecf5" stroke="none"/>
+<rect x="496" y="2419" width="83" height="12" rx="6" fill="#50c5a1" stroke="none" class="scan"/>
+<rect x="635" y="2338" width="264" height="157" rx="14" fill="#f7f9fc" stroke="#e1e8f2"/>
+<text x="656" y="2373" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#8699b1" >WORKSPACE</text>
+<text x="652" y="2437" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="32" font-weight="760" fill="#3886d0" >Connected</text>
+<circle cx="862" cy="2425" r="6" fill="#44bd96" class="pulse"/>
+<rect x="373" y="2512" width="526" height="205" rx="14" fill="#f7f9fc" stroke="#e1e8f2"/>
+<text x="395" y="2552" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#8699b1" >PERFORMANCE / ACTIVITY</text>
+<path d="M396 2678H874" stroke="#e4eaf2" stroke-width="1" fill="none" />
+<path d="M396 2658H874" stroke="#e8edf4" stroke-width="1" fill="none" />
+<path d="M397 2645L442 2631L491 2641L535 2596L572 2615L616 2597L664 2610L709 2569L752 2589L802 2565L849 2577L872 2556" stroke="#6d9edc" stroke-width="4" fill="none" class="wave-line" stroke-linecap="round" stroke-linejoin="round"/>
+<text x="129" y="2766" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="680" fill="#7590ab" >C#  ·  .NET  ·  WINFORMS  ·  WEBVIEW2  ·  LOCAL WORKFLOWS</text>
+<text x="109" y="2869" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="805" fill="#6688b7" letter-spacing="2.5">BUILT WITH INTENT</text>
+<text x="102" y="2924" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="44" font-weight="795" fill="#294360" letter-spacing="-1.7">Design. Build. Verify.</text>
+<text x="106" y="2964" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="19" font-weight="540" fill="#8194a9" >One coherent product — from its first screen to its last detail.</text>
+<rect x="108" y="2995" width="793" height="6" rx="3" fill="#dce8f5" stroke="none"/>
+<rect x="108" y="2995" width="793" height="6" rx="3" fill="url(#glow)" stroke="none" class="progress"/>
+<circle cx="132" cy="3041" r="17" fill="#dbe9f9"/><text x="132" y="3046" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#5685b6" text-anchor="middle">01</text><text x="111" y="3084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#6983a1" >PLAN</text><circle cx="293" cy="3041" r="17" fill="#dbe9f9"/><text x="293" y="3046" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#5685b6" text-anchor="middle">02</text><text x="272" y="3084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#6983a1" >DESIGN</text><circle cx="454" cy="3041" r="17" fill="#dbe9f9"/><text x="454" y="3046" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#5685b6" text-anchor="middle">03</text><text x="433" y="3084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#6983a1" >BUILD</text><circle cx="615" cy="3041" r="17" fill="#dbe9f9"/><text x="615" y="3046" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#5685b6" text-anchor="middle">04</text><text x="594" y="3084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#6983a1" >TEST</text><circle cx="776" cy="3041" r="17" fill="#4db79c"/><text x="776" y="3046" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#ffffff" text-anchor="middle">05</text><text x="755" y="3084" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="760" fill="#6983a1" >SHIP</text>
+<rect x="108" y="3110" width="793" height="54" rx="18" fill="#ffffff" stroke="#e0eaf4"/>
+<text x="129" y="3144" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="725" fill="#4675ad" >github.com/AincFh</text>
+<text x="397" y="3144" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="650" fill="#6485aa" >aincfh.dpdns.org</text>
+<text x="701" y="3144" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="650" fill="#6485aa" >fhainc@hotmail.com</text>
+
 
 
 </svg>
