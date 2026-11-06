@@ -57,5 +57,5 @@
 <text x="650" y="494" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="765" fill="#95E7CD">SYSTEM / TOOLS</text>
 <text x="650" y="526" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="29" font-weight="800" fill="#77E6C2">98%</text>
 <rect x="716" y="519" width="94" height="7" rx="4" fill="#394B65" stroke="none"/>
-<rect x="716" y="519" width="78" height="7" rx="4" fill="#69D6AF" stroke="class="scan""/>
+<rect x="716" y="519" width="78" height="7" rx="4" fill="#69D6AF" stroke="none" class="scan"/>
 </svg>
