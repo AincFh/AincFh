@@ -42,11 +42,11 @@ svg{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','Pi
 <filter id="glassRefraction" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="1" seed="6" result="ripples"/><feDisplacementMap in="SourceGraphic" in2="ripples" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter>
 </defs><rect x="0" y="0" width="900" height="264" rx="20" class="bg" /><ellipse class="glass-orb" cx="754" cy="66" rx="180" ry="126" fill="url(#glassAura)" aria-hidden="true"/>
 <text x="55" y="46" class="brand-ink" font-size="13" font-weight="760" letter-spacing="1.1">03 / THE APPROACH</text>
-<text x="52" y="100" class="ink" font-size="42" font-weight="775" letter-spacing="-1.7">Clarity is a feature.</text>
-<text x="56" y="131" class="muted" font-size="16" font-weight="545" >Less decoration. More attention to how things actually work.</text>
-<path d="M56 164H844" class="stroke" stroke-width="1" fill="none" />
+<text x="52" y="100" class="ink" font-size="42" font-weight="775" letter-spacing="-1.7">From intent to delivery.</text>
+<text x="56" y="131" class="muted" font-size="16" font-weight="545" >AI-assisted implementation. Human review. Tested outcomes.</text>
+<path d="M56 164H844" class="stroke" stroke-width="1" fill="none" /><rect x="655" y="28" width="187" height="32" rx="16" class="glass-thin"/><path d="M669 30H826" class="glass-glint"/><text x="677" y="49" class="brand-ink" font-size="11" font-weight="740">REVIEWED WORKFLOW</text>
 <path d="M318 179V232" class="stroke" stroke-width="1" fill="none" /><path d="M581 179V232" class="stroke" stroke-width="1" fill="none" />
-<text x="57" y="193" class="brand-ink" font-size="13" font-weight="700" >01 / DESIGN</text><text x="57" y="223" class="ink" font-size="21" font-weight="730" >Visual coherence</text>
-<text x="347" y="193" class="brand-ink" font-size="13" font-weight="700" >02 / BUILD</text><text x="347" y="223" class="ink" font-size="21" font-weight="730" >Reliable behavior</text>
-<text x="610" y="193" class="brand-ink" font-size="13" font-weight="700" >03 / VERIFY</text><text x="610" y="223" class="ink" font-size="21" font-weight="730" >Tested delivery</text>
+<text x="57" y="193" class="brand-ink" font-size="13" font-weight="700" >01 / DISCOVER</text><text x="57" y="223" class="ink" font-size="21" font-weight="730" >Product decisions</text>
+<text x="347" y="193" class="brand-ink" font-size="13" font-weight="700" >02 / ENGINEER</text><text x="347" y="223" class="ink" font-size="21" font-weight="730" >Agent-assisted build</text>
+<text x="610" y="193" class="brand-ink" font-size="13" font-weight="700" >03 / VALIDATE</text><text x="610" y="223" class="ink" font-size="21" font-weight="730" >Browser + CI checks</text>
 </svg>
