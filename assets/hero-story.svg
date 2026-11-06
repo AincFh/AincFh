@@ -59,5 +59,34 @@
 </g>
 <text x="106" y="578" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="800" fill="#6689b7" letter-spacing="2.5">SELECTED EXPERIENCES</text>
 <path d="M106 597H925" stroke="#d5e1ef" stroke-width="1.2" fill="none" />
+
+<g filter="url(#shadow)"><rect x="102" y="659" width="820" height="633" rx="23" fill="#ffffff" stroke="#dae5f2"/></g><rect x="103" y="660" width="818" height="56" rx="22" fill="#f7f9fc" stroke="none"/><rect x="103" y="701" width="818" height="16" rx="0" fill="#f7f9fc" stroke="none"/><circle cx="131" cy="688" r="7" fill="#ff625b"/><circle cx="157" cy="688" r="7" fill="#ffbd4e"/><circle cx="183" cy="688" r="7" fill="#35ca6b"/><text x="513" y="695" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="700" fill="#5f748e" text-anchor="middle">A.T. Field · Web Platform</text><text x="889" y="695" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="680" fill="#a1b0c0" text-anchor="end">01 / 03</text><path d="M103 716H921" stroke="#e5ebf4" stroke-width="1" fill="none"/>
+<rect x="121" y="735" width="781" height="47" rx="12" fill="#f5f8fd" stroke="#eaf0f7"/>
+<circle cx="143" cy="758" r="5" fill="#52bf98"/><text x="162" y="764" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="17" font-weight="650" fill="#72859e" >aincfh.dpdns.org</text>
+<text x="876" y="763" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="24" font-weight="700" fill="#6c9bdb" text-anchor="end">↗</text>
+<rect x="121" y="798" width="782" height="341" rx="20" fill="url(#sky)" stroke="#e7e9f3"/>
+<text x="157" y="851" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="800" fill="#6b8bb5" letter-spacing="3">A.T. FIELD</text>
+<text x="151" y="929" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="58" font-weight="830" fill="#2c4769" letter-spacing="-2.6">Create.</text>
+<text x="155" y="987" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="54" font-weight="820" fill="#2c4769" letter-spacing="-2.5">Share. Discover.</text>
+<text x="157" y="1032" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="19" font-weight="575" fill="#6d86a3" >Content, community and digital experiences.</text>
+<rect x="157" y="1063" width="223" height="47" rx="17" fill="url(#blue)" stroke="none"/>
+<text x="183" y="1094" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="785" fill="#ffffff" >EXPLORE PLATFORM</text>
+<rect x="571" y="829" width="300" height="275" rx="18" fill="#ffffff" stroke="#dfe8f3"/>
+<text x="594" y="866" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="775" fill="#7891b0" >PLATFORM OVERVIEW</text>
+<rect x="592" y="889" width="246" height="11" rx="5" fill="#dbe5f2" stroke="none"/><rect x="592" y="911" width="187" height="9" rx="4" fill="#e6edf5" stroke="none"/>
+<g class="cardA"><rect x="591" y="953" width="246" height="118" rx="13" fill="#edf4ff" stroke="none"/>
+<text x="608" y="988" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="770" fill="#376baf" >Content library</text>
+<text x="609" y="1021" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="605" fill="#7890ac" >Articles, ideas and guides</text>
+<text x="609" y="1049" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#4489d8" letter-spacing="1.1">LIVE CONTENT</text></g>
+<g class="cardB" opacity="0"><rect x="591" y="953" width="246" height="118" rx="13" fill="#eef8f5" stroke="none"/>
+<text x="608" y="988" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="770" fill="#348b78" >Community</text>
+<text x="609" y="1021" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="605" fill="#7a9a94" >Tools for shared interests</text>
+<text x="609" y="1049" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#44a98e" letter-spacing="1.1">ACTIVE SERVICES</text></g>
+<text x="139" y="1193" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="795" fill="#6785a8" >REACT</text><text x="258" y="1193" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="795" fill="#6785a8" >TYPESCRIPT</text>
+<text x="434" y="1193" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="795" fill="#6785a8" >CLOUDFLARE</text><text x="634" y="1193" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="795" fill="#6785a8" >WORKERS  ·  D1  ·  R2</text>
+<path d="M137 1215H884" stroke="#e0e8f2" stroke-width="1" fill="none"/>
+<text x="139" y="1246" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="750" fill="#98aabf" letter-spacing="1.5">WEB PRODUCT  /  VISUAL CONCEPT</text>
+<text x="909" y="1246" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="610" fill="#8c9fb5" text-anchor="end">Built for everyday use</text>
 <!-- STORY_CONTENT -->
+
 </svg>
