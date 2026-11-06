@@ -39,7 +39,7 @@
 <circle class="af-tour-pulse" cx="54" cy="56" r="4" fill="#9CDECC"/>
 <text class="mono" x="68" y="60" font-size="10" fill="#A9C8F1" letter-spacing="1.6">AINCFH OS  /  PROJECT TOUR</text>
 <text class="t" x="52" y="124" font-size="49" fill="#F5F7FC" font-weight="850" letter-spacing="-2.2">AincFh</text>
-<text class="t" x="226" y="124" font-size="49" fill="#F2C5AB" font-weight="850">_OS</text>
+<text class="t" x="226" y="124" font-size="49" fill="#CDBCF0" font-weight="850">OS.</text>
 <text class="t" x="54" y="158" font-size="15" fill="#F5F7FC" font-weight="650">Explore a living workspace.</text>
 <text class="t" x="54" y="194" font-size="12" fill="#C8D5E5" >Projects, app windows, Dock and terminal</text>
 <text class="t" x="54" y="214" font-size="12" fill="#C8D5E5" >come together in the browser OS.</text>
