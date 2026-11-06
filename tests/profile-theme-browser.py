@@ -12,7 +12,10 @@ QUERY = """() => ({
   bg: getComputedStyle(document.querySelector('rect.bg')).fill,
   ink: getComputedStyle(document.querySelector('text.ink')).fill,
   brand: getComputedStyle(document.querySelector('text.brand-ink')).fill,
-  reduced: [...document.querySelectorAll('.chap,.tab-active,.progress,.float')]
+  glass: getComputedStyle(document.querySelector('.glass-thin')).fill,
+  glassBorder: getComputedStyle(document.querySelector('.glass-thin')).stroke,
+  rim: getComputedStyle(document.documentElement).getPropertyValue('--glassRim').trim(),
+  reduced: [...document.querySelectorAll('.chap,.tab-active,.progress,.float,.glass-orb,.glass-spark')]
     .every(n => getComputedStyle(n).animationName === 'none')
 })"""
 
@@ -62,6 +65,15 @@ def run():
             "Light and dark mode must harmonize instead of using an opposite fixed background"
         )
         assert themes["light"][0]["ink"] != themes["dark"][0]["ink"]
+        assert themes["light"][0]["glass"] != themes["dark"][0]["glass"], (
+            "Liquid Glass tint must adapt to surrounding light/dark appearances"
+        )
+        assert themes["light"][0]["rim"] != themes["dark"][0]["rim"]
+        assert all(a["glass"] == themes["light"][0]["glass"]
+                   for a in themes["light"]), themes["light"]
+        assert all(a["glass"] == themes["dark"][0]["glass"]
+                   for a in themes["dark"]), themes["dark"]
+        print("PASS Liquid Glass: consistent tinted glass and contrasting rim in both modes")
         print("PASS adaptive theme: consistent colors across modules, matched to GitHub appearance")
         browser.close()
 

@@ -18,14 +18,36 @@ svg{font-family:-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','Pi
 .slide{animation:slide 12s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
 @keyframes slide{to{transform:scaleX(.6)}}
 @media(prefers-reduced-motion:reduce){.chap,.tab-active,.progress,.float,.glow,.slide{animation:none!important;transform:none!important}.chap0,.tab0{opacity:1!important}.chap1,.chap2,.chap3,.tab1,.tab2,.tab3{opacity:0!important}}
-]]></style><filter id="shadow" x="-25%" y="-25%" width="150%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="14" flood-color="#162d48" flood-opacity=".13"/></filter><clipPath id="content"><rect x="57" y="217" width="786" height="266" rx="12"/></clipPath></defs><rect x="0" y="0" width="900" height="330" rx="20" class="bg" />
-<text x="54" y="45" class="brand-ink" font-size="13" font-weight="750" >A I N C F H  /  S T U D I O</text>
+
+/* Editorial Liquid Glass: functional glass above solid readable content. */
+:root{--glassTint:rgba(255,255,255,.60);--glassThin:rgba(255,255,255,.42);--glassBorder:rgba(255,255,255,.82);--glassRim:rgba(63,102,154,.23);--glassInk:#315f95}
+@media(prefers-color-scheme:dark){:root{--glassTint:rgba(129,157,193,.20);--glassThin:rgba(165,190,215,.11);--glassBorder:rgba(239,248,255,.30);--glassRim:rgba(19,28,47,.58);--glassInk:#b6d5ff}}
+.glass-surface{fill:var(--glassTint);stroke:var(--glassBorder);stroke-width:1.35;backdrop-filter:blur(12px) saturate(145%);-webkit-backdrop-filter:blur(12px) saturate(145%)}
+.glass-thin{fill:var(--glassThin);stroke:var(--glassBorder);stroke-width:1;backdrop-filter:blur(8px) saturate(120%);-webkit-backdrop-filter:blur(8px) saturate(120%)}
+.glass-selected{fill:var(--glassTint);stroke:var(--brand);stroke-width:1.1;backdrop-filter:blur(10px) saturate(130%);-webkit-backdrop-filter:blur(10px) saturate(130%)}
+.glass-glint{fill:none;stroke:url(#glassEdge);stroke-width:1.7;stroke-linecap:round}
+.glass-rim{fill:none;stroke:var(--glassRim);stroke-width:1.8}
+.glass-light{fill:var(--glassInk)}
+.glass-orb{opacity:.25;animation:glass-orb 16s ease-in-out infinite alternate}
+.glass-spark{opacity:.72;animation:glass-spark 8s ease-in-out infinite alternate}
+@keyframes glass-orb{to{transform:translate(9px,-7px);opacity:.38}}
+@keyframes glass-spark{to{opacity:.32}}
+@media(prefers-reduced-motion:reduce){.glass-orb,.glass-spark{animation:none!important;transform:none!important}}
+@media(prefers-contrast:more){.glass-surface,.glass-thin,.glass-selected{fill:var(--surface);stroke:var(--brand)}}
+
+]]></style><filter id="shadow" x="-25%" y="-25%" width="150%" height="180%"><feDropShadow dx="0" dy="9" stdDeviation="14" flood-color="#162d48" flood-opacity=".13"/></filter><clipPath id="content"><rect x="57" y="217" width="786" height="266" rx="12"/></clipPath>
+<linearGradient id="glassEdge" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffffff" stop-opacity=".9"/><stop offset=".38" stop-color="#e9f5ff" stop-opacity=".34"/><stop offset=".78" stop-color="#b7c9e7" stop-opacity=".16"/><stop offset="1" stop-color="#ffffff" stop-opacity=".67"/></linearGradient>
+<radialGradient id="glassAura"><stop offset="0" stop-color="#9ec7ff" stop-opacity=".59"/><stop offset=".55" stop-color="#b4b3f4" stop-opacity=".31"/><stop offset="1" stop-color="#a9d8ff" stop-opacity="0"/></radialGradient>
+<linearGradient id="glassPrism" x1="0" y1="0" x2="1" y2=".75"><stop offset="0" stop-color="#ffffff" stop-opacity=".45"/><stop offset=".28" stop-color="#a5d3ff" stop-opacity=".20"/><stop offset=".65" stop-color="#d2b8eb" stop-opacity=".18"/><stop offset="1" stop-color="#ffffff" stop-opacity=".28"/></linearGradient>
+<filter id="glassRefraction" x="-8%" y="-8%" width="116%" height="116%"><feTurbulence type="fractalNoise" baseFrequency=".016" numOctaves="1" seed="6" result="ripples"/><feDisplacementMap in="SourceGraphic" in2="ripples" scale="3.2" xChannelSelector="R" yChannelSelector="G"/></filter>
+</defs><rect x="0" y="0" width="900" height="330" rx="20" class="bg" /><ellipse class="glass-orb" cx="746" cy="139" rx="212" ry="150" fill="url(#glassAura)" aria-hidden="true"/>
+<text x="54" y="45" class="brand-ink" font-size="13" font-weight="750" >A I N C F H  /  PRODUCT STUDIO</text>
 <text x="51" y="137" class="ink" font-size="82" font-weight="820" letter-spacing="-4">AincFh.</text>
-<text x="55" y="190" class="ink" font-size="30" font-weight="670" letter-spacing="-1.1">Software, with intention.</text>
-<text x="56" y="224" class="muted" font-size="16" font-weight="480" >Useful products. Thoughtful details. Real engineering.</text>
+<text x="55" y="190" class="ink" font-size="30" font-weight="670" letter-spacing="-1.1">Ideas into working software.</text>
+<text x="56" y="224" class="muted" font-size="16" font-weight="480" >Web platforms · AI Agents · Windows &amp; Android apps</text>
 <rect x="55" y="258" width="209" height="37" rx="12" class="brand-bg" /><text x="80" y="283" class="brand-on" font-size="15" font-weight="710" >Browse repositories  ↗</text>
-<text x="278" y="282" class="muted" font-size="14" font-weight="560" >Web   ·   Desktop   ·   AI</text>
-<g class="float"><rect x="591" y="55" width="247" height="224" rx="26" class="surface" filter="url(#shadow)"/><rect x="614" y="80" width="202" height="154" rx="19" class="subtle" /><rect x="669" y="113" width="91" height="91" rx="23" class="brand-bg" /><text x="715" y="181" class="brand-on" font-size="72" font-weight="720" text-anchor="middle">A</text>
+<text x="278" y="282" class="muted" font-size="14" font-weight="560" >Explore actual projects</text>
+<g class="float"><rect x="591" y="55" width="247" height="224" rx="26" class="glass-surface" filter="url(#shadow)"/><rect x="594" y="58" width="241" height="218" rx="24" class="glass-rim"/><path d="M618 66H810" class="glass-glint"/><rect x="614" y="80" width="202" height="154" rx="19" class="glass-thin"/><ellipse cx="715" cy="155" rx="89" ry="77" fill="url(#glassPrism)" opacity=".54" filter="url(#glassRefraction)"/><rect x="669" y="113" width="91" height="91" rx="23" class="brand-bg"/><rect x="671" y="115" width="87" height="87" rx="22" fill="url(#glassPrism)" opacity=".28"/><path d="M684 128Q705 115 744 123" class="glass-glint"/><text x="715" y="181" class="brand-on" font-size="72" font-weight="720" text-anchor="middle">A</text>
 <circle cx="779" cy="109" r="5" class="brand-bg" /><rect x="616" y="244" width="96" height="8" rx="4" class="line" /><rect x="719" y="244" width="63" height="8" rx="4" class="line" /></g>
 <path d="M55 311H846" class="stroke" stroke-width="1" fill="none" />
 </svg>

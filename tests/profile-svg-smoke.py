@@ -7,7 +7,7 @@ ROOT = Path(__file__).resolve().parents[1]
 FILES = ("editorial-hero", "editorial-workspace", "editorial-projects",
          "editorial-approach", "editorial-contact")
 SVG = "{http://www.w3.org/2000/svg}"
-VERSION = "20261106-editorial24b"
+VERSION = "20261106-liquid25"
 
 
 def run():
@@ -19,7 +19,7 @@ def run():
     assert "https://aincfh.github.io/AincFh/" not in readme, "Avoid unavailable Pages"
     assert "FiveM" in readme and ("虚构" in readme or "fictional" in readme.lower())
 
-    expected_heights = (330, 552, 722, 264, 214)
+    expected_heights = (330, 552, 960, 264, 214)
     for name, h in zip(FILES, expected_heights):
         source = (ROOT / "assets" / f"{name}.svg").read_text(encoding="utf-8")
         root = ET.fromstring(source)
@@ -45,8 +45,29 @@ def run():
         assert f"chap{i}" in source
     assert "cursor" not in source.lower(), "Cursor simulation was deliberately eliminated"
     assert "24s" in source, "The four scenes must use one shared 24-second timeline"
-    assert "Not a real government service" in source
+    assert "Fictional roleplay" in source and "Private project source" in source
+    assert source.count(">ATLAS</text>") == 2, "ATLAS active/static tabs must agree"
+    assert source.count(">QINGJI</text>") == 2, "QingJi active/static tabs must agree"
+    assert ">WINDOWS</text>" not in source and ">SHELL</text>" not in source
     print("PASS editorial project explorer: four synchronized chapters, no fake pointer")
+    projects = (ROOT / "assets/editorial-projects.svg").read_text(encoding="utf-8")
+    for expected in ("A.T. Field", "Saint Laurent", "ATLAS Developer Studio",
+                     "QingJi", "Meridian", "ANDROID PROTOTYPE", "PRIVATE SOURCE"):
+        assert expected in projects, f"Missing real project or correct status: {expected}"
+    for name in FILES:
+        source = (ROOT / "assets" / f"{name}.svg").read_text(encoding="utf-8")
+        assert "glass-surface" in source
+        assert "glass-thin" in source
+        assert "glassPrism" in source
+        assert "glassRefraction" in source
+        assert "prefers-contrast:more" in source
+    assert "not an Apple product" in readme
+    assert "Liquid Glass" in readme and "Notion" not in readme, (
+        "Attribution should describe inspiration without exposing private notes"
+    )
+    assert "轻记 QingJi" in readme and "ATLAS Developer Studio" in readme
+    assert "原型" in readme and "虚构" in readme
+    print("PASS Liquid Glass: glass chrome, readability fallbacks, real project statuses")
     print("PASS README: five full-width independently composed visual modules")
 
 
