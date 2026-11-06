@@ -1,69 +1,18 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 260" width="900" height="260" role="img" aria-label="Destruction is the joy of rebirth — contact">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 235" width="900" height="235" role="img" aria-label="AincFh contact: aincfh.dpdns.org, fhainc@hotmail.com, and GitHub AincFh">
 <defs>
-<style>
-:root{--bg:#fafafa;--ink:#111111;--sub:#64748b;--dim:#94a3b8;--hexl:rgba(255,159,67,.26);--brk:#8b5cf6;--line:rgba(0,0,0,.08)}
-@media (prefers-color-scheme:dark){:root{--bg:#1c1f2b;--ink:#f1f5f9;--sub:#94a3b8;--dim:#7c8ba3;--hexl:rgba(255,159,67,.17);--brk:#a78bfa;--line:rgba(255,255,255,.10)}}
-.bg{fill:var(--bg)}.ink{fill:var(--ink)}.sub{fill:var(--sub)}.dim{fill:var(--dim)}
-.hx{stroke:var(--hexl);fill:none;stroke-width:1}
-.brk{stroke:var(--brk);fill:none;stroke-width:2}
-.ln{stroke:var(--line);stroke-width:1}
-.dsp{font-family:'Orbitron','Rajdhani','Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Helvetica Neue',Arial,sans-serif}
-.txt{font-family:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,'Noto Sans SC','PingFang SC','Microsoft YaHei','Helvetica Neue',Arial,sans-serif}
-</style>
-<linearGradient id="at" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" stop-color="#FF9F43"/><stop offset="100%" stop-color="#FF6B6B"/></linearGradient>
-<radialGradient id="o1"><stop offset="0%" stop-color="#FF9F43" stop-opacity=".24"/><stop offset="100%" stop-color="#FF9F43" stop-opacity="0"/></radialGradient>
-<radialGradient id="mg" cx="50%" cy="22%" r="52%"><stop offset="0%" stop-color="#fff" stop-opacity=".9"/><stop offset="100%" stop-color="#fff" stop-opacity="0"/></radialGradient>
-<mask id="lm"><rect width="900" height="260" fill="url(#mg)"/></mask>
-<pattern id="hexp" width="60" height="105" patternUnits="userSpaceOnUse">
-<path class="hx" d="M30,0 L60,17.5 L60,52.5 L30,70 L0,52.5 L0,17.5 Z"/>
-<path class="hx" d="M60,52.5 L90,70 L90,105 L60,122.5 L30,105 L30,70 Z"/>
-<path class="hx" d="M0,52.5 L30,70 L30,105 L0,122.5 L-30,105 L-30,70 Z"/>
-<path class="hx" d="M60,-52.5 L90,-35 L90,0 L60,17.5 L30,0 L30,-35 Z"/>
-<path class="hx" d="M0,-52.5 L30,-35 L30,0 L0,17.5 L-30,0 L-30,-35 Z"/>
-</pattern>
-<pattern id="scan" width="4" height="4" patternUnits="userSpaceOnUse"><rect y="2" width="4" height="2" fill="#000" opacity=".2"/></pattern>
-<filter id="noise"><feTurbulence type="fractalNoise" baseFrequency=".65" numOctaves="3" stitchTiles="stitch"/><feColorMatrix type="saturate" values="0"/></filter>
-<filter id="glow" x="-80%" y="-80%" width="260%" height="260%"><feGaussianBlur stdDeviation="5" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+<linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#101522"/><stop offset=".55" stop-color="#182135"/><stop offset="1" stop-color="#111727"/></linearGradient>
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#ffad53"/><stop offset=".5" stop-color="#fd816b"/><stop offset="1" stop-color="#a481f4"/></linearGradient>
+<linearGradient id="glass" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#253047"/><stop offset="1" stop-color="#192336"/></linearGradient>
+<radialGradient id="light"><stop stop-color="#995be6" stop-opacity=".24"/><stop offset="1" stop-color="#995be6" stop-opacity="0"/></radialGradient>
+<radialGradient id="warm"><stop stop-color="#f29447" stop-opacity=".14"/><stop offset="1" stop-color="#f29447" stop-opacity="0"/></radialGradient>
+<pattern id="hex" width="86" height="74" patternUnits="userSpaceOnUse"><path d="M21 1 42 13v25L21 50 0 38V13ZM64 38 85 50v24L64 86 43 74V50Z" fill="none" stroke="#ffa455" stroke-opacity=".09" stroke-width="1"/></pattern>
 </defs>
-
-<rect class="bg" width="900" height="260"/>
-
-<ellipse cx="450" cy="56" rx="300" ry="120" fill="url(#o1)" opacity=".7">
-<animate attributeName="rx" values="300;336;300" dur="8s" repeatCount="indefinite"/>
-<animate attributeName="opacity" values=".7;.92;.7" dur="8s" repeatCount="indefinite"/>
-</ellipse>
-
-<rect width="900" height="260" fill="url(#hexp)" mask="url(#lm)"/>
-
-<g fill="none" stroke-width="1.4" stroke-linejoin="round">
-<path d="M242,56 L253,37 L275,37 L286,56 L275,75 L253,75 Z" stroke="#8B5CF6" opacity=".18"><animate attributeName="opacity" values=".18;.34;.18" dur="6s" begin="1.8s" repeatCount="indefinite"/></path>
-<path d="M304,56 L315,37 L337,37 L348,56 L337,75 L315,75 Z" stroke="#FF6B6B" opacity=".34"><animate attributeName="opacity" values=".34;.6;.34" dur="6s" begin="1.2s" repeatCount="indefinite"/></path>
-<path d="M366,56 L377,37 L399,37 L410,56 L399,75 L377,75 Z" stroke="#FF9F43" opacity=".55"><animate attributeName="opacity" values=".55;.85;.55" dur="6s" begin=".6s" repeatCount="indefinite"/></path>
-<path d="M490,56 L501,37 L523,37 L534,56 L523,75 L501,75 Z" stroke="#FF9F43" opacity=".55"><animate attributeName="opacity" values=".55;.85;.55" dur="6s" begin=".6s" repeatCount="indefinite"/></path>
-<path d="M552,56 L563,37 L585,37 L596,56 L585,75 L563,75 Z" stroke="#FF6B6B" opacity=".34"><animate attributeName="opacity" values=".34;.6;.34" dur="6s" begin="1.2s" repeatCount="indefinite"/></path>
-<path d="M614,56 L625,37 L647,37 L658,56 L647,75 L625,75 Z" stroke="#8B5CF6" opacity=".18"><animate attributeName="opacity" values=".18;.34;.18" dur="6s" begin="1.8s" repeatCount="indefinite"/></path>
-</g>
-<path d="M428,56 L439,37 L461,37 L472,56 L461,75 L439,75 Z" fill="url(#at)" filter="url(#glow)" opacity=".95">
-<animate attributeName="opacity" values=".95;.65;.95" dur="6s" repeatCount="indefinite"/>
-</path>
-
-<text class="txt ink" x="450" y="126" font-size="17" font-weight="600" text-anchor="middle" letter-spacing="1.5">破灭的宿命亦是重生的喜悦</text>
-<text class="txt dim" x="450" y="150" font-size="11" font-weight="500" text-anchor="middle" letter-spacing="1.6">Destruction is the joy of rebirth.  ·  I alone level up.</text>
-
-<line class="ln" x1="60" y1="182" x2="840" y2="182"/>
-
-<text class="txt" x="450" y="216" font-size="12.5" font-weight="600" text-anchor="middle" letter-spacing=".4"><tspan fill="#FF9F43">aincfh.dpdns.org</tspan><tspan class="dim">     ·     </tspan><tspan class="sub">fhainc@hotmail.com</tspan><tspan class="dim">     ·     </tspan><tspan fill="#FB7299">space.bilibili.com/527018775</tspan></text>
-
-<text class="txt dim" x="60" y="244" font-size="10" font-weight="600" letter-spacing="2.2">AI-AUGMENTED  ·  HUMAN-REVIEWED</text>
-<text class="txt dim" x="840" y="244" font-size="10" font-weight="600" letter-spacing="2.2" text-anchor="end">PRODUCTS  ·  SYSTEMS  ·  DESIGN</text>
-
-<g class="brk">
-<path d="M16,30 L16,16 L30,16"/>
-<path d="M870,16 L884,16 L884,30"/>
-<path d="M16,230 L16,244 L30,244"/>
-<path d="M870,244 L884,244 L884,230"/>
-</g>
-
-<rect width="900" height="260" fill="url(#scan)" opacity=".1"/>
-<rect width="900" height="260" filter="url(#noise)" opacity=".03"/>
-</svg>
+<g font-family="Inter,-apple-system,BlinkMacSystemFont,'Segoe UI','PingFang SC','Microsoft YaHei',Arial,sans-serif">
+<rect x="0" y="0" width="900" height="235" rx="0" fill="url(#bg)" stroke="none" stroke-width="1"/><rect x="0" y="0" width="900" height="235" rx="0" fill="url(#hex)" stroke="none" stroke-width="1"/>
+<ellipse cx="800" cy="45" rx="345" ry="240" fill="url(#light)"/>
+<ellipse cx="85" cy="175" rx="250" ry="200" fill="url(#warm)"/>
+<rect x="18" y="18" width="864" height="199" rx="12" fill="none" stroke="#3a4059" stroke-width="1"/>
+<path d="M38 35h24M38 35v23 M838 200h24v-23" fill="none" stroke="#b78afb" stroke-width="2"/>
+<path d="M18 215H882" stroke="url(#accent)" stroke-width="3"/>
+<text x="50" y="61" fill="#ffb267" font-size="11" font-weight="770" letter-spacing="1.9">AINCFH  /  CONNECT</text><text x="450" y="110" fill="#f3f2f8" font-size="22" font-weight="720" text-anchor="middle">破灭的宿命亦是重生的喜悦</text><text x="450" y="139" fill="#aabbd4" font-size="13" font-weight="520" text-anchor="middle">Destruction is the joy of rebirth.</text><path d="M65 159H835" stroke="#37435d" stroke-width="1"/><text x="69" y="190" fill="#ffb167" font-size="9" font-weight="790" letter-spacing="1.5">WEB</text><text x="111" y="190" fill="#d7e1f0" font-size="12" font-weight="600" >aincfh.dpdns.org</text><text x="357" y="190" fill="#ffb167" font-size="9" font-weight="790" letter-spacing="1.5">EMAIL</text><text x="410" y="190" fill="#d7e1f0" font-size="12" font-weight="600" >fhainc@hotmail.com</text><text x="674" y="190" fill="#ffb167" font-size="9" font-weight="790" letter-spacing="1.5">GITHUB</text><text x="738" y="190" fill="#d7e1f0" font-size="12" font-weight="680" >AincFh</text>
+</g></svg>
