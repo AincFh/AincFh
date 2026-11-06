@@ -1,61 +1,47 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 607" width="900" height="607" role="img" aria-label="Selected AincFh projects: A.T. Field web platform, Saint Laurent fictional FiveM services, and Windows desktop tools, with clear visual previews"><defs>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 548" width="900" height="548" role="img" aria-label="Selected work: three spacious project rows for A.T. Field, Saint Laurent fictional FiveM services and Windows tools, each with one simple product indicator.">
+<defs>
 <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#2C3B4F"/><stop offset=".56" stop-color="#35465C"/><stop offset="1" stop-color="#2B394C"/></linearGradient>
-<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#A9C8F1"/><stop offset=".52" stop-color="#CDBCF0"/><stop offset="1" stop-color="#F2C5AB"/></linearGradient>
-<radialGradient id="aura"><stop stop-color="#91A8D9" stop-opacity=".15"/><stop offset="1" stop-color="#91A8D9" stop-opacity="0"/></radialGradient>
-<radialGradient id="warm"><stop stop-color="#F2C5AB" stop-opacity=".12"/><stop offset="1" stop-color="#F2C5AB" stop-opacity="0"/></radialGradient>
-</defs><style><![CDATA[
-.breathe{animation:breathe 11s ease-in-out infinite alternate;transform-origin:center}
-@keyframes breathe{from{opacity:.53}to{opacity:1}}
-.float{animation:float 8s ease-in-out infinite alternate}
-@keyframes float{to{transform:translateY(-5px)}}
-.soft-pulse{animation:pulse 3s ease-in-out infinite}
-@keyframes pulse{50%{opacity:.38}}
-.scan{animation:scan 12s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
-@keyframes scan{to{transform:scaleX(.55)}}
-.shine{animation:shine 14s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:left center}
-@keyframes shine{to{opacity:.5;transform:scaleX(.72)}}
-
-@media(prefers-reduced-motion:reduce){.breathe,.float,.scan,.shine,.soft-pulse,.card-a,.card-b{animation:none!important;transform:none!important}}
+<linearGradient id="accent" x1="0" y1="0" x2="1" y2=".4"><stop stop-color="#A9C8F1"/><stop offset=".62" stop-color="#CDBCF0"/><stop offset="1" stop-color="#F2C5AB"/></linearGradient>
+<linearGradient id="icon" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#B6D0F5"/><stop offset=".57" stop-color="#B8BFF0"/><stop offset="1" stop-color="#D8BDE4"/></linearGradient>
+<linearGradient id="surface" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#43546D"/><stop offset="1" stop-color="#3A4C64"/></linearGradient>
+<style><![CDATA[
+:root{color-scheme:dark}
+.breathe{animation:breathe 11s ease-in-out infinite}
+@keyframes breathe{0%,100%{opacity:.72}50%{opacity:1}}
+.draw{animation:draw 13s ease-in-out infinite;transform-box:fill-box;transform-origin:left center}
+@keyframes draw{0%,100%{transform:scaleX(.20);opacity:.55}60%{transform:scaleX(1);opacity:1}}
+@media(prefers-reduced-motion:reduce){.breathe,.draw{animation:none!important;transform:none!important}}
 ]]></style>
-<rect x="0" y="0" width="900" height="607" rx="0" fill="url(#bg)" stroke="none"/>
-<ellipse class="breathe" cx="780" cy="42" rx="280" ry="230" fill="url(#aura)"/>
-<ellipse class="breathe" cx="80" cy="582" rx="195" ry="145" fill="url(#warm)"/>
+</defs>
+<rect x="0" y="0" width="900" height="548" rx="0" fill="url(#bg)" stroke="none"/>
 
+<text x="55" y="44" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="735" fill="#A9C8F1" letter-spacing="2">SELECTED WORK</text>
+<text x="52" y="98" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="34" font-weight="780" fill="#F5F7FC" letter-spacing="-1.1">Projects, not just prototypes.</text>
+<text x="55" y="126" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="16" font-weight="500" fill="#C8D5E5" >Focused products across web, community and desktop.</text>
 
-<text x="49" y="54" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="790" fill="#F2C5AB" letter-spacing="1.7">SELECTED WORK</text>
-<text x="49" y="102" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="33" font-weight="810" fill="#F5F7FC" letter-spacing="-.6">Projects with a purpose.</text>
-<text x="49" y="126" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="540" fill="#C8D5E5">Three disciplines, one focus: usable products.</text>
-<rect x="47" y="157" width="806" height="131" rx="15" fill="#3B4D64" stroke="#6A7D96"/><rect x="47" y="171" width="3" height="102" rx="2" fill="#F2C5AB" stroke="none"/>
-<text x="69" y="202" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="25" font-weight="810" fill="#F2C5AB">01</text>
-<text x="126" y="196" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="775" fill="#F5F7FC">A.T. Field</text>
-<text x="126" y="222" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="585" fill="#C1CFE1">Web platform and community</text>
-<text x="126" y="250" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="520" fill="#B6C8DC">Full-stack product · Public project</text>
-<rect x="635" y="176" width="193" height="94" rx="10" fill="#132137" stroke="#6A7D96"/>
-<rect x="635" y="176" width="193" height="23" rx="10" fill="#40536C" stroke="none"/>
-<circle cx="649" cy="186" r="3" fill="#E7B6AD"/><circle cx="660" cy="186" r="3" fill="#F2C5AB"/><circle cx="671" cy="186" r="3" fill="#9CDECC"/>
-<text x="697" y="190" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="9" font-weight="755" fill="#E6D7F2">A.T. FIELD</text>
-<rect x="650" y="210" width="164" height="43" rx="7" fill="#40536C" stroke="none"/>
-<text x="663" y="228" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="725" fill="#F2C5AB">Content / Community</text>
-<rect x="663" y="237" width="101" height="5" rx="3" fill="#AD8FDF" stroke="none"/>
-<rect x="47" y="305" width="806" height="131" rx="15" fill="#3B4D64" stroke="#6A7D96"/><rect x="47" y="319" width="3" height="102" rx="2" fill="#CDBCF0" stroke="none"/>
-<text x="69" y="350" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="25" font-weight="810" fill="#CDBCF0">02</text>
-<text x="126" y="344" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="775" fill="#F5F7FC">Saint Laurent</text>
-<text x="126" y="370" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="585" fill="#C1CFE1">Fictional FiveM roleplay services</text>
-<text x="126" y="398" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="520" fill="#B6C8DC">Codex and authorized workflows</text>
-<rect x="635" y="324" width="193" height="94" rx="10" fill="#132137" stroke="#6A7D96"/>
-<text x="650" y="346" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="750" fill="#D3B7FF">CODEX / LOOKUP</text>
-<rect x="648" y="354" width="168" height="22" rx="6" fill="#40536C" stroke="none"/>
-<text x="656" y="368" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="500" fill="#B4C2DC">Search statutes…</text>
-<rect x="648" y="383" width="82" height="6" rx="3" fill="#CDBCF0" stroke="none"/>
-<rect x="737" y="383" width="79" height="6" rx="3" fill="#405676" stroke="none"/>
-<rect x="47" y="453" width="806" height="131" rx="15" fill="#3B4D64" stroke="#6A7D96"/><rect x="47" y="467" width="3" height="102" rx="2" fill="#9CDECC" stroke="none"/>
-<text x="69" y="498" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="25" font-weight="810" fill="#9CDECC">03</text>
-<text x="126" y="492" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="23" font-weight="775" fill="#F5F7FC">Windows Tools</text>
-<text x="126" y="518" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="585" fill="#C1CFE1">Desktop apps and local utilities</text>
-<text x="126" y="546" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="520" fill="#B6C8DC">C# · .NET · Private projects</text>
-<rect x="635" y="472" width="193" height="94" rx="10" fill="#132137" stroke="#6A7D96"/>
-<text x="650" y="494" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="765" fill="#95E7CD">SYSTEM / TOOLS</text>
-<text x="650" y="526" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="29" font-weight="800" fill="#77E6C2">98%</text>
-<rect x="716" y="519" width="94" height="7" rx="4" fill="#627891" stroke="none"/>
-<rect x="716" y="519" width="78" height="7" rx="4" fill="#69D6AF" stroke="none" class="scan"/>
+<rect x="54" y="170" width="792" height="111" rx="14" fill="#3E5068" stroke="none"/>
+<text x="77" y="208" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="730" fill="#A9C8F1" >01</text>
+<text x="133" y="209" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="24" font-weight="745" fill="#F5F7FC" >A.T. Field</text>
+<text x="133" y="235" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="14" font-weight="540" fill="#C8D5E5" >Web platform and community</text>
+<text x="133" y="259" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="470" fill="#B8CBE0" >React · TypeScript · Public project</text>
+<rect x="700" y="185" width="124" height="80" rx="11" fill="#30445C" stroke="none"/>
+<rect x="712" y="185" width="100" height="11" rx="3" fill="#526B87" stroke="none"/><circle cx="721" cy="190" r="3" fill="#F2C5AB" /><circle cx="732" cy="190" r="3" fill="#CDBCF0" /><circle cx="743" cy="190" r="3" fill="#9CDECC" /><rect x="712" y="201" width="100" height="52" rx="6" fill="#3A5979" stroke="none"/><text x="722" y="224" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="12" font-weight="695" fill="#F5F7FC" >A.T. FIELD</text><rect x="722" y="234" width="65" height="4" rx="2" fill="#A9C8F1" stroke="none"/>
+
+<rect x="54" y="295" width="792" height="111" rx="14" fill="#3E5068" stroke="none"/>
+<text x="77" y="333" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="730" fill="#A9C8F1" >02</text>
+<text x="133" y="334" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="24" font-weight="745" fill="#F5F7FC" >Saint Laurent</text>
+<text x="133" y="360" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="14" font-weight="540" fill="#C8D5E5" >Fictional FiveM community services</text>
+<text x="133" y="384" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="470" fill="#B8CBE0" >CODEX / LOOKUP · Authorized workflows</text>
+<rect x="700" y="310" width="124" height="80" rx="11" fill="#30445C" stroke="none"/>
+<text x="712" y="355" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="14" font-weight="745" fill="#CDBCF0" >CODEX</text><rect x="712" y="366" width="100" height="18" rx="5" fill="#526B87" stroke="none"/><text x="720" y="378" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="500" fill="#F5F7FC" >Search laws…</text><rect x="712" y="394" width="70" height="4" rx="2" fill="#A9C8F1" stroke="none"/>
+
+<rect x="54" y="420" width="792" height="111" rx="14" fill="#3E5068" stroke="none"/>
+<text x="77" y="458" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="15" font-weight="730" fill="#A9C8F1" >03</text>
+<text x="133" y="459" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="24" font-weight="745" fill="#F5F7FC" >Windows Tools</text>
+<text x="133" y="485" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="14" font-weight="540" fill="#C8D5E5" >Desktop applications and utilities</text>
+<text x="133" y="509" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="470" fill="#B8CBE0" >C# · .NET · Private projects</text>
+<rect x="700" y="435" width="124" height="80" rx="11" fill="#30445C" stroke="none"/>
+<text x="712" y="497" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="13" font-weight="745" fill="#9CDECC" >SYSTEM</text><text x="712" y="527" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="28" font-weight="755" fill="#F5F7FC" >98%</text><rect x="770" y="518" width="42" height="6" rx="3" fill="#526B87" stroke="none"/><rect x="770" y="518" width="34" height="6" rx="3" fill="#9CDECC" stroke="class="draw""/>
+<text x="56" y="544" font-family="-apple-system,BlinkMacSystemFont,'SF Pro Display','Segoe UI','PingFang SC',Arial,sans-serif" font-size="10" font-weight="460" fill="#C8D5E5" >Content / Community     ·     CODEX / LOOKUP     ·     SYSTEM / TOOLS</text>
+
 </svg>
